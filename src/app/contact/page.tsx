@@ -1,15 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Mail, 
-  MapPin, 
-  Phone, 
-  ArrowRight, 
-  CheckCircle2, 
-  BookOpen, 
-  ShieldCheck, 
-  UserCheck, 
+import {
+  Mail,
+  MapPin,
+  CheckCircle2,
+  BookOpen,
+  ShieldCheck,
+  UserCheck,
   MessageSquare,
   Globe,
   Clock,

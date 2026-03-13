@@ -1,19 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Camera, 
-  RefreshCcw, 
-  CheckCircle2, 
-  ArrowRight, 
-  FileText, 
-  Mail, 
-  MessageSquare, 
-  Zap, 
-  Globe,
-  Smartphone,
+import {
+  Camera,
+  RefreshCcw,
+  CheckCircle2,
+  ArrowRight,
+  Mail,
   ShieldCheck,
-  Search,
   HelpCircle,
   Image as ImageIcon,
   Settings
@@ -26,9 +20,9 @@ import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import { useState, useEffect } from "react";
 
 const cameraBackgrounds = [
-  { url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=1200", type: 'image' as const }, // Person with professional camera
-  { url: "https://images.unsplash.com/photo-1452784444945-3f422708fe5e?auto=format&fit=crop&q=80&w=1200", type: 'image' as const }, // Scenic landscape photography
-  { url: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&q=80&w=1200", type: 'image' as const }  // Mature woman taking photos
+  { url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'dark' as const },
+  { url: "https://images.unsplash.com/photo-1452784444945-3f422708fe5e?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'light' as const },
+  { url: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'light' as const },
 ];
 
 const CameraVisuals = () => {

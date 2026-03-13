@@ -1,16 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Navigation, 
-  Map as MapIcon, 
-  CheckCircle2, 
-  ArrowRight, 
-  FileText, 
-  Mail, 
-  MessageSquare, 
-  Zap, 
-  Globe,
+import {
+  Navigation,
+  Map as MapIcon,
+  CheckCircle2,
+  ArrowRight,
+  Mail,
+  Zap,
   Satellite,
   Search,
   RefreshCcw,

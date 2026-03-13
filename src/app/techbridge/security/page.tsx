@@ -1,23 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Shield, 
-  Lock, 
-  CheckCircle2, 
-  ArrowRight, 
-  FileText, 
-  Mail, 
-  MessageSquare, 
-  Zap, 
+import {
+  Shield,
+  Lock,
+  CheckCircle2,
+  ArrowRight,
+  Mail,
   Globe,
-  Smartphone,
   ShieldCheck,
-  Search,
-  RefreshCcw,
   HelpCircle,
-  Eye,
-  Key
+  Eye
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -27,9 +20,9 @@ import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import { useState, useEffect } from "react";
 
 const securityBackgrounds = [
-  { url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1200", type: 'image' as const }, // Secure office environment
-  { url: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=1200", type: 'image' as const }, // Person using secure tablet
-  { url: "https://images.unsplash.com/photo-1510511459019-5dee997dd1db?auto=format&fit=crop&q=80&w=1200", type: 'image' as const }  // Cyber security concept
+  { url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'dark' as const },
+  { url: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'dark' as const },
+  { url: "https://images.unsplash.com/photo-1510511459019-5dee997dd1db?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'dark' as const },
 ];
 
 const SecurityVisuals = () => {

@@ -1,18 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Mic, 
-  Wifi, 
-  CheckCircle2, 
-  ArrowRight, 
-  FileText, 
-  Mail, 
-  MessageSquare, 
-  Zap, 
-  Globe,
-  Smartphone,
-  ShieldCheck,
+import {
+  Mic,
+  CheckCircle2,
+  ArrowRight,
+  Mail,
+  Zap,
   Search,
   RefreshCcw,
   Volume2,

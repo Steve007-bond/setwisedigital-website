@@ -23,13 +23,12 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import Image from "next/image";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 
 const aboutBackgrounds = [
-  { url: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=1200", type: 'image' as const }, // Mature man working at laptop
-  { url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=1200", type: 'image' as const }, // Friendly middle-aged woman
-  { url: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1200", type: 'image' as const }  // Smiling mature professional
+  { url: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'light' as const },
+  { url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'light' as const },
+  { url: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'light' as const },
 ];
 
 export default function About() {

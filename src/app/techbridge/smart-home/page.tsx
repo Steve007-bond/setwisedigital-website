@@ -1,21 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Home as HomeIcon, 
-  Wifi, 
-  CheckCircle2, 
-  ArrowRight, 
-  FileText, 
-  Mail, 
-  MessageSquare, 
-  Zap, 
-  Globe,
+import {
+  Home as HomeIcon,
+  Wifi,
+  CheckCircle2,
+  ArrowRight,
+  Mail,
+  Zap,
   Smartphone,
-  ShieldCheck,
   Search,
   RefreshCcw,
-  Lightbulb,
   HelpCircle,
   Lock
 } from "lucide-react";

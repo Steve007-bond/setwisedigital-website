@@ -1,29 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Printer, 
-  Wifi, 
-  CheckCircle2, 
-  ArrowRight, 
-  FileText, 
-  Mail, 
-  MessageSquare, 
-  Package, 
-  Zap, 
-  ChevronRight,
-  Monitor,
-  Smartphone,
+import {
+  Printer,
+  Wifi,
+  CheckCircle2,
+  ArrowRight,
+  Mail,
+  MessageSquare,
+  Package,
+  Zap,
   AlertCircle,
   RefreshCcw,
-  Search,
   Users,
   HelpCircle
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import Image from "next/image";
 import TechBridgeApp, { Step } from "@/components/TechBridgeApp";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import { useState, useEffect } from "react";
