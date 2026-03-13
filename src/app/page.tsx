@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { 
   ArrowRight, 
   Zap, 
@@ -48,7 +48,7 @@ export default function Home() {
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 10]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -58,7 +58,7 @@ export default function Home() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -67,7 +67,7 @@ export default function Home() {
     },
   };
 
-  const fadeIn = {
+  const fadeIn: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.8 } }
   };
