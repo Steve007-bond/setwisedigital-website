@@ -33,10 +33,10 @@ export default function HeaderBackgroundSlider({ items, interval = 8000, onTheme
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 0.8, scale: 1.05 }}
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 1, scale: 1.03 }}
           exit={{ opacity: 0, scale: 1 }}
-          transition={{ duration: 2, ease: "easeInOut" }}
+          transition={{ duration: 1.8, ease: "easeInOut" }}
           className="absolute inset-0"
         >
           {currentItem.type === 'video' ? (
@@ -58,15 +58,20 @@ export default function HeaderBackgroundSlider({ items, interval = 8000, onTheme
               unoptimized
             />
           )}
-          {/* Subtle Overlay to ensure text readability */}
-          <div className={`absolute inset-0 ${currentItem.theme === 'dark' ? 'bg-black/40' : 'bg-white/20'}`} />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950/20" />
+
+          {/* Strong consistent dark overlay — always ensures white text is readable */}
+          <div className="absolute inset-0 bg-black/55" />
+
+          {/* Extra gradient from bottom for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
+
+          {/* Side vignette for focus */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
         </motion.div>
       </AnimatePresence>
-      
-      {/* Mesh Gradient Overlay for consistent branding - lowered opacity */}
-      <div className="absolute inset-0 mesh-gradient opacity-10 mix-blend-overlay" />
+
+      {/* Subtle brand mesh overlay */}
+      <div className="absolute inset-0 mesh-gradient opacity-8 mix-blend-overlay pointer-events-none" />
     </div>
   );
 }
-

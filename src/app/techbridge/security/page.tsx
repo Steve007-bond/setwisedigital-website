@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import TechBridgeLearnLayout from "@/components/TechBridgeLearnLayout";
 import {
   Shield,
   Lock,
@@ -319,82 +320,36 @@ export default function SecurityPage() {
         </div>
       </header>
 
-      {/* App Section */}
-      <section id="app" className="py-32 bg-zinc-900 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('/grid.svg')]" />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-block px-4 py-1 rounded-lg dark-glass border-white/10 text-blue-400 text-sm font-bold mb-6 uppercase tracking-wider">Interactive Tool</div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-6">Security Assistant</h2>
-            <p className="text-xl text-zinc-400 font-medium">Click through our simple guide to master your online security.</p>
-          </div>
-          
-          <div className="bg-white rounded-[4rem] shadow-2xl overflow-hidden border border-white/10">
-            <TechBridgeApp 
-              title="Security Assistant" 
-              steps={securitySteps} 
-            />
-          </div>
-        </div>
-      </section>
+      <TechBridgeLearnLayout config={{
+        topic: "Security",
+        pdfTitle: "Online Safety & Home Security Complete Guide",
+        pdfDescription: "Stay safe online and at home with simple, clear steps. Covers antivirus, email security, passwords, cloud storage, and home security cameras.",
+        pdfHighlights: [
+          "Setting up antivirus protection on any device",
+          "Creating strong passwords and using a password manager",
+          "Recognizing and avoiding phishing scams",
+          "How to set up and use cloud storage safely",
+          "Email security and spam filtering setup",
+          "Home security camera setup and access",
+        ],
+        brandExamples: ["Norton", "McAfee", "Ring", "Nest", "Arlo", "LastPass"],
+        starterQuestions: [
+          "How do I know if I have a virus?",
+          "My email was hacked — what do I do?",
+          "How do I create a strong password?",
+          "How do I set up my Ring camera?",
+          "Is my Wi-Fi network secure?",
+          "How do I back up my files to the cloud?",
+        ],
+        emailjsServiceId: "service_dtucjcw",
+        emailjsPdfTemplateId: "template_uls5p3p",
+        emailjsContactTemplateId: "template_uls5p3p",
+        emailjsPublicKey: "XRCYl5c7gwzK67hbD",
+        discordBotToken: "MTQ4MjE0MjI3MzQ3NDAwMzA2Ng.GtM-3y.eQUosynKep7fnM26pjbtM3npCFn2evOvHjUJuk",
+        discordChannelId: "1482143893708345428",
+      }} />
 
-      {/* Roadmap Section */}
-      <section className="py-32 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto mb-20">
-            <div className="inline-block px-4 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-bold mb-6 uppercase tracking-wider">The Roadmap</div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8">Digital Safety Path</h2>
-            <p className="text-xl md:text-2xl text-zinc-600 font-medium leading-relaxed">
-              We guide you through the process of securing your digital life so you can browse with confidence.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { title: "Account Safety", desc: "Set up 2FA and strong passwords for all major accounts.", icon: <Lock /> },
-              { title: "Antivirus", desc: "Install and configure a reliable antivirus for ongoing protection.", icon: <ShieldCheck /> },
-              { title: "Safe Habits", desc: "Learn to spot phishing emails and avoid online scams.", icon: <Eye /> },
-              { title: "Backup", desc: "Securely back up your most important files to the cloud.", icon: <Globe /> }
-            ].map((step, i) => (
-              <div key={i} className="p-8 rounded-[2.5rem] bg-zinc-50 border border-zinc-100 relative group">
-                <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                  {step.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-zinc-500 font-medium leading-relaxed">{step.desc}</p>
-                <div className="absolute top-8 right-8 text-4xl font-black text-zinc-200 opacity-50 group-hover:text-blue-100 transition-colors">
-                  0{i + 1}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-32 bg-zinc-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-extrabold text-center mb-16">Security FAQ</h2>
-          <div className="space-y-6">
-            {[
-              { q: "Is two-factor authentication (2FA) really necessary?", a: "Yes. 2FA adds a critical second layer of security, making it much harder for hackers to access your accounts even if they have your password." },
-              { q: "Can a free antivirus be trusted?", a: "Yes, some free options like Windows Defender are excellent. However, paid versions often offer more features like identity theft protection." },
-              { q: "How do I know if an email is a scam?", a: "Look for urgent threats, misspellings, and generic greetings. If in doubt, never click links and go to the official website directly." },
-              { q: "Should I use a password manager?", a: "Absolutely. Password managers are the safest way to store unique, complex passwords for all your accounts without having to remember them." }
-            ].map((faq, i) => (
-              <div key={i} className="bg-white p-8 rounded-[2rem] border border-zinc-100">
-                <h4 className="text-xl font-extrabold mb-3 flex gap-3 items-center">
-                  <HelpCircle className="text-blue-600" />
-                  {faq.q}
-                </h4>
-                <p className="text-lg text-zinc-600 font-medium leading-relaxed pl-9">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Footer />
+            <Footer />
     </div>
   );
 }

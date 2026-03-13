@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import TechBridgeLearnLayout from "@/components/TechBridgeLearnLayout";
 import {
   Mic,
   CheckCircle2,
@@ -190,7 +191,7 @@ export default function AlexaPage() {
 
       {/* Hero Section */}
       {/* Hero Section - Full Cover */}
-      <header className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-1000 ${currentTheme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+      <header className="relative min-h-screen flex items-center justify-center overflow-hidden text-white">
         <HeaderBackgroundSlider items={alexaBackgrounds} onThemeChange={setCurrentTheme} />
         
         {/* Advanced Background Elements */}
@@ -213,15 +214,15 @@ export default function AlexaPage() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="lg:w-3/5"
             >
-              <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full backdrop-blur-md text-xs font-black uppercase tracking-[0.2em] mb-10 shadow-xl border ${currentTheme === 'dark' ? 'bg-black/20 border-white/20 text-blue-400' : 'bg-white/50 border-white/50 text-blue-700'}`}>
+              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full backdrop-blur-md text-xs font-black uppercase tracking-[0.2em] mb-10 shadow-xl border bg-black/30 border-white/20 text-blue-400">
                 <Mic size={14} />
                 <span>Voice Assistant Support</span>
               </div>
-              <h1 className={`text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.9] ${currentTheme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+              <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.9] text-white">
                 Talk to Your <br />
                 <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-[length:200%_auto] animate-gradient bg-clip-text text-transparent italic">Tech.</span>
               </h1>
-              <p className={`text-xl md:text-3xl mb-14 leading-relaxed font-medium ${currentTheme === 'dark' ? 'text-zinc-300' : 'text-zinc-600'}`}>
+              <p className="text-xl md:text-3xl mb-14 leading-relaxed font-medium text-zinc-200">
                 From initial setup to advanced voice routines, we help you master Alexa and other voice assistants for a more convenient home.
               </p>
               
@@ -237,7 +238,7 @@ export default function AlexaPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
-                    className={`flex items-center gap-4 p-5 rounded-3xl backdrop-blur-sm border shadow-xl hover:shadow-2xl transition-all group ${currentTheme === 'dark' ? 'bg-white/10 border-white/10 text-zinc-200' : 'bg-white/80 border-white text-zinc-700'}`}
+                    className="flex items-center gap-4 p-5 rounded-3xl backdrop-blur-sm border shadow-xl hover:shadow-2xl transition-all group bg-white/10 border-white/10 text-zinc-200"
                   >
                     <div className="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center text-white transition-colors duration-300">
                       <CheckCircle2 size={20} />
@@ -252,8 +253,8 @@ export default function AlexaPage() {
                   Start Alexa Guide
                   <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
                 </Link>
-                <Link href="/contact" className={`font-black hover:text-blue-600 transition-all flex items-center gap-3 group ${currentTheme === 'dark' ? 'text-white' : 'text-zinc-500'}`}>
-                  <div className={`w-14 h-14 rounded-2xl backdrop-blur-md flex items-center justify-center shadow-lg transition-all ${currentTheme === 'dark' ? 'bg-white/10 group-hover:bg-white/20' : 'bg-white/80 group-hover:bg-blue-50'}`}>
+                <Link href="/contact" className="font-black hover:text-blue-400 transition-all flex items-center gap-3 group text-white">
+                  <div className="w-14 h-14 rounded-2xl backdrop-blur-md flex items-center justify-center shadow-lg transition-all bg-white/10 group-hover:bg-white/20">
                     <Mail size={24} />
                   </div>
                   Ask an Alexa Expert
@@ -293,104 +294,36 @@ export default function AlexaPage() {
         </div>
       </header>
 
-      {/* App Section */}
-      <section id="app" className="py-32 bg-zinc-900 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('/grid.svg')]" />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-block px-4 py-1 rounded-lg dark-glass border-white/10 text-blue-400 text-sm font-bold mb-6 uppercase tracking-wider">Interactive Tool</div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-6">Alexa Setup Assistant</h2>
-            <p className="text-xl text-zinc-400 font-medium">Click through our simple guide to master your voice assistant.</p>
-          </div>
-          
-          <div className="bg-white rounded-[4rem] shadow-2xl overflow-hidden border border-white/10">
-            <TechBridgeApp 
-              title="Alexa Assistant" 
-              steps={alexaSteps} 
-            />
-          </div>
-        </div>
-      </section>
+      <TechBridgeLearnLayout config={{
+        topic: "Alexa",
+        pdfTitle: "Alexa Complete Setup & Commands Guide",
+        pdfDescription: "Unlock everything your Amazon Echo and Alexa can do — from playing music to managing your calendar, controlling smart devices, and beyond.",
+        pdfHighlights: [
+          "Complete first-time Echo setup walkthrough",
+          "50+ most useful Alexa voice commands",
+          "Setting up music, news, and flash briefings",
+          "Alexa routines for morning, evening, and more",
+          "Connecting Alexa to your smart home devices",
+          "Alexa privacy settings and managing your history",
+        ],
+        brandExamples: ["Amazon Echo", "Echo Dot", "Echo Show", "Echo Plus", "Echo Pop", "Fire TV"],
+        starterQuestions: [
+          "How do I set up my new Echo device?",
+          "Alexa isn't understanding my commands",
+          "How do I play music on Alexa?",
+          "How do I set a reminder on Alexa?",
+          "Can Alexa call my family members?",
+          "How do I reset my Echo device?",
+        ],
+        emailjsServiceId: "service_dtucjcw",
+        emailjsPdfTemplateId: "template_uls5p3p",
+        emailjsContactTemplateId: "template_uls5p3p",
+        emailjsPublicKey: "XRCYl5c7gwzK67hbD",
+        discordBotToken: "MTQ4MjE0MjI3MzQ3NDAwMzA2Ng.GtM-3y.eQUosynKep7fnM26pjbtM3npCFn2evOvHjUJuk",
+        discordChannelId: "1482143893708345428",
+      }} />
 
-      {/* Roadmap Section */}
-      <section className="py-32 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto mb-20">
-            <div className="inline-block px-4 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-bold mb-6 uppercase tracking-wider">The Roadmap</div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8">Voice Mastery Roadmap</h2>
-            <p className="text-xl md:text-2xl text-zinc-600 font-medium leading-relaxed">
-              We guide you through the process of setting up and mastering Alexa so it becomes your personal assistant.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { title: "Device Setup", desc: "Connect your Echo to power and your phone app.", icon: <Search /> },
-              { title: "Account Linking", desc: "Link your Amazon, Music, and News accounts.", icon: <RefreshCcw /> },
-              { title: "Voice Training", desc: "Teach Alexa to recognize your specific voice.", icon: <Volume2 /> },
-              { title: "Master Commands", desc: "Learn the most useful commands for your life.", icon: <Mic /> }
-            ].map((step, i) => (
-              <div key={i} className="p-8 rounded-[2.5rem] bg-zinc-50 border border-zinc-100 relative group">
-                <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                  {step.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-zinc-500 font-medium leading-relaxed">{step.desc}</p>
-                <div className="absolute top-8 right-8 text-4xl font-black text-zinc-200 opacity-50 group-hover:text-blue-100 transition-colors">
-                  0{i + 1}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Lead Capture Section */}
-      <section className="py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-zinc-900 p-12 md:p-16 rounded-[4rem] text-white text-center">
-            <h2 className="text-4xl font-extrabold mb-6 text-white">The "Ultimate Alexa Commands" Guide</h2>
-            <p className="text-xl text-zinc-400 mb-12 font-medium">Download our free PDF guide to the most useful Alexa commands for seniors and families. No jargon included.</p>
-            
-            <form className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="flex-grow px-8 py-5 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:border-blue-500 transition-colors font-bold text-white" 
-              />
-              <button className="px-10 py-5 bg-blue-600 text-white rounded-2xl font-bold text-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 whitespace-nowrap">
-                Download PDF
-              </button>
-            </form>
-            <p className="mt-6 text-zinc-500 font-bold text-sm uppercase tracking-widest">We'll send the guide instantly to your inbox.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-32 bg-zinc-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-extrabold text-center mb-16">Alexa FAQ</h2>
-          <div className="space-y-6">
-            {[
-              { q: "Is Alexa always listening to me?", a: "Alexa only listens for the 'wake word' (like Alexa). It does not record your conversations otherwise. You can also press the mute button to disable the microphone at any time." },
-              { q: "Can Alexa help me in an emergency?", a: "Yes, you can set up 'Alexa Emergency Assist' to call for help using your voice. You can also add emergency contacts for Alexa to notify." },
-              { q: "Do I need an Amazon Prime account?", a: "No, you only need a free Amazon account to use Alexa. However, Prime members get access to more music and features." },
-              { q: "Can I use Alexa to call my family?", a: "Absolutely. Once you link your contacts, you can say 'Alexa, call my daughter' to start a hands-free call." }
-            ].map((faq, i) => (
-              <div key={i} className="bg-white p-8 rounded-[2rem] border border-zinc-100">
-                <h4 className="text-xl font-extrabold mb-3 flex gap-3 items-center">
-                  <HelpCircle className="text-blue-600" />
-                  {faq.q}
-                </h4>
-                <p className="text-lg text-zinc-600 font-medium leading-relaxed pl-9">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Footer />
+            <Footer />
     </div>
   );
 }

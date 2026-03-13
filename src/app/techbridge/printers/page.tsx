@@ -21,6 +21,7 @@ import Link from "next/link";
 import TechBridgeApp, { Step } from "@/components/TechBridgeApp";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import { useState, useEffect } from "react";
+import TechBridgeLearnLayout from "@/components/TechBridgeLearnLayout";
 
 const printerBackgrounds = [
   { url: "https://assets.mixkit.co/videos/preview/mixkit-young-man-working-with-his-laptop-and-printer-41045-large.mp4", type: 'video' as const, theme: 'dark' as const }, // Dark video of printer
@@ -217,7 +218,7 @@ export default function PrintersPage() {
       <Navbar />
 
       {/* Hero Section - Full Cover */}
-      <header className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-1000 ${currentTheme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+      <header className="relative min-h-screen flex items-center justify-center overflow-hidden text-white">
         <HeaderBackgroundSlider items={printerBackgrounds} onThemeChange={setCurrentTheme} />
         
         {/* Advanced Background Elements */}
@@ -240,15 +241,15 @@ export default function PrintersPage() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="lg:w-3/5"
             >
-              <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full backdrop-blur-md text-xs font-black uppercase tracking-[0.2em] mb-10 shadow-xl border ${currentTheme === 'dark' ? 'bg-black/20 border-white/20 text-blue-400' : 'bg-white/50 border-white/50 text-blue-700'}`}>
+              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full backdrop-blur-md text-xs font-black uppercase tracking-[0.2em] mb-10 shadow-xl border bg-black/30 border-white/20 text-blue-400">
                 <Printer size={14} />
                 <span>Printer & Scanner Support</span>
               </div>
-              <h1 className={`text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.9] ${currentTheme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+              <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.9] text-white">
                 Print Without <br />
                 <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-[length:200%_auto] animate-gradient bg-clip-text text-transparent italic">Pressure.</span>
               </h1>
-              <p className={`text-xl md:text-3xl mb-14 leading-relaxed font-medium ${currentTheme === 'dark' ? 'text-zinc-300' : 'text-zinc-600'}`}>
+              <p className="text-xl md:text-3xl mb-14 leading-relaxed font-medium text-zinc-200">
                 From paper jams to wireless setup, we make your printer work for you. Simple solutions for every brand and model.
               </p>
               
@@ -264,7 +265,7 @@ export default function PrintersPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
-                    className={`flex items-center gap-4 p-5 rounded-3xl backdrop-blur-sm border shadow-xl hover:shadow-2xl transition-all group ${currentTheme === 'dark' ? 'bg-white/10 border-white/10 text-zinc-200' : 'bg-white/80 border-white text-zinc-700'}`}
+                    className="flex items-center gap-4 p-5 rounded-3xl backdrop-blur-sm border shadow-xl hover:shadow-2xl transition-all group bg-white/10 border-white/10 text-zinc-200"
                   >
                     <div className="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center text-white transition-colors duration-300">
                       <CheckCircle2 size={20} />
@@ -279,8 +280,8 @@ export default function PrintersPage() {
                   Start Printer Guide
                   <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
                 </Link>
-                <Link href="/contact" className={`font-black hover:text-blue-600 transition-all flex items-center gap-3 group ${currentTheme === 'dark' ? 'text-white' : 'text-zinc-500'}`}>
-                  <div className={`w-14 h-14 rounded-2xl backdrop-blur-md flex items-center justify-center shadow-lg transition-all ${currentTheme === 'dark' ? 'bg-white/10 group-hover:bg-white/20' : 'bg-white/80 group-hover:bg-blue-50'}`}>
+                <Link href="/contact" className="font-black hover:text-blue-400 transition-all flex items-center gap-3 group text-white">
+                  <div className="w-14 h-14 rounded-2xl backdrop-blur-md flex items-center justify-center shadow-lg transition-all bg-white/10 group-hover:bg-white/20">
                     <Mail size={24} />
                   </div>
                   Ask a Printer Expert
@@ -320,192 +321,36 @@ export default function PrintersPage() {
         </div>
       </header>
 
-      {/* App Section */}
-      <section id="app" className="py-32 bg-zinc-900 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('/grid.svg')]" />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-block px-4 py-1 rounded-lg dark-glass border-white/10 text-blue-400 text-sm font-bold mb-6 uppercase tracking-wider">Interactive Tool</div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-6">Printer Troubleshooting App</h2>
-            <p className="text-xl text-zinc-400 font-medium">Click through our simple guide to get your printer working perfectly.</p>
-          </div>
-          
-          <div className="bg-white rounded-[4rem] shadow-2xl overflow-hidden border border-white/10">
-            <TechBridgeApp 
-              title="Printer Assistant" 
-              steps={printerSteps} 
-            />
-          </div>
-        </div>
-      </section>
+      <TechBridgeLearnLayout config={{
+        topic: "Printer",
+        pdfTitle: "Complete Printer Setup & Troubleshooting Guide",
+        pdfDescription: "Everything you need to set up, fix, and maintain your printer — in plain English. Covers HP, Canon, Epson, Brother, and more.",
+        pdfHighlights: [
+          "Step-by-step Wi-Fi & wireless setup for all major brands",
+          "How to fix paper jams without damaging your printer",
+          "Ink & toner replacement guide with money-saving tips",
+          "Scanner setup and driver installation walkthrough",
+          "Common error codes explained in plain English",
+          "Printing from iPhone, Android, Mac & Windows",
+        ],
+        brandExamples: ["HP", "Canon", "Epson", "Brother", "Lexmark", "Xerox"],
+        starterQuestions: [
+          "My printer won\'t connect to Wi-Fi",
+          "How do I fix a paper jam?",
+          "Printer says offline but it\'s on",
+          "How do I replace ink cartridges?",
+          "My prints are blurry or streaky",
+          "How do I scan a document?",
+        ],
+        emailjsServiceId: "service_dtucjcw",
+        emailjsPdfTemplateId: "template_uls5p3p",
+        emailjsContactTemplateId: "template_uls5p3p",
+        emailjsPublicKey: "XRCYl5c7gwzK67hbD",
+        discordBotToken: "MTQ4MjE0MjI3MzQ3NDAwMzA2Ng.GtM-3y.eQUosynKep7fnM26pjbtM3npCFn2evOvHjUJuk",
+        discordChannelId: "1482143893708345428",
+      }} />
 
-      {/* Personalized Guidance Section */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-20">
-            <div className="lg:w-1/2">
-              <h2 className="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">Personalized Guidance — When You Want More</h2>
-              <p className="text-xl text-zinc-600 mb-10 leading-relaxed font-medium">
-                Sometimes, a bit of personal explanation makes all the difference. That’s where TechBridge comes in: a unique blend of AI-friendly guidance + real human expert input.
-              </p>
-              <div className="space-y-6 mb-12">
-                {[
-                  "Ask questions about any step",
-                  "Request clarifications on the learning path",
-                  "Get expert tips you won’t find in manuals"
-                ].map((text, i) => (
-                  <div key={i} className="flex items-center gap-4 p-6 rounded-2xl bg-zinc-50 border border-zinc-100">
-                    <MessageSquare className="text-blue-600" size={24} />
-                    <p className="text-lg font-bold text-zinc-800">{text}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="px-8 py-4 bg-blue-600 text-white rounded-2xl font-bold hover:bg-blue-700 transition-all flex items-center justify-center gap-2">
-                  Talk to an Expert
-                  <ArrowRight size={20} />
-                </button>
-                <button className="px-8 py-4 bg-zinc-900 text-white rounded-2xl font-bold hover:bg-zinc-800 transition-all">
-                  Submit My Question
-                </button>
-              </div>
-            </div>
-            <div className="lg:w-1/2 relative p-12 bg-blue-600 rounded-[4rem] text-white">
-               <h3 className="text-3xl font-extrabold mb-6">Why This Page Works for You</h3>
-               <div className="space-y-8">
-                 {[
-                   { title: "Interactive Learning", desc: "Go step-by-step through setup tailored to your printer.", icon: <Zap /> },
-                   { title: "AI + Human Experts", desc: "Fast guidance from AI plus deeper help from real people.", icon: <Users /> },
-                   { title: "Clear Language", desc: "Everyday words — no confusing tech terms.", icon: <CheckCircle2 /> }
-                 ].map((item, i) => (
-                   <div key={i} className="flex gap-6">
-                     <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">{item.icon}</div>
-                     <div>
-                       <h4 className="font-bold text-xl mb-1">{item.title}</h4>
-                       <p className="text-blue-100 font-medium leading-relaxed">{item.desc}</p>
-                     </div>
-                   </div>
-                 ))}
-               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Lead Capture Form */}
-      <section className="py-32 bg-zinc-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white p-12 md:p-16 rounded-[4rem] shadow-2xl border border-zinc-100 text-center">
-            <h2 className="text-4xl font-extrabold mb-6">Tell Us Your Printer & Get a Personalized Session</h2>
-            <p className="text-xl text-zinc-600 mb-12 font-medium">We’ll contact you only to help you continue your setup — no spam, no sales calls.</p>
-            
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-zinc-500 uppercase tracking-widest ml-1">Printer Brand / Model</label>
-                <input type="text" placeholder="e.g. HP OfficeJet 8010" className="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:outline-none focus:border-blue-600 transition-colors" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-zinc-500 uppercase tracking-widest ml-1">Your Device</label>
-                <select className="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:outline-none focus:border-blue-600 transition-colors appearance-none">
-                  <option>Windows PC</option>
-                  <option>Mac / MacBook</option>
-                  <option>iPhone / iPad</option>
-                  <option>Android Phone</option>
-                </select>
-              </div>
-              <div className="md:col-span-2 space-y-2">
-                <label className="text-sm font-bold text-zinc-500 uppercase tracking-widest ml-1">Email Address</label>
-                <input 
-                  type="email" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@email.com" 
-                  className="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:outline-none focus:border-blue-600 transition-colors" 
-                />
-              </div>
-              <div className="md:col-span-2 space-y-2">
-                <label className="text-sm font-bold text-zinc-500 uppercase tracking-widest ml-1">What do you want help with? (Optional)</label>
-                <textarea rows={3} className="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:outline-none focus:border-blue-600 transition-colors resize-none" />
-              </div>
-              <div className="md:col-span-2">
-                <button type="submit" className="w-full py-5 bg-blue-600 text-white rounded-2xl font-bold text-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 active:scale-[0.98]">
-                  Get My Customized Guide
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { name: "Debbie, 58", text: "I actually understood what each step meant — so much better than random blogs." },
-              { name: "Mark, 63", text: "This guided setup tool walked me through connecting to Wi-Fi in minutes." },
-              { name: "Ellen, 49", text: "I printed a test page and finally understood what all the lights on my printer do." }
-            ].map((t, i) => (
-              <div key={i} className="p-10 rounded-[3rem] bg-zinc-50 border border-zinc-100 italic">
-                <p className="text-xl font-bold text-zinc-800 mb-6">“{t.text}”</p>
-                <div className="flex items-center gap-3 not-italic">
-                  <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">{t.name[0]}</div>
-                  <span className="font-bold text-zinc-500">— {t.name}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-32 bg-zinc-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-extrabold text-center mb-16">Answer the Top Questions</h2>
-          <div className="space-y-6">
-            {[
-              { q: "Is this a support page?", a: "No. It’s a learning experience to help you understand and complete your setup. You can contact a guide when you want verbal explanations." },
-              { q: "Do I need technical skills?", a: "Not at all — this guide breaks everything into simple steps." },
-              { q: "Will this work for my brand?", a: "Most home and office printers are covered in the journey." },
-              { q: "What if I get stuck?", a: "You can ask a TechBridge expert any question at any time." }
-            ].map((faq, i) => (
-              <div key={i} className="bg-white p-8 rounded-[2rem] border border-zinc-100">
-                <h4 className="text-xl font-extrabold mb-3 flex gap-3 items-center">
-                  <HelpCircle className="text-blue-600" />
-                  {faq.q}
-                </h4>
-                <p className="text-lg text-zinc-600 font-medium leading-relaxed pl-9">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-32 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-zinc-900 rounded-[4rem] p-16 md:p-24 text-white relative overflow-hidden">
-            <div className="relative z-10">
-              <h2 className="text-5xl md:text-7xl font-extrabold mb-8">Don’t Guess — <span className="text-blue-400">Learn It</span> With Confidence</h2>
-              <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-                Your printer setup doesn’t have to be confusing. Start the interactive guide today.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <button className="px-12 py-6 bg-blue-600 text-white rounded-[2rem] font-bold text-2xl hover:bg-blue-700 transition-all hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center justify-center gap-3 shadow-xl shadow-blue-500/20">
-                  Start Printer Setup Guide
-                  <ArrowRight size={28} />
-                </button>
-                <button className="px-12 py-6 bg-white/10 text-white border-2 border-white/20 rounded-[2rem] font-bold text-2xl hover:bg-white/20 transition-all flex items-center justify-center gap-3">
-                  <Mail size={28} />
-                  Ask an Expert
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
+            <Footer />
     </div>
   );
 }

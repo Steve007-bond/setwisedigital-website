@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import TechBridgeLearnLayout from "@/components/TechBridgeLearnLayout";
 import {
   Camera,
   RefreshCcw,
@@ -314,82 +315,36 @@ export default function CameraPage() {
         </div>
       </header>
 
-      {/* App Section */}
-      <section id="app" className="py-32 bg-zinc-900 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('/grid.svg')]" />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20">
-            <div className="inline-block px-4 py-1 rounded-lg dark-glass border-white/10 text-blue-400 text-sm font-bold mb-6 uppercase tracking-wider">Interactive Tool</div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-6">Camera Assistant</h2>
-            <p className="text-xl text-zinc-400 font-medium">Click through our simple guide to master your camera settings.</p>
-          </div>
-          
-          <div className="bg-white rounded-[4rem] shadow-2xl overflow-hidden border border-white/10">
-            <TechBridgeApp 
-              title="Camera Assistant" 
-              steps={cameraSteps} 
-            />
-          </div>
-        </div>
-      </section>
+      <TechBridgeLearnLayout config={{
+        topic: "Camera",
+        pdfTitle: "Digital Camera Setup & Photography Guide",
+        pdfDescription: "Take better photos, update your camera firmware, and master the settings that make the biggest difference — in plain, simple language.",
+        pdfHighlights: [
+          "How to update camera firmware safely step-by-step",
+          "The most important camera settings explained simply",
+          "Tips for sharper, clearer photos in any light",
+          "How to back up and organize your photos",
+          "Connecting your camera to your computer or phone",
+          "Understanding SD cards — what to buy and how to use them",
+        ],
+        brandExamples: ["Canon", "Nikon", "Sony", "Fujifilm", "Panasonic", "Olympus"],
+        starterQuestions: [
+          "How do I update my camera firmware?",
+          "Why are my photos blurry?",
+          "How do I transfer photos to my computer?",
+          "My camera won't turn on",
+          "Which camera settings should I change?",
+          "How do I clean my camera lens?",
+        ],
+        emailjsServiceId: "service_dtucjcw",
+        emailjsPdfTemplateId: "template_uls5p3p",
+        emailjsContactTemplateId: "template_uls5p3p",
+        emailjsPublicKey: "XRCYl5c7gwzK67hbD",
+        discordBotToken: "MTQ4MjE0MjI3MzQ3NDAwMzA2Ng.GtM-3y.eQUosynKep7fnM26pjbtM3npCFn2evOvHjUJuk",
+        discordChannelId: "1482143893708345428",
+      }} />
 
-      {/* Roadmap Section */}
-      <section className="py-32 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto mb-20">
-            <div className="inline-block px-4 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-bold mb-6 uppercase tracking-wider">The Roadmap</div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8">Photography Journey</h2>
-            <p className="text-xl md:text-2xl text-zinc-600 font-medium leading-relaxed">
-              We guide you through the process of mastering your camera so you can capture every moment with confidence.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { title: "Firmware", desc: "Keep your camera's internal software updated for better performance.", icon: <RefreshCcw /> },
-              { title: "Settings", desc: "Learn the best settings for portraits, landscapes, and movement.", icon: <Settings /> },
-              { title: "Storage", desc: "Understand SD card speeds and how to back up your photos safely.", icon: <ShieldCheck /> },
-              { title: "Editing", desc: "Simple tips for organizing and lightly editing your favorite shots.", icon: <ImageIcon /> }
-            ].map((step, i) => (
-              <div key={i} className="p-8 rounded-[2.5rem] bg-zinc-50 border border-zinc-100 relative group">
-                <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                  {step.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-zinc-500 font-medium leading-relaxed">{step.desc}</p>
-                <div className="absolute top-8 right-8 text-4xl font-black text-zinc-200 opacity-50 group-hover:text-blue-100 transition-colors">
-                  0{i + 1}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-32 bg-zinc-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-extrabold text-center mb-16">Camera FAQ</h2>
-          <div className="space-y-6">
-            {[
-              { q: "Why do I need to update my camera firmware?", a: "Firmware updates can fix bugs, improve autofocus speed, and even add new features to your camera for free." },
-              { q: "What SD card should I buy?", a: "Look for cards labeled 'Class 10' or 'V30' for reliable performance. Brands like SanDisk and Samsung are usually the most trusted." },
-              { q: "How do I stop my photos from being blurry?", a: "Blur is often caused by a slow shutter speed. Try using a tripod or increasing your ISO setting in low light." },
-              { q: "Can you help me with my specific camera model?", a: "Yes! Our guides cover all major brands like Sony, Canon, Nikon, and Fujifilm. If you have a specific question, just ask." }
-            ].map((faq, i) => (
-              <div key={i} className="bg-white p-8 rounded-[2rem] border border-zinc-100">
-                <h4 className="text-xl font-extrabold mb-3 flex gap-3 items-center">
-                  <HelpCircle className="text-blue-600" />
-                  {faq.q}
-                </h4>
-                <p className="text-lg text-zinc-600 font-medium leading-relaxed pl-9">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Footer />
+            <Footer />
     </div>
   );
 }

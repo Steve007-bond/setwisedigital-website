@@ -24,6 +24,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import Image from "next/image";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import { useState, useRef } from "react";
 
@@ -77,7 +78,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section - Full Cover */}
-      <header className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-1000 ${currentTheme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+      <header className="relative min-h-screen flex items-center justify-center overflow-hidden text-white">
         <HeaderBackgroundSlider items={homeBackgrounds} onThemeChange={setCurrentTheme} />
 
         {/* Floating Animated Elements (Parallax) */}
@@ -97,7 +98,7 @@ export default function Home() {
             animate="visible"
             className="text-center max-w-4xl mx-auto"
           >
-            <motion.div variants={itemVariants} className={`inline-flex items-center gap-2 px-5 py-2 rounded-full backdrop-blur-md text-xs font-black uppercase tracking-[0.2em] mb-10 shadow-xl border animate-bounce-slow ${currentTheme === 'dark' ? 'bg-black/20 border-white/20 text-blue-400' : 'bg-white/50 border-white/50 text-blue-700'}`}>
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-5 py-2 rounded-full backdrop-blur-md text-xs font-black uppercase tracking-[0.2em] mb-10 shadow-xl border animate-bounce-slow bg-black/30 border-white/20 text-blue-400">
 
               <Sparkles size={14} className="text-yellow-500 fill-yellow-500" />
               <span>Experience Technology Differently</span>
@@ -105,7 +106,7 @@ export default function Home() {
             
             <motion.h1 
               variants={itemVariants}
-              className={`text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.9] ${currentTheme === 'dark' ? 'text-white' : 'text-zinc-900'}`}
+              className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.9] text-white"
             >
               Technology <br />
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-[length:200%_auto] animate-gradient bg-clip-text text-transparent italic">Simplified.</span>
@@ -113,7 +114,7 @@ export default function Home() {
 
             <motion.p 
               variants={itemVariants}
-              className={`text-xl md:text-3xl mb-14 leading-relaxed font-medium ${currentTheme === 'dark' ? 'text-zinc-300' : 'text-zinc-600'}`}
+              className="text-xl md:text-3xl mb-14 leading-relaxed font-medium text-zinc-200"
             >
               At Setwise Digital, we bridge the gap between complex tech and everyday ease. Personalized support for the modern age.
             </motion.p>
@@ -126,8 +127,8 @@ export default function Home() {
                 Get Support Now
                 <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
               </Link>
-              <Link href="/pricing" className={`font-black hover:text-blue-600 transition-all flex items-center gap-3 group ${currentTheme === 'dark' ? 'text-white' : 'text-zinc-500'}`}>
-                <div className={`w-14 h-14 rounded-2xl backdrop-blur-md flex items-center justify-center shadow-lg transition-all ${currentTheme === 'dark' ? 'bg-white/10 group-hover:bg-white/20' : 'bg-white/80 group-hover:bg-blue-50'}`}>
+              <Link href="/pricing" className="font-black hover:text-blue-400 transition-all flex items-center gap-3 group text-white">
+                <div className="w-14 h-14 rounded-2xl backdrop-blur-md flex items-center justify-center shadow-lg transition-all bg-white/10 group-hover:bg-white/20">
                   <Zap size={24} />
                 </div>
                 View Pricing
