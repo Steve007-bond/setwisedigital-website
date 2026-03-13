@@ -345,8 +345,7 @@ export default function SecurityPage() {
         emailjsPdfTemplateId: "template_uls5p3p",
         emailjsContactTemplateId: "template_uls5p3p",
         emailjsPublicKey: "XRCYl5c7gwzK67hbD",
-        discordBotToken: "MTQ4MjE0MjI3MzQ3NDAwMzA2Ng.GtM-3y.eQUosynKep7fnM26pjbtM3npCFn2evOvHjUJuk",
-        discordChannelId: "1482143893708345428",
+
       }} />
 
             <Footer />

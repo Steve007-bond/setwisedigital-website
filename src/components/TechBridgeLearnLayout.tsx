@@ -21,8 +21,7 @@ export interface TechBridgeLearnConfig {
   emailjsPdfTemplateId?: string;
   emailjsContactTemplateId?: string;
   emailjsPublicKey?: string;
-  discordBotToken?: string;
-  discordChannelId?: string;
+
 }
 
 const TABS = [
@@ -155,8 +154,7 @@ export default function TechBridgeLearnLayout({
               emailjsServiceId={config.emailjsServiceId}
               emailjsContactTemplateId={config.emailjsContactTemplateId}
               emailjsPublicKey={config.emailjsPublicKey}
-              discordBotToken={config.discordBotToken}
-              discordChannelId={config.discordChannelId}
+
             />
           )}
         </motion.div>

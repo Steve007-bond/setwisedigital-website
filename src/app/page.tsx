@@ -588,41 +588,139 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-4xl font-extrabold mb-6">Discover New Tips Every Week</h2>
+              <div className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 font-black text-xs uppercase tracking-[0.2em] mb-6">Learning Hub</div>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-6">Discover New Tips Every Week</h2>
               <p className="text-xl text-zinc-600 font-medium">Our Learning Hub is your go-to space for fresh ideas and easy lessons written in everyday language.</p>
             </div>
-            <button className="px-8 py-4 bg-white border-2 border-zinc-200 rounded-2xl font-bold hover:border-blue-600 hover:text-blue-600 transition-all shadow-sm">
+            <Link href="/techbridge" className="px-8 py-4 bg-white border-2 border-zinc-200 rounded-2xl font-bold hover:border-blue-600 hover:text-blue-600 transition-all shadow-sm whitespace-nowrap">
               Visit Learning Hub
-            </button>
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {[
-              "How to Print Wirelessly from Your Phone",
-              "The Easiest Way to Update Your Garmin GPS",
-              "5 Alexa Features You Didn’t Know You Had",
-              "Why Camera Updates Improve Your Photos"
-            ].map((title, i) => (
-              <motion.div 
+              {
+                title: "How to Print Wirelessly from Your Phone",
+                category: "Printer Tips",
+                readTime: "4 min read",
+                stat: "68% of printer issues are Wi-Fi related",
+                img: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=600&h=400",
+                href: "/techbridge/printers",
+                accent: "bg-blue-600/70",
+              },
+              {
+                title: "The Easiest Way to Update Your Garmin GPS",
+                category: "GPS & Navigation",
+                readTime: "5 min read",
+                stat: "72% of GPS users never update their maps",
+                img: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=600&h=400",
+                href: "/techbridge/gps",
+                accent: "bg-indigo-600/70",
+              },
+              {
+                title: "5 Alexa Features You Didn't Know You Had",
+                category: "Smart Home",
+                readTime: "3 min read",
+                stat: "Only 30% of Alexa owners use routines",
+                img: "https://images.unsplash.com/photo-1518444065439-e933c06ce9cd?auto=format&fit=crop&q=80&w=600&h=400",
+                href: "/techbridge/alexa",
+                accent: "bg-violet-600/70",
+              },
+              {
+                title: "Why Camera Updates Improve Your Photos",
+                category: "Camera & Photo",
+                readTime: "3 min read",
+                stat: "Firmware updates fix 40% of camera bugs",
+                img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=600&h=400",
+                href: "/techbridge/camera",
+                accent: "bg-rose-600/70",
+              },
+            ].map((article, i) => (
+              <motion.div
                 key={i}
-                whileHover={{ y: -5 }}
-                className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-zinc-100 flex flex-col group"
+                whileHover={{ y: -6 }}
+                className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all border border-zinc-100 flex flex-col group"
               >
-                <div className="h-48 bg-zinc-200 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-blue-600/10 group-hover:bg-blue-600/0 transition-colors" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <BookOpen size={48} className="text-zinc-400 group-hover:text-blue-600 group-hover:scale-110 transition-all duration-300" />
+                <div className="h-48 relative overflow-hidden">
+                  <img
+                    src={article.img}
+                    alt={article.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className={`absolute inset-0 ${article.accent}`} />
+                  <div className="absolute top-3 left-3">
+                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-black text-zinc-700">
+                      {article.category}
+                    </span>
                   </div>
                 </div>
-                <div className="p-8 flex flex-col flex-grow">
-                  <div className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-3">Tutorial</div>
-                  <h4 className="text-lg font-bold mb-4 leading-snug group-hover:text-blue-600 transition-colors">{title}</h4>
-                  <div className="mt-auto flex items-center text-zinc-500 font-bold text-sm gap-2">
-                    Read Article <ChevronRight size={16} />
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex items-start gap-2 mb-3 p-3 bg-blue-50 rounded-xl border border-blue-100">
+                    <span className="text-xs">📊</span>
+                    <span className="text-xs font-bold text-blue-700 leading-tight">{article.stat}</span>
+                  </div>
+                  <h4 className="text-base font-black mb-3 leading-snug group-hover:text-blue-600 transition-colors text-zinc-900">{article.title}</h4>
+                  <div className="mt-auto flex items-center justify-between text-xs text-zinc-400 font-bold">
+                    <span>{article.readTime}</span>
+                    <Link href={article.href} className="flex items-center gap-1 text-blue-600 hover:gap-2 transition-all">
+                      Read <ChevronRight size={14} />
+                    </Link>
                   </div>
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          <div className="bg-white rounded-[2rem] border border-zinc-100 shadow-lg p-8 mb-16">
+            <div className="text-center mb-6">
+              <span className="text-xs font-black text-zinc-400 uppercase tracking-widest">Tech Facts & Stats — 2025</span>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              {[
+                { stat: "65%", label: "of adults 50+ own a smart speaker", source: "Pew Research" },
+                { stat: "4.2B", label: "wireless printers active worldwide", source: "IDC 2025" },
+                { stat: "72%", label: "of GPS users never update their maps", source: "Garmin Survey" },
+                { stat: "89%", label: "prefer plain-English tech guides", source: "AARP Study" },
+              ].map((item, i) => (
+                <div key={i} className="space-y-1">
+                  <div className="text-3xl md:text-4xl font-black text-blue-600 tracking-tighter">{item.stat}</div>
+                  <div className="text-sm font-bold text-zinc-700 leading-tight">{item.label}</div>
+                  <div className="text-xs text-zinc-400 font-medium">{item.source}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-black text-zinc-900">Related Articles</h3>
+              <Link href="/techbridge" className="text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                View all <ChevronRight size={14} />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
+                { title: "How to Fix a Paper Jam in 60 Seconds", tag: "Printer", icon: "🖨️", href: "/techbridge/printers" },
+                { title: "Setting Up Google Nest for the First Time", tag: "Smart Home", icon: "🏠", href: "/techbridge/smart-home" },
+                { title: "Is Your Home Wi-Fi Putting You at Risk?", tag: "Security", icon: "🔒", href: "/techbridge/security" },
+              ].map((item, i) => (
+                <Link
+                  key={i}
+                  href={item.href}
+                  className="flex items-center gap-4 p-5 bg-white rounded-2xl border border-zinc-100 hover:border-blue-200 hover:shadow-lg transition-all group"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-zinc-50 flex items-center justify-center text-2xl shrink-0 group-hover:bg-blue-50 transition-colors">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <span className="text-xs font-black text-blue-600 uppercase tracking-widest block mb-1">{item.tag}</span>
+                    <span className="font-bold text-sm text-zinc-800 leading-tight group-hover:text-blue-600 transition-colors">{item.title}</span>
+                  </div>
+                  <ChevronRight size={16} className="text-zinc-300 group-hover:text-blue-600 ml-auto shrink-0 group-hover:translate-x-1 transition-all" />
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

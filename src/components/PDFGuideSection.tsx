@@ -46,19 +46,30 @@ export default function PDFGuideSection({
         {
           to_name: firstName,
           to_email: email,
-          topic: topic,
-          pdf_title: pdfTitle,
           from_name: "Setwise Digital",
           reply_to: "support@setwisedigital.com",
-          website: "www.setwisedigital.com",
-          message: `Hi ${firstName},\n\nThank you for requesting the ${pdfTitle}.\n\nPlease find your guide attached or download it from: www.setwisedigital.com/guides\n\nBest regards,\nSetwise Digital Team\nsupport@setwisedigital.com\nwww.setwisedigital.com`,
+          subject: `Your Free ${topic} Guide from Setwise Digital`,
+          message: `Hi ${firstName},
+
+Thank you for requesting the ${pdfTitle}!
+
+Your free guide covers everything you need to know about ${topic} in plain, easy-to-understand English.
+
+To access your guide, please visit: www.setwisedigital.com/techbridge
+
+If you have any questions, our team is always happy to help:
+Email: support@setwisedigital.com
+Website: www.setwisedigital.com
+
+Best regards,
+The Setwise Digital Team`,
         },
         emailjsPublicKey
       );
       setStatus("success");
     } catch (err) {
       console.error("EmailJS error:", err);
-      setErrorMsg("Something went wrong. Please try again or email us at support@setwisedigital.com");
+      setErrorMsg("Could not send email. Please email us directly at support@setwisedigital.com and we will send your guide manually.");
       setStatus("error");
     }
   };

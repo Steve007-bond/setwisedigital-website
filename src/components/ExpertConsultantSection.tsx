@@ -9,8 +9,6 @@ interface ExpertConsultantSectionProps {
   emailjsServiceId?: string;
   emailjsContactTemplateId?: string;
   emailjsPublicKey?: string;
-  discordBotToken?: string;
-  discordChannelId?: string;
 }
 
 const AVAILABILITY = [
@@ -27,8 +25,7 @@ export default function ExpertConsultantSection({
   emailjsServiceId = "service_dtucjcw",
   emailjsContactTemplateId = "template_uls5p3p",
   emailjsPublicKey = "XRCYl5c7gwzK67hbD",
-  discordBotToken = "MTQ4MjE0MjI3MzQ3NDAwMzA2Ng.GtM-3y.eQUosynKep7fnM26pjbtM3npCFn2evOvHjUJuk",
-  discordChannelId = "1482143893708345428",
+
 }: ExpertConsultantSectionProps) {
   const [form, setForm] = useState({
     name: "",
@@ -49,35 +46,19 @@ export default function ExpertConsultantSection({
   };
 
   const sendToDiscord = async () => {
-    const embed = {
-      embeds: [
-        {
-          title: `🔧 New ${topic} Expert Request`,
-          color: 0x2563eb,
-          fields: [
-            { name: "👤 Name", value: form.name || "Not provided", inline: true },
-            { name: "📧 Email", value: form.email || "Not provided", inline: true },
-            { name: "📞 Phone", value: form.phone || "Not provided", inline: true },
-            { name: "🖥️ Device / Model", value: form.device || "Not specified", inline: true },
-            { name: "📅 Availability", value: form.availability || "Not specified", inline: true },
-            { name: "📬 Preferred Contact", value: form.contactMethod || "Email", inline: true },
-            { name: "❓ Issue Description", value: form.issue, inline: false },
-          ],
-          footer: {
-            text: `Setwise Digital • support@setwisedigital.com • www.setwisedigital.com`,
-          },
-          timestamp: new Date().toISOString(),
-        },
-      ],
-    };
-
-    await fetch(`https://discord.com/api/v10/channels/${discordChannelId}/messages`, {
+    await fetch("/api/contact", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bot ${discordBotToken}`,
-      },
-      body: JSON.stringify(embed),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        topic,
+        device: form.device,
+        issue: form.issue,
+        availability: form.availability,
+        contactMethod: form.contactMethod,
+      }),
     });
   };
 
@@ -110,7 +91,7 @@ export default function ExpertConsultantSection({
     try {
       // Send to both EmailJS and Discord in parallel
       await Promise.allSettled([
-        sendEmailJS(),
+        sendEmailJS().catch(e => console.warn("EmailJS:", e)),
         sendToDiscord(),
       ]);
       setStatus("success");

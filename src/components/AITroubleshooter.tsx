@@ -65,19 +65,17 @@ Key guidelines:
     setMessageCount((c) => c + 1);
 
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: systemPrompt,
+          systemPrompt,
           messages: newMessages.map((m) => ({ role: m.role, content: m.content })),
         }),
       });
 
       const data = await response.json();
-      const assistantMessage = data.content?.[0]?.text || "I'm sorry, I couldn't process that. Please try again.";
+      const assistantMessage = data.text || "I'm sorry, I couldn't process that. Please try again.";
       setMessages([...newMessages, { role: "assistant", content: assistantMessage }]);
 
       // Show lead capture after enough messages
