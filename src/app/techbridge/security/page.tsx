@@ -341,10 +341,6 @@ export default function SecurityPage() {
           "Is my Wi-Fi network secure?",
           "How do I back up my files to the cloud?",
         ],
-        emailjsServiceId: "service_dtucjcw",
-        emailjsPdfTemplateId: "template_uls5p3p",
-        emailjsContactTemplateId: "template_uls5p3p",
-        emailjsPublicKey: "XRCYl5c7gwzK67hbD",
 
       }} />
 

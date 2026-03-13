@@ -334,10 +334,6 @@ export default function SmartHomePage() {
           "How do I control my smart bulbs by voice?",
           "What can Alexa do that I don't know about?",
         ],
-        emailjsServiceId: "service_dtucjcw",
-        emailjsPdfTemplateId: "template_uls5p3p",
-        emailjsContactTemplateId: "template_uls5p3p",
-        emailjsPublicKey: "XRCYl5c7gwzK67hbD",
 
       }} />
 

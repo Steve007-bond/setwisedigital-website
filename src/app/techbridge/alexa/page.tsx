@@ -315,10 +315,6 @@ export default function AlexaPage() {
           "Can Alexa call my family members?",
           "How do I reset my Echo device?",
         ],
-        emailjsServiceId: "service_dtucjcw",
-        emailjsPdfTemplateId: "template_uls5p3p",
-        emailjsContactTemplateId: "template_uls5p3p",
-        emailjsPublicKey: "XRCYl5c7gwzK67hbD",
 
       }} />
 

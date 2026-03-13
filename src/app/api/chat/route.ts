@@ -5,8 +5,15 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { messages, systemPrompt } = body;
 
-    const apiKey = process.env.ANTHROPIC_API_KEY || "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";
+    const apiKey = process.env.ANTHROPIC_API_KEY;
 
+    if (!apiKey) {
+      console.error("ANTHROPIC_API_KEY not set in environment variables");
+      return NextResponse.json(
+        { text: "AI assistant is not configured yet. Please contact us at support@setwisedigital.com for help." },
+        { status: 200 }
+      );
+    }
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -16,7 +23,7 @@ export async function POST(req: NextRequest) {
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
+        model: "claude-haiku-4-5",
         max_tokens: 1024,
         system: systemPrompt,
         messages,
@@ -24,22 +31,23 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      console.error("Anthropic API error:", error);
+      const errorText = await response.text();
+      console.error("Anthropic API error:", response.status, errorText);
       return NextResponse.json(
-        { error: "AI service unavailable" },
-        { status: response.status }
+        { text: "I'm having a moment — please try again or email support@setwisedigital.com" },
+        { status: 200 }
       );
     }
 
     const data = await response.json();
-    const text = data.content?.[0]?.text ?? "Sorry, I couldn't process that.";
+    const text = data.content?.[0]?.text ?? "I couldn't generate a response. Please try again.";
     return NextResponse.json({ text });
+
   } catch (err) {
     console.error("Chat route error:", err);
     return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
+      { text: "Something went wrong. Please try again or contact support@setwisedigital.com" },
+      { status: 200 }
     );
   }
 }

@@ -336,10 +336,6 @@ export default function CameraPage() {
           "Which camera settings should I change?",
           "How do I clean my camera lens?",
         ],
-        emailjsServiceId: "service_dtucjcw",
-        emailjsPdfTemplateId: "template_uls5p3p",
-        emailjsContactTemplateId: "template_uls5p3p",
-        emailjsPublicKey: "XRCYl5c7gwzK67hbD",
 
       }} />
 

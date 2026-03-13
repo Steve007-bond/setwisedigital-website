@@ -342,10 +342,6 @@ export default function PrintersPage() {
           "My prints are blurry or streaky",
           "How do I scan a document?",
         ],
-        emailjsServiceId: "service_dtucjcw",
-        emailjsPdfTemplateId: "template_uls5p3p",
-        emailjsContactTemplateId: "template_uls5p3p",
-        emailjsPublicKey: "XRCYl5c7gwzK67hbD",
 
       }} />
 

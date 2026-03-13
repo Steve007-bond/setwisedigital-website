@@ -341,10 +341,6 @@ export default function GpsPage() {
           "How do I connect GPS to my phone?",
           "My in-car GPS is outdated",
         ],
-        emailjsServiceId: "service_dtucjcw",
-        emailjsPdfTemplateId: "template_uls5p3p",
-        emailjsContactTemplateId: "template_uls5p3p",
-        emailjsPublicKey: "XRCYl5c7gwzK67hbD",
 
       }} />
 

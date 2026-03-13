@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, Mail, CheckCircle2, AlertCircle, Loader2, Download, Shield, ChevronDown, ChevronUp } from "lucide-react";
+import { FileText, CheckCircle2, AlertCircle, Loader2, Download, Shield, ChevronDown, ChevronUp } from "lucide-react";
 
 interface PDFGuideSectionProps {
-  topic: string; // e.g. "Printer Setup"
-  pdfTitle: string; // e.g. "Complete Printer Setup & Troubleshooting Guide"
+  topic: string;
+  pdfTitle: string;
   pdfDescription: string;
-  highlights: string[]; // bullet points of what's inside
+  highlights: string[];
+  // EmailJS props kept for compatibility but no longer required
   emailjsServiceId?: string;
   emailjsTemplateId?: string;
   emailjsPublicKey?: string;
@@ -19,18 +20,14 @@ export default function PDFGuideSection({
   pdfTitle,
   pdfDescription,
   highlights,
-  emailjsServiceId = "service_dtucjcw",
-  emailjsTemplateId = "template_uls5p3p",
-  emailjsPublicKey = "XRCYl5c7gwzK67hbD",
 }: PDFGuideSectionProps) {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
 
-  const isValid = firstName.trim() && email.trim() && agreed && email.includes("@");
+  const isValid = firstName.trim() !== "" && email.trim() !== "" && agreed && email.includes("@");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,38 +35,16 @@ export default function PDFGuideSection({
     setStatus("loading");
 
     try {
-      // Dynamically load EmailJS
-      const emailjs = await import("@emailjs/browser");
-      await emailjs.send(
-        emailjsServiceId,
-        emailjsTemplateId,
-        {
-          to_name: firstName,
-          to_email: email,
-          from_name: "Setwise Digital",
-          reply_to: "support@setwisedigital.com",
-          subject: `Your Free ${topic} Guide from Setwise Digital`,
-          message: `Hi ${firstName},
+      const res = await fetch("/api/pdf-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName, email, topic, pdfTitle }),
+      });
 
-Thank you for requesting the ${pdfTitle}!
-
-Your free guide covers everything you need to know about ${topic} in plain, easy-to-understand English.
-
-To access your guide, please visit: www.setwisedigital.com/techbridge
-
-If you have any questions, our team is always happy to help:
-Email: support@setwisedigital.com
-Website: www.setwisedigital.com
-
-Best regards,
-The Setwise Digital Team`,
-        },
-        emailjsPublicKey
-      );
+      if (!res.ok) throw new Error("Server error");
       setStatus("success");
     } catch (err) {
-      console.error("EmailJS error:", err);
-      setErrorMsg("Could not send email. Please email us directly at support@setwisedigital.com and we will send your guide manually.");
+      console.error("PDF request error:", err);
       setStatus("error");
     }
   };
@@ -92,7 +67,6 @@ The Setwise Digital Team`,
               {pdfDescription}
             </p>
 
-            {/* PDF preview card */}
             <div className="bg-white rounded-[2rem] border border-zinc-100 shadow-xl p-8 mb-8">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
@@ -132,12 +106,16 @@ The Setwise Digital Team`,
                   <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle2 size={40} className="text-green-600" />
                   </div>
-                  <h3 className="text-3xl font-black text-zinc-900 mb-4">Guide Sent! 🎉</h3>
-                  <p className="text-zinc-500 font-medium mb-2">
-                    Check your inbox at <span className="font-black text-zinc-900">{email}</span>
+                  <h3 className="text-3xl font-black text-zinc-900 mb-4">Request Received! 🎉</h3>
+                  <p className="text-zinc-500 font-medium mb-3">
+                    Thanks <span className="font-black text-zinc-900">{firstName}</span>! Our team has been notified.
                   </p>
-                  <p className="text-sm text-zinc-400 font-medium">
-                    Can't find it? Check your spam folder or email us at{" "}
+                  <p className="text-zinc-500 font-medium mb-6">
+                    We'll email your <span className="font-bold text-zinc-800">{topic} guide</span> to{" "}
+                    <span className="font-black text-zinc-900">{email}</span> shortly.
+                  </p>
+                  <p className="text-sm text-zinc-400">
+                    Questions? Email us at{" "}
                     <a href="mailto:support@setwisedigital.com" className="text-blue-600 font-bold">
                       support@setwisedigital.com
                     </a>
@@ -152,7 +130,7 @@ The Setwise Digital Team`,
                 >
                   <h3 className="text-2xl font-black text-zinc-900 mb-2">Get Your Free Guide</h3>
                   <p className="text-zinc-400 font-medium mb-8 text-sm">
-                    Enter your details below and we'll send it straight to your inbox.
+                    Enter your details and we'll send it straight to your inbox.
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-5">
@@ -169,6 +147,7 @@ The Setwise Digital Team`,
                         required
                       />
                     </div>
+
                     <div>
                       <label className="block text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">
                         Email Address
@@ -219,8 +198,7 @@ The Setwise Digital Team`,
                           >
                             <div className="mt-4 pt-4 border-t border-zinc-200 text-xs text-zinc-500 leading-relaxed space-y-2">
                               <p><strong>Terms of consent:</strong> By submitting this form, you agree to receive the requested PDF guide and occasional emails from Setwise Digital including product updates, tips, and promotional offers.</p>
-                              <p>We will never sell or share your information with third parties. You may unsubscribe at any time by clicking the unsubscribe link in any email we send.</p>
-                              <p>Your data is stored securely and used only for the purposes stated above, in accordance with applicable privacy laws.</p>
+                              <p>We will never sell or share your information with third parties. You may unsubscribe at any time.</p>
                               <p>Company: Setwise Digital | Email: support@setwisedigital.com | Website: www.setwisedigital.com</p>
                             </div>
                           </motion.div>
@@ -231,7 +209,13 @@ The Setwise Digital Team`,
                     {status === "error" && (
                       <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-100 rounded-2xl">
                         <AlertCircle size={18} className="text-red-500 shrink-0 mt-0.5" />
-                        <p className="text-sm text-red-600 font-medium">{errorMsg}</p>
+                        <p className="text-sm text-red-600 font-medium">
+                          Something went wrong. Please email us directly at{" "}
+                          <a href="mailto:support@setwisedigital.com" className="font-bold underline">
+                            support@setwisedigital.com
+                          </a>{" "}
+                          and we will send your guide manually.
+                        </p>
                       </div>
                     )}
 
@@ -247,7 +231,7 @@ The Setwise Digital Team`,
                       {status === "loading" ? (
                         <>
                           <Loader2 size={20} className="animate-spin" />
-                          Sending Guide...
+                          Sending Request...
                         </>
                       ) : (
                         <>

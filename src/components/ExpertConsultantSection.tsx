@@ -22,9 +22,6 @@ const CONTACT_METHODS = ["Email", "Phone Call", "Video Call"];
 
 export default function ExpertConsultantSection({
   topic,
-  emailjsServiceId = "service_dtucjcw",
-  emailjsContactTemplateId = "template_uls5p3p",
-  emailjsPublicKey = "XRCYl5c7gwzK67hbD",
 
 }: ExpertConsultantSectionProps) {
   const [form, setForm] = useState({
@@ -62,27 +59,6 @@ export default function ExpertConsultantSection({
     });
   };
 
-  const sendEmailJS = async () => {
-    const emailjs = await import("@emailjs/browser");
-    await emailjs.send(
-      emailjsServiceId,
-      emailjsContactTemplateId,
-      {
-        to_name: "Setwise Digital Team",
-        from_name: form.name,
-        from_email: form.email,
-        phone: form.phone || "Not provided",
-        topic: topic,
-        device: form.device || "Not specified",
-        issue: form.issue,
-        availability: form.availability || "Not specified",
-        contact_method: form.contactMethod,
-        reply_to: form.email,
-      },
-      emailjsPublicKey
-    );
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValid) return;
@@ -90,10 +66,7 @@ export default function ExpertConsultantSection({
 
     try {
       // Send to both EmailJS and Discord in parallel
-      await Promise.allSettled([
-        sendEmailJS().catch(e => console.warn("EmailJS:", e)),
-        sendToDiscord(),
-      ]);
+      await sendToDiscord();
       setStatus("success");
     } catch (err) {
       console.error("Submission error:", err);

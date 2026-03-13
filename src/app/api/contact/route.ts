@@ -5,9 +5,9 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { name, email, phone, topic, device, issue, availability, contactMethod } = body;
 
-    const webhookUrl = process.env.DISCORD_WEBHOOK_URL || "https://discord.com/api/webhooks/1482154983871877130/dFtJNRBX3z5yloE9Jvnxs4HxRPne-lomYkABXd3rmX5iT1m99FPA4bFwLM-ppcm6CiLr";
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
-    if (true) {
+    if (webhookUrl) {
       const embed = {
         embeds: [
           {
@@ -39,6 +39,8 @@ export async function POST(req: NextRequest) {
       if (!discordRes.ok) {
         console.error("Discord webhook error:", await discordRes.text());
       }
+    } else {
+      console.warn("DISCORD_WEBHOOK_URL not set — contact form submission not forwarded to Discord");
     }
 
     return NextResponse.json({ success: true });
