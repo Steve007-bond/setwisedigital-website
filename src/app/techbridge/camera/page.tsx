@@ -1,345 +1,175 @@
 "use client";
-
 import { motion } from "framer-motion";
-import TechBridgeLearnLayout from "@/components/TechBridgeLearnLayout";
-import {
-  Camera,
-  RefreshCcw,
-  CheckCircle2,
-  ArrowRight,
-  Mail,
-  ShieldCheck,
-  HelpCircle,
-  Image as ImageIcon,
-  Settings
-} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LeadWizard from "@/components/LeadWizard";
 import Link from "next/link";
-import TechBridgeApp, { Step } from "@/components/TechBridgeApp";
-import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
-import { useState, useEffect } from "react";
+import { Camera, ArrowRight, Lightbulb } from "lucide-react";
 
-const cameraBackgrounds = [
-  { url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'dark' as const },
-  { url: "https://images.unsplash.com/photo-1452784444945-3f422708fe5e?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'light' as const },
-  { url: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'light' as const },
+const WIZARD_CONFIG = {
+  source: "camera-page",
+  accentColor: "from-purple-600 to-violet-400",
+  accentHex: "#9333ea",
+  step1Title: "What camera help do you need?",
+  step1Options: [
+    { label: "Update firmware", icon: "🔄", popular: true },
+    { label: "Photos are blurry", icon: "📷", popular: true },
+    { label: "Transfer photos", icon: "💾" },
+    { label: "Camera won't start", icon: "⚡" },
+    { label: "SD card error", icon: "💳" },
+    { label: "Best settings", icon: "⚙️" },
+  ],
+  step2Title: "What camera brand do you have?",
+  brandOptions: [
+    { label: "Canon", icon: "🔴" },
+    { label: "Nikon", icon: "⚫" },
+    { label: "Sony", icon: "⬛" },
+    { label: "Fujifilm", icon: "🟢" },
+    { label: "Panasonic", icon: "🔵" },
+    { label: "Other", icon: "❓" },
+  ],
+  step2Options: [
+    { label: "Fix my issue", icon: "🔧" },
+    { label: "Better photos", icon: "📸" },
+    { label: "Learn settings", icon: "📚" },
+    { label: "Expert help", icon: "👤" },
+  ],
+  processingMessages: [
+    "Checking your camera model...",
+    "Finding your firmware steps...",
+    "Almost ready, [name]...",
+    "Your camera guide is ready!",
+  ],
+};
+
+function CameraSVG() {
+  return (
+    <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+      className="w-72 h-64 mx-auto">
+      <svg viewBox="0 0 240 200" className="w-full h-full">
+        {/* Camera body */}
+        <rect x="20" y="50" width="200" height="130" rx="16" fill="#1e1b4b" stroke="#4c1d95" strokeWidth="2" />
+        {/* Top bump */}
+        <rect x="70" y="30" width="100" height="30" rx="8" fill="#1e1b4b" stroke="#4c1d95" strokeWidth="1.5" />
+        {/* Lens outer */}
+        <circle cx="110" cy="120" r="50" fill="#0f0a1e" stroke="#4c1d95" strokeWidth="3" />
+        <circle cx="110" cy="120" r="38" fill="#0a0718" stroke="#7c3aed" strokeWidth="1.5" />
+        <circle cx="110" cy="120" r="26" fill="#050310" stroke="#8b5cf6" strokeWidth="1.5" />
+        {/* Lens reflection */}
+        <circle cx="100" cy="110" r="8" fill="#4c1d95" opacity="0.6" />
+        <circle cx="97" cy="107" r="3" fill="white" opacity="0.4" />
+        {/* Aperture blades */}
+        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+          <motion.line key={i} x1="110" y1="120"
+            x2={110 + Math.cos(angle * Math.PI / 180) * 20}
+            y2={120 + Math.sin(angle * Math.PI / 180) * 20}
+            stroke="#7c3aed" strokeWidth="1" opacity="0.5"
+            animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            style={{ transformOrigin: "110px 120px" }} />
+        ))}
+        {/* Flash */}
+        <rect x="185" y="60" width="25" height="18" rx="4" fill="#312e81" />
+        <motion.rect x="185" y="60" width="25" height="18" rx="4" fill="white" opacity="0"
+          animate={{ opacity: [0, 0.8, 0] }} transition={{ duration: 3, repeat: Infinity, delay: 2 }} />
+        {/* Viewfinder */}
+        <rect x="155" y="58" width="25" height="16" rx="3" fill="#1e1b4b" stroke="#4c1d95" strokeWidth="1" />
+        {/* Shutter button */}
+        <circle cx="90" cy="38" r="8" fill="#7c3aed" />
+        <motion.circle cx="90" cy="38" r="8" fill="#a78bfa"
+          animate={{ opacity: [0.6, 1, 0.6] }} transition={{ duration: 2, repeat: Infinity }} />
+        {/* Aperture ring */}
+        {[1, 2, 3].map(i => (
+          <motion.circle key={i} cx="110" cy="120" r={i * 16 + 26} fill="none" stroke="#7c3aed" strokeWidth="0.5" opacity="0.3"
+            animate={{ opacity: [0.1, 0.4, 0.1] }} transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }} />
+        ))}
+      </svg>
+    </motion.div>
+  );
+}
+
+const ISSUES = [
+  { icon: "🔄", title: "Firmware Updates", desc: "Update safely to fix bugs and unlock new features." },
+  { icon: "📸", title: "Better Photos", desc: "Simple settings that transform every shot you take." },
+  { icon: "💾", title: "Photo Transfer", desc: "Get photos onto your computer or phone easily." },
+  { icon: "⚙️", title: "Camera Settings", desc: "Plain-English guide to every important setting." },
 ];
 
-const CameraVisuals = () => {
-  const [currentScene, setCurrentScene] = useState(0);
-  const scenes = [
-    { title: "Firmware Update", icon: <RefreshCcw />, color: "text-blue-500" },
-    { title: "Optimizing Settings", icon: <Settings />, color: "text-indigo-500" },
-    { title: "Photo Transfer", icon: <ArrowRight />, color: "text-green-500" },
-    { title: "Troubleshooting", icon: <HelpCircle />, color: "text-red-500" }
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentScene((prev) => (prev + 1) % scenes.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
-
+export default function CameraPage() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center p-12">
-      <div className="absolute inset-0 opacity-20 bg-[url('/grid.svg')]" />
-      
-      <motion.div
-        key={currentScene}
-        initial={{ opacity: 0, scale: 0.8, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 1.1, y: -20 }}
-        transition={{ duration: 0.8, ease: "circOut" }}
-        className="relative z-10 w-full h-full flex flex-col items-center justify-center"
-      >
-        <div className="w-full h-2/3 flex items-center justify-center">
-          {currentScene === 0 && (
-            <svg viewBox="0 0 400 400" className="w-full h-full text-blue-500/40">
-              <rect x="100" y="120" width="200" height="160" rx="20" fill="currentColor" fillOpacity="0.1" stroke="currentColor" strokeWidth="2" />
-              <motion.path 
-                d="M150 200 H250" stroke="currentColor" strokeWidth="4" strokeLinecap="round"
-                initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, repeat: Infinity }}
-              />
-              <RefreshCcw className="text-blue-500" size={48} />
-            </svg>
-          )}
-          {currentScene === 1 && (
-            <svg viewBox="0 0 400 400" className="w-full h-full text-indigo-500/40">
-              <circle cx="200" cy="200" r="60" fill="currentColor" fillOpacity="0.1" stroke="currentColor" strokeWidth="2" />
-              <motion.path 
-                d="M200 140 V260 M140 200 H260" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4"
-                animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              />
-              <Settings className="text-indigo-500" size={48} />
-            </svg>
-          )}
-          {currentScene === 2 && (
-            <svg viewBox="0 0 400 400" className="w-full h-full text-green-500/40">
-              <motion.path 
-                d="M100 200 H300" stroke="currentColor" strokeWidth="4" strokeDasharray="10 10"
-                animate={{ strokeDashoffset: [0, -20] }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              />
-              <ArrowRight className="text-green-500" size={48} />
-            </svg>
-          )}
-          {currentScene === 3 && (
-            <svg viewBox="0 0 400 400" className="w-full h-full text-red-500/40">
-              <motion.path 
-                d="M200 150 V250 M200 300 H200.01" stroke="currentColor" strokeWidth="8" strokeLinecap="round"
-                animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1, repeat: Infinity }}
-              />
-              <HelpCircle className="text-red-500" size={48} />
-            </svg>
-          )}
-        </div>
-        
-        <div className="mt-8 text-center">
-          <div className={`text-2xl font-black uppercase tracking-widest ${scenes[currentScene].color} mb-2`}>
-            {scenes[currentScene].title}
+    <div className="min-h-screen bg-[#0a0718] text-white font-sans">
+      <Navbar />
+      <section className="min-h-screen flex items-center pt-20 pb-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-950/30 via-transparent to-violet-950/20" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+          <div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-black uppercase tracking-widest mb-8">
+              <Camera size={14} /> Camera & Photography
+            </motion.div>
+            <div className="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8">
+              {["Capture", "Every", "Moment."].map((word, i) => (
+                <motion.span key={i} className={`block ${i === 2 ? "bg-gradient-to-r from-purple-400 to-violet-300 bg-clip-text text-transparent italic" : ""}`}
+                  initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + i * 0.08, type: "spring" }}>
+                  {word}
+                </motion.span>
+              ))}
+            </div>
+            <motion.p className="text-xl text-zinc-400 font-medium mb-10 leading-relaxed max-w-lg"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
+              Firmware updates, sharp photo tips, and settings explained — all in plain English for any camera brand.
+            </motion.p>
+            <motion.div className="flex flex-col sm:flex-row gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}>
+              <motion.a href="#learn"
+                className="px-8 py-5 font-black text-lg rounded-2xl text-white bg-gradient-to-r from-purple-600 to-violet-500 flex items-center justify-center gap-3"
+                whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                animate={{ boxShadow: ["0 0 0 0 rgba(147,51,234,0)", "0 0 0 12px rgba(147,51,234,0)", "0 0 0 0 rgba(147,51,234,0)"] }}
+                transition={{ boxShadow: { duration: 2, repeat: Infinity } }}>
+                Improve My Photos <ArrowRight size={20} />
+              </motion.a>
+              <Link href="/contact" className="px-8 py-5 border-2 border-zinc-600 hover:border-purple-500 text-white font-black text-lg rounded-2xl flex items-center justify-center transition-colors">
+                Talk to Expert
+              </Link>
+            </motion.div>
           </div>
-          <div className="flex gap-2 justify-center">
-            {scenes.map((_, i) => (
-              <div 
-                key={i} 
-                className={`w-2 h-2 rounded-full transition-all duration-500 ${i === currentScene ? 'w-8 bg-blue-600' : 'bg-zinc-700'}`} 
-              />
+          <div className="flex items-center justify-center"><CameraSVG /></div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-zinc-950/50 border-y border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+            <h2 className="text-4xl font-black tracking-tighter mb-4">Camera Help That Actually Works</h2>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {ISSUES.map((issue, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.12 }}
+                whileHover={{ scale: 1.04, y: -8 }} className="bg-zinc-900 border border-zinc-800 rounded-[2rem] p-8 group hover:border-purple-500 transition-all cursor-pointer">
+                <div className="text-4xl mb-6">{issue.icon}</div>
+                <h3 className="text-xl font-black text-white mb-3 group-hover:text-purple-400 transition-colors">{issue.title}</h3>
+                <p className="text-zinc-500 font-medium text-sm leading-relaxed">{issue.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
-      </motion.div>
-    </div>
-  );
-};
+      </section>
 
-export default function CameraPage() {
-  const [email, setEmail] = useState("");
-
-  const cameraSteps: Step[] = [
-    {
-      id: "start",
-      question: "How can we help with your camera today?",
-      options: [
-        { label: "Update Firmware", nextStepId: "firmware" },
-        { label: "Adjust Settings", nextStepId: "settings" },
-        { label: "Transfer Photos", nextStepId: "transfer" },
-        { label: "Fix Camera Issues", nextStepId: "trouble" }
-      ]
-    },
-    {
-      id: "firmware",
-      question: "Updating Camera Firmware",
-      options: [
-        { 
-          label: "Finish Update", 
-          isFinal: true, 
-          instructions: [
-            "Check your camera's current firmware version in the 'Setup' menu.",
-            "Go to the manufacturer's website (e.g. Sony, Canon, Nikon).",
-            "Download the latest firmware file to your computer.",
-            "Format your SD card and copy the firmware file onto it.",
-            "Insert the card into your camera and select 'Firmware Update' in the menu.",
-            "Do NOT turn off the camera until the process is complete."
-          ] 
-        }
-      ]
-    },
-    {
-      id: "settings",
-      question: "Optimizing Camera Settings",
-      options: [
-        { 
-          label: "Best Settings", 
-          isFinal: true, 
-          instructions: [
-            "Set your Image Quality to 'Fine' or 'RAW' for the best detail.",
-            "Use 'Auto ISO' to help the camera adjust to different lighting.",
-            "Turn on 'Image Stabilization' to prevent blurry photos.",
-            "Set the focus mode to 'AF-S' (Single) for stationary subjects.",
-            "Enable 'Grid Lines' on your screen to help with straight horizons."
-          ] 
-        }
-      ]
-    },
-    {
-      id: "transfer",
-      question: "Transferring Your Photos",
-      options: [
-        { 
-          label: "Transfer Help", 
-          isFinal: true, 
-          instructions: [
-            "Connect your camera to your computer using a USB cable.",
-            "Or, insert your SD card into a card reader on your computer.",
-            "Open your 'Photos' app or file explorer.",
-            "Select the images you want to keep and click 'Import'.",
-            "Safely eject the camera or card before unplugging."
-          ] 
-        }
-      ]
-    },
-    {
-      id: "trouble",
-      question: "Camera Troubleshooting",
-      options: [
-        { 
-          label: "Fix Issues", 
-          isFinal: true, 
-          instructions: [
-            "If the camera won't turn on, ensure the battery is fully charged.",
-            "Try a different SD card if you see a 'Card Error' message.",
-            "Clean the lens gently with a microfiber cloth for clearer shots.",
-            "Reset the camera to factory settings if menus are acting strangely.",
-            "Ensure the lens is properly attached and 'clicked' into place."
-          ] 
-        }
-      ]
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-[#FDFDFD] text-zinc-900 font-sans selection:bg-blue-100 selection:text-blue-900">
-      <Navbar />
-
-      {/* Hero Section */}
-      <header className="relative pt-44 pb-32 overflow-hidden">
-        <HeaderBackgroundSlider items={cameraBackgrounds} />
-        
-        {/* Advanced Background Elements */}
-        <div className="absolute inset-0 -z-10">
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.2, 1],
-              x: [-50, 50, -50],
-            }}
-            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 right-0 w-1/3 h-full bg-blue-100/30 rounded-l-[100px] blur-3xl" 
-          />
-          <motion.div 
-            animate={{ 
-              scale: [1.2, 1, 1.2],
-              x: [50, -50, 50],
-            }}
-            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-indigo-100/20 rounded-r-full blur-3xl" 
-          />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-20">
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="lg:w-3/5"
-            >
-              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full glass border-blue-100/50 text-blue-700 text-xs font-black uppercase tracking-[0.2em] mb-10 shadow-xl">
-                <Camera size={14} className="text-blue-600" />
-                <span>Camera & Firmware Guidance</span>
-              </div>
-              <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.9] text-zinc-900">
-                Capture the Moment. <br />
-                <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-[length:200%_auto] animate-gradient bg-clip-text text-transparent">Clearly.</span>
-              </h1>
-              <p className="text-xl md:text-3xl text-zinc-600 mb-14 leading-relaxed font-medium">
-                Don't let technical settings get in the way of your memories. We help you update your camera, optimize settings, and master the basics of photography.
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-14">
-                {[
-                  "Firmware update assistance",
-                  "Menu walkthroughs",
-                  "Better photo settings",
-                  "SD card & backup help"
-                ].map((bullet, i) => (
-                  <motion.div 
-                    key={i} 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
-                    className="flex items-center gap-4 p-5 rounded-3xl bg-white/80 backdrop-blur-sm border border-white shadow-xl hover:shadow-2xl transition-all group"
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                      <CheckCircle2 size={20} />
-                    </div>
-                    <span className="font-black text-zinc-700">{bullet}</span>
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center gap-6">
-                <Link href="#app" className="shine-effect w-full sm:w-auto px-12 py-6 bg-blue-600 text-white rounded-[2rem] font-black text-2xl hover:shadow-[0_20px_50px_rgba(37,99,235,0.4)] hover:-translate-y-1 transition-all flex items-center justify-center gap-3 group">
-                  Start Camera Guide
-                  <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
-                </Link>
-                <Link href="/contact" className="text-zinc-500 font-black hover:text-blue-600 transition-all flex items-center gap-3 group">
-                  <div className="w-14 h-14 rounded-2xl bg-white/80 backdrop-blur-sm flex items-center justify-center group-hover:bg-blue-50 shadow-lg transition-all">
-                    <Mail size={24} />
-                  </div>
-                  Ask a Camera Expert
-                </Link>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="lg:w-2/5 relative"
-            >
-              <div className="bg-zinc-900 aspect-square rounded-[4rem] flex items-center justify-center relative overflow-hidden shadow-2xl group">
-                <CameraVisuals />
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent pointer-events-none" />
-              </div>
-
-              {/* Status Badge */}
-              <motion.div 
-                initial={{ x: 50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                className="absolute -bottom-8 -left-8 bg-white p-8 rounded-[2.5rem] shadow-2xl border border-zinc-100"
-              >
-                <div className="flex items-center gap-5">
-                  <div className="w-16 h-16 rounded-2xl bg-blue-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
-                    <Camera size={32} />
-                  </div>
-                  <div>
-                    <div className="font-black text-2xl text-zinc-900 tracking-tight">Lens Ready</div>
-                    <div className="text-zinc-500 font-bold text-sm uppercase tracking-widest">Sharp & Clear</div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+      <section id="learn" className="py-24 bg-zinc-950">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-black uppercase tracking-widest mb-6">
+              <Lightbulb size={14} /> Free Camera Guide
+            </div>
+            <h2 className="text-4xl font-black text-white mb-4">Get Your Camera Guide</h2>
+            <p className="text-zinc-500 font-medium">Tell us your camera issue — personalised steps in seconds</p>
+          </motion.div>
+          <div className="bg-zinc-900/80 border border-zinc-800 rounded-[2rem] p-8">
+            <LeadWizard config={WIZARD_CONFIG} />
           </div>
         </div>
-      </header>
-
-      <TechBridgeLearnLayout config={{
-        topic: "Camera",
-        pdfTitle: "Digital Camera Setup & Photography Guide",
-        pdfDescription: "Take better photos, update your camera firmware, and master the settings that make the biggest difference — in plain, simple language.",
-        pdfHighlights: [
-          "How to update camera firmware safely step-by-step",
-          "The most important camera settings explained simply",
-          "Tips for sharper, clearer photos in any light",
-          "How to back up and organize your photos",
-          "Connecting your camera to your computer or phone",
-          "Understanding SD cards — what to buy and how to use them",
-        ],
-        brandExamples: ["Canon", "Nikon", "Sony", "Fujifilm", "Panasonic", "Olympus"],
-        starterQuestions: [
-          "How do I update my camera firmware?",
-          "Why are my photos blurry?",
-          "How do I transfer photos to my computer?",
-          "My camera won't turn on",
-          "Which camera settings should I change?",
-          "How do I clean my camera lens?",
-        ],
-
-      }} />
-
-            <Footer />
+      </section>
+      <Footer />
     </div>
   );
 }
