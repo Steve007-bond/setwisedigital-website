@@ -201,7 +201,7 @@ export default function TechBridgeApp({ title, steps }: TechBridgeAppProps) {
                   className="flex-grow py-6 bg-blue-600 text-white rounded-[2rem] font-black text-xl hover:bg-blue-700 transition-all flex items-center justify-center gap-3 shadow-xl shadow-blue-500/20"
                 >
                   <Mail size={24} />
-                  Talk to Expert
+                  Book a Live Lesson
                 </Link>
               </div>
             </motion.div>

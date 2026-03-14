@@ -16,40 +16,43 @@ const pricingBackgrounds = [
 export default function PricingPage() {
   const plans = [
     {
-      name: "Guided Learning Session",
-      desc: "Perfect for one topic or one device.",
+      name: "Single Lesson Session",
+      price: "From $49",
+      desc: "Perfect for learning one device or topic in depth.",
       features: [
-        "1-on-1 consultant session",
-        "Simple explanations, step by step",
-        "Notes or recordings to keep",
-        "Follow-up checklist"
+        "1-hour live video lesson with an educator",
+        "Covers one device or topic of your choice",
+        "Plain-English explanations, step by step",
+        "Lesson summary PDF to keep"
       ],
-      cta: "Book a Guided Session",
+      cta: "Book a Lesson Session",
       color: "bg-white"
     },
     {
-      name: "Skill-Builder Plan",
-      desc: "Great if you want practice and repetition.",
+      name: "Skill-Builder Course",
+      price: "From $97",
+      desc: "Great if you want to build lasting tech confidence.",
       features: [
-        "Multiple guided sessions",
-        "Custom learning roadmap",
-        "Screen-share (if needed)",
-        "Progress tracking"
+        "3 live video lesson sessions",
+        "Personalised learning roadmap",
+        "Covers multiple topics or devices",
+        "Progress recap after each lesson"
       ],
-      cta: "Start a Skill-Builder Plan",
+      cta: "Start Skill-Builder Course",
       color: "bg-blue-600",
       dark: true
     },
     {
-      name: "Home & Family Plan",
-      desc: "Support across multiple devices and family members.",
+      name: "Family Learning Plan",
+      price: "From $147",
+      desc: "Learning for the whole household, across multiple devices.",
       features: [
-        "Shared guidance for everyone",
-        "Personalized tips for seniors",
-        "Printer, GPS, camera & smart home help",
-        "Scheduled check-ins"
+        "Up to 5 lesson sessions",
+        "Covers printers, GPS, Alexa, smart home & more",
+        "Personalised tips for every family member",
+        "Flexible scheduling to suit you"
       ],
-      cta: "Talk With a Consultant",
+      cta: "Get the Family Plan",
       color: "bg-white"
     }
   ];
@@ -60,7 +63,8 @@ export default function PricingPage() {
     { feature: "1-on-1 sessions", access: false, guided: true, skill: true, family: true },
     { feature: "Custom learning plan", access: false, guided: false, skill: true, family: true },
     { feature: "Multiple devices covered", access: false, guided: false, skill: false, family: true },
-    { feature: "Ongoing support", access: false, guided: "Optional", skill: true, family: true },
+    { feature: "Video lesson sessions", access: false, guided: "1 session", skill: "3 sessions", family: "5 sessions" },
+    { feature: "Lesson summary PDF", access: false, guided: true, skill: true, family: true },
   ];
 
   return (
@@ -93,7 +97,7 @@ export default function PricingPage() {
               transition={{ delay: 0.1 }}
               className="text-xl md:text-3xl text-zinc-600 max-w-3xl mx-auto leading-relaxed font-medium"
             >
-              At Setwise Digital, we believe learning should start simple — and grow with you.
+              At Setwise Digital, we believe learning should start simple — and grow with you. All lessons are live video sessions with a real educator.
             </motion.p>
           </div>
 
@@ -169,7 +173,8 @@ export default function PricingPage() {
                   </div>
                 )}
                 <h3 className="text-3xl font-black tracking-tighter mb-4">{plan.name}</h3>
-                <p className={`${plan.dark ? 'text-blue-100' : 'text-zinc-500'} mb-10 text-lg font-medium leading-relaxed`}>{plan.desc}</p>
+                <p className={`${plan.dark ? 'text-blue-100' : 'text-zinc-500'} mb-4 text-lg font-medium leading-relaxed`}>{plan.desc}</p>
+                <div className={`text-3xl font-black mb-8 ${plan.dark ? 'text-white' : 'text-blue-600'}`}>{(plan as any).price}</div>
                 <div className="space-y-5 mb-12 flex-grow">
                   {plan.features.map((feat, j) => (
                     <div key={j} className="flex items-start gap-4">
@@ -193,7 +198,7 @@ export default function PricingPage() {
              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                {[
                  { title: "Learn at your own pace", desc: "No locking you into complicated subscriptions." },
-                 { title: "Help only when you need it", desc: "Access remains free; pay only for guidance." },
+                 { title: "Pay only for lessons", desc: "Free resources always available. Pay only for live lessons." },
                  { title: "Honest & Human", desc: "Simple pricing with no hidden force upgrades." }
                ].map((item, i) => (
                  <div key={i} className="space-y-4">

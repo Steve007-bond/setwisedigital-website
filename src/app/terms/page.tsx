@@ -12,7 +12,7 @@ export default function TermsPage() {
       icon: <FileText className="text-blue-600" />,
       content: (
         <div className="space-y-4">
-          <p>Setwise Digital provides educational, step-by-step guides to help users better understand technology. Our content may include skill-building steps, explanations, tutorials, AI-powered suggestions, and optional human consultant support.</p>
+          <p>Setwise Digital provides educational, step-by-step guides to help users better understand technology. Our content includes skill-building lessons, plain-English explanations, tutorials, AI-powered learning tools, and optional live video lesson sessions with educators.</p>
           <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100">
             <h4 className="font-bold text-blue-800 mb-2 flex items-center gap-2">
               <ShieldAlert size={20} />
@@ -50,7 +50,7 @@ export default function TermsPage() {
       content: (
         <div className="space-y-4">
           <p>AI suggestions may sometimes be incomplete or inaccurate. They are intended only to assist learning.</p>
-          <p>Human consultants do not log in to accounts, collect passwords, remotely access devices, or sell repairs.</p>
+          <p>Our educators conduct live video lesson sessions only. They do not log in to accounts, collect passwords, access devices remotely, or provide repair services.</p>
         </div>
       )
     },

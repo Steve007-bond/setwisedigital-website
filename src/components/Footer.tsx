@@ -67,9 +67,9 @@ export default function Footer() {
 
           <div className="bg-white/5 p-8 rounded-[2.5rem] border border-white/10">
             <h4 className="font-black text-xl mb-6 tracking-tight">Ready to Learn?</h4>
-            <p className="text-zinc-400 font-bold mb-8 text-sm leading-relaxed">Join thousands of others who have mastered their tech with us.</p>
+            <p className="text-zinc-400 font-bold mb-8 text-sm leading-relaxed">Discover plain-English tech courses and free learning guides.</p>
             <Link href="/pricing" className="shine-effect flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20">
-              Start Now <ArrowRight size={16} />
+              Browse Courses <ArrowRight size={16} />
             </Link>
           </div>
         </div>

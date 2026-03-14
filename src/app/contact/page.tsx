@@ -289,7 +289,7 @@ export default function ContactPage() {
               {[
                 { title: "Review", desc: "We review your message carefully.", icon: <Search size={24} /> },
                 { title: "Clarify", desc: "We ask simple questions if needed.", icon: <MessageSquare size={24} /> },
-                { title: "Options", desc: "We share learning resources or help.", icon: <BookOpen size={24} /> },
+                { title: "Options", desc: "We recommend the right course or lesson module for your learning goal.", icon: <BookOpen size={24} /> },
                 { title: "Decide", desc: "You decide what feels right.", icon: <CheckCircle2 size={24} /> }
               ].map((step, i) => (
                 <motion.div
@@ -321,7 +321,7 @@ export default function ContactPage() {
               {[
                 { q: "Do you provide official manufacturer support?", a: "No — we focus on education and learning guidance. We help you understand and use the devices you already own." },
                 { q: "Do I need to pay to contact you?", a: "No. Asking questions and accessing learning tools does not require payment." },
-                { q: "Do you offer remote fixes?", a: "We guide and teach first. When needed, we walk through steps together — always safely and transparently." },
+                { q: "Do you offer remote fixes?", a: "We don't provide remote repairs or technical support. Our sessions are structured educational lessons — we teach concepts, not perform fixes." },
                 { q: "Who is Setwise Digital best for?", a: "Seniors, families, and anyone who prefers simple, patient explanations." }
               ].map((faq, i) => (
                 <div

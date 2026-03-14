@@ -101,7 +101,7 @@ export default function About() {
               variants={itemVariants}
               className="text-xl md:text-3xl text-zinc-600 max-w-3xl mx-auto leading-relaxed font-medium mb-12"
             >
-              Setwise Digital started with a simple belief: technology should make life easier — not more stressful.
+              Setwise Digital was founded on a simple idea: everyone deserves to understand the technology in their own home.
             </motion.p>
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link href="/pricing" className="shine-effect w-full sm:w-auto px-12 py-6 bg-blue-600 text-white rounded-[2rem] font-black text-2xl hover:shadow-[0_20px_50px_rgba(37,99,235,0.4)] hover:-translate-y-1 transition-all flex items-center justify-center">
@@ -247,8 +247,8 @@ export default function About() {
                 },
                 { 
                   icon: <MessageSquare className="text-blue-600" />, 
-                  title: "Patient Support",
-                  text: "Get clear answers in plain English whenever you need a helping hand." 
+                  title: "Structured Learning",
+                  text: "Follow a clear lesson structure so you always know what you are learning and why." 
                 },
                 { 
                   icon: <UserCheck className="text-blue-600" />, 
@@ -278,12 +278,12 @@ export default function About() {
         </div>
       </section>
 
-      {/* What We Help With */}
+      {/* What We Teach */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-24">
             <div className="inline-block px-4 py-1 rounded-lg bg-indigo-50 text-indigo-700 text-sm font-bold mb-6 uppercase tracking-wider">Our Expertise</div>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8">What We Help With</h2>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8">What We Teach</h2>
             <p className="text-xl md:text-2xl text-zinc-600 max-w-3xl mx-auto font-medium">We focus on real-life technology needs — especially for seniors, families, and non-technical users.</p>
           </div>
 
@@ -292,25 +292,25 @@ export default function About() {
               { 
                 icon: <Printer className="text-blue-600" size={32} />, 
                 title: "Printer Help & Setup", 
-                features: ["Wi-Fi and network printer setup", "Secure document printing", "Troubleshooting paper jams & offline errors", "Step-by-step printer guides"],
+                features: ["How Wi-Fi printing works", "Understanding print settings and quality", "Why paper jams happen and how to prevent them", "Printer maintenance and care basics"],
                 gradient: "from-blue-50 to-indigo-50"
               },
               { 
                 icon: <Navigation className="text-blue-600" size={32} />, 
                 title: "GPS & Map Updates", 
-                features: ["GPS software and map updates", "Trip planning help", "Simple instructions anyone can follow", "Voice navigation setup"],
+                features: ["How GPS map updates work", "Understanding GPS navigation", "Route planning and navigation basics", "How voice-guided navigation works"],
                 gradient: "from-indigo-50 to-blue-50"
               },
               { 
                 icon: <Camera className="text-blue-600" size={32} />, 
                 title: "Camera & Firmware Guidance", 
-                features: ["Camera updates and feature unlocks", "Performance improvements", "Friendly tutorials without the tech jargon", "Digital photo backup help"],
+                features: ["Understanding camera firmware", "Camera settings and performance basics", "Photo quality and composition basics", "How digital storage and backups work"],
                 gradient: "from-blue-50 to-indigo-50"
               },
               { 
                 icon: <HomeIcon className="text-blue-600" size={32} />, 
                 title: "Smart Home & Everyday Devices", 
-                features: ["Smart device setup and connection", "Voice controls made easy", "Safer, simpler smart home learning", "Security camera basics"],
+                features: ["How smart home devices connect", "Understanding voice assistant commands", "Smart home routines and automation basics", "How smart cameras and doorbells work"],
                 gradient: "from-indigo-50 to-blue-50"
               }
             ].map((service, i) => (
@@ -366,10 +366,10 @@ export default function About() {
             </div>
             <div className="p-10 rounded-[3rem] bg-white/5 border border-white/10 flex flex-col">
               <UserCheck className="text-blue-400 mb-8" size={48} />
-              <h3 className="text-2xl font-bold mb-4">Real Consultants</h3>
-              <p className="text-zinc-400 mb-10 flex-grow font-medium">When you need human support, our consultants listen first, explain clearly, and stay until you feel confident.</p>
+              <h3 className="text-2xl font-bold mb-4">Live Lesson Sessions</h3>
+              <p className="text-zinc-400 mb-10 flex-grow font-medium">When you want to learn with a real person, our educators deliver structured video lessons — patient, clear, and built around your learning goals.</p>
               <Link href="/contact" className="flex items-center gap-2 text-blue-400 font-bold group">
-                Talk to a Consultant <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                Book a Live Lesson <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -424,7 +424,7 @@ export default function About() {
             {[
               { icon: <Heart className="text-red-500" />, title: "Respectful", desc: "We value your experience and treat every question with care." },
               { icon: <CheckCircle2 className="text-blue-600" />, title: "Simple", desc: "No tech jargon. Just plain English instructions that work." },
-              { icon: <ShieldCheck className="text-green-600" />, title: "Pressure-Free", desc: "No upselling. No scare tactics. Just honest learning." },
+              { icon: <ShieldCheck className="text-green-600" />, title: "Judgement-Free", desc: "No upselling. No scare tactics. Just honest learning." },
               { icon: <Target className="text-purple-600" />, title: "Focused", desc: "Everything we do is built around your specific learning goals." }
             ].map((value, i) => (
               <div key={i} className="bg-white p-10 rounded-[2.5rem] shadow-sm text-center flex flex-col items-center gap-4 border border-zinc-100">

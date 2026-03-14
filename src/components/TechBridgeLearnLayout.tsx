@@ -27,14 +27,14 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
     {
       id: "start", type: "question",
       title: "What's going on with your printer?",
-      subtitle: "Select the issue that best describes your situation",
+      subtitle: "Select the topic you want to learn about",
       options: [
         { label: "Won't connect to Wi-Fi", icon: "📶", nextId: "wifi", tag: "popular" },
         { label: "Paper jam or paper error", icon: "📄", nextId: "jam", tag: "quick" },
-        { label: "Ink or print quality issue", icon: "🖨️", nextId: "ink", tag: "popular" },
+        { label: "Ink and print quality", icon: "🖨️", nextId: "ink", tag: "popular" },
         { label: "Printer offline / not found", icon: "❌", nextId: "offline", tag: "popular" },
         { label: "Scanner not working", icon: "🔍", nextId: "scanner" },
-        { label: "Driver or software issue", icon: "💻", nextId: "driver" },
+        { label: "Drivers and software", icon: "💻", nextId: "driver" },
       ],
     },
     {
@@ -62,7 +62,7 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
           "Print a test page to confirm the connection works.",
         ],
         tip: "Most printers have a WPS button — press it within 2 minutes of pressing WPS on your router for an instant connection without needing to type your password!",
-        upsell: "Want us to walk you through this live? Our expert consultants do 1-on-1 screen-sharing sessions — we stay on until it's working.",
+        upsell: "Want to go deeper? Our educators offer live video lessons where you learn exactly how this works on your device.",
       },
     },
     {
@@ -79,12 +79,12 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
           "Choose number of copies and tap Print in the top right.",
         ],
         tip: "This works with any AirPrint printer — HP, Canon, Epson, Brother all support it. No app needed!",
-        upsell: "Did you know you can also scan documents back to your iPhone from most printers? Ask our experts how.",
+        upsell: "Did you know you can scan documents back to your iPhone from most printers? Learn how in our printer course.",
       },
     },
     {
       id: "jam", type: "result",
-      title: "Fix a Paper Jam",
+      title: "Understanding Paper Jams",
       result: {
         heading: "Clear a paper jam safely",
         difficulty: "easy", time: "2–5 minutes",
@@ -102,7 +102,7 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
     },
     {
       id: "ink", type: "question",
-      title: "What's the exact ink issue?",
+      title: "Understanding Ink Issues",
       options: [
         { label: "Prints are faded or streaky", icon: "🌫️", nextId: "ink_faded", tag: "popular" },
         { label: "Wrong colours printing", icon: "🎨", nextId: "ink_colour" },
@@ -112,9 +112,9 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
     },
     {
       id: "ink_faded", type: "result",
-      title: "Fix Faded or Streaky Prints",
+      title: "Understanding Faded or Streaky Prints",
       result: {
-        heading: "Fix faded, streaky or patchy prints",
+        heading: "Understanding faded, streaky or patchy prints",
         difficulty: "easy", time: "5 minutes",
         steps: [
           "On your printer, go to Settings → Maintenance or Tools.",
@@ -132,7 +132,7 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
       id: "ink_notfound", type: "result",
       title: "Cartridge Not Recognised",
       result: {
-        heading: "Fix 'cartridge not recognised' error",
+        heading: "Understanding cartridge recognition errors",
         difficulty: "easy", time: "3 minutes",
         steps: [
           "Remove the cartridge and check for any orange protective tape — peel it off completely.",
@@ -142,7 +142,7 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
           "If still not recognised, try a different cartridge slot temporarily to test.",
         ],
         tip: "Third-party cartridges sometimes trigger this error. Your printer manufacturer's app may need an update to accept newer refill brands.",
-        upsell: "Our experts know every brand's quirks — book a 15-minute session and we'll have you sorted instantly.",
+        upsell: "Our educators cover every brand's quirks in our printer course — including the ones most guides miss.",
       },
     },
     {
@@ -167,7 +167,7 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
       id: "offline", type: "result",
       title: "Printer Shows Offline",
       result: {
-        heading: "Fix 'printer offline' on any device",
+        heading: "Understanding the printer offline status",
         difficulty: "easy", time: "5 minutes",
         steps: [
           "Turn your printer completely off, wait 30 seconds, turn back on.",
@@ -177,8 +177,8 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
           "If still offline, delete the printer and re-add it from Settings → Devices.",
           "Make sure printer and computer are on the same Wi-Fi network.",
         ],
-        tip: "Set your printer to have a static IP address — this stops it going 'offline' every time your router restarts. Our experts can show you how in 5 minutes.",
-        upsell: "This is the most common printer issue we fix. If the above doesn't work, one of our consultants can diagnose it remotely.",
+        tip: "Setting a static IP address stops your printer going offline every time your router restarts. Our printer course covers this step by step.",
+        upsell: "This is the most common printer topic we cover. If these steps don't help, book a live lesson and we'll walk through it together.",
       },
     },
     {
@@ -214,7 +214,7 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
           "Restart your computer after installation completes.",
         ],
         tip: "Bookmark your printer's support page — manufacturers release firmware updates that fix bugs and add new features. Check every 3 months.",
-        upsell: "Drivers confusing you? Our consultants handle complete printer setup remotely — you just watch and learn.",
+        upsell: "Drivers confusing you? Our educators handle complete printer setup remotely — you just watch and learn.",
       },
     },
     { id: "wifi_mac", type: "result", title: "Wi-Fi Setup on Mac",
@@ -229,7 +229,7 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
           "macOS will automatically download the right driver.",
         ],
         tip: "AirPrint means instant printing from any Apple device with zero setup — if your printer supports it, you may not need to install any software at all!",
-        upsell: "Having trouble getting Mac to see your printer? Our experts specialise in Mac + printer setups.",
+        upsell: "Having trouble getting Mac to see your printer? Our educators specialise in Mac + printer setups.",
       },
     },
     { id: "wifi_android", type: "result", title: "Print from Android",
@@ -370,7 +370,7 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
           "Factory reset as last resort: Settings → System → Restore Factory Settings (backs up your favourites first).",
         ],
         tip: "GPS devices slow down when they're 70%+ full — just like a computer. Delete old tracks and routes regularly for snappy performance.",
-        upsell: "Our expert consultants can remotely walk you through a clean reset that keeps all your saved places intact.",
+        upsell: "Our educators can remotely walk you through a clean reset that keeps all your saved places intact.",
       },
     },
     {
@@ -404,7 +404,7 @@ const DIAGNOSTIC_STEPS: Record<string, any[]> = {
           "Check the charging port for debris — use a toothpick gently to clean it.",
         ],
         tip: "GPS batteries lose capacity over time. If yours is 3+ years old and won't hold charge, a replacement battery costs around $15 and is usually DIY-replaceable.",
-        upsell: "If your GPS is beyond saving, our experts can advise on the best current models for your budget and use case.",
+        upsell: "If your GPS is beyond saving, our educators can advise on the best current models for your budget and use case.",
       },
     },
     {

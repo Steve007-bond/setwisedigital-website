@@ -32,9 +32,9 @@ const WIZARD_CONFIG = {
   ],
   step2Options: [
     { label: "Update my maps", icon: "🔄" },
-    { label: "Fix my issue", icon: "🔧" },
+    { label: "Show me how it works", icon: "🔧" },
     { label: "Learn features", icon: "📚" },
-    { label: "Get expert help", icon: "👤" },
+    { label: "Book a live lesson", icon: "👤" },
   ],
   processingMessages: [
     "Checking your GPS model...",
@@ -82,9 +82,9 @@ function GPSHeroSVG() {
 }
 
 const ISSUES = [
-  { icon: "🔄", title: "Update Maps", desc: "Get the latest roads loaded onto any GPS device." },
-  { icon: "🧊", title: "Frozen Screen", desc: "Quick reset steps that work on all major brands." },
-  { icon: "✅", title: "Wrong Directions", desc: "Fix outdated routes and report road errors." },
+  { icon: "🔄", title: "Update Maps", desc: "Understand how GPS maps are structured and how updates work." },
+  { icon: "🧊", title: "Frozen Screen", desc: "Learn what causes GPS screen issues and how to address them." },
+  { icon: "✅", title: "Wrong Directions", desc: "Understand how GPS routing works and why directions sometimes differ." },
   { icon: "📍", title: "Plan a Route", desc: "Multi-stop planning and travel time estimates." },
 ];
 
@@ -127,10 +127,10 @@ export default function GPSPage() {
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                 animate={{ boxShadow: ["0 0 0 0 rgba(22,163,74,0)", "0 0 0 12px rgba(22,163,74,0)", "0 0 0 0 rgba(22,163,74,0)"] }}
                 transition={{ boxShadow: { duration: 2, repeat: Infinity } }}>
-                Update My GPS <ArrowRight size={20} />
+                Learn GPS Updates <ArrowRight size={20} />
               </motion.a>
               <Link href="/contact" className="px-8 py-5 border-2 border-zinc-600 hover:border-green-500 text-white font-black text-lg rounded-2xl flex items-center justify-center gap-3 transition-colors">
-                Ask an Expert
+                Book a Live Lesson
               </Link>
             </motion.div>
           </div>
@@ -187,7 +187,7 @@ export default function GPSPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl font-black tracking-tighter mb-4">GPS Skills We Build</h2>
+            <h2 className="text-4xl font-black tracking-tighter mb-4">What You Will Learn</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {ISSUES.map((issue, i) => (

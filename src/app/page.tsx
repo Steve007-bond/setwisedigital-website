@@ -118,7 +118,7 @@ export default function Home() {
               variants={itemVariants}
               className="text-xl md:text-3xl mb-14 leading-relaxed font-medium text-zinc-200"
             >
-              At Setwise Digital, we bridge the gap between complex tech and everyday ease. Plain-English tech literacy for the modern age.
+              At Setwise Digital, we teach you how everyday technology works — in plain English, at your own pace. No jargon. No pressure. Just learning.
             </motion.p>
 
             <motion.div 
@@ -187,7 +187,7 @@ export default function Home() {
                   { title: "Clarity", text: "Plain English step-by-step guides", icon: <CheckCircle2 className="text-blue-600" /> },
                   { title: "Confidence", text: "We teach you the 'why', not just 'how'", icon: <CheckCircle2 className="text-blue-600" /> },
                   { title: "Community", text: "Built for real users, by real people", icon: <CheckCircle2 className="text-blue-600" /> },
-                  { title: "Coaching", text: "Personal tutoring sessions whenever you want to go deeper", icon: <CheckCircle2 className="text-blue-600" /> }
+                  { title: "Coaching", text: "Live video lessons with an educator when you want to go deeper", icon: <CheckCircle2 className="text-blue-600" /> }
                 ].map((promise, i) => (
                   <motion.div 
                     key={i} 
@@ -310,7 +310,7 @@ export default function Home() {
               icon: <Printer className="text-blue-600" />, 
               title: "Printer Setup", 
               desc: "Master wireless printing, learn device maintenance, and discover tips to save ink and paper.",
-              points: ["Wi-Fi Setup", "Jam Prevention", "Save Ink"],
+              points: ["Wi-Fi Printing", "Paper Handling", "Save Ink"],
               href: "/techbridge/printers"
             },
             { 
@@ -389,7 +389,7 @@ export default function Home() {
               Featured Packages
             </div>
             <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter">Choose Your Learning Path</h2>
-            <p className="text-xl text-zinc-500 max-w-2xl mx-auto font-medium">Simple, upfront pricing. No monthly fees. Just the help you need, when you need it.</p>
+            <p className="text-xl text-zinc-500 max-w-2xl mx-auto font-medium">Simple, transparent pricing. No monthly fees. Just the learning you need, when you need it.</p>
           </motion.div>
         </div>
 
@@ -397,9 +397,9 @@ export default function Home() {
           {[
             { 
               title: "Printer Learning Package", 
-              subtitle: "Setup in 10 minutes",
+              subtitle: "Learn in 10 minutes a day",
               bonus: "Printing tips to save time & money",
-              features: ["Wi-Fi printer setup guide", "Maintenance skills explained simply"],
+              features: ["How Wi-Fi printing works — explained simply", "Printer maintenance and care basics"],
               color: "bg-blue-600",
               icon: <Printer className="text-white" />,
               href: "/techbridge/printers"
@@ -408,7 +408,7 @@ export default function Home() {
               title: "GPS Travel Package", 
               subtitle: "Smooth travels ahead",
               bonus: "Hidden map features most people miss",
-              features: ["Garmin & in-car GPS updates", "Navigation basics explained"],
+              features: ["Understanding Garmin & in-car GPS systems", "How GPS navigation works — plain English"],
               color: "bg-zinc-900",
               icon: <Navigation className="text-white" />,
               href: "/techbridge/gps"
@@ -417,7 +417,7 @@ export default function Home() {
               title: "Smart Home Starter", 
               subtitle: "Your voice-controlled life",
               bonus: "Create a routine that suits your lifestyle",
-              features: ["Alexa & Google Nest setup", "Voice commands for daily tasks"],
+              features: ["How Alexa & Google Nest work", "Voice assistant commands explained"],
               color: "bg-indigo-600",
               icon: <HomeIcon className="text-white" />,
               href: "/techbridge/smart-home"
@@ -426,7 +426,7 @@ export default function Home() {
               title: "Camera Essentials", 
               subtitle: "Clearer, sharper photos",
               bonus: "Simple tips for sharper photos",
-              features: ["Firmware updates without stress", "Menu walkthroughs for settings"],
+              features: ["Understanding camera firmware", "Camera settings explained simply"],
               color: "bg-zinc-800",
               icon: <Camera className="text-white" />,
               href: "/techbridge/camera"
@@ -703,7 +703,7 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {[
-                { title: "How to Fix a Paper Jam in 60 Seconds", tag: "Printer", icon: "🖨️", href: "/techbridge/printers" },
+                { title: "How Paper Jams Happen — and How to Prevent Them", tag: "Printer", icon: "🖨️", href: "/techbridge/printers" },
                 { title: "Setting Up Google Nest for the First Time", tag: "Smart Home", icon: "🏠", href: "/techbridge/smart-home" },
                 { title: "Is Your Home Wi-Fi Putting You at Risk?", tag: "Security", icon: "🔒", href: "/techbridge/security" },
               ].map((item, i) => (

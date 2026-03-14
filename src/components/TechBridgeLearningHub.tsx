@@ -94,7 +94,7 @@ export default function TechBridgeLearningHub({
       border: "border-blue-500/40",
       glow: "shadow-blue-500/25",
       iconBg: "bg-blue-600",
-      steps: ["Tell us your issue", "Pick your brand", "Get your guide"],
+      steps: ["Tell us what you want to learn", "Pick your brand", "Get your guide"],
       highlight: "Free — takes 60 seconds",
     },
     {
@@ -108,21 +108,21 @@ export default function TechBridgeLearningHub({
       border: "border-violet-500/40",
       glow: "shadow-violet-500/25",
       iconBg: "bg-violet-600",
-      steps: ["Describe your problem", "Follow guided steps", "Solve it confidently"],
+      steps: ["Choose your topic", "Follow the lesson steps", "Complete your lesson confidently"],
       highlight: "Powered by AI — real answers",
     },
     {
       id: "expert" as Option,
       icon: <UserCheck size={36} />,
-      label: "Talk to an Expert",
-      tagline: "Book a 1-on-1 consultation with a real advisor",
-      badge: "Human Touch",
+      label: "Book a Live Lesson",
+      tagline: "Schedule a structured video lesson with a tech educator",
+      badge: "Live Lesson",
       badgeColor: "bg-emerald-600",
       gradient: "from-emerald-600/20 via-emerald-500/5 to-transparent",
       border: "border-emerald-500/40",
       glow: "shadow-emerald-500/25",
       iconBg: "bg-emerald-600",
-      steps: ["Fill a short form", "We contact you", "Get personal help"],
+      steps: ["Fill a short form", "We confirm your lesson time", "Join your video lesson"],
       highlight: "Response within 24 hours",
     },
   ];
@@ -188,7 +188,7 @@ export default function TechBridgeLearningHub({
                   transition={{ delay: 0.2 }}
                   className="text-zinc-400 text-xl font-medium max-w-2xl mx-auto"
                 >
-                  Choose your learning path — from a quick guide to live expert support.
+                  Choose your learning path — from a free guide to a live lesson with a real educator.
                 </motion.p>
 
                 {/* Animated click hint */}
@@ -330,7 +330,7 @@ export default function TechBridgeLearningHub({
                 {[
                   { label: "Free Guide", cols: ["✓ Personalised PDF", "✓ 60 seconds", "✓ No signup needed", "✗ Not interactive"] },
                   { label: "AI Assistant", cols: ["✓ Live conversation", "✓ 15 guided steps", "✓ Remembers context", "✓ Discover new features"] },
-                  { label: "Expert Session", cols: ["✓ Real human advisor", "✓ Screen share option", "✓ Custom learning plan", "✓ Follow-up support"] },
+                  { label: "Live Lesson", cols: ["✓ Real tech educator", "✓ Live video lesson", "✓ Personalised lesson plan", "✓ Lesson summary included"] },
                 ].map((col, i) => (
                   <div key={i} className="bg-zinc-900/60 p-6">
                     <div className={`text-xs font-black uppercase tracking-widest mb-4 ${i === 0 ? "text-blue-400" : i === 1 ? "text-violet-400" : "text-emerald-400"}`}>

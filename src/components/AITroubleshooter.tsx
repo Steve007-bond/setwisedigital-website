@@ -45,7 +45,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
     {
       id: "start", type: "question",
       title: "What's going on with your printer?",
-      subtitle: "Select the issue that best describes your situation",
+      subtitle: "Select the topic you want to learn about",
       options: [
         { label: "Won't connect to Wi-Fi", icon: "📶", nextId: "wifi", tag: "popular" },
         { label: "Paper jam", icon: "📄", nextId: "jam", tag: "quick" },
@@ -77,7 +77,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
           "Print a test page to confirm it's working.",
         ],
         tip: "Most printers have a WPS button — press it + press WPS on your router for instant wireless connection without typing a password!",
-        upsell: "Want us to walk through this live? Our expert consultants do screen-sharing sessions — we stay on until it's working.",
+        upsell: "Want to go deeper? Our educators offer live video lessons where you'll learn exactly how this works on your device.",
       },
     },
     {
@@ -93,7 +93,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
           "AirPrint printers work with zero setup on Mac — just make sure both are on the same Wi-Fi.",
         ],
         tip: "If your printer supports AirPrint, you don't need to install any software at all — it just works on Mac!",
-        upsell: "Having trouble getting Mac to see your printer? Our experts specialise in Mac + printer setups.",
+        upsell: "Want to learn how Mac and printer connections work? Our educators cover this in detail in our printer course.",
       },
     },
     {
@@ -109,7 +109,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
           "Choose copies and tap Print in the top right corner.",
         ],
         tip: "This works with any AirPrint printer — HP, Canon, Epson, Brother all support it. No app or cable needed!",
-        upsell: "Did you know you can also scan straight back to your iPhone from most printers? Ask our experts how.",
+        upsell: "Did you know you can scan straight back to your iPhone from most printers? Learn how in our printer course.",
       },
     },
     {
@@ -129,7 +129,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
       },
     },
     {
-      id: "jam", type: "result", title: "Fix a Paper Jam",
+      id: "jam", type: "result", title: "Understanding Paper Jams",
       result: {
         heading: "Clear a paper jam safely", difficulty: "easy", time: "2–5 min",
         steps: [
@@ -154,9 +154,9 @@ const FLOWS: Record<string, GuidedStep[]> = {
       ],
     },
     {
-      id: "ink_faded", type: "result", title: "Fix Faded Prints",
+      id: "ink_faded", type: "result", title: "Understanding Faded Prints",
       result: {
-        heading: "Fix faded, streaky or patchy prints", difficulty: "easy", time: "5 min",
+        heading: "Understanding faded and streaky prints", difficulty: "easy", time: "5 min",
         steps: [
           "On the printer: go to Settings → Maintenance (or Tools).",
           "Run Print Head Cleaning or Nozzle Check — this unblocks dried ink.",
@@ -172,7 +172,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
     {
       id: "ink_notfound", type: "result", title: "Cartridge Not Recognised",
       result: {
-        heading: "Fix cartridge not recognised error", difficulty: "easy", time: "3 min",
+        heading: "Understanding Cartridge Recognition", difficulty: "easy", time: "3 min",
         steps: [
           "Remove the cartridge and check for orange protective tape — peel ALL of it off.",
           "Look for the gold/copper chip on the cartridge — clean gently with a dry cloth.",
@@ -181,7 +181,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
           "If still unrecognised, try reinserting in a different slot temporarily.",
         ],
         tip: "Third-party cartridges sometimes trigger this. Your printer's app may need an update to accept newer refill brands.",
-        upsell: "Our experts know every brand's quirks — a 15-min session gets you sorted fast.",
+        upsell: "Our educators cover every brand in our printer course — including the quirks that most guides miss.",
       },
     },
     {
@@ -201,9 +201,9 @@ const FLOWS: Record<string, GuidedStep[]> = {
       },
     },
     {
-      id: "ink_colour", type: "result", title: "Fix Wrong Colours",
+      id: "ink_colour", type: "result", title: "Understanding Colour Printing",
       result: {
-        heading: "Fix incorrect colour printing", difficulty: "medium", time: "10 min",
+        heading: "Understanding colour printing issues", difficulty: "medium", time: "10 min",
         steps: [
           "Run a nozzle check from the Maintenance menu.",
           "Run a print head alignment from Settings → Tools.",
@@ -218,7 +218,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
     {
       id: "offline", type: "result", title: "Printer Shows Offline",
       result: {
-        heading: "Fix printer offline error", difficulty: "easy", time: "5 min",
+        heading: "Understanding Printer Offline Status", difficulty: "easy", time: "5 min",
         steps: [
           "Turn printer completely off, wait 30 seconds, turn back on.",
           "Restart your computer or phone too.",
@@ -227,14 +227,14 @@ const FLOWS: Record<string, GuidedStep[]> = {
           "If still offline, delete the printer and re-add it via Settings → Devices.",
           "Confirm both printer and computer are on the same Wi-Fi network.",
         ],
-        tip: "Giving your printer a static IP address stops it going offline every time your router restarts. Our experts show you this in 5 minutes.",
-        upsell: "This is the most common printer issue we fix. If above steps don't work, a consultant can diagnose it remotely.",
+        tip: "Giving your printer a static IP address stops it going offline every time your router restarts. Our GPS course covers networking basics.",
+        upsell: "This is the most common printer question we cover. If these steps don't help, book a live lesson and we'll walk through it together.",
       },
     },
     {
       id: "scanner", type: "result", title: "Scanner Not Working",
       result: {
-        heading: "Fix your printer scanner", difficulty: "medium", time: "10 min",
+        heading: "Understanding Printer Scanning", difficulty: "medium", time: "10 min",
         steps: [
           "Make sure you installed the full software — not just the basic driver.",
           "Open your printer app: HP Smart, Canon IJ Scan, Epson Scan, etc.",
@@ -250,7 +250,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
     {
       id: "driver", type: "result", title: "Driver or Software Issues",
       result: {
-        heading: "Fix printer driver problems", difficulty: "medium", time: "15 min",
+        heading: "Understanding Printer Drivers", difficulty: "medium", time: "15 min",
         steps: [
           "Go to your printer brand's website (hp.com, canon.com, epson.com, etc.).",
           "Search your exact model number — it's on a sticker on the printer.",
@@ -259,8 +259,8 @@ const FLOWS: Record<string, GuidedStep[]> = {
           "Run the new installer and follow the setup wizard.",
           "Restart your computer after installation completes.",
         ],
-        tip: "Bookmark your printer's support page — manufacturers release firmware updates that fix bugs and add features. Check every 3 months.",
-        upsell: "Drivers confusing you? Our consultants handle complete printer setup remotely — you just watch and learn.",
+        tip: "Bookmark your printer manufacturer's website — they release firmware updates that improve features. Check every 3 months.",
+        upsell: "Drivers confusing you? Our educators cover complete printer driver setup in our live lesson sessions — step by step.",
       },
     },
   ],
@@ -359,7 +359,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
           "Check the charging port for debris — use a toothpick gently to clean it.",
         ],
         tip: "GPS batteries lose capacity over years. If yours is 3+ years old and won't hold charge, a replacement battery costs ~$15 and is usually DIY-replaceable.",
-        upsell: "If your GPS is beyond saving, our experts can advise on the best current models for your budget and driving needs.",
+        upsell: "If your GPS is beyond saving, our educators can advise on the best current models for your budget and driving needs.",
       },
     },
     {
@@ -404,7 +404,7 @@ const FLOWS: Record<string, GuidedStep[]> = {
           "Factory reset as last resort: Settings → System → Restore Factory Settings (saves your favourites first).",
         ],
         tip: "GPS devices slow down when 70%+ full — just like a computer. Delete old tracks and routes regularly for snappy performance.",
-        upsell: "Our experts can walk you through a clean reset that keeps all your saved places intact.",
+        upsell: "Our educators can walk you through a clean reset that keeps all your saved places intact.",
       },
     },
     {

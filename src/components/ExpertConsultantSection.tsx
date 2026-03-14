@@ -85,22 +85,22 @@ export default function ExpertConsultantSection({
           <div className="lg:w-5/12">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 text-xs font-black uppercase tracking-widest mb-8">
               <UserCheck size={14} />
-              Expert Consultant
+              Live Lesson
             </div>
             <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-6 leading-tight text-white">
-              Talk to a {topic} Expert
+              Book a Live {topic} Lesson
             </h2>
             <p className="text-lg text-zinc-400 font-medium mb-10 leading-relaxed">
-              Sometimes you need a real person who listens, explains clearly, and stays patient until you feel confident. That's exactly what our consultants do.
+              Sometimes the fastest way to learn is with a real instructor by your side. Our educators walk you through concepts clearly, at your pace, via a scheduled video lesson.
             </p>
 
             {/* What to expect */}
             <div className="space-y-4 mb-10">
               {[
-                { icon: <MessageSquare size={20} className="text-blue-600" />, title: "We listen first", desc: "Tell us your situation in your own words — no judgement." },
-                { icon: <Star size={20} className="text-blue-600" />, title: "Step-by-step guidance", desc: "We walk through every step together at your pace." },
-                { icon: <Clock size={20} className="text-blue-600" />, title: "We stay until it's done", desc: "No rushing. We don't leave until you feel confident." },
-                { icon: <CheckCircle2 size={20} className="text-blue-600" />, title: "Follow-up support", desc: "Got stuck later? Reach back out — we remember you." },
+                { icon: <MessageSquare size={20} className="text-blue-600" />, title: "We start with your goals", desc: "Tell us what you want to learn — no technical knowledge needed." },
+                { icon: <Star size={20} className="text-blue-600" />, title: "Clear, structured lessons", desc: "Every lesson follows a clear structure so you always know where you are." },
+                { icon: <Clock size={20} className="text-blue-600" />, title: "We go at your pace", desc: "No rushing. We move at whatever speed feels comfortable for you." },
+                { icon: <CheckCircle2 size={20} className="text-blue-600" />, title: "Lesson recap included", desc: "After every lesson, we send a summary of what you covered to keep." },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 p-5 rounded-2xl bg-white/5 border border-white/10">
                   <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
@@ -145,7 +145,7 @@ export default function ExpertConsultantSection({
                     Thanks <span className="font-black text-zinc-900">{form.name}</span>! Our team has been notified.
                   </p>
                   <p className="text-zinc-400 font-medium text-sm mb-6">
-                    We'll reach out to <span className="font-bold text-zinc-700">{form.email}</span> within 1 business day to schedule your session.
+                    We'll confirm your lesson time with <span className="font-bold text-zinc-700">{form.email}</span> within 1 business day.
                   </p>
                   <p className="text-xs text-zinc-500">
                     Questions? Email us at{" "}
@@ -163,8 +163,8 @@ export default function ExpertConsultantSection({
                   className="bg-zinc-800/80 rounded-[2rem] border border-white/10 shadow-xl p-8 md:p-10 space-y-6"
                 >
                   <div>
-                    <h3 className="text-2xl font-black text-white mb-1">Book a Consultation</h3>
-                    <p className="text-zinc-400 font-medium text-sm">Fill in your details and we'll be in touch to arrange your session.</p>
+                    <h3 className="text-2xl font-black text-white mb-1">Schedule Your Lesson</h3>
+                    <p className="text-zinc-400 font-medium text-sm">Fill in your details and we'll confirm your lesson time within 1 business day.</p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -191,9 +191,9 @@ export default function ExpertConsultantSection({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-black text-zinc-400 uppercase tracking-widest mb-2">Describe Your Issue *</label>
+                    <label className="block text-xs font-black text-zinc-400 uppercase tracking-widest mb-2">What would you like to learn? *</label>
                     <textarea name="issue" value={form.issue} onChange={handleChange} rows={4} required
-                      placeholder={`Tell us what's happening with your ${topic.toLowerCase()} — as much detail as you like. No technical knowledge needed!`}
+                      placeholder={`Tell us what you'd like to learn about your ${topic.toLowerCase()} — No technical knowledge needed — just tell us in your own words.`}
                       className="w-full px-5 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-zinc-800 transition-all font-medium text-white resize-none" />
                   </div>
 
@@ -245,7 +245,7 @@ export default function ExpertConsultantSection({
                     {status === "loading" ? (
                       <><Loader2 size={20} className="animate-spin" />Submitting...</>
                     ) : (
-                      <><UserCheck size={20} />Book My Consultation</>
+                      <><UserCheck size={20} />Book My Lesson</>
                     )}
                   </button>
 

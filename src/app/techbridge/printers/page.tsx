@@ -32,16 +32,16 @@ const WIZARD_CONFIG = {
     { label: "Other", icon: "❓" },
   ],
   step2Options: [
-    { label: "Fix my issue now", icon: "⚡" },
+    { label: "Show me how it works", icon: "⚡" },
     { label: "Learn step by step", icon: "📚" },
-    { label: "Talk to expert", icon: "👤" },
+    { label: "Book a live lesson", icon: "👤" },
     { label: "Get PDF guide", icon: "📄" },
   ],
   processingMessages: [
-    "Finding your printer steps...",
-    "Adding tips for your [brand]...",
+    "Preparing your printer learning guide...",
+    "Adding lessons for your [brand] printer...",
     "Almost ready, [name]...",
-    "Your personalised guide is ready!",
+    "Your personalised learning guide is ready!",
   ],
 };
 
@@ -124,10 +124,10 @@ function InkBar({ label, value, color, warning }: { label: string; value: number
 }
 
 const ISSUES = [
-  { icon: "📄", title: "Paper Jams", desc: "Clear any jam safely without damaging your printer." },
-  { icon: "📶", title: "Wi-Fi Setup", desc: "Connect wirelessly from any device in your home." },
-  { icon: "🖨️", title: "Replace Ink", desc: "Step-by-step cartridge replacement for any brand." },
-  { icon: "🔍", title: "Scanner Help", desc: "Scan documents straight to your email or computer." },
+  { icon: "📄", title: "Paper Jams", desc: "Learn what causes paper jams and how to prevent them." },
+  { icon: "📶", title: "Wi-Fi Setup", desc: "Understand how Wi-Fi printing works and how to set it up." },
+  { icon: "🖨️", title: "Replace Ink", desc: "Learn how ink cartridges work and when to replace them." },
+  { icon: "🔍", title: "Scanner Help", desc: "Learn how scanners work and how to send documents digitally." },
 ];
 
 export default function PrintersPage() {
@@ -169,7 +169,7 @@ export default function PrintersPage() {
             </div>
             <motion.p className="text-xl text-zinc-400 font-medium mb-10 leading-relaxed max-w-lg"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
-              Learn wireless printing, device care, and hidden features — all explained in plain, simple English.
+              Understand how printers work — wireless setup, maintenance, and features explained in plain English.
             </motion.p>
             <motion.div className="flex flex-col sm:flex-row gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}>
               <motion.a href="#learn"
@@ -182,7 +182,7 @@ export default function PrintersPage() {
               <Link href="/contact"
                 className="relative px-8 py-5 border-2 border-zinc-600 text-white font-black text-lg rounded-2xl flex items-center justify-center gap-3 overflow-hidden group hover:border-blue-500 transition-colors">
                 <span className="absolute inset-0 bg-blue-600 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                <span className="relative">Talk to an Expert</span>
+                <span className="relative">Book a Live Lesson</span>
               </Link>
             </motion.div>
           </div>
@@ -212,7 +212,7 @@ export default function PrintersPage() {
       <section className="py-24 bg-[#080808]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-4">Common Issues We Solve</h2>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-4">Topics Covered in This Course</h2>
             <p className="text-zinc-500 text-lg font-medium">Every problem — explained in plain English</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

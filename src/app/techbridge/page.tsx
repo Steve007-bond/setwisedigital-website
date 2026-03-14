@@ -116,7 +116,7 @@ export default function TechBridgePage() {
               variants={itemVariants}
               className="text-xl md:text-3xl text-zinc-400 max-w-3xl mx-auto mb-14 leading-relaxed font-medium"
             >
-              The technology learning platform that connects you to your devices without the frustration.
+              Plain-English technology courses for everyday device users. Learn at your own pace, on any device.
             </motion.p>
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link href="/contact" className="shine-effect w-full sm:w-auto px-12 py-6 bg-blue-600 text-white rounded-[2rem] font-black text-2xl hover:shadow-[0_20px_50px_rgba(37,99,235,0.4)] hover:-translate-y-1 transition-all flex items-center justify-center gap-3 group">
@@ -219,14 +219,14 @@ export default function TechBridgePage() {
       <section className="py-32 bg-zinc-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <div className="inline-block px-4 py-1 rounded-lg bg-indigo-50 text-indigo-700 text-sm font-bold mb-6 uppercase tracking-wider">The Solution</div>
-          <h2 className="text-4xl md:text-7xl font-black tracking-tighter mb-8 text-zinc-900">Confusion to Clarity</h2>
+          <h2 className="text-4xl md:text-7xl font-black tracking-tighter mb-8 text-zinc-900">From Confusion to Confidence</h2>
           <p className="text-xl md:text-2xl text-zinc-600 max-w-3xl mx-auto mb-20 font-medium leading-relaxed">
-            TechBridge is a smart ecosystem designed to help you understand, fix, and confidently use modern electronics.
+            TechBridge is our learning platform designed to help you understand and confidently use the technology you already own.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "AI-Powered Guidance", desc: "Instant answers for quick fixes that teach you the logic.", icon: <Zap className="text-yellow-500" />, color: "bg-yellow-50" },
-              { title: "Human Expert Access", desc: "Technology education with a patient, friendly voice.", icon: <Users className="text-blue-600" />, color: "bg-blue-50" },
+              { title: "AI-Powered Guidance", desc: "Instant answers for quick understanding — powered by AI, guided by educators.", icon: <Zap className="text-yellow-500" />, color: "bg-yellow-50" },
+              { title: "Human Expert Access", desc: "Structured courses authored by real educators who understand your learning needs.", icon: <Users className="text-blue-600" />, color: "bg-blue-50" },
               { title: "Step-by-Step Guides", desc: "Visual manuals in plain English you can keep forever.", icon: <BookOpen className="text-indigo-600" />, color: "bg-indigo-50" }
             ].map((item, i) => (
               <motion.div 
@@ -271,8 +271,8 @@ export default function TechBridgePage() {
               },
               { 
                 title: "3. The Personal Touch", 
-                subtitle: "Expert Consultants", 
-                desc: "If you feel stuck, connect with a certified expert who prioritizes education over rushing. Build confidence, not dependence.",
+                subtitle: "Live Lesson Sessions", 
+                desc: "Learn alongside a real educator in a scheduled video lesson. Structured, patient, and built entirely around your learning goals.",
                 perfect: "When you want a human connection.",
                 icon: <Users className="text-blue-600" />
               }
@@ -318,8 +318,8 @@ export default function TechBridgePage() {
                 title: "Printers & Scanners", 
                 icon: <Printer size={32} />, 
                 desc: "Comprehensive setup guide from unboxing to wireless printing.",
-                points: ["How to connect printer to WiFi", "Solving paper jams & offline errors", "Ink cartridge installation lessons"],
-                btn: "Fix My Printer",
+                points: ["How Wi-Fi printing works", "Understanding paper jams and offline status", "Ink cartridge basics and replacement"],
+                btn: "Printer Course",
                 href: "/techbridge/printers"
               },
               { 
@@ -327,8 +327,8 @@ export default function TechBridgePage() {
                 title: "GPS & Navigation Mastery", 
                 icon: <Navigation size={32} />, 
                 desc: "Stay on the right path with our map update learning modules.",
-                points: ["Garmin & Nuvi software upgrades", "Fixing frozen screens", "Understanding old vs. new maps"],
-                btn: "Update My GPS",
+                points: ["How Garmin & in-car GPS updates work", "Understanding GPS display issues", "How GPS maps are structured and updated"],
+                btn: "GPS Course",
                 href: "/techbridge/gps"
               },
               { 
@@ -336,8 +336,8 @@ export default function TechBridgePage() {
                 title: "Smart Home Tech", 
                 icon: <HomeIcon size={32} />, 
                 desc: "Your complete installation guide. Learn to control your home with confidence.",
-                points: ["Smart plugs & light setup", "WiFi device pairing", "App-based controls made simple"],
-                btn: "Setup Smart Home",
+                points: ["Smart plugs & light setup", "How smart home pairing works", "Understanding smart home apps"],
+                btn: "Smart Home Course",
                 href: "/techbridge/smart-home"
               },
               { 
@@ -345,8 +345,8 @@ export default function TechBridgePage() {
                 title: "Alexa & Voice Assistant Mastery", 
                 icon: <Mic size={32} />, 
                 desc: "Setup and configuration help that actually works. Talk to your home.",
-                points: ["Account linking & Skills setup", "Voice recognition training", "Smart integration education"],
-                btn: "Configure Alexa",
+                points: ["How Alexa Skills and account linking works", "How voice recognition works", "Understanding smart device integration"],
+                btn: "Alexa Course",
                 href: "/techbridge/alexa"
               }
             ].map((item, i) => (
@@ -405,8 +405,8 @@ export default function TechBridgePage() {
               <p>TechBridge isn’t about quick hacks. It’s about long-term confidence. When you use our technology learning platform, you aren’t just solving today's bug. You are learning:</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
                 {[
-                  "How to troubleshoot similar issues in the future.",
-                  "How to avoid common mistakes.",
+                  "How to understand similar situations in the future.",
+                  "How to get the most from your devices.",
                   "How to keep your digital life running smoothly."
                 ].map((text, i) => (
                   <div key={i} className="flex gap-3 bg-white/5 p-6 rounded-2xl border border-white/10">
@@ -433,9 +433,9 @@ export default function TechBridgePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { title: "Education-First", text: "We teach, we don't just fix.", icon: <BookOpen className="text-blue-600" /> },
-              { title: "Plain Language", text: "No 'Geek Speak.' Just clear instructions.", icon: <CheckCircle2 className="text-blue-600" /> },
+              { title: "Plain Language", text: "No jargon. Just plain-English explanations.", icon: <CheckCircle2 className="text-blue-600" /> },
               { title: "Safety Net", text: "AI speed with human empathy.", icon: <ShieldCheck className="text-blue-600" /> },
-              { title: "No Hidden Agendas", text: "No forced repairs or surprise upsells.", icon: <Heart className="text-blue-600" /> }
+              { title: "No Hidden Agendas", text: "No upsells. No pressure. Just honest education.", icon: <Heart className="text-blue-600" /> }
             ].map((item, i) => (
               <div key={i} className="p-10 rounded-[2.5rem] bg-zinc-50 border border-zinc-100 text-center flex flex-col items-center">
                 <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6">
@@ -455,7 +455,7 @@ export default function TechBridgePage() {
           <h2 className="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">Ready to Cross the Bridge?</h2>
           <p className="text-xl text-blue-100 mb-12 font-medium">Discover a smarter, calmer way to learn technology today.</p>
           <button className="px-12 py-6 bg-white text-blue-600 rounded-[2rem] font-bold text-2xl hover:shadow-2xl transition-all hover:scale-105 active:scale-95 shadow-xl shadow-blue-500/20">
-            Get Started Now
+            Start Learning Now
           </button>
         </div>
       </section>

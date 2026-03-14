@@ -141,7 +141,7 @@ function LeadForm({ topic, onDone }: { topic: string; onDone: () => void }) {
         <div>
           <div className="text-xs font-black text-zinc-500 uppercase tracking-widest mb-3">What would help you most?</div>
           <div className="flex flex-wrap gap-2">
-            {["Step-by-step guides", "Hidden features", "Money-saving tips", "1-on-1 expert help", "Free PDF guides", "Video walkthroughs"].map((i) => (
+            {["Step-by-step guides", "Hidden features", "Money-saving tips", "Live lesson sessions", "Free PDF guides", "Video walkthroughs"].map((i) => (
               <button key={i} type="button" onClick={() => toggleInterest(i)}
                 className={`px-3 py-2 rounded-full text-xs font-bold border transition-all ${
                   interests.includes(i) ? "bg-blue-600 border-blue-600 text-white" : "bg-zinc-50 border-zinc-200 text-zinc-600 hover:border-blue-400"
@@ -320,7 +320,7 @@ export default function SmartDiagnostic({ topic, steps, brandExamples, features 
                                   opt.tag === "quick" ? "bg-green-100 text-green-700 group-hover:bg-white/20 group-hover:text-white" :
                                   "bg-purple-100 text-purple-700 group-hover:bg-white/20 group-hover:text-white"
                                 } transition-all`}>
-                                  {opt.tag === "popular" ? "Most common" : opt.tag === "quick" ? "2 min fix" : "Advanced"}
+                                  {opt.tag === "popular" ? "Most popular" : opt.tag === "quick" ? "2 min lesson" : "In-depth"}
                                 </span>
                               )}
                               <ChevronRight size={20} className="text-zinc-300 group-hover:text-white transition-colors" />
@@ -342,7 +342,7 @@ export default function SmartDiagnostic({ topic, steps, brandExamples, features 
                           <h3 className="text-2xl font-black text-zinc-900">{currentStep.result.heading}</h3>
                           <div className="flex items-center gap-3 mt-2 flex-wrap">
                             <span className={`px-3 py-1 rounded-full text-xs font-black border ${difficultyColor[currentStep.result.difficulty]}`}>
-                              {currentStep.result.difficulty === "easy" ? "✅ Easy fix" : currentStep.result.difficulty === "medium" ? "⚠️ Moderate" : "🔧 Advanced"}
+                              {currentStep.result.difficulty === "easy" ? "✅ Easy to learn" : currentStep.result.difficulty === "medium" ? "⚠️ Moderate" : "🔧 Advanced"}
                             </span>
                             <span className="px-3 py-1 rounded-full text-xs font-bold bg-zinc-100 text-zinc-600 border border-zinc-200">
                               ⏱ {currentStep.result.time}
@@ -434,7 +434,7 @@ export default function SmartDiagnostic({ topic, steps, brandExamples, features 
         {/* Bottom social proof */}
         <div className="grid grid-cols-3 gap-4 mt-6">
           {[
-            { icon: "⚡", stat: "2 min", label: "Average fix time" },
+            { icon: "⚡", stat: "2 min", label: "Average lesson start" },
             { icon: "✅", stat: "98%", label: "Problems solved" },
             { icon: "🔒", stat: "100%", label: "Free to use" },
           ].map((item, i) => (

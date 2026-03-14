@@ -133,7 +133,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           { icon: <Mail size={18} />, label: "Guide Downloaded", desc: "Check your downloads folder" },
-          { icon: <Phone size={18} />, label: "We\'ll Call You", desc: `At ${phone || "your number"}` },
+          { icon: <Phone size={18} />, label: "We\'ll Call You", desc: `We'll be in touch at ${phone || "your number"}` },
           { icon: <Star size={18} />, label: "More Guides", desc: "Visit setwisedigital.com" },
         ].map((card, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.1 }}
@@ -284,7 +284,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
         </button>
         <div>
           <h3 className="text-2xl md:text-3xl font-black text-white mb-1">One last thing, {name} 👋</h3>
-          <p className="text-zinc-500 text-sm font-medium">Phone number lets our expert call you directly</p>
+          <p className="text-zinc-500 text-sm font-medium">So our educator can confirm your lesson time</p>
         </div>
         <div>
           <label className="text-xs font-black text-zinc-400 uppercase tracking-widest block mb-2">Phone Number *</label>
@@ -313,7 +313,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
               `📋 Personalised guide for: ${issue || "your issue"}`,
               `🏷️ Tips specific to: ${brand || "your device"}`,
               "📧 Sent directly to your email",
-              "📞 Expert follow-up call from our team",
+              "📞 Our educator will confirm your lesson time",
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-2 text-zinc-300 text-sm font-medium">
                 <CheckCircle2 size={14} className="text-green-400 shrink-0" />
@@ -328,7 +328,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
           className={`w-full py-5 rounded-2xl font-black text-white text-lg bg-gradient-to-r ${accent} flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20`}>
           {loading ? <Loader2 size={22} className="animate-spin" /> : <><Star size={20} /> Get My Free Guide</>}
         </motion.button>
-        <p className="text-center text-xs text-zinc-600">🔒 Your info is safe — we never spam or sell your details</p>
+        <p className="text-center text-xs text-zinc-600">🔒 Your info is safe — we never spam, share, or sell your details</p>
       </div>
     );
 

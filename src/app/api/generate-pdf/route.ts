@@ -115,7 +115,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#1a
   <div class="sec">
     <div class="sec-hd"><div class="sec-num">3</div><div class="sec-title">What to Do Next</div></div>
     <div class="ncards">
-      <div class="nc"><div class="ncicon">📞</div><div class="nct">Still Stuck?</div><div class="ncd">Book a 1-on-1 session with a Setwise Digital expert consultant</div></div>
+      <div class="nc"><div class="ncicon">📞</div><div class="nct">Still Stuck?</div><div class="ncd">Book a live lesson session with a Setwise Digital educator</div></div>
       <div class="nc"><div class="ncicon">🌐</div><div class="nct">More Guides</div><div class="ncd">Visit setwisedigital.com for GPS, Alexa, camera guides and more</div></div>
       <div class="nc"><div class="ncicon">📧</div><div class="nct">Email Support</div><div class="ncd">support@setwisedigital.com — we respond within 24 hours</div></div>
     </div>

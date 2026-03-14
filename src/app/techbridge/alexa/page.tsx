@@ -147,7 +147,7 @@ export default function AlexaPage() {
                 Get My Learning Guide <ArrowRight size={20} />
               </motion.a>
               <Link href="/contact" className="px-8 py-5 border-2 border-zinc-600 hover:border-cyan-500 text-white font-black text-lg rounded-2xl flex items-center justify-center transition-colors">
-                Talk to Expert
+                Book a Live Lesson
               </Link>
             </motion.div>
           </div>
