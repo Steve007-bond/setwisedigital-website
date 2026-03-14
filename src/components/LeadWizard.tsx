@@ -72,8 +72,8 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
   const startProcessing = async () => {
     setDir(1); setStep(4);
     setProgress(0); setMsgIdx(0);
-    const interval = setInterval(() => setProgress(p => Math.min(p + 2, 100)), 50);
-    config.processingMessages.forEach((_, i) => {
+    const interval = setInterval(() => setProgress((p: number) => Math.min(p + 2, 100)), 50);
+    config.processingMessages.forEach((_: string, i: number) => {
       timerRef.current = setTimeout(() => setMsgIdx(i), i * 800);
     });
     setTimeout(() => { clearInterval(interval); setProgress(100); }, 2600);
@@ -134,7 +134,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
         ))}
       </div>
 
-      <div className="relative min-h-[420px]">
+      <div className="relative">
         <AnimatePresence custom={dir} mode="wait">
           <motion.div key={step} custom={dir} variants={SLIDE}
             initial="enter" animate="center" exit="exit"
@@ -240,7 +240,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
                     <label className="text-xs font-black text-zinc-500 uppercase tracking-widest block mb-2">First Name *</label>
                     <div className="relative">
                       <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
-                      <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Mary"
+                      <input type="text" value={name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} placeholder="e.g. Mary"
                         className="w-full pl-10 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-600" />
                     </div>
                     {errors.name && <p className="text-red-400 text-xs mt-1 font-medium">{errors.name}</p>}
@@ -249,7 +249,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
                     <label className="text-xs font-black text-zinc-500 uppercase tracking-widest block mb-2">Email Address *</label>
                     <div className="relative">
                       <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
-                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="name@email.com"
+                      <input type="email" value={email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} placeholder="name@email.com"
                         className="w-full pl-10 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-600" />
                       {email.includes("@") && (
                         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
@@ -282,7 +282,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
                   <label className="text-xs font-black text-zinc-500 uppercase tracking-widest block mb-2">Phone Number (optional)</label>
                   <div className="relative">
                     <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
-                    <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+1 555 000 0000"
+                    <input type="tel" value={phone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)} placeholder="+1 555 000 0000"
                       className="w-full pl-10 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-600" />
                   </div>
                 </div>

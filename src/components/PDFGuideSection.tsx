@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FileText, CheckCircle2, AlertCircle, Loader2, Download, Shield, ChevronDown, ChevronUp } from "lucide-react";
@@ -141,7 +142,7 @@ export default function PDFGuideSection({
                       <input
                         type="text"
                         value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
                         placeholder="e.g. Mary"
                         className="w-full px-5 py-4 bg-zinc-50 border border-zinc-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium text-zinc-900"
                         required
@@ -155,7 +156,7 @@ export default function PDFGuideSection({
                       <input
                         type="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                         placeholder="name@email.com"
                         className="w-full px-5 py-4 bg-zinc-50 border border-zinc-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium text-zinc-900"
                         required

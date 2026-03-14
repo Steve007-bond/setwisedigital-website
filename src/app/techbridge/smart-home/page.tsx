@@ -46,7 +46,7 @@ const WIZARD_CONFIG = {
 
 function SmartHouseSVG() {
   const [litRooms, setLitRooms] = useState<number[]>([0, 2]);
-  const toggleRoom = (i: number) => setLitRooms(p => p.includes(i) ? p.filter(x => x !== i) : [...p, i]);
+  const toggleRoom = (i: number) => setLitRooms((p: number[]) => p.includes(i) ? p.filter((x: number) => x !== i) : [...p, i]);
   const rooms = [
     { label: "Living Room", x: 10, y: 10, w: 90, h: 90, color: "#f59e0b" },
     { label: "Bedroom", x: 110, y: 10, w: 80, h: 90, color: "#06b6d4" },

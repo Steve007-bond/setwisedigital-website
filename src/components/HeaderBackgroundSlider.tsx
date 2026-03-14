@@ -15,7 +15,7 @@ export default function HeaderBackgroundSlider({ items, interval = 8000, onTheme
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % items.length);
+      setIndex((prev: number) => (prev + 1) % items.length);
     }, interval);
     return () => clearInterval(timer);
   }, [items.length, interval]);

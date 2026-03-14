@@ -109,7 +109,7 @@ export default function AlexaPage() {
   const [listening, setListening] = useState(false);
 
   useEffect(() => {
-    const t = setInterval(() => setCmdIdx(i => (i + 1) % COMMANDS.length), 3000);
+    const t = setInterval(() => setCmdIdx((i: number) => (i + 1) % COMMANDS.length), 3000);
     return () => clearInterval(t);
   }, []);
 

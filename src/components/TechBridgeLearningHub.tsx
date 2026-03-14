@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import {
@@ -390,11 +391,11 @@ export default function TechBridgeLearningHub({
                 initial={{ scale: 0.96, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
-                className="bg-zinc-900 border border-zinc-700/60 rounded-[2.5rem] p-10 md:p-14 shadow-2xl shadow-blue-500/10 relative overflow-hidden"
+                className="bg-zinc-900 border border-zinc-700/60 rounded-[2.5rem] p-8 md:p-14 shadow-2xl shadow-blue-500/10 relative"
               >
                 {/* Subtle glow */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-indigo-600/5 pointer-events-none" />
-                <div className="relative z-10 overflow-auto">
+                <div className="relative z-10">
                   <LeadWizard config={wizardConfig} />
                 </div>
               </motion.div>

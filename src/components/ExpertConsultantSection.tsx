@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { UserCheck, Mail, MessageSquare, Clock, CheckCircle2, Loader2, AlertCircle, Star, Phone, Calendar } from "lucide-react";
@@ -39,7 +40,7 @@ export default function ExpertConsultantSection({
   const isValid = form.name && form.email && form.issue && form.email.includes("@");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+    setForm((f: typeof form) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
   const sendToDiscord = async () => {
@@ -215,7 +216,7 @@ export default function ExpertConsultantSection({
                       </label>
                       <div className="flex gap-2">
                         {CONTACT_METHODS.map((m) => (
-                          <button key={m} type="button" onClick={() => setForm((f) => ({ ...f, contactMethod: m }))}
+                          <button key={m} type="button" onClick={() => setForm((f: typeof form) => ({ ...f, contactMethod: m }))}
                             className={`flex-1 py-4 rounded-2xl text-xs font-black border transition-all ${
                               form.contactMethod === m
                                 ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/20"
