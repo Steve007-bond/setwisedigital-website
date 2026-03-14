@@ -3,9 +3,10 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import LeadWizard from "@/components/LeadWizard";
+import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
+import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
-import { Navigation, ArrowRight, Lightbulb } from "lucide-react";
+import { Navigation, ArrowRight } from "lucide-react";
 
 const WIZARD_CONFIG = {
   source: "gps-page",
@@ -91,6 +92,7 @@ export default function GPSPage() {
   return (
     <div className="min-h-screen bg-[#0d1117] text-white font-sans">
       <Navbar />
+      <ScrollToTop />
       {/* Road ambient */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <motion.div className="absolute inset-0 opacity-5"
@@ -202,20 +204,22 @@ export default function GPSPage() {
         </div>
       </section>
 
-      <section id="learn" className="py-24 bg-zinc-950">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-black uppercase tracking-widest mb-6">
-              <Lightbulb size={14} /> Free GPS Guide
-            </div>
-            <h2 className="text-4xl font-black text-white mb-4">Fix Your GPS Today</h2>
-            <p className="text-zinc-500 font-medium">3 quick questions — personalised guide in seconds</p>
-          </motion.div>
-          <div className="bg-zinc-900/80 border border-zinc-800 rounded-[2rem] p-8">
-            <LeadWizard config={WIZARD_CONFIG} />
-          </div>
-        </div>
-      </section>
+      <TechBridgeLearningHub
+        topic="GPS"
+        accentColor="from-green-400 to-emerald-400"
+        accentHex="#16a34a"
+        wizardConfig={WIZARD_CONFIG}
+        aiProps={{
+          brandExamples: ["Garmin", "TomTom", "Magellan", "In-car GPS", "Google Maps"],
+          starterQuestions: [
+            "My GPS maps are outdated — how do I update them?",
+            "My Garmin screen is frozen",
+            "GPS is giving wrong directions",
+            "How do I plan a route with multiple stops?",
+            "My GPS has no signal",
+          ],
+        }}
+      />
       <Footer />
     </div>
   );

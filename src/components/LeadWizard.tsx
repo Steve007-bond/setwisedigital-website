@@ -130,11 +130,11 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
       <div className="flex items-center justify-center gap-2 mb-6">
         {Array.from({ length: totalSteps }).map((_, i) => (
           <motion.div key={i} animate={{ scale: i === step ? 1.3 : 1, opacity: i <= step ? 1 : 0.3 }}
-            className={`rounded-full transition-all ${i < step ? "w-3 h-3 bg-green-500" : i === step ? `w-4 h-4 bg-gradient-to-r ${accent}` : "w-2 h-2 bg-zinc-600"}`} />
+            className={`rounded-full transition-all ${i < step ? "w-4 h-4 bg-green-500 shadow-lg shadow-green-500/50" : i === step ? `w-5 h-5 bg-gradient-to-r ${accent} shadow-lg` : "w-2.5 h-2.5 bg-zinc-700"}`} />
         ))}
       </div>
 
-      <div className="relative min-h-[360px]">
+      <div className="relative min-h-[420px]">
         <AnimatePresence custom={dir} mode="wait">
           <motion.div key={step} custom={dir} variants={SLIDE}
             initial="enter" animate="center" exit="exit"
@@ -152,7 +152,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
                   {config.step1Options.map((opt, i) => (
                     <motion.button key={i} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                       onClick={() => { setIssue(opt.label); }}
-                      className={`relative p-4 rounded-2xl border-2 text-left transition-all ${
+                      className={`relative p-5 rounded-2xl border-2 text-left transition-all ${
                         issue === opt.label
                           ? `border-blue-500 bg-blue-500/10`
                           : "border-white/10 bg-white/5 hover:border-white/20"
@@ -160,8 +160,8 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
                       {opt.popular && (
                         <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-blue-600 text-white text-xs font-black rounded-full">Popular</span>
                       )}
-                      <div className="text-2xl mb-2">{opt.icon}</div>
-                      <div className="font-black text-white text-sm">{opt.label}</div>
+                      <div className="text-3xl mb-3">{opt.icon}</div>
+                      <div className="font-black text-white text-base">{opt.label}</div>
                       {issue === opt.label && (
                         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
                           className="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">

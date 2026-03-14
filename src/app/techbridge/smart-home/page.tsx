@@ -3,7 +3,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import LeadWizard from "@/components/LeadWizard";
+import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
+import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
 import { Home, ArrowRight, Lightbulb } from "lucide-react";
 
@@ -109,6 +110,7 @@ export default function SmartHomePage() {
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-white font-sans">
       <Navbar />
+      <ScrollToTop />
       <section className="min-h-screen flex items-center pt-20 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-amber-950/20 via-transparent to-orange-950/10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -167,22 +169,23 @@ export default function SmartHomePage() {
           </div>
         </div>
       </section>
-
-      <section id="learn" className="py-24 bg-zinc-950">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-black uppercase tracking-widest mb-6">
-              <Lightbulb size={14} /> Free Setup Guide
-            </div>
-            <h2 className="text-4xl font-black text-white mb-4">Set Up Your Smart Home</h2>
-            <p className="text-zinc-500 font-medium">Tell us what you need — get a personalised guide instantly</p>
-          </motion.div>
-          <div className="bg-zinc-900/80 border border-zinc-800 rounded-[2rem] p-8">
-            <LeadWizard config={WIZARD_CONFIG} />
-          </div>
-        </div>
-      </section>
-      <Footer />
+      <TechBridgeLearningHub
+        topic="Smart Home"
+        accentColor="from-amber-400 to-orange-400"
+        accentHex="#f59e0b"
+        wizardConfig={WIZARD_CONFIG}
+        aiProps={{
+          brandExamples: ["Amazon Echo", "Google Nest", "Apple HomePod", "Ring", "Philips Hue"],
+          starterQuestions: [
+            "My Alexa isn't responding to commands",
+            "How do I set up a smart home routine?",
+            "My smart lights won't connect",
+            "How do I link Alexa to my thermostat?",
+            "My Google Nest isn't working properly",
+          ],
+        }}
+      />
+            <Footer />
     </div>
   );
 }

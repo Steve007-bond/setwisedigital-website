@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import LeadWizard from "@/components/LeadWizard";
+import ScrollToTop from "@/components/ScrollToTop";
+import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
+import { Wifi, AlertCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { Wifi, AlertCircle, Lightbulb, CheckCircle2, ArrowRight } from "lucide-react";
 
 const WIZARD_CONFIG = {
   source: "printers-page",
@@ -44,25 +45,30 @@ const WIZARD_CONFIG = {
   ],
 };
 
+const AI_PROPS = {
+  brandExamples: ["HP", "Canon", "Epson", "Brother", "Lexmark"],
+  starterQuestions: [
+    "My printer won't connect to Wi-Fi",
+    "How do I fix a paper jam?",
+    "My printer shows offline — how do I fix it?",
+    "How do I replace ink cartridges?",
+    "My prints look blurry or faded",
+  ],
+};
+
 function PrinterSVG() {
   return (
     <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       className="relative w-64 h-64 mx-auto">
       <svg viewBox="0 0 200 200" className="w-full h-full">
-        {/* Printer body */}
         <rect x="20" y="80" width="160" height="90" rx="8" fill="#1e293b" stroke="#334155" strokeWidth="2" />
         <rect x="30" y="90" width="140" height="60" rx="4" fill="#0f172a" />
-        {/* Paper slot */}
         <rect x="60" y="145" width="80" height="6" rx="2" fill="#334155" />
-        {/* Top tray */}
         <rect x="50" y="55" width="100" height="30" rx="4" fill="#1e293b" stroke="#334155" strokeWidth="1.5" />
-        {/* Control panel */}
         <circle cx="150" cy="110" r="6" fill="#2563eb" opacity="0.8" />
         <circle cx="135" cy="110" r="4" fill="#1d4ed8" opacity="0.6" />
-        {/* LED indicator */}
         <motion.circle cx="150" cy="110" r="6" fill="#3b82f6"
           animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
-        {/* Wireless rings */}
         {[1, 2, 3].map(i => (
           <motion.circle key={i} cx="100" cy="75" r={i * 10} fill="none" stroke="#2563eb" strokeWidth="1.5"
             initial={{ opacity: 0, scale: 0.5 }}
@@ -70,7 +76,6 @@ function PrinterSVG() {
             transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.5 }} />
         ))}
       </svg>
-      {/* Ink drops */}
       {[
         { color: "#06b6d4", x: 60, delay: 0 },
         { color: "#ec4899", x: 80, delay: 0.3 },
@@ -119,20 +124,19 @@ function InkBar({ label, value, color, warning }: { label: string; value: number
 }
 
 const ISSUES = [
-  { icon: "📄", title: "Paper Jams", desc: "Clear any jam safely without damaging your printer.", color: "blue" },
-  { icon: "📶", title: "Wi-Fi Setup", desc: "Connect wirelessly from any device in your home.", color: "indigo" },
-  { icon: "🖨️", title: "Replace Ink", desc: "Step-by-step cartridge replacement for any brand.", color: "cyan" },
-  { icon: "🔍", title: "Scanner Help", desc: "Scan documents straight to your email or computer.", color: "blue" },
+  { icon: "📄", title: "Paper Jams", desc: "Clear any jam safely without damaging your printer." },
+  { icon: "📶", title: "Wi-Fi Setup", desc: "Connect wirelessly from any device in your home." },
+  { icon: "🖨️", title: "Replace Ink", desc: "Step-by-step cartridge replacement for any brand." },
+  { icon: "🔍", title: "Scanner Help", desc: "Scan documents straight to your email or computer." },
 ];
 
 export default function PrintersPage() {
-  const heroRef = useRef(null);
   const inkRef = useRef(null);
-  const inkInView = useInView(inkRef, { once: false });
 
   return (
     <div className="min-h-screen bg-[#080808] text-white font-sans">
       <Navbar />
+      <ScrollToTop />
 
       {/* HERO */}
       <section className="min-h-screen flex items-center pt-20 pb-16 relative overflow-hidden">
@@ -140,9 +144,9 @@ export default function PrintersPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-blue-950/30 via-transparent to-indigo-950/20" />
           {[...Array(20)].map((_, i) => (
             <motion.div key={i} className="absolute w-1 h-1 bg-blue-500 rounded-full"
-              style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+              style={{ left: `${(i * 17 + 7) % 100}%`, top: `${(i * 23 + 11) % 100}%` }}
               animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
-              transition={{ duration: 2 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 5 }} />
+              transition={{ duration: 2 + (i % 3), repeat: Infinity, delay: (i * 0.4) % 5 }} />
           ))}
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -215,7 +219,7 @@ export default function PrintersPage() {
             {ISSUES.map((issue, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.12 }}
-                whileHover={{ scale: 1.04, y: -8 }} whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.04, y: -8 }}
                 className="bg-zinc-900 border border-zinc-800 rounded-[2rem] p-8 cursor-pointer group hover:border-blue-500 transition-all">
                 <div className="text-4xl mb-6">{issue.icon}</div>
                 <h3 className="text-xl font-black text-white mb-3 group-hover:text-blue-400 transition-colors">{issue.title}</h3>
@@ -226,22 +230,14 @@ export default function PrintersPage() {
         </div>
       </section>
 
-      {/* LEAD WIZARD */}
-      <section id="learn" className="py-24 bg-zinc-950">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-widest mb-6">
-              <Lightbulb size={14} /> Get Your Free Guide
-            </div>
-            <h2 className="text-4xl font-black text-white mb-4">Let's Fix Your Printer</h2>
-            <p className="text-zinc-500 font-medium">Answer 3 quick questions — get a personalised step-by-step guide</p>
-          </motion.div>
-          <div className="bg-zinc-900/80 border border-zinc-800 rounded-[2rem] p-8">
-            <LeadWizard config={WIZARD_CONFIG} />
-          </div>
-        </div>
-      </section>
+      {/* ── THE 3-OPTION LEARNING HUB ─────────────────────────────── */}
+      <TechBridgeLearningHub
+        topic="Printer"
+        accentColor="from-blue-400 to-cyan-400"
+        accentHex="#2563eb"
+        wizardConfig={WIZARD_CONFIG}
+        aiProps={AI_PROPS}
+      />
 
       <Footer />
     </div>

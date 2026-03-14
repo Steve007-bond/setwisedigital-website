@@ -3,9 +3,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import LeadWizard from "@/components/LeadWizard";
+import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
+import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
-import { Shield, ArrowRight, Lightbulb, CheckCircle2 } from "lucide-react";
+import { Shield, ArrowRight, CheckCircle2 } from "lucide-react";
 
 const WIZARD_CONFIG = {
   source: "security-page",
@@ -92,6 +93,7 @@ export default function SecurityPage() {
   return (
     <div className="min-h-screen bg-[#0a0000] text-white font-sans">
       <Navbar />
+      <ScrollToTop />
       <section className="min-h-screen flex items-center pt-20 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-red-950/20 via-transparent to-rose-950/10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -167,22 +169,23 @@ export default function SecurityPage() {
           </div>
         </div>
       </section>
-
-      <section id="learn" className="py-24 bg-zinc-950">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-black uppercase tracking-widest mb-6">
-              <Lightbulb size={14} /> Free Security Guide
-            </div>
-            <h2 className="text-4xl font-black text-white mb-4">Protect Yourself Today</h2>
-            <p className="text-zinc-500 font-medium">Tell us your concern — get a personalised security plan</p>
-          </motion.div>
-          <div className="bg-zinc-900/80 border border-zinc-800 rounded-[2rem] p-8">
-            <LeadWizard config={WIZARD_CONFIG} />
-          </div>
-        </div>
-      </section>
-      <Footer />
+      <TechBridgeLearningHub
+        topic="Security"
+        accentColor="from-red-400 to-rose-400"
+        accentHex="#ef4444"
+        wizardConfig={WIZARD_CONFIG}
+        aiProps={{
+          brandExamples: ["Windows Defender", "Norton", "McAfee", "Bitdefender", "Gmail"],
+          starterQuestions: [
+            "How do I set up two-factor authentication?",
+            "My computer may have a virus — what do I do?",
+            "How do I create a strong password?",
+            "How do I set up automatic backups?",
+            "How do I keep my email account secure?",
+          ],
+        }}
+      />
+            <Footer />
     </div>
   );
 }

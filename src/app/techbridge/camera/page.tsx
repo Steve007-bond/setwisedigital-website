@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import LeadWizard from "@/components/LeadWizard";
+import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
+import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
 import { Camera, ArrowRight, Lightbulb } from "lucide-react";
 
@@ -98,6 +99,7 @@ export default function CameraPage() {
   return (
     <div className="min-h-screen bg-[#0a0718] text-white font-sans">
       <Navbar />
+      <ScrollToTop />
       <section className="min-h-screen flex items-center pt-20 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-950/30 via-transparent to-violet-950/20" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -154,22 +156,23 @@ export default function CameraPage() {
           </div>
         </div>
       </section>
-
-      <section id="learn" className="py-24 bg-zinc-950">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-black uppercase tracking-widest mb-6">
-              <Lightbulb size={14} /> Free Camera Guide
-            </div>
-            <h2 className="text-4xl font-black text-white mb-4">Get Your Camera Guide</h2>
-            <p className="text-zinc-500 font-medium">Tell us your camera issue — personalised steps in seconds</p>
-          </motion.div>
-          <div className="bg-zinc-900/80 border border-zinc-800 rounded-[2rem] p-8">
-            <LeadWizard config={WIZARD_CONFIG} />
-          </div>
-        </div>
-      </section>
-      <Footer />
+      <TechBridgeLearningHub
+        topic="Camera"
+        accentColor="from-purple-400 to-pink-400"
+        accentHex="#9333ea"
+        wizardConfig={WIZARD_CONFIG}
+        aiProps={{
+          brandExamples: ["Sony", "Canon", "Nikon", "Fujifilm", "Panasonic"],
+          starterQuestions: [
+            "How do I update my camera firmware?",
+            "My photos are blurry — what's wrong?",
+            "How do I transfer photos to my phone?",
+            "My camera won't turn on",
+            "How do I adjust camera settings for better photos?",
+          ],
+        }}
+      />
+            <Footer />
     </div>
   );
 }

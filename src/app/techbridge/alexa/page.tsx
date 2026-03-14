@@ -3,7 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import LeadWizard from "@/components/LeadWizard";
+import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
+import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
 import { Mic, ArrowRight, Lightbulb } from "lucide-react";
 
@@ -115,6 +116,7 @@ export default function AlexaPage() {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans">
       <Navbar />
+      <ScrollToTop />
       <section className="min-h-screen flex items-center pt-20 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/20 via-transparent to-blue-950/20" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -180,22 +182,23 @@ export default function AlexaPage() {
           </div>
         </div>
       </section>
-
-      <section id="learn" className="py-24 bg-zinc-950">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-black uppercase tracking-widest mb-6">
-              <Lightbulb size={14} /> Free Alexa Setup Guide
-            </div>
-            <h2 className="text-4xl font-black text-white mb-4">Master Your Voice Assistant</h2>
-            <p className="text-zinc-500 font-medium">3 questions — personalised guide in seconds</p>
-          </motion.div>
-          <div className="bg-zinc-900/80 border border-zinc-800 rounded-[2rem] p-8">
-            <LeadWizard config={WIZARD_CONFIG} />
-          </div>
-        </div>
-      </section>
-      <Footer />
+      <TechBridgeLearningHub
+        topic="Alexa"
+        accentColor="from-cyan-400 to-blue-400"
+        accentHex="#06b6d4"
+        wizardConfig={WIZARD_CONFIG}
+        aiProps={{
+          brandExamples: ["Echo Dot", "Echo Show", "Echo Plus", "Echo Studio", "Echo Flex"],
+          starterQuestions: [
+            "Alexa stopped responding — how do I fix it?",
+            "How do I set up Alexa routines?",
+            "How do I connect Alexa to my music?",
+            "Can Alexa control my smart lights?",
+            "How do I update my Alexa device?",
+          ],
+        }}
+      />
+            <Footer />
     </div>
   );
 }

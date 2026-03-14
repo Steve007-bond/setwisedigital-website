@@ -131,6 +131,7 @@ export default function AITroubleshooter({ topic, brandExamples, starterQuestion
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [leadSent, setLeadSent] = useState(false);
   const [tipIndex, setTipIndex] = useState(0);
+  const [stepsCompleted, setStepsCompleted] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -179,6 +180,7 @@ export default function AITroubleshooter({ topic, brandExamples, starterQuestion
         } : undefined,
       }]);
 
+      setStepsCompleted((s) => Math.min(s + 1, 15));
       if (shouldShowLead) setTimeout(() => setShowLeadForm(true), 600);
     } catch {
       setMessages([...newMessages, {
@@ -229,6 +231,7 @@ export default function AITroubleshooter({ topic, brandExamples, starterQuestion
     setLeadSent(false);
     setTipIndex(0);
     setProfile({ name: "", email: "", phone: "", age: "", purpose: "", device: "", interests: [], captured: false });
+    setStepsCompleted(0);
   };
 
   const formatMessage = (content: string) => {
@@ -256,8 +259,8 @@ export default function AITroubleshooter({ topic, brandExamples, starterQuestion
   };
 
   return (
-    <section id="ai-assistant" className="py-24 bg-zinc-900">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div id="ai-assistant">
+      <div className="max-w-4xl mx-auto px-2">
         {/* Header */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-widest mb-6">
@@ -306,6 +309,26 @@ export default function AITroubleshooter({ topic, brandExamples, starterQuestion
             <button onClick={handleReset} className="text-zinc-500 hover:text-white transition-colors flex items-center gap-1 text-xs font-bold uppercase tracking-widest">
               <RotateCcw size={12} /> Reset
             </button>
+          </div>
+          {/* 15-step progress bar */}
+          <div className="bg-zinc-900/80 px-6 py-3 border-b border-white/5 flex items-center gap-3">
+            <span className="text-zinc-500 text-xs font-black shrink-0">STEP {stepsCompleted}/15</span>
+            <div className="flex-1 flex gap-1">
+              {Array.from({ length: 15 }).map((_, i) => (
+                <div key={i} className="flex-1 h-1.5 rounded-full overflow-hidden bg-zinc-800">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-violet-500 to-blue-500 rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{ width: i < stepsCompleted ? "100%" : "0%" }}
+                    transition={{ duration: 0.4, delay: i * 0.03 }}
+                  />
+                </div>
+              ))}
+            </div>
+            {stepsCompleted === 15 && (
+              <motion.span initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
+                className="text-xs font-black text-green-400 shrink-0">✓ Complete</motion.span>
+            )}
           </div>
 
           {/* Messages */}
@@ -514,6 +537,6 @@ export default function AITroubleshooter({ topic, brandExamples, starterQuestion
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
