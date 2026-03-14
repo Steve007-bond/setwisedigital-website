@@ -50,7 +50,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
   const [done, setDone] = useState(false);
   const [msgIdx, setMsgIdx] = useState(0);
   const [progress, setProgress] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const totalSteps = 5;
 

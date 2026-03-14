@@ -1,9 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { name, email, phone, topic, device, issue, availability, contactMethod } = body;
+
+    // Validate required fields
+    if (!name?.trim()) {
+      return NextResponse.json({ error: "Name is required" }, { status: 400 });
+    }
+    if (!email || !isValidEmail(email)) {
+      return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
+    }
+    if (!issue?.trim()) {
+      return NextResponse.json({ error: "Message is required" }, { status: 400 });
+    }
 
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
@@ -11,19 +26,19 @@ export async function POST(req: NextRequest) {
       const embed = {
         embeds: [
           {
-            title: `🔧 New ${topic || "Tech"} Expert Request`,
+            title: `🔧 New ${topic || "General"} Contact Request`,
             color: 0x2563eb,
             fields: [
-              { name: "👤 Name", value: name || "Not provided", inline: true },
-              { name: "📧 Email", value: email || "Not provided", inline: true },
+              { name: "👤 Name", value: name, inline: true },
+              { name: "📧 Email", value: email, inline: true },
               { name: "📞 Phone", value: phone || "Not provided", inline: true },
               { name: "🖥️ Device / Model", value: device || "Not specified", inline: true },
               { name: "📅 Availability", value: availability || "Not specified", inline: true },
               { name: "📬 Preferred Contact", value: contactMethod || "Email", inline: true },
-              { name: "❓ Issue Description", value: issue || "No details provided", inline: false },
+              { name: "❓ Message", value: String(issue).slice(0, 1024), inline: false },
             ],
             footer: {
-              text: "Setwise Digital • support@setwisedigital.com • www.setwisedigital.com",
+              text: "Setwise Digital • support@setwisedigital.com",
             },
             timestamp: new Date().toISOString(),
           },
@@ -37,18 +52,15 @@ export async function POST(req: NextRequest) {
       });
 
       if (!discordRes.ok) {
-        console.error("Discord webhook error:", await discordRes.text());
+        console.error("Discord webhook error:", discordRes.status, await discordRes.text());
       }
     } else {
-      console.warn("DISCORD_WEBHOOK_URL not set — contact form submission not forwarded to Discord");
+      console.warn("DISCORD_WEBHOOK_URL not set — contact form submission not forwarded");
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Contact route error:", err);
-    return NextResponse.json(
-      { error: "Failed to submit" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to submit" }, { status: 500 });
   }
 }

@@ -27,6 +27,7 @@ import Link from "next/link";
 import Image from "next/image";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import { useState, useRef } from "react";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const homeBackgrounds = [
   { url: "https://assets.mixkit.co/videos/preview/mixkit-woman-working-on-her-laptop-at-home-39887-large.mp4", type: 'video' as const, theme: 'dark' as const }, // Darker video
@@ -76,6 +77,7 @@ export default function Home() {
   return (
     <div ref={containerRef} className="min-h-screen bg-[#FDFDFD] text-zinc-900 font-sans selection:bg-blue-100">
       <Navbar />
+      <ScrollToTop />
 
       {/* Hero Section - Full Cover */}
       <header className="relative min-h-screen flex items-center justify-center overflow-hidden text-white">
