@@ -1,24 +1,29 @@
-# Vercel Setup Instructions
+# Vercel Environment Variables — Add These Now
 
-## Required Environment Variables
+Go to: Vercel Dashboard → setwisedigital-website-kti2 → Settings → Environment Variables
 
-Go to: **Vercel Dashboard → Your Project → Settings → Environment Variables**
+## Required Variables:
 
-Add these two variables:
+### 1. AI Chat (FREE - Google Gemini)
+Key:   GEMINI_API_KEY
+Value: [Your key from aistudio.google.com]
+Get it: Go to aistudio.google.com → Sign in → Get API Key → Create API key
 
-### 1. Anthropic API Key (for AI Troubleshooter)
-- **Key:** `ANTHROPIC_API_KEY`
-- **Value:** `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`
-- **Environments:** Production, Preview, Development
+### 2. Discord Notifications
+Key:   DISCORD_WEBHOOK_URL  
+Value: https://discord.com/api/webhooks/1482154983871877130/dFtJNRBX3z5yloE9Jvnxs4HxRPne-lomYkABXd3rmX5iT1m99FPA4bFwLM-ppcm6CiLr
 
-### 2. Discord Webhook URL (for contact form & PDF requests)
-- **Key:** `DISCORD_WEBHOOK_URL`
-- **Value:** `https://discord.com/api/webhooks/1482154983871877130/dFtJNRBX3z5yloE9Jvnxs4HxRPne-lomYkABXd3rmX5iT1m99FPA4bFwLM-ppcm6CiLr`
-- **Environments:** Production, Preview, Development
+## After adding both variables:
+1. Click Save
+2. Go to Deployments tab
+3. Click the 3 dots on the latest deployment → Redeploy
+4. Wait 2 minutes
+5. Test at: https://setwisedigital-website-kti2.vercel.app/api/test
 
-## After adding variables:
-Click **Redeploy** in Vercel to apply the changes.
-
-## EmailJS (for automated PDF emails)
-Currently PDF requests are sent to Discord for manual follow-up.
-To automate PDF emails later, reconnect Gmail in EmailJS dashboard with full send permissions.
+## Expected result after setup:
+{
+  "gemini_key": "✅ Set",
+  "discord_webhook": "✅ Set", 
+  "gemini_test": "✅ Gemini working",
+  "summary": "🟢 Ready to go"
+}
