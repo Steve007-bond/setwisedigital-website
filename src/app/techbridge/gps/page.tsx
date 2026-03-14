@@ -106,7 +106,7 @@ export default function GPSPage() {
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-black uppercase tracking-widest mb-8">
-              <Navigation size={14} /> GPS & Navigation
+              <Navigation size={14} /> GPS & Navigation Mastery
             </motion.div>
             <div className="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8">
               {["Update", "Your GPS", "in Minutes"].map((word, i) => (
@@ -119,7 +119,7 @@ export default function GPSPage() {
             </div>
             <motion.p className="text-xl text-zinc-400 font-medium mb-10 leading-relaxed max-w-lg"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-              Keep your maps current, fix frozen screens, and discover hidden features — all in plain English.
+              Keep your maps current, master navigation features, and discover shortcuts — all in plain English.
             </motion.p>
             <motion.div className="flex flex-col sm:flex-row gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}>
               <motion.a href="#learn"
@@ -187,7 +187,7 @@ export default function GPSPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl font-black tracking-tighter mb-4">GPS Issues We Solve</h2>
+            <h2 className="text-4xl font-black tracking-tighter mb-4">GPS Skills We Build</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {ISSUES.map((issue, i) => (

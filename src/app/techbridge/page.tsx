@@ -250,7 +250,7 @@ export default function TechBridgePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl font-extrabold mb-6">Three Ways to Learn (No Pressure, Just Progress)</h2>
-            <p className="text-xl text-zinc-600 max-w-3xl mx-auto font-medium">We know everyone learns differently. That’s why we offer step by step tech troubleshooting tailored to your comfort level.</p>
+            <p className="text-xl text-zinc-600 max-w-3xl mx-auto font-medium">We know everyone learns differently. That’s why we offer step by step tech skill-building tailored to your comfort level.</p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {[
@@ -324,7 +324,7 @@ export default function TechBridgePage() {
               },
               { 
                 cat: "Category 2", 
-                title: "GPS & Navigation", 
+                title: "GPS & Navigation Mastery", 
                 icon: <Navigation size={32} />, 
                 desc: "Stay on the right path with our map update learning modules.",
                 points: ["Garmin & Nuvi software upgrades", "Fixing frozen screens", "Understanding old vs. new maps"],
@@ -342,7 +342,7 @@ export default function TechBridgePage() {
               },
               { 
                 cat: "Category 4", 
-                title: "Alexa & Voice Assistants", 
+                title: "Alexa & Voice Assistant Mastery", 
                 icon: <Mic size={32} />, 
                 desc: "Setup and configuration help that actually works. Talk to your home.",
                 points: ["Account linking & Skills setup", "Voice recognition training", "Smart integration education"],

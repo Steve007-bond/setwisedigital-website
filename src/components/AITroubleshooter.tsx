@@ -574,12 +574,12 @@ export default function AITroubleshooter({ topic, brandExamples, starterQuestion
         {/* Header */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-widest mb-5">
-            <Sparkles size={14} /> 15-Step Guided Fix — No AI Key Needed
+            <Sparkles size={14} /> 15-Step Guided Lesson — No AI Key Needed
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-3">
-            {topic} Fix Guide
+            {topic} Learning Guide
           </h2>
-          <p className="text-zinc-400 font-medium">Answer a few questions — get exact steps for your specific issue</p>
+          <p className="text-zinc-400 font-medium">Answer a few questions — get exact steps and master your device</p>
           <div className="flex flex-wrap justify-center gap-2 mt-4">
             {brandExamples.map(b => (
               <span key={b} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-bold text-zinc-400">{b}</span>

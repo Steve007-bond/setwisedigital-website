@@ -74,10 +74,19 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-zinc-500 font-bold">© 2026 Setwise Digital. All rights reserved.</p>
-          <div className="flex items-center gap-2 text-zinc-500 font-bold">
-            Built with <Heart size={16} className="text-red-500 fill-red-500" /> for lifelong learners
+        {/* Compliance Disclaimer */}
+        <div className="pt-12 border-t border-white/5">
+          <div className="bg-white/3 border border-white/10 rounded-2xl p-6 mb-8">
+            <p className="text-zinc-500 text-xs font-medium leading-relaxed text-center">
+              <span className="text-zinc-400 font-bold">Independent Educational Platform.</span>{" "}
+              Setwise Digital is an independent tech literacy and education platform. We are not affiliated with, endorsed by, or representing any device manufacturer including HP, Canon, Epson, Brother, Garmin, TomTom, Amazon, Google, or Apple. All brand names and product names are trademarks of their respective owners and are referenced solely for educational identification purposes.
+            </p>
+          </div>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <p className="text-zinc-500 font-bold">© 2026 Setwise Digital. All rights reserved.</p>
+            <div className="flex items-center gap-2 text-zinc-500 font-bold">
+              Built with <Heart size={16} className="text-red-500 fill-red-500" /> for lifelong learners
+            </div>
           </div>
         </div>
       </div>

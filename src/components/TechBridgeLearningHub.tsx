@@ -100,7 +100,7 @@ export default function TechBridgeLearningHub({
     {
       id: "ai" as Option,
       icon: <Bot size={36} />,
-      label: "AI Troubleshooter",
+      label: "TechBridge Learning Guide",
       tagline: `Chat with TechBridge AI — 15-step guided ${topic} help`,
       badge: "Instant Help",
       badgeColor: "bg-violet-600",
@@ -379,10 +379,10 @@ export default function TechBridgeLearningHub({
                   <BookOpen size={14} /> Free Personalised Guide
                 </div>
                 <h2 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter">
-                  Let's Fix Your {topic}
+                  Master Your {topic}
                 </h2>
                 <p className="text-zinc-400 text-lg font-medium">
-                  Answer 3 quick questions — get a personalised step-by-step guide sent to you
+                  Answer 3 quick questions — get a personalised learning guide sent to you
                 </p>
               </div>
 
@@ -429,12 +429,12 @@ export default function TechBridgeLearningHub({
                   <Bot size={14} /> TechBridge AI — 15-Step Support
                 </div>
                 <h2 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter">
-                  Your {topic} Expert
+                  Your {topic} Tutor
                   <br />
-                  <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">is Ready to Help</span>
+                  <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">is Ready to Teach</span>
                 </h2>
                 <p className="text-zinc-400 text-lg font-medium max-w-2xl mx-auto">
-                  Chat with Alex — our AI advisor guides you through up to 15 steps of personalised {topic.toLowerCase()} troubleshooting.
+                  Alex, your personal tech tutor, walks you through up to 15 steps of {topic.toLowerCase()} skill-building.
                 </p>
 
                 {/* Steps bar */}

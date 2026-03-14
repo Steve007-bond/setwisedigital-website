@@ -117,7 +117,7 @@ export default function SmartHomePage() {
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-black uppercase tracking-widest mb-8">
-              <Home size={14} /> Smart Home Setup
+              <Home size={14} /> Smart Home Mastery
             </motion.div>
             <div className="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8">
               {["Your Home,", "Smarter"].map((word, i) => (
@@ -138,7 +138,7 @@ export default function SmartHomePage() {
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                 animate={{ boxShadow: ["0 0 0 0 rgba(245,158,11,0)", "0 0 0 12px rgba(245,158,11,0)", "0 0 0 0 rgba(245,158,11,0)"] }}
                 transition={{ boxShadow: { duration: 2, repeat: Infinity } }}>
-                Set Up My Home <ArrowRight size={20} />
+                Begin Smart Home Course <ArrowRight size={20} />
               </motion.a>
               <Link href="/contact" className="px-8 py-5 border-2 border-zinc-600 hover:border-amber-500 text-white font-black text-lg rounded-2xl flex items-center justify-center transition-colors">
                 Talk to Expert

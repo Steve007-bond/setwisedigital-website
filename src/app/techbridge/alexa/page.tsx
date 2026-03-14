@@ -123,7 +123,7 @@ export default function AlexaPage() {
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-black uppercase tracking-widest mb-8">
-              <Mic size={14} /> Alexa & Voice Assistants
+              <Mic size={14} /> Alexa & Voice Assistant Mastery
             </motion.div>
             <div className="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8">
               {["Your Voice,", "Your Home"].map((word, i) => (
@@ -144,7 +144,7 @@ export default function AlexaPage() {
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                 animate={{ boxShadow: ["0 0 0 0 rgba(6,182,212,0)", "0 0 0 12px rgba(6,182,212,0)", "0 0 0 0 rgba(6,182,212,0)"] }}
                 transition={{ boxShadow: { duration: 2, repeat: Infinity } }}>
-                Get Free Guide <ArrowRight size={20} />
+                Get My Learning Guide <ArrowRight size={20} />
               </motion.a>
               <Link href="/contact" className="px-8 py-5 border-2 border-zinc-600 hover:border-cyan-500 text-white font-black text-lg rounded-2xl flex items-center justify-center transition-colors">
                 Talk to Expert

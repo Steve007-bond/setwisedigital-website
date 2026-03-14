@@ -24,15 +24,16 @@ export const metadata: Metadata = {
     template: "%s | Setwise Digital",
   },
   description:
-    "Setwise Digital makes everyday technology simple. Step-by-step guides for printers, GPS, smart home devices, cameras and more — in plain English.",
+    "Setwise Digital is an independent tech literacy platform. Plain-English courses on printers, GPS, smart home, cameras and more. Learn at your own pace — no prior knowledge needed.",
   keywords: [
-    "technology help",
-    "printer setup",
-    "GPS update",
-    "Alexa setup",
-    "smart home guide",
-    "tech support",
-    "technology simplified",
+    "technology education",
+    "tech literacy",
+    "printer learning guide",
+    "GPS course",
+    "Alexa tutorial",
+    "smart home lessons",
+    "technology courses",
+    "independent tech education",
     "Setwise Digital",
   ],
   authors: [{ name: "Setwise Digital", url: "https://setwisedigital.com" }],
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "Setwise Digital",
     title: "Setwise Digital | Technology Simplified",
     description:
-      "We bridge the gap between complex tech and everyday ease. Plain-English guides for printers, GPS, smart home devices, cameras and more.",
+      "Independent tech literacy platform. Plain-English courses and tutorials for printers, GPS navigation, smart home, cameras and online safety. Learn at your own pace.",
     images: [
       {
         url: "/og-image.png",
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Setwise Digital | Technology Simplified",
     description:
-      "Plain-English tech guides for printers, GPS, smart home and more.",
+      "Independent tech literacy courses for printers, GPS, smart home, cameras and online safety.",
     images: ["/og-image.png"],
   },
   robots: {

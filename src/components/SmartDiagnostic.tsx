@@ -212,10 +212,10 @@ export default function SmartDiagnostic({ topic, steps, brandExamples, features 
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-widest mb-6">
             <Zap size={14} />
-            Smart Diagnostic Tool
+            Smart Learning Guide
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-4">
-            Fix Your {topic} in Minutes
+            Master Your {topic} in Minutes
           </h2>
           <p className="text-zinc-400 font-medium max-w-xl mx-auto">
             Answer a few quick questions — we'll give you exact steps plus tips most people never discover.

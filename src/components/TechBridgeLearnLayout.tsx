@@ -1026,7 +1026,7 @@ const TOPIC_FEATURES: Record<string, { icon: string; title: string; desc: string
 
 const TABS = [
   { id: "pdf", label: "PDF Guide", sublabel: "Learn at your own pace", icon: FileText },
-  { id: "ai", label: "Fix My Issue", sublabel: "Step-by-step diagnostic", icon: Zap },
+  { id: "ai", label: "Start My Lesson", sublabel: "Guided learning journey", icon: Zap },
   { id: "expert", label: "Expert Help", sublabel: "One-on-one guidance", icon: UserCheck },
 ] as const;
 

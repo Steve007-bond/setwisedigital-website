@@ -100,7 +100,7 @@ export default function SecurityPage() {
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-black uppercase tracking-widest mb-8">
-              <Shield size={14} /> Online Security
+              <Shield size={14} /> Online Safety & Digital Literacy
             </motion.div>
             <div className="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8">
               {["Stay Safe", "Online,"].map((word, i) => (
@@ -140,7 +140,7 @@ export default function SecurityPage() {
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                 animate={{ boxShadow: ["0 0 0 0 rgba(239,68,68,0)", "0 0 0 12px rgba(239,68,68,0)", "0 0 0 0 rgba(239,68,68,0)"] }}
                 transition={{ boxShadow: { duration: 2, repeat: Infinity } }}>
-                Fix My Security <ArrowRight size={20} />
+                Start Security Course <ArrowRight size={20} />
               </motion.a>
               <Link href="/contact" className="px-8 py-5 border-2 border-zinc-600 hover:border-red-500 text-white font-black text-lg rounded-2xl flex items-center justify-center transition-colors">
                 Talk to Expert
@@ -154,7 +154,7 @@ export default function SecurityPage() {
       <section className="py-24 bg-zinc-950/50 border-y border-zinc-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl font-black tracking-tighter mb-4">Security Problems We Solve</h2>
+            <h2 className="text-4xl font-black tracking-tighter mb-4">Security Skills We Teach</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {ISSUES.map((issue, i) => (

@@ -106,7 +106,7 @@ export default function CameraPage() {
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-black uppercase tracking-widest mb-8">
-              <Camera size={14} /> Camera & Photography
+              <Camera size={14} /> Camera & Photography Mastery
             </motion.div>
             <div className="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8">
               {["Capture", "Every", "Moment."].map((word, i) => (
@@ -127,7 +127,7 @@ export default function CameraPage() {
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                 animate={{ boxShadow: ["0 0 0 0 rgba(147,51,234,0)", "0 0 0 12px rgba(147,51,234,0)", "0 0 0 0 rgba(147,51,234,0)"] }}
                 transition={{ boxShadow: { duration: 2, repeat: Infinity } }}>
-                Improve My Photos <ArrowRight size={20} />
+                Start Camera Masterclass <ArrowRight size={20} />
               </motion.a>
               <Link href="/contact" className="px-8 py-5 border-2 border-zinc-600 hover:border-purple-500 text-white font-black text-lg rounded-2xl flex items-center justify-center transition-colors">
                 Talk to Expert
@@ -141,7 +141,7 @@ export default function CameraPage() {
       <section className="py-24 bg-zinc-950/50 border-y border-zinc-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl font-black tracking-tighter mb-4">Camera Help That Actually Works</h2>
+            <h2 className="text-4xl font-black tracking-tighter mb-4">Camera Lessons That Actually Stick</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {ISSUES.map((issue, i) => (

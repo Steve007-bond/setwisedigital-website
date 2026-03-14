@@ -1,142 +1,82 @@
 "use client";
-
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, ShieldAlert, Globe, MapPin, Search, BookOpen, Scale, Zap } from "lucide-react";
 
 export default function DisclaimerPage() {
-  const sections = [
-    {
-      title: "1. Educational Purposes Only",
-      icon: <BookOpen className="text-blue-600" />,
-      content: (
-        <div className="space-y-6">
-          <p>All content on this Site — including articles, guides, web apps, AI suggestions, chat responses, downloads, and emails — is provided for informational and educational purposes only.</p>
-          <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100">
-            <h4 className="font-bold text-blue-800 mb-2 flex items-center gap-2">
-              <ShieldAlert size={20} />
-              We do not provide:
-            </h4>
-            <p className="text-blue-900/80 font-medium">Official manufacturer support, certified repair services, professional IT consulting, or legal/financial/medical advice. You are responsible for how you choose to use the information.</p>
-          </div>
-          <div className="space-y-2">
-            <p className="font-bold text-zinc-900">Always:</p>
-            <ul className="list-disc pl-5 space-y-1 text-zinc-600">
-              <li>Back up important data</li>
-              <li>Read manufacturer instructions</li>
-              <li>Proceed carefully before changing settings or installing software</li>
-            </ul>
-          </div>
-        </div>
-      )
-    },
-    {
-      title: "2. AI-Generated Content & Human Consultants",
-      icon: <Zap className="text-blue-600" />,
-      content: (
-        <div className="space-y-4">
-          <p>Some guidance may come from AI-powered tools and suggestions may be incomplete or inaccurate. Human consultants are available only to clarify instructions and explain educational content.</p>
-          <p>They do not request passwords, access personal accounts, or remotely control devices.</p>
-        </div>
-      )
-    },
-    {
-      title: "3. No Affiliation With Brands",
-      icon: <Scale className="text-blue-600" />,
-      content: (
-        <div className="space-y-4 text-zinc-600">
-          <p>Setwise Digital is not affiliated, sponsored, or endorsed by printer companies, computer brands, GPS companies, or software vendors.</p>
-          <p>All trademarks, logos, and brand names belong to their respective owners and are used for identification purposes only.</p>
-        </div>
-      )
-    },
-    {
-      title: "4. Advertising & Monetization",
-      icon: <ShieldAlert className="text-blue-600" />,
-      content: (
-        <div className="space-y-4 text-zinc-600">
-          <p>Our Site may display advertisements or include affiliate links to help support the website. We do not control the content of ads and do not guarantee any advertised products or services.</p>
-          <p>Any interaction with ads is strictly between you and the third-party provider.</p>
-        </div>
-      )
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-[#FDFDFD] text-zinc-900 font-sans selection:bg-blue-100">
+    <div className="min-h-screen bg-white text-zinc-900">
       <Navbar />
-      
-      <main className="pt-44 pb-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-16 text-center"
-          >
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-6">Disclaimer</h1>
-            <p className="text-xl text-zinc-600 leading-relaxed max-w-2xl mx-auto">
-              Setwise Digital provides information to help users learn technology through simple, step-by-step educational guides.
-            </p>
-          </motion.div>
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <div className="inline-block px-4 py-1 rounded-full bg-blue-50 text-blue-700 font-black text-xs uppercase tracking-[0.2em] mb-6">Legal</div>
+          <h1 className="text-5xl font-black tracking-tighter mb-4">Disclaimer</h1>
+          <p className="text-zinc-500 font-medium mb-12">Last updated: January 2026</p>
 
-          <div className="space-y-12">
-            {sections.map((section, i) => (
-              <motion.section 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="p-8 md:p-10 bg-white rounded-[2.5rem] border border-zinc-100 shadow-sm"
-              >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                    {section.icon}
-                  </div>
-                  <h2 className="text-2xl font-bold">{section.title}</h2>
-                </div>
-                <div className="text-lg text-zinc-600 leading-relaxed font-medium">
-                  {section.content}
-                </div>
-              </motion.section>
-            ))}
+          <div className="prose prose-zinc max-w-none space-y-10">
 
-            {/* Contact Section */}
-            <motion.section 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="p-8 md:p-10 bg-zinc-900 text-white rounded-[2.5rem]"
-            >
-              <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
-                <Mail className="text-blue-400" />
-                10. Contact Us
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-medium">
-                <div className="space-y-4">
-                  <p className="flex items-start gap-3">
-                    <MapPin className="text-blue-400 mt-1 flex-shrink-0" />
-                    Setwise Digital<br />
-                    110 16th Street, Suite 1460<br />
-                    Denver, CO 80202, United States
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  <p className="flex items-center gap-3">
-                    <Mail className="text-blue-400" />
-                    support@setwisedigital.com
-                  </p>
-                  <p className="flex items-center gap-3">
-                    <Globe className="text-blue-400" />
-                    www.setwisedigital.com
-                  </p>
-                </div>
-              </div>
-            </motion.section>
+            <div className="p-6 bg-blue-50 border border-blue-200 rounded-2xl">
+              <h2 className="text-xl font-black text-blue-900 mb-3">Independent Educational Platform</h2>
+              <p className="text-blue-800 font-medium leading-relaxed">
+                Setwise Digital is an independent educational technology literacy platform. We provide self-paced learning guides, tutorials, and educational courses to help individuals develop confidence and competency with everyday consumer technology devices.
+              </p>
+            </div>
+
+            <section>
+              <h2 className="text-2xl font-black mb-4">No Affiliation with Manufacturers</h2>
+              <p className="text-zinc-600 leading-relaxed font-medium">
+                Setwise Digital is not affiliated with, endorsed by, authorised by, or in any way officially connected with any device manufacturer, software developer, or technology company referenced on this website. This includes but is not limited to:
+              </p>
+              <ul className="mt-4 space-y-2 text-zinc-600 font-medium">
+                {["HP Inc. / Hewlett-Packard", "Canon Inc.", "Epson America Inc.", "Brother Industries Ltd.", "Lexmark International", "Garmin Ltd.", "TomTom International BV", "Amazon.com Inc. (Alexa / Echo)", "Google LLC (Google Home / Nest)", "Apple Inc. (Siri / HomePod)", "Samsung Electronics", "Ring LLC", "Arlo Technologies"].map(brand => (
+                  <li key={brand} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-blue-500 rounded-full shrink-0" />
+                    {brand}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-zinc-600 leading-relaxed font-medium mt-4">
+                All brand names, product names, logos, and trademarks mentioned on this website are the property of their respective owners and are referenced solely for educational identification purposes under nominative fair use principles.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-black mb-4">Educational Purpose Only</h2>
+              <p className="text-zinc-600 leading-relaxed font-medium">
+                All content on Setwise Digital — including guides, lessons, tutorials, and interactive learning tools — is provided for general educational and informational purposes only. Our courses teach tech literacy and digital competency skills.
+              </p>
+              <p className="text-zinc-600 leading-relaxed font-medium mt-3">
+                Setwise Digital does not provide: remote device access, official manufacturer warranties, authorised product servicing, or any form of certified technical repair. We are an education company, not a device service company.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-black mb-4">Accuracy of Educational Content</h2>
+              <p className="text-zinc-600 leading-relaxed font-medium">
+                While we strive to keep our educational content accurate and up to date, technology changes rapidly. Device interfaces, software versions, and menu structures may differ from what is described in our guides. Always refer to your device manufacturer&apos;s official documentation for the most current instructions.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-black mb-4">No Warranty</h2>
+              <p className="text-zinc-600 leading-relaxed font-medium">
+                Educational content is provided &quot;as is&quot; without warranties of any kind, express or implied. Setwise Digital shall not be liable for any loss or damage arising from your use of our learning materials or your application of skills learned through our platform.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-black mb-4">Contact</h2>
+              <p className="text-zinc-600 leading-relaxed font-medium">
+                For questions about this disclaimer or our educational platform, please contact us at{" "}
+                <a href="mailto:support@setwisedigital.com" className="text-blue-600 font-bold hover:underline">
+                  support@setwisedigital.com
+                </a>
+              </p>
+            </section>
+
           </div>
-        </div>
+        </motion.div>
       </main>
-
       <Footer />
     </div>
   );

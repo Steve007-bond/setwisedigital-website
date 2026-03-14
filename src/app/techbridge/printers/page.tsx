@@ -153,7 +153,7 @@ export default function PrintersPage() {
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-widest mb-8">
-              <Wifi size={14} /> Printer & Scanner Support
+              <Wifi size={14} /> Printer & Scanner Literacy
             </motion.div>
             <div className="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8">
               {"Print Without".split(" ").map((word, i) => (
@@ -169,7 +169,7 @@ export default function PrintersPage() {
             </div>
             <motion.p className="text-xl text-zinc-400 font-medium mb-10 leading-relaxed max-w-lg"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
-              From paper jams to wireless setup — we make your printer work for you in plain, simple English.
+              Learn wireless printing, device care, and hidden features — all explained in plain, simple English.
             </motion.p>
             <motion.div className="flex flex-col sm:flex-row gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}>
               <motion.a href="#learn"
@@ -177,7 +177,7 @@ export default function PrintersPage() {
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                 animate={{ boxShadow: ["0 0 0 0 rgba(37,99,235,0)", "0 0 0 12px rgba(37,99,235,0)", "0 0 0 0 rgba(37,99,235,0)"] }}
                 transition={{ boxShadow: { duration: 2, repeat: Infinity } }}>
-                Fix My Printer Now <ArrowRight size={20} />
+                Start Printer Masterclass <ArrowRight size={20} />
               </motion.a>
               <Link href="/contact"
                 className="relative px-8 py-5 border-2 border-zinc-600 text-white font-black text-lg rounded-2xl flex items-center justify-center gap-3 overflow-hidden group hover:border-blue-500 transition-colors">

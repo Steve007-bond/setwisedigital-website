@@ -118,7 +118,7 @@ export default function Home() {
               variants={itemVariants}
               className="text-xl md:text-3xl mb-14 leading-relaxed font-medium text-zinc-200"
             >
-              At Setwise Digital, we bridge the gap between complex tech and everyday ease. Personalized support for the modern age.
+              At Setwise Digital, we bridge the gap between complex tech and everyday ease. Plain-English tech literacy for the modern age.
             </motion.p>
 
             <motion.div 
@@ -126,7 +126,7 @@ export default function Home() {
               className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20"
             >
               <Link href="/techbridge" className="shine-effect w-full sm:w-auto px-12 py-6 bg-blue-600 text-white rounded-[2rem] font-black text-2xl hover:shadow-[0_20px_50px_rgba(37,99,235,0.4)] hover:-translate-y-1 transition-all flex items-center justify-center gap-3 group border-0">
-                Get Support Now
+                Start Learning Now
                 <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
               </Link>
               <Link href="/pricing" className="font-black hover:text-blue-400 transition-all flex items-center gap-3 group text-white">
@@ -187,7 +187,7 @@ export default function Home() {
                   { title: "Clarity", text: "Plain English step-by-step guides", icon: <CheckCircle2 className="text-blue-600" /> },
                   { title: "Confidence", text: "We teach you the 'why', not just 'how'", icon: <CheckCircle2 className="text-blue-600" /> },
                   { title: "Community", text: "Built for real users, by real people", icon: <CheckCircle2 className="text-blue-600" /> },
-                  { title: "Support", text: "Human help whenever you get stuck", icon: <CheckCircle2 className="text-blue-600" /> }
+                  { title: "Coaching", text: "Personal tutoring sessions whenever you want to go deeper", icon: <CheckCircle2 className="text-blue-600" /> }
                 ].map((promise, i) => (
                   <motion.div 
                     key={i} 
@@ -309,8 +309,8 @@ export default function Home() {
             { 
               icon: <Printer className="text-blue-600" />, 
               title: "Printer Setup", 
-              desc: "Learn wireless printing, fix common issues, and discover tips to save ink and paper.",
-              points: ["Wi-Fi Setup", "Fix Jams", "Save Ink"],
+              desc: "Master wireless printing, learn device maintenance, and discover tips to save ink and paper.",
+              points: ["Wi-Fi Setup", "Jam Prevention", "Save Ink"],
               href: "/techbridge/printers"
             },
             { 
@@ -330,7 +330,7 @@ export default function Home() {
             { 
               icon: <Camera className="text-blue-600" />, 
               title: "Camera Basics", 
-              desc: "Install firmware, adjust settings, and capture sharper photos without the tech headache.",
+              desc: "Install firmware, adjust settings, and capture sharper photos without the complexity.",
               points: ["Firmware", "Settings", "Better Photos"],
               href: "/techbridge/camera"
             },
@@ -399,7 +399,7 @@ export default function Home() {
               title: "Printer Learning Package", 
               subtitle: "Setup in 10 minutes",
               bonus: "Printing tips to save time & money",
-              features: ["Wi-Fi printer setup guide", "Everyday fixes explained simply"],
+              features: ["Wi-Fi printer setup guide", "Maintenance skills explained simply"],
               color: "bg-blue-600",
               icon: <Printer className="text-white" />,
               href: "/techbridge/printers"
@@ -489,17 +489,17 @@ export default function Home() {
                 Innovation meets Experience
               </div>
               <h2 className="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">
-                TechBridge: Learning With <span className="text-blue-400">Confidence</span>
+                TechBridge: Mastering Tech With <span className="text-blue-400">Confidence</span>
               </h2>
               <p className="text-xl text-zinc-400 mb-10 leading-relaxed">
-                We blend instant AI-powered answers with human-designed lessons. Think of it as a bridge — one side is fast and automated, the other side is thoughtful and personal. Together, they make learning technology smoother.
+                We blend on-demand AI learning resources with human-designed lessons. Think of it as a bridge — one side is fast and interactive, the other side is thoughtful and personal. Together, they make mastering technology more natural.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div className="p-8 rounded-3xl bg-white/5 border border-white/10">
                   <Zap className="text-blue-400 mb-4" size={32} />
-                  <h4 className="font-bold text-xl mb-2">Fast & Instant</h4>
-                  <p className="text-zinc-400 font-medium">Get quick answers to urgent questions from our AI guides.</p>
+                  <h4 className="font-bold text-xl mb-2">On-Demand Learning</h4>
+                  <p className="text-zinc-400 font-medium">Interactive AI-guided lessons whenever you need a refresher.</p>
                 </div>
                 <div className="p-8 rounded-3xl bg-white/5 border border-white/10">
                   <UserCheck className="text-blue-400 mb-4" size={32} />
@@ -517,13 +517,13 @@ export default function Home() {
                   </div>
                   <div className="space-y-4">
                     <div className="bg-white/5 p-4 rounded-2xl rounded-tl-none mr-12 text-sm text-zinc-300">
-                      "How do I connect my printer to Wi-Fi?"
+                      "Teach me how to set up wireless printing."
                     </div>
                     <div className="bg-blue-600 p-4 rounded-2xl rounded-tr-none ml-12 text-sm font-medium">
-                      "First, make sure your printer is on. Press the WPS button on your router..."
+                      "Great choice! Let's start with Lesson 1: understanding how Wi-Fi printing works..."
                     </div>
                     <div className="flex justify-center pt-4">
-                      <span className="text-xs font-bold uppercase tracking-widest text-zinc-500">Blending with human guide...</span>
+                      <span className="text-xs font-bold uppercase tracking-widest text-zinc-500">Connecting you with your course...</span>
                     </div>
                   </div>
                 </div>
@@ -612,7 +612,7 @@ export default function Home() {
               },
               {
                 title: "The Easiest Way to Update Your Garmin GPS",
-                category: "GPS & Navigation",
+                category: "GPS & Navigation Mastery",
                 readTime: "5 min read",
                 stat: "72% of GPS users never update their maps",
                 img: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=600&h=400",
@@ -632,7 +632,7 @@ export default function Home() {
                 title: "Why Camera Updates Improve Your Photos",
                 category: "Camera & Photo",
                 readTime: "3 min read",
-                stat: "Firmware updates fix 40% of camera bugs",
+                stat: "Firmware updates improve 40% of camera performance issues",
                 img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=600&h=400",
                 href: "/techbridge/camera",
                 accent: "bg-rose-600/70",
