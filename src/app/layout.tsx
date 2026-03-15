@@ -148,6 +148,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Bing Webmaster Tools Verification */}
+        <meta name="msvalidate.01" content="49690429747E6992F298BB8C7C4F71DD" />
+        {/* End Bing Webmaster Tools Verification */}
         {/* LocalBusiness Schema Markup */}
         <script
           type="application/ld+json"
