@@ -19,6 +19,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/about", label: "About Us" },
     { href: "/techbridge", label: "TechBridge" },
+    { href: "/tools", label: "Free Tools" },
     { href: "/pricing", label: "Pricing" },
     { href: "/contact", label: "Contact" },
   ];

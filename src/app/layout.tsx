@@ -84,8 +84,7 @@ export default function RootLayout({
 }>) {
   const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": ["EducationalOrganization", "LocalBusiness"],
-    "@id": "https://www.setwisedigital.com/#business",
+    "@type": "LocalBusiness",
     "name": "Setwise Digital",
     "url": "https://www.setwisedigital.com",
     "description": "Setwise Digital is an independent tech literacy and education platform. Plain-English step-by-step courses on printers, GPS, smart home, cameras, and online security — designed for lifelong learners.",
@@ -148,9 +147,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Bing Webmaster Tools Verification */}
-        <meta name="msvalidate.01" content="49690429747E6992F298BB8C7C4F71DD" />
-        {/* End Bing Webmaster Tools Verification */}
         {/* LocalBusiness Schema Markup */}
         <script
           type="application/ld+json"
