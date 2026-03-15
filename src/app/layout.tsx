@@ -84,7 +84,8 @@ export default function RootLayout({
 }>) {
   const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["EducationalOrganization", "LocalBusiness"],
+    "@id": "https://www.setwisedigital.com/#business",
     "name": "Setwise Digital",
     "url": "https://www.setwisedigital.com",
     "description": "Setwise Digital is an independent tech literacy and education platform. Plain-English step-by-step courses on printers, GPS, smart home, cameras, and online security — designed for lifelong learners.",
