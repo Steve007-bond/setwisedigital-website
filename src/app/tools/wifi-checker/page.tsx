@@ -1,0 +1,1 @@
+import type { Metadata } from 'next'; import Client from './Client'; export const metadata: Metadata = { title: 'wifi-checker | Setwise Digital', description: 'Free interactive tech tool for adults 45+. Plain-English, no jargon. Setwise Digital.', alternates: { canonical: 'https://setwisedigital.com/tools/wifi-checker' } }; export default function Page() { return <Client/>; }

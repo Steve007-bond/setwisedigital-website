@@ -26,21 +26,24 @@ const CATEGORIES = [
 ];
 
 const TOOLS = [
-  { id: "road-trip-checker", category: "gps", href: "/tools/road-trip-checker", emoji: "🚗", badge: "Most Popular", badgeColor: "bg-green-500", title: "Road Trip GPS Pre-Check", description: "Make sure your GPS is fully ready before your next road trip. 5-step plain-English checklist covering maps, battery, mounting, route, and audio.", tags: ["GPS", "Road Trip", "Garmin", "TomTom"], time: "3 min", users: "2,400+", accent: "from-green-500 to-emerald-400", tagBg: "bg-green-900/40", tagText: "text-green-300", live: true },
-  { id: "best-gps-finder", category: "gps", href: "/tools/best-gps-finder", emoji: "🧭", badge: "New", badgeColor: "bg-blue-500", title: "Best GPS Finder for You", description: "Answer 5 plain-English questions about your driving habits and budget. Get a personalized GPS recommendation matched exactly to your lifestyle.", tags: ["GPS", "Garmin", "TomTom", "Buying Guide"], time: "4 min", users: "1,800+", accent: "from-blue-500 to-indigo-400", tagBg: "bg-blue-900/40", tagText: "text-blue-300", live: true },
-  { id: "printer-cost", category: "printer", href: "#", emoji: "💰", badge: "Coming Soon", badgeColor: "bg-zinc-600", title: "Printer True Cost Calculator", description: "Find out exactly how much your printer costs per year — ink, paper, and electricity included. Compare HP, Canon, Epson and Brother side by side.", tags: ["HP", "Canon", "Epson", "Brother"], time: "3 min", users: "Launching soon", accent: "from-indigo-500 to-blue-400", tagBg: "bg-indigo-900/40", tagText: "text-indigo-300", live: false },
-  { id: "best-printer", category: "printer", href: "#", emoji: "🖨️", badge: "Coming Soon", badgeColor: "bg-zinc-600", title: "Best Printer Finder for You", description: "Photos, documents, or both? We match you to the perfect printer for your home and budget — no technical knowledge needed.", tags: ["HP", "Canon", "Epson", "Buying Guide"], time: "4 min", users: "Launching soon", accent: "from-cyan-500 to-blue-400", tagBg: "bg-cyan-900/40", tagText: "text-cyan-300", live: false },
-  { id: "smart-home-matcher", category: "smarthome", href: "#", emoji: "🏠", badge: "Coming Soon", badgeColor: "bg-zinc-600", title: "Smart Home Starter Matcher", description: "Alexa, Google Nest, or Apple HomeKit? 5 questions match the right smart home system to your lifestyle — no technical knowledge needed.", tags: ["Alexa", "Google Nest", "Apple HomeKit"], time: "4 min", users: "Launching soon", accent: "from-amber-500 to-orange-400", tagBg: "bg-amber-900/40", tagText: "text-amber-300", live: false },
-  { id: "security-audit", category: "security", href: "#", emoji: "🔒", badge: "Coming Soon", badgeColor: "bg-zinc-600", title: "Home Security Audit Tool", description: "10 simple yes/no questions reveal how protected your home truly is — and which affordable devices would make the biggest difference.", tags: ["Ring", "SimpliSafe", "ADT", "Cameras"], time: "5 min", users: "Launching soon", accent: "from-red-500 to-rose-400", tagBg: "bg-red-900/40", tagText: "text-red-300", live: false },
-  { id: "voice-matcher", category: "voice", href: "#", emoji: "🎙️", badge: "Coming Soon", badgeColor: "bg-zinc-600", title: "Best Voice Assistant for You", description: "Alexa, Google Assistant, or Siri? We match the best voice assistant to your phone, daily habits and home devices in just 5 questions.", tags: ["Alexa", "Google Assistant", "Siri"], time: "3 min", users: "Launching soon", accent: "from-violet-500 to-purple-400", tagBg: "bg-violet-900/40", tagText: "text-violet-300", live: false },
+  { id: "road-trip-checker", category: "gps", href: "/tools/road-trip-checker", emoji: "🚗", badge: "Most Popular", badgeColor: "bg-green-500", title: "Road Trip GPS Pre-Check", description: "5-step GPS readiness checklist before your next road trip. Maps, battery, mounting, route, and audio — all in plain English.", tags: ["GPS", "Road Trip", "Garmin", "TomTom"], time: "3 min", users: "2,400+", accent: "from-green-500 to-emerald-400", tagBg: "bg-green-900/40", tagText: "text-green-300", live: true },
+  { id: "best-gps-finder", category: "gps", href: "/tools/best-gps-finder", emoji: "🧭", badge: "New", badgeColor: "bg-blue-500", title: "Best GPS Finder for You", description: "Answer 5 questions about your driving habits and budget. Get a personalized GPS recommendation matched exactly to your lifestyle.", tags: ["GPS", "Garmin", "TomTom", "Buying Guide"], time: "4 min", users: "1,800+", accent: "from-blue-500 to-indigo-400", tagBg: "bg-blue-900/40", tagText: "text-blue-300", live: true },
+  { id: "gps-update-scheduler", category: "gps", href: "/tools/gps-update-scheduler", emoji: "📅", badge: "New", badgeColor: "bg-cyan-600", title: "GPS Update Scheduler", description: "Find out how outdated your GPS maps are and get a personalized step-by-step update guide specific to your device.", tags: ["Garmin Express", "TomTom", "Map Updates"], time: "3 min", users: "900+", accent: "from-cyan-500 to-blue-400", tagBg: "bg-cyan-900/40", tagText: "text-cyan-300", live: true },
+  { id: "printer-cost-calculator", category: "printer", href: "/tools/printer-cost-calculator", emoji: "💰", badge: "New", badgeColor: "bg-indigo-500", title: "Printer True Cost Calculator", description: "Find out exactly how much your printer costs per year — ink, paper, and electricity all included. Compare HP, Canon, Epson and Brother.", tags: ["HP", "Canon", "Epson", "Brother"], time: "3 min", users: "1,200+", accent: "from-indigo-500 to-blue-400", tagBg: "bg-indigo-900/40", tagText: "text-indigo-300", live: true },
+  { id: "best-printer-finder", category: "printer", href: "/tools/best-printer-finder", emoji: "🖨️", badge: "New", badgeColor: "bg-violet-600", title: "Best Printer Finder for You", description: "Photos, documents, or both? 5 questions match you to the perfect printer for your home and budget — no technical knowledge needed.", tags: ["HP", "Canon", "Epson", "Buying Guide"], time: "4 min", users: "980+", accent: "from-violet-500 to-purple-400", tagBg: "bg-violet-900/40", tagText: "text-violet-300", live: true },
+  { id: "smart-home-matcher", category: "smarthome", href: "/tools/smart-home-matcher", emoji: "🏠", badge: "New", badgeColor: "bg-amber-600", title: "Smart Home Starter Matcher", description: "Alexa, Google Nest, or Apple HomeKit? 5 questions match the right smart home system to your lifestyle — no technical knowledge needed.", tags: ["Alexa", "Google Nest", "Apple HomeKit"], time: "4 min", users: "760+", accent: "from-amber-500 to-orange-400", tagBg: "bg-amber-900/40", tagText: "text-amber-300", live: true },
+  { id: "home-security-audit", category: "security", href: "/tools/home-security-audit", emoji: "🔒", badge: "New", badgeColor: "bg-red-600", title: "Home Security Audit Tool", description: "10 yes/no questions reveal how protected your home truly is — and which affordable devices would make the biggest difference.", tags: ["Ring", "SimpliSafe", "ADT", "Cameras"], time: "5 min", users: "640+", accent: "from-red-500 to-rose-400", tagBg: "bg-red-900/40", tagText: "text-red-300", live: true },
+  { id: "voice-assistant-matcher", category: "voice", href: "/tools/voice-assistant-matcher", emoji: "🎙️", badge: "New", badgeColor: "bg-purple-600", title: "Best Voice Assistant for You", description: "Alexa, Google Assistant, or Siri? Match the best voice assistant to your phone, daily habits and home devices in 5 questions.", tags: ["Alexa", "Google Assistant", "Siri"], time: "3 min", users: "520+", accent: "from-violet-500 to-purple-400", tagBg: "bg-violet-900/40", tagText: "text-violet-300", live: true },
+  { id: "subscription-audit", category: "smarthome", href: "/tools/subscription-audit", emoji: "📊", badge: "New", badgeColor: "bg-teal-600", title: "Tech Subscription Audit", description: "List your digital subscriptions and we'll calculate your true monthly cost, find overlaps, and tell you exactly which ones to cancel.", tags: ["Netflix", "Streaming", "Subscriptions", "Save Money"], time: "4 min", users: "430+", accent: "from-teal-500 to-cyan-400", tagBg: "bg-teal-900/40", tagText: "text-teal-300", live: true },
+  { id: "wifi-checker", category: "smarthome", href: "/tools/wifi-checker", emoji: "📶", badge: "New", badgeColor: "bg-sky-600", title: "Home Wi-Fi Overload Checker", description: "Count your connected devices and find out if your router can handle the load. Get a plain-English plan to fix slow Wi-Fi.", tags: ["Wi-Fi", "Router", "Internet Speed", "Smart Home"], time: "3 min", users: "380+", accent: "from-sky-500 to-blue-400", tagBg: "bg-sky-900/40", tagText: "text-sky-300", live: true },
 ];
 
 function ToolCard({ tool, index }: { tool: (typeof TOOLS)[0]; index: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
   return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 50 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: index * 0.07 }} className="group relative">
-      <div className={`relative h-full rounded-[2rem] border transition-all duration-300 overflow-hidden ${tool.live ? "border-zinc-800 bg-zinc-900 hover:border-zinc-600 hover:shadow-2xl hover:shadow-black/50 cursor-pointer" : "border-zinc-800/50 bg-zinc-900/40 opacity-65"}`}>
+    <motion.div ref={ref} initial={{ opacity: 0, y: 50 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: index * 0.06 }} className="group relative">
+      <div className="relative h-full rounded-[2rem] border border-zinc-800 bg-zinc-900 hover:border-zinc-600 hover:shadow-2xl hover:shadow-black/50 transition-all duration-300 overflow-hidden cursor-pointer">
         <div className={`h-1.5 w-full bg-gradient-to-r ${tool.accent}`} />
         <div className="p-8">
           <div className="flex items-start justify-between mb-6">
@@ -57,12 +60,10 @@ function ToolCard({ tool, index }: { tool: (typeof TOOLS)[0]; index: number }) {
               <span className="flex items-center gap-1.5"><Zap size={14} className="text-amber-400" />{tool.time}</span>
               <span className="flex items-center gap-1.5"><Users size={14} className="text-blue-400" />{tool.users}</span>
             </div>
-            {tool.live ? (
-              <Link href={tool.href}><motion.div whileHover={{ x: 4 }} className={`flex items-center gap-2 text-base font-black bg-gradient-to-r ${tool.accent} bg-clip-text text-transparent`}>Start Free <ArrowRight size={16} className="text-blue-400" /></motion.div></Link>
-            ) : (<span className="text-sm font-bold text-zinc-600">Launching soon</span>)}
+            <Link href={tool.href}><motion.div whileHover={{ x: 4 }} className={`flex items-center gap-2 text-base font-black bg-gradient-to-r ${tool.accent} bg-clip-text text-transparent`}>Start Free <ArrowRight size={16} className="text-blue-400" /></motion.div></Link>
           </div>
         </div>
-        {tool.live && <div className="absolute inset-0 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-blue-500/5 via-transparent to-transparent" />}
+        <div className="absolute inset-0 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-blue-500/5 via-transparent to-transparent" />
       </div>
     </motion.div>
   );
@@ -83,14 +84,14 @@ export default function ToolsHubClient() {
       <Navbar />
       <ScrollToTop />
 
-      {/* Hero with Background Slider */}
-      <section className="relative min-h-[88vh] flex items-center pt-20 pb-16 overflow-hidden">
+      {/* ── Hero — EXACT same pattern as homepage ── */}
+      <header className="relative min-h-screen flex items-center justify-center overflow-hidden text-white">
         <HeaderBackgroundSlider items={toolsBackgrounds} interval={7000} onThemeChange={setCurrentTheme} />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="max-w-3xl mx-auto text-center">
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-sm font-black uppercase tracking-widest mb-8">
-              <Zap size={14} className="text-blue-400" />2 Free Tools Live — More Launching Weekly
+              <Zap size={14} className="text-blue-400" />10 Free Tools Live — More Launching Weekly
             </motion.div>
             <h1 className="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8">
               {["Free Tech Tools", "Built for You"].map((line, i) => (
@@ -119,18 +120,16 @@ export default function ToolsHubClient() {
             </motion.div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0d1117] to-transparent z-10" />
-      </section>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0d1117] to-transparent z-10 pointer-events-none" />
+      </header>
 
-      {/* Disclaimer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 mt-10">
         <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl px-6 py-4 flex items-start gap-3">
           <Shield size={16} className="text-blue-400 mt-0.5 shrink-0" />
           <p className="text-base text-blue-300 font-medium"><strong className="text-blue-200">Educational Platform:</strong> All tools are for learning and guidance purposes only. Setwise Digital is an independent tech literacy platform — not affiliated with any device manufacturer.</p>
         </div>
       </div>
 
-      {/* Category Filter */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
         <div className="flex flex-wrap gap-3">
           {CATEGORIES.map((cat) => (
@@ -142,7 +141,6 @@ export default function ToolsHubClient() {
         </div>
       </section>
 
-      {/* Tools Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28">
         <AnimatePresence mode="wait">
           {filtered.length === 0 ? (
@@ -159,15 +157,14 @@ export default function ToolsHubClient() {
         </AnimatePresence>
       </section>
 
-      {/* CTA */}
       <section className="relative py-24 overflow-hidden border-t border-zinc-800">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-indigo-900/20" />
         <div className="relative max-w-3xl mx-auto px-4 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <div className="text-6xl mb-6">📬</div>
             <h2 className="text-4xl md:text-5xl font-black text-white mb-5 tracking-tight">Get New Tools in Your Inbox</h2>
             <p className="text-zinc-400 font-medium mb-10 text-xl leading-relaxed">We launch new free tools every week. Start with our Road Trip GPS Checker — takes just 3 minutes.</p>
-            <Link href="/tools/road-trip-checker" className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black px-10 py-6 rounded-2xl text-xl shadow-2xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all hover:scale-105">
+            <Link href="/tools/road-trip-checker" className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black px-10 py-6 rounded-2xl text-xl shadow-2xl shadow-blue-500/30 hover:scale-105 transition-transform">
               <Zap size={22} />Try Your First Free Tool<ArrowRight size={22} />
             </Link>
           </motion.div>
