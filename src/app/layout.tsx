@@ -82,9 +82,75 @@ export default function RootLayout({
 }: Readonly<{
   children: import("react").ReactNode;
 }>) {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Setwise Digital",
+    "url": "https://www.setwisedigital.com",
+    "description": "Setwise Digital is an independent tech literacy and education platform. Plain-English step-by-step courses on printers, GPS, smart home, cameras, and online security — designed for lifelong learners.",
+    "foundingDate": "2016",
+    "email": "contact@setwisedigital.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "137 Mazzeo Drive",
+      "addressLocality": "Glassboro",
+      "addressRegion": "NJ",
+      "postalCode": "08028",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 39.7026,
+      "longitude": -75.1118
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    ],
+    "areaServed": [
+      {
+        "@type": "State",
+        "name": "New Jersey"
+      },
+      {
+        "@type": "Country",
+        "name": "United States"
+      }
+    ],
+    "serviceType": [
+      "Tech Literacy Education",
+      "Printer Setup Guides",
+      "GPS Navigation Tutorials",
+      "Smart Home Setup",
+      "Camera Tutorials",
+      "Online Security Courses"
+    ],
+    "sameAs": [
+      "https://www.setwisedigital.com"
+    ],
+    "hasMap": "https://maps.google.com/?q=137+Mazzeo+Drive+Glassboro+NJ+08028",
+    "priceRange": "$$",
+    "currenciesAccepted": "USD",
+    "paymentAccepted": "Credit Card, PayPal",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.setwisedigital.com/logo.png"
+    }
+  };
+
   return (
     <html lang="en">
       <head>
+        {/* LocalBusiness Schema Markup */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        {/* End LocalBusiness Schema Markup */}
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
