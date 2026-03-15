@@ -89,7 +89,7 @@ export default function RootLayout({
     "url": "https://www.setwisedigital.com",
     "description": "Setwise Digital is an independent tech literacy and education platform. Plain-English step-by-step courses on printers, GPS, smart home, cameras, and online security — designed for lifelong learners.",
     "foundingDate": "2016",
-    "email": "contact@setwisedigital.com",
+    "email": "support@setwisedigital.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "137 Mazzeo Drive",
@@ -138,7 +138,9 @@ export default function RootLayout({
     "paymentAccepted": "Credit Card, PayPal",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://www.setwisedigital.com/logo.png"
+      "url": "https://www.setwisedigital.com/logo-light.png",
+      "width": 960,
+      "height": 320
     }
   };
 
