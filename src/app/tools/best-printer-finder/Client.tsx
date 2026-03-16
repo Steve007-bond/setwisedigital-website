@@ -8,7 +8,11 @@ import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight, ArrowLeft, ChevronRight, Mail, Phone, User, Loader2, Shield, Zap, RefreshCw, Star } from "lucide-react";
 
-const bgs = [{ url:"https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const },{ url:"https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const }];
+const bgs = [
+  { url:"https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1563520239648-a8ade7166c97?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+];
 
 const PRINTERS = [
   { id:"hp-deskjet-4155e", name:"HP DeskJet 4155e", brand:"HP", price:"$89", priceNum:89, emoji:"🔵", badge:"Best for Beginners", badgeColor:"bg-blue-600", type:"Inkjet", features:["Wireless printing from phone","Easy setup","Scan & copy included","HP+ subscription available"], pros:["Very affordable","Simple to use","Good print quality for documents","HP+ gives 6 months free ink"], cons:["Ink costs more per page","Slower than laser","No automatic double-sided"], bestFor:"Light home printing — letters, forms, coupons. Under 100 pages/month.", costPerPage:"~18¢ color / ~8¢ black", scores:{documents:35,photos:10,occasional:40,budget:45,color:20} },

@@ -6,11 +6,12 @@ import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
-import { CheckCircle2, ChevronRight, Mail, Phone, User, Loader2, Shield, Zap, RefreshCw, AlertCircle, ExternalLink } from "lucide-react";
+import { CheckCircle2, ArrowRight, ChevronRight, Mail, Phone, User, Loader2, Shield, Zap, RefreshCw, AlertCircle, ExternalLink } from "lucide-react";
 
 const bgs = [
-  { url:"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const },
-  { url:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
 ];
 
 interface CarBrand {

@@ -8,7 +8,10 @@ import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { ChevronRight, Zap, CheckCircle2 } from "lucide-react";
 
-const bgs = [{ url:"https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const }];
+const bgs = [
+  { url:"https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1563520239648-a8ade7166c97?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+];
 
 const FEATURES = [
   { id:"wireless", name:"Wireless / Wi-Fi Printing", emoji:"📶", importance:"Essential for modern homes", plain:"Print from your phone, iPad, or any computer in your home without plugging in any cables. Just connect the printer to your Wi-Fi once and it works everywhere.", needs:"Built-in Wi-Fi on virtually all modern printers", goodFor:"Everyone — this is now a standard feature", skip:"Nobody — always get wireless" },

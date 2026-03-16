@@ -9,8 +9,9 @@ import Link from "next/link";
 import { CheckCircle2, ArrowRight, ArrowLeft, ChevronRight, Mail, Phone, User, Loader2, Shield, Zap, RefreshCw, Star, AlertCircle } from "lucide-react";
 
 const bgs = [
-  { url:"https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const },
-  { url:"https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1563520239648-a8ade7166c97?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
 ];
 
 const PRINTER_TYPES = [

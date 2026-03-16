@@ -9,8 +9,9 @@ import Link from "next/link";
 import { CheckCircle2, ArrowRight, ArrowLeft, ChevronRight, Mail, Phone, User, Loader2, Navigation, Shield, RefreshCw, Award, Star } from "lucide-react";
 
 const BG = [
-  { url: "https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&q=80&w=1200", type: "image" as const, theme: "dark" as const },
-  { url: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=1200", type: "image" as const, theme: "dark" as const },
+  { url:"https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
 ];
 const GPS = [
   { id:"g52", name:"Garmin Drive 52", brand:"Garmin", price:"$89–$109", pMin:89, screen:"5-inch", bestFor:["Beginners","Budget-conscious"], features:["Turn-by-turn voice","Speed limit alerts","Simple menu","Bright screen"], pros:["Very affordable","Simple to use","Reliable Garmin quality"], cons:["No live traffic","No Bluetooth"], badge:"Best for Beginners", badgeColor:"bg-green-600", emoji:"🟢", drivingType:["city","suburban","highway"], techLevel:"beginner", priority:["simple"] },
@@ -51,7 +52,7 @@ export default function BestGPSFinderClient(){
   return(
     <div className="min-h-screen bg-[#0d1117] text-white font-sans"><Navbar/><ScrollToTop/>
       <header ref={heroRef} className="relative pt-44 pb-32 overflow-hidden">
-        <HeaderBackgroundSlider items={BG} interval={8000}/>
+        <HeaderBackgroundSlider items={BG} interval={8000} onThemeChange={setCurrentTheme}/>
         <div className="absolute inset-0 -z-10"/>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <nav className="flex items-center gap-2 text-base text-zinc-400 mb-8"><Link href="/" className="hover:text-white">Home</Link><ChevronRight size={16}/><Link href="/tools" className="hover:text-white">Free Tools</Link><ChevronRight size={16}/><span className="text-zinc-200">Best GPS Finder</span></nav>

@@ -10,10 +10,11 @@ import Link from "next/link";
 import { ArrowRight, Users, Zap, Search, Shield } from "lucide-react";
 
 const toolsBackgrounds = [
-  { url: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=1200", type: "image" as const, theme: "dark" as const },
-  { url: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=1200", type: "image" as const, theme: "dark" as const },
-  { url: "https://images.unsplash.com/photo-1518444065439-e933c06ce9cd?auto=format&fit=crop&q=80&w=1200", type: "image" as const, theme: "dark" as const },
-  { url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=1200", type: "image" as const, theme: "dark" as const },
+  { url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1600", type: "image" as const, theme: "dark" as const },
+  { url: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=1600", type: "image" as const, theme: "dark" as const },
+  { url: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=1600", type: "image" as const, theme: "dark" as const },
+  { url: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=1600", type: "image" as const, theme: "dark" as const },
+  { url: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=1600", type: "image" as const, theme: "dark" as const },
 ];
 
 const CATEGORIES = [

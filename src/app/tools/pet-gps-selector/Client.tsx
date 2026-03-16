@@ -8,7 +8,11 @@ import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight, ChevronRight, Mail, Phone, User, Loader2, Shield, Zap, RefreshCw, Star } from "lucide-react";
 
-const bgs = [{ url:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const }];
+const bgs = [
+  { url:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+];
 
 const PET_TRACKERS = [
   { id:"fi-series3", name:"Fi Series 3 Smart Collar", price:"$149 + $99/yr", badge:"Best Overall Dog GPS", badgeColor:"bg-blue-600", emoji:"🐕", pets:["Dogs (large)"], range:"Unlimited via cellular + Wi-Fi","batteryLife":"3 months","subscription":"$99/yr","features":["Real-time GPS location on phone","Escape alerts — notified within seconds","Step counter and sleep tracking","Geofence home zone alerts","7-year GPS history","Built into collar — no attachment"], pros:["Best battery life available (3 months)","Cellular coverage everywhere","Extremely accurate","Built into stylish collar"], cons:["Only available in collar form","Monthly subscription required","Large dog minimum (20 lbs+)"], bestFor:"Dog owners who want the best battery life and don't want to recharge constantly" },

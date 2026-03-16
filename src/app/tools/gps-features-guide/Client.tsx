@@ -8,7 +8,11 @@ import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { ChevronRight, Zap, CheckCircle2 } from "lucide-react";
 
-const bgs = [{ url:"https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const }];
+const bgs = [
+  { url:"https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1476231682828-37e571bc172f?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+];
 
 const FEATURES = [
   { id:"live-traffic", name:"Live Traffic", emoji:"🚦", importance:"Essential for city drivers", plain:"Your GPS checks road conditions in real-time and reroutes you around jams automatically. Without this, it will send you into traffic it doesn't know about.", needs:"Smartphone connection or cellular subscription", goodFor:"City drivers, commuters, highway drivers", skip:"Rural drivers, low traffic areas" },

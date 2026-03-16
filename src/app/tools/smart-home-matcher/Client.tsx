@@ -8,7 +8,11 @@ import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight, ArrowLeft, ChevronRight, Mail, Phone, User, Loader2, Shield, Zap, RefreshCw, Star } from "lucide-react";
 
-const bgs = [{ url:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const },{ url:"https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const }];
+const bgs = [
+  { url:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+];
 
 const SYSTEMS = [
   { id:"alexa", name:"Amazon Alexa", device:"Amazon Echo", priceRange:"$29–$249", emoji:"🔵", badge:"Most Popular for Seniors", badgeColor:"bg-blue-600", pros:["Widest device compatibility","Best shopping integration","Most Alexa Skills available","Works with almost everything","Easy to set up and use"], cons:["Requires Amazon account","Less private than others","Some features need Prime"], bestFor:"Android users, Amazon shoppers, people who want simplicity", features:["100,000+ compatible smart home devices","Amazon shopping by voice","Music via Amazon Music, Spotify, Apple Music","Phone calls & messaging","Reminders & routines"], monthlyFee:"$0 (optional Prime $15/mo for more features)", setupDifficulty:"Very Easy", score:0 },

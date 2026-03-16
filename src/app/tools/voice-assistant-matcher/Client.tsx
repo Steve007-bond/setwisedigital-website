@@ -8,7 +8,11 @@ import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight, ArrowLeft, ChevronRight, Mail, Phone, User, Loader2, Shield, Zap, RefreshCw, Star } from "lucide-react";
 
-const bgs = [{ url:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const },{ url:"https://images.unsplash.com/photo-1512446733611-9099a758e5e5?auto=format&fit=crop&q=80&w=1200", type:"image" as const, theme:"dark" as const }];
+const bgs = [
+  { url:"https://images.unsplash.com/photo-1512446733611-9099a758e5e5?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1543512214-318c7553f230?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+];
 
 const ASSISTANTS = [
   { id:"alexa", name:"Amazon Alexa", device:"Amazon Echo Dot (5th Gen)", price:"$49.99", emoji:"🔵", badge:"Most Popular for Seniors", badgeColor:"bg-blue-600", pros:["Widest device compatibility — works with almost everything","Best for Amazon shopping & Prime Video","100,000+ Skills (mini-apps) available","Very easy setup — plug in and go","Great for reminders, timers, and routines"], cons:["Requires Amazon account","Some features need Prime subscription","Privacy: recordings stored on Amazon servers"], bestFor:"Android users, Amazon shoppers, people who want simplicity and the most device options", monthlyFee:"$0 (Prime $15/mo optional for extra features)", setupEase:"⭐⭐⭐⭐⭐ Extremely Easy" },
