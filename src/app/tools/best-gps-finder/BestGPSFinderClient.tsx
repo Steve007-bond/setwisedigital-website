@@ -42,6 +42,7 @@ export default function BestGPSFinderClient(){
   const [curQ,setCurQ]=useState(0); const [answers,setAnswers]=useState<Record<string,string>>({}); const [sel,setSel]=useState<string|null>(null);
   const [name,setName]=useState(""); const [email,setEmail]=useState(""); const [phone,setPhone]=useState("");
   const [errors,setErrors]=useState<Record<string,string>>({}); const [submitting,setSubmitting]=useState(false); const [submitted,setSubmitted]=useState(false);
+  const [currentTheme,setCurrentTheme]=useState<"dark"|"light">("dark");
   const heroRef=useRef(null); const heroInView=useInView(heroRef,{once:true});
   const ranked=GPS.map(d=>({...d,score:score(d,answers)})).sort((a,b)=>b.score-a.score);
   const top=ranked[0]; const progress=(curQ/QS.length)*100;
