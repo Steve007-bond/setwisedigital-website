@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // Keep unoptimized for Vercel hobby tier (avoids image quota)
     unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
@@ -10,7 +9,13 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.unsplash.com" },
     ],
   },
-  // Security headers
+  async redirects() {
+    return [
+      // Fix old path references from previous deployments
+      { source: "/tools/wifi-speed-checker", destination: "/tools/wifi-checker", permanent: true },
+      { source: "/tools/gps-update-guide", destination: "/tools/gps-update-scheduler", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
@@ -20,17 +25,12 @@ const nextConfig: NextConfig = {
           { key: "X-Frame-Options", value: "DENY" },
           { key: "X-XSS-Protection", value: "1; mode=block" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          {
-            key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
-          },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         ],
       },
     ];
   },
-  // Compress responses
   compress: true,
-  // Power the app with Next.js Turbopack in dev (already default in 16.x but be explicit)
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
   },
