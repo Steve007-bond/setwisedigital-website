@@ -233,7 +233,7 @@ export default function Client() {
                             {i===0 && (<div className="flex items-center gap-2 mb-2"><Star size={14} className="text-amber-400 fill-amber-400"/><span className="text-sm font-black text-amber-400 uppercase tracking-widest">Our Top Pick</span></div>)}
                             <h4 className="text-xl font-black text-white mb-1.5">{device.name}</h4>
                             <div className="flex items-center gap-3">
-                              <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${device.badgeColor}`}>{device.badge}</span>
+                              <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${device.badgeColor || "bg-blue-600"}`}>{device.badge}</span>
                               <span className="text-zinc-400 font-bold">{device.screen} screen</span>
                             </div>
                           </div>

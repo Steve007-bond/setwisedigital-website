@@ -169,7 +169,7 @@ export default function Client() {
                           {i === 0 && selectedFeatures.length > 0 && (<div className="flex items-center gap-2 mb-2"><CheckCircle2 size={14} className="text-green-400"/><span className="text-sm font-black text-green-400 uppercase tracking-widest">Best Match</span></div>)}
                           <h3 className="text-xl font-black text-white mb-2">{device.name}</h3>
                           <div className="flex items-center gap-3 flex-wrap">
-                            <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${device.badgeColor}`}>{device.badge}</span>
+                            <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${device.badgeColor || "bg-blue-600"}`}>{device.badge}</span>
                             <span className="text-zinc-400 text-sm">{device.screen} screen</span>
                           </div>
                         </div>

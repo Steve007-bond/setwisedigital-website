@@ -250,7 +250,7 @@ export default function Client() {
                 <div className="p-8 md:p-10">
                   <div className="flex items-center gap-3 mb-5"><div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center"><Star size={18} className="text-white fill-white"/></div><span className="font-black text-amber-400 uppercase tracking-widest text-sm">Best Match for Your RV</span></div>
                   <div className="flex items-start justify-between gap-4 mb-5">
-                    <div><div className="text-5xl mb-3">{result.emoji}</div><h2 className="text-3xl font-black text-white mb-2">{result.name}</h2><span className={`text-xs font-black text-white px-3 py-1.5 rounded-full ${result.badgeColor}`}>{result.badge}</span></div>
+                    <div><div className="text-5xl mb-3">{result.emoji}</div><h2 className="text-3xl font-black text-white mb-2">{result.name}</h2><span className={`text-xs font-black text-white px-3 py-1.5 rounded-full ${(result as any).badgeColor || "bg-blue-600"}`}>{result.badge}</span></div>
                     <div className="text-right shrink-0"><div className="text-sm text-zinc-400">Screen</div><div className="text-2xl font-black text-white">{result.screen}</div><div className="text-2xl font-black text-amber-400 mt-1">{result.price}</div></div>
                   </div>
                   <p className="text-zinc-300 text-lg font-medium leading-relaxed mb-6">{result.bestFor}</p>

@@ -207,7 +207,7 @@ export default function Client() {
                       className="p-6 rounded-[2rem] border-2 border-green-800 bg-green-900/10 hover:bg-green-900/20 text-left transition-all group">
                       <div className="flex items-center justify-between mb-3">
                         <div className="text-3xl">{device.emoji}</div>
-                        <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${device.badgeColor}`}>{device.badge}</span>
+                        <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${device.badgeColor || "bg-blue-600"}`}>{device.badge}</span>
                       </div>
                       <h3 className="font-black text-white text-base mb-1">{device.name}</h3>
                       <div className="text-green-300 text-sm font-bold mb-1">{device.mapModel}</div>
@@ -229,7 +229,7 @@ export default function Client() {
                       <div className="flex items-center justify-between mb-3">
                         <div className="text-3xl">{device.emoji}</div>
                         <div className="text-right">
-                          <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${device.badgeColor}`}>{device.badge}</span>
+                          <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${device.badgeColor || "bg-blue-600"}`}>{device.badge}</span>
                           <div className={`text-xs font-bold mt-1 ${device.text}`}>3-year cost: ${device.threeYearCost}</div>
                         </div>
                       </div>
@@ -284,7 +284,7 @@ export default function Client() {
                     <div>
                       <div className="text-4xl mb-3">{selectedDevice.emoji}</div>
                       <h2 className="text-3xl font-black text-white mb-2">{selectedDevice.name}</h2>
-                      <span className={`text-xs font-black text-white px-3 py-1.5 rounded-full ${selectedDevice.badgeColor}`}>{selectedDevice.badge}</span>
+                      <span className={`text-xs font-black text-white px-3 py-1.5 rounded-full ${selectedDevice.badgeColor || "bg-blue-600"}`}>{selectedDevice.badge}</span>
                     </div>
                     <div className="text-right shrink-0">
                       <div className="text-sm text-zinc-400 font-medium">3-Year Map Cost</div>

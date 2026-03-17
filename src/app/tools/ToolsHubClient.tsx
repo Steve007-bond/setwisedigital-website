@@ -55,7 +55,7 @@ function ToolCard({ tool, index }: { tool: (typeof TOOLS)[0]; index: number }) {
         <div className="p-8">
           <div className="flex items-start justify-between mb-6">
             <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${tool.accent} flex items-center justify-center text-3xl shadow-xl`}>{tool.emoji}</div>
-            <span className={`${tool.badgeColor} text-white text-sm font-black px-3 py-1.5 rounded-full`}>{tool.badge}</span>
+            <span className={`${tool.badgeColor || "bg-blue-600"} text-white text-sm font-black px-3 py-1.5 rounded-full`}>{tool.badge}</span>
           </div>
           <h3 className="text-2xl font-black text-white mb-3 leading-tight group-hover:text-blue-300 transition-colors">{tool.title}</h3>
           <p className="text-zinc-400 text-base font-medium leading-relaxed mb-6">{tool.description}</p>

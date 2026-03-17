@@ -261,7 +261,7 @@ export default function Client() {
                     <motion.div key={device.name} initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:0.1*i}} className="p-6 bg-zinc-800 rounded-2xl border border-zinc-700">
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <div>{i===0&&<div className="flex items-center gap-2 mb-2"><Star size={13} className="text-amber-400 fill-amber-400"/><span className="text-sm font-black text-amber-400 uppercase tracking-widest">Top Pick</span></div>}<h4 className="text-xl font-black text-white">{device.name}</h4></div>
-                        <div className="text-right"><div className="text-xl font-black text-white">{device.price}</div><div className={`text-xs font-black text-white mt-1 px-2 py-1 rounded-full ${device.badgeColor}`}>{device.badge}</div></div>
+                        <div className="text-right"><div className="text-xl font-black text-white">{device.price}</div><div className={`text-xs font-black text-white mt-1 px-2 py-1 rounded-full ${i===0?"bg-amber-600":"bg-blue-600"}`}>{device.badge}</div></div>
                       </div>
                       <p className="text-base text-zinc-300 font-medium leading-relaxed">{device.desc}</p>
                     </motion.div>

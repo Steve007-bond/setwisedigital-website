@@ -148,7 +148,7 @@ export default function Client() {
                   <div className="p-8">
                     {i===0&&(<div className="flex items-center gap-2 mb-4"><Star size={16} className="text-amber-400 fill-amber-400"/><span className="text-amber-400 font-black text-sm uppercase tracking-widest">Top Pick</span></div>)}
                     <div className="flex items-start justify-between gap-4 mb-5">
-                      <div><h3 className="text-2xl font-black text-white mb-2">{device.name}</h3><span className={`${device.badgeColor} text-white text-sm font-black px-3 py-1.5 rounded-full`}>{device.badge}</span></div>
+                      <div><h3 className="text-2xl font-black text-white mb-2">{device.name}</h3><span className={`${device.badgeColor || "bg-blue-600"} text-white text-sm font-black px-3 py-1.5 rounded-full`}>{device.badge}</span></div>
                       <div className="text-3xl font-black text-green-400 shrink-0">{device.price}</div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">

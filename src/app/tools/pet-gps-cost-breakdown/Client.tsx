@@ -215,7 +215,7 @@ export default function Client() {
                           {isSelected && <div className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-br ${tracker.color}`}><CheckCircle2 size={14} className="text-white" /></div>}
                         </div>
                         <h3 className="font-black text-white text-lg">{tracker.name}</h3>
-                        <span className={`text-xs font-black text-white px-2.5 py-1 rounded-full ${tracker.badgeColor}`}>{tracker.badge}</span>
+                        <span className={`text-xs font-black text-white px-2.5 py-1 rounded-full ${tracker.badgeColor || "bg-blue-600"}`}>{tracker.badge}</span>
                       </div>
                       <div className="text-right shrink-0">
                         <div className={`text-3xl font-black ${isCheapest ? "text-green-400" : "text-white"}`}>${total}</div>

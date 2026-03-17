@@ -130,7 +130,7 @@ export default function Client() {
                             <span className="text-3xl">{device.icon}</span>
                             <h3 className="text-xl font-black text-white">{device.name}</h3>
                           </div>
-                          <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${device.badgeColor}`}>{device.badge}</span>
+                          <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${device.badgeColor || "bg-blue-600"}`}>{device.badge}</span>
                         </div>
                         <div className="text-right shrink-0">
                           <div className={`text-3xl font-black ${selectedTrip.text}`}>{device.battery < 100 ? `${device.battery}h` : "100h+"}</div>

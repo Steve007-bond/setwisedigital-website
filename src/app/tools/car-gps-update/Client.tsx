@@ -396,7 +396,7 @@ export default function Client() {
                         className="flex flex-col items-center gap-3 p-6 rounded-2xl border-2 border-zinc-700 bg-zinc-800/50 hover:border-blue-500 hover:bg-blue-900/20 transition-all">
                         <div className="text-4xl">{brand.emoji}</div>
                         <div className="font-black text-white text-base">{brand.name}</div>
-                        <span className={`${brand.badgeColor} text-white text-xs font-black px-2 py-1 rounded-full`}>{brand.badge}</span>
+                        <span className={`${brand.badgeColor || "bg-blue-600"} text-white text-xs font-black px-2 py-1 rounded-full`}>{brand.badge}</span>
                       </motion.button>
                     ))}
                   </div>

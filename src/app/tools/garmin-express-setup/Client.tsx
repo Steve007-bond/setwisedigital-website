@@ -153,7 +153,7 @@ export default function Client() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2 flex-wrap">
                         <span className="text-xl font-black text-white">{method.label}</span>
-                        <span className={`text-xs font-black text-white px-2.5 py-1 rounded-full ${method.badgeColor}`}>{method.badge}</span>
+                        <span className={`text-xs font-black text-white px-2.5 py-1 rounded-full ${method.badgeColor || "bg-blue-600"}`}>{method.badge}</span>
                       </div>
                       <p className="text-zinc-400 text-sm font-medium leading-relaxed">{method.desc}</p>
                       <div className="mt-3 text-sm font-black text-zinc-500 group-hover:text-zinc-300 transition-colors">{method.steps.length} steps → tap to begin</div>

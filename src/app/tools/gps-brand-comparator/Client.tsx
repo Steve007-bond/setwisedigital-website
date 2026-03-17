@@ -219,7 +219,7 @@ export default function Client() {
                       <div className="font-black text-white text-xl mb-1">{brand.name}</div>
                       <div className={`text-sm font-bold mb-3 ${isSelected ? brand.text : "text-zinc-500"}`}>{brand.tagline}</div>
                       <div className="flex items-center justify-between">
-                        <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${brand.badgeColor}`}>{brand.badge}</span>
+                        <span className={`text-xs font-black text-white px-2.5 py-1.5 rounded-full ${brand.badgeColor || "bg-blue-600"}`}>{brand.badge}</span>
                         <span className="font-black text-white text-base">{brand.price}</span>
                       </div>
                     </motion.button>
