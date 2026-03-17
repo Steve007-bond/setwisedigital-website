@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import RoadTripCheckerClient from "./RoadTripCheckerClient";
 export const metadata: Metadata = {
   title: "Road Trip GPS Pre-Check — Is Your GPS Ready? | Setwise Digital",

@@ -1,16 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
+import Script from "next/script";
+import dynamic from "next/dynamic";
 import "./globals.css";
-import CookieConsent from "@/components/CookieConsent";
+
+// Dynamically import CookieConsent — not needed for LCP, loads after interactive
+const CookieConsent = dynamic(() => import("@/components/CookieConsent"), {
+  ssr: false,
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const viewport: Viewport = {
@@ -27,67 +30,40 @@ export const metadata: Metadata = {
   description:
     "Setwise Digital is an independent tech literacy platform. Plain-English courses on printers, GPS, smart home, cameras and more. Learn at your own pace — no prior knowledge needed.",
   keywords: [
-    "technology education",
-    "tech literacy",
-    "printer learning guide",
-    "GPS course",
-    "Alexa tutorial",
-    "smart home lessons",
-    "technology courses",
-    "independent tech education",
-    "Setwise Digital",
+    "technology education", "tech literacy", "printer learning guide",
+    "GPS course", "Alexa tutorial", "smart home lessons",
+    "technology courses", "independent tech education", "Setwise Digital",
   ],
   authors: [{ name: "Setwise Digital", url: "https://setwisedigital.com" }],
   creator: "Setwise Digital",
   metadataBase: new URL("https://setwisedigital.com"),
   openGraph: {
-    type: "website",
-    locale: "en_US",
+    type: "website", locale: "en_US",
     url: "https://setwisedigital.com",
     siteName: "Setwise Digital",
     title: "Setwise Digital | Technology Simplified",
-    description:
-      "Independent tech literacy platform. Plain-English courses and tutorials for printers, GPS navigation, smart home, cameras and online safety. Learn at your own pace.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Setwise Digital – Technology Simplified",
-      },
-    ],
+    description: "Independent tech literacy platform. Plain-English courses and tutorials for printers, GPS navigation, smart home, cameras and online safety. Learn at your own pace.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Setwise Digital – Technology Simplified" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Setwise Digital | Technology Simplified",
-    description:
-      "Independent tech literacy courses for printers, GPS, smart home, cameras and online safety.",
+    description: "Independent tech literacy courses for printers, GPS, smart home, cameras and online safety.",
     images: ["/og-image.png"],
   },
   robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    index: true, follow: true,
+    googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 },
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: import("react").ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: import("react").ReactNode }>) {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Setwise Digital",
     "url": "https://www.setwisedigital.com",
-    "description": "Setwise Digital is an independent tech literacy and education platform. Plain-English step-by-step courses on printers, GPS, smart home, cameras, and online security — designed for lifelong learners.",
+    "description": "Setwise Digital is an independent tech literacy and education platform.",
     "foundingDate": "2016",
     "email": "support@setwisedigital.com",
     "address": {
@@ -98,63 +74,52 @@ export default function RootLayout({
       "postalCode": "08028",
       "addressCountry": "US"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 39.7026,
-      "longitude": -75.1118
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "18:00"
-      }
-    ],
+    "geo": { "@type": "GeoCoordinates", "latitude": 39.7026, "longitude": -75.1118 },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:00", "closes": "18:00"
+    }],
     "areaServed": [
-      {
-        "@type": "State",
-        "name": "New Jersey"
-      },
-      {
-        "@type": "Country",
-        "name": "United States"
-      }
+      { "@type": "State", "name": "New Jersey" },
+      { "@type": "Country", "name": "United States" }
     ],
-    "serviceType": [
-      "Tech Literacy Education",
-      "Printer Setup Guides",
-      "GPS Navigation Tutorials",
-      "Smart Home Setup",
-      "Camera Tutorials",
-      "Online Security Courses"
-    ],
-    "sameAs": [
-      "https://www.setwisedigital.com"
-    ],
-    "hasMap": "https://maps.google.com/?q=137+Mazzeo+Drive+Glassboro+NJ+08028",
+    "serviceType": ["Tech Literacy Education","Printer Setup Guides","GPS Navigation Tutorials","Smart Home Setup","Camera Tutorials","Online Security Courses"],
+    "sameAs": ["https://www.setwisedigital.com"],
     "priceRange": "$$",
-    "currenciesAccepted": "USD",
-    "paymentAccepted": "Credit Card, PayPal",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.setwisedigital.com/logo-light.png",
-      "width": 960,
-      "height": 320
-    }
+    "logo": { "@type": "ImageObject", "url": "https://www.setwisedigital.com/logo-light.png", "width": 960, "height": 320 }
   };
 
   return (
     <html lang="en">
       <head>
-        {/* LocalBusiness Schema Markup */}
+        {/* Preconnect to critical external domains */}
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+
+        {/* Schema markup */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
-        {/* End LocalBusiness Schema Markup */}
-        {/* Google Tag Manager */}
-        <script
+      </head>
+      <body className={`${geistSans.variable} antialiased`}>
+        {/* GTM noscript */}
+        <noscript>
+          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W29RTSF3"
+            height="0" width="0" style={{ display: "none", visibility: "hidden" }} />
+        </noscript>
+
+        {children}
+
+        {/* Cookie consent — lazy loaded, not needed for initial render */}
+        <CookieConsent />
+
+        {/* GTM — afterInteractive ensures it never blocks paint */}
+        <Script
+          id="gtm"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -163,23 +128,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-W29RTSF3');`,
           }}
         />
-        {/* End Google Tag Manager */}
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-W29RTSF3"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
-        {children}
-        <CookieConsent />
       </body>
     </html>
   );

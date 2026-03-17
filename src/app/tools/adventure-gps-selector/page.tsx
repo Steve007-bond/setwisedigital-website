@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Client from "./Client";
 export const metadata: Metadata = {
   title: "Adventure GPS Selector — Hiking, Hunting, Fishing, Boating | Setwise Digital",
@@ -6,4 +7,4 @@ export const metadata: Metadata = {
   keywords: ["best hiking GPS","best hunting GPS","best fishing GPS","Garmin adventure GPS","off-road GPS","boating GPS"],
   alternates: { canonical: "https://setwisedigital.com/tools/adventure-gps-selector" },
 };
-export default function Page() { return <Client />; }
+export default function Page() { return <Suspense fallback={"<div className=\"min-h-screen bg-[#0d1117]\" />"}><Client /></Suspense>; }

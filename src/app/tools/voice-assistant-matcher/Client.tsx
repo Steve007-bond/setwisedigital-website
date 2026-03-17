@@ -9,9 +9,9 @@ import Link from "next/link";
 import { CheckCircle2, ArrowRight, ArrowLeft, ChevronRight, Mail, Phone, User, Loader2, Shield, Zap, RefreshCw, Star } from "lucide-react";
 
 const bgs = [
-  { url:"https://images.unsplash.com/photo-1512446733611-9099a758e5e5?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
-  { url:"https://images.unsplash.com/photo-1543512214-318c7553f230?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
-  { url:"https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1512446733611-9099a758e5e5?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1543512214-318c7553f230?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
 ];
 
 const ASSISTANTS = [

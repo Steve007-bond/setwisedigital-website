@@ -9,9 +9,9 @@ import Link from "next/link";
 import { CheckCircle2, ArrowRight, ArrowLeft, ChevronRight, Mail, Phone, User, Loader2, Navigation, Shield, RefreshCw, Award, Star } from "lucide-react";
 
 const BG = [
-  { url:"https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
-  { url:"https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
-  { url:"https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
 ];
 const GPS = [
   { id:"g52", name:"Garmin Drive 52", brand:"Garmin", price:"$89–$109", pMin:89, screen:"5-inch", bestFor:["Beginners","Budget-conscious"], features:["Turn-by-turn voice","Speed limit alerts","Simple menu","Bright screen"], pros:["Very affordable","Simple to use","Reliable Garmin quality"], cons:["No live traffic","No Bluetooth"], badge:"Best for Beginners", badgeColor:"bg-green-600", emoji:"🟢", drivingType:["city","suburban","highway"], techLevel:"beginner", priority:["simple"] },

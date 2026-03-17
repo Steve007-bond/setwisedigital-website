@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import BestGPSFinderClient from "./BestGPSFinderClient";
 export const metadata: Metadata = {
   title: "Best GPS Device for Seniors 2026 — Find Yours Free | Setwise Digital",

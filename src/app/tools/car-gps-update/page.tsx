@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Client from "./Client";
 export const metadata: Metadata = {
   title: "Car Navigation Update Guide — Honda Toyota BMW Mercedes Lexus Audi | Setwise Digital",
@@ -6,4 +7,4 @@ export const metadata: Metadata = {
   keywords: ["Honda navigation update","Toyota GPS update","BMW iDrive map update","Mercedes COMAND update","Lexus navigation update","Audi MMI update","how to update car GPS","car navigation map update"],
   alternates: { canonical: "https://setwisedigital.com/tools/car-gps-update" },
 };
-export default function Page() { return <Client />; }
+export default function Page() { return <Suspense fallback={"<div className=\"min-h-screen bg-[#0d1117]\" />"}><Client /></Suspense>; }

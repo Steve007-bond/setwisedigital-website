@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Client from "./Client";
 export const metadata: Metadata = {
   title: "Printer Cost Per Page Calculator — HP Canon Epson Brother | Setwise Digital",
@@ -6,4 +7,4 @@ export const metadata: Metadata = {
   keywords: ["printer cost per page calculator","how much does it cost to print one page","HP printer cost per page","cheapest printer per page","Epson EcoTank cost per page","printer running cost"],
   alternates: { canonical: "https://setwisedigital.com/tools/printer-cost-per-page" },
 };
-export default function Page() { return <Client />; }
+export default function Page() { return <Suspense fallback={"<div className=\"min-h-screen bg-[#0d1117]\" />"}><Client /></Suspense>; }

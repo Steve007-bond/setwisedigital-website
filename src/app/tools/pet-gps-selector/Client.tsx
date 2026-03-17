@@ -9,9 +9,9 @@ import Link from "next/link";
 import { CheckCircle2, ArrowRight, ChevronRight, Mail, Phone, User, Loader2, Shield, Zap, RefreshCw, Star } from "lucide-react";
 
 const bgs = [
-  { url:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
-  { url:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
-  { url:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
 ];
 
 const PET_TRACKERS = [

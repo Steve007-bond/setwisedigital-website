@@ -12,9 +12,9 @@ type CheckStatus = "yes" | "no" | "unsure" | null;
 interface CheckItem { id: string; category: string; icon: React.ReactNode; question: string; yesLabel: string; noLabel: string; unsureLabel: string; tip: string; learnMore: string; status: CheckStatus; }
 
 const roadTripBgs = [
-  { url:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
-  { url:"https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
-  { url:"https://images.unsplash.com/photo-1476231682828-37e571bc172f?auto=format&fit=crop&q=80&w=1600", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
+  { url:"https://images.unsplash.com/photo-1476231682828-37e571bc172f?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
 ];
 
 const CHECKS: Omit<CheckItem, "status">[] = [

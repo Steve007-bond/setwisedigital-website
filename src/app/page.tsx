@@ -29,11 +29,13 @@ import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import { useState, useRef } from "react";
 import ScrollToTop from "@/components/ScrollToTop";
 
+// IMAGE must be first — video as LCP element destroys mobile PageSpeed score
+// The slider shows the video after 9s on subsequent cycles
 const homeBackgrounds = [
-  { url: "https://assets.mixkit.co/videos/preview/mixkit-woman-working-on-her-laptop-at-home-39887-large.mp4", type: 'video' as const, theme: 'dark' as const }, // Darker video
-  { url: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'light' as const }, // Light image
-  { url: "https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'light' as const }, // Light image
-  { url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1200", type: 'image' as const, theme: 'dark' as const }  // Dark image
+  { url: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=60&w=1200", type: 'image' as const, theme: 'light' as const },
+  { url: "https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&q=60&w=1200", type: 'image' as const, theme: 'light' as const },
+  { url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=60&w=1200", type: 'image' as const, theme: 'dark' as const },
+  { url: "https://assets.mixkit.co/videos/preview/mixkit-woman-working-on-her-laptop-at-home-39887-large.mp4", type: 'video' as const, theme: 'dark' as const },
 ];
 
 export default function Home() {
