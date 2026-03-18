@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://setwisedigital.com/contact" },
   openGraph: {
     title: "Contact Setwise Digital — Tech Learning Guidance",
-    description: "Book a live technology lesson session, ask a question, or explore our 27 free tools. Reply within 24 hours.",
+    description: "Book a live technology lesson session, ask a question, or explore our 47 free tools. Reply within 24 hours.",
     url: "https://setwisedigital.com/contact",
   },
 };
@@ -73,7 +73,7 @@ export default function ContactPage() {
         name: "Is it free to contact Setwise Digital?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Contacting Setwise Digital and using our 27 free interactive tools is completely free. Live lesson sessions are available at paid pricing starting from $49.",
+          text: "Yes. Contacting Setwise Digital and using our 47 free interactive tools is completely free. Live lesson sessions are available at paid pricing starting from $49.",
         },
       },
       {

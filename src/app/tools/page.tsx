@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import ToolsHubClient from "./ToolsHubClient";
 
 export const metadata: Metadata = {
-  title: "27 Free Tech Tools — Printers, GPS & Smart Home Guides | Setwise Digital",
+  title: "47 Free Tech Tools — Printers, GPS & Smart Home Guides | Setwise Digital",
   description:
-    "27 free interactive tools from Setwise Digital. Fix your printer, set up a new device, print from your phone, compare GPS brands, and more. Plain English — no jargon, no account needed.",
+    "47 free interactive tools from Setwise Digital. Fix your printer, set up a new device, print from your phone, compare GPS brands, and more. Plain English — no jargon, no account needed.",
   keywords: [
     "free printer tools",
     "how to fix printer",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://setwisedigital.com/tools" },
   openGraph: {
-    title: "27 Free Tech Tools — Printers, GPS & Smart Home | Setwise Digital",
+    title: "47 Free Tech Tools — Printers, GPS & Smart Home | Setwise Digital",
     description: "Free interactive tools covering printer setup, troubleshooting, GPS, smart home, and more. Plain English for adults 40+.",
     url: "https://setwisedigital.com/tools",
   },
@@ -34,7 +34,7 @@ export default function ToolsPage() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Free Technology Learning Tools by Setwise Digital",
-    description: "27 free interactive tools helping adults 40+ understand and fix their everyday technology. Covers printers, GPS, smart home devices, and more in plain English.",
+    description: "47 free interactive tools helping adults 40+ understand and fix their everyday technology. Covers printers, GPS, smart home devices, and more in plain English.",
     url: "https://setwisedigital.com/tools",
     numberOfItems: 27,
     provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
@@ -68,7 +68,7 @@ export default function ToolsPage() {
     "@type": "Organization",
     name: "Setwise Digital",
     url: "https://setwisedigital.com",
-    description: "Independent tech literacy platform providing plain-English guides and 27 free tools for adults 40+. Not affiliated with HP, Canon, Epson, Brother, Garmin, TomTom, Amazon, Google, or Apple.",
+    description: "Independent tech literacy platform providing plain-English guides and 47 free tools for adults 40+. Not affiliated with HP, Canon, Epson, Brother, Garmin, TomTom, Amazon, Google, or Apple.",
   };
 
   return (

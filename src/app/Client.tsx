@@ -200,7 +200,7 @@ export default function Home() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-block px-4 py-1 rounded-full bg-orange-100 text-orange-700 font-black text-xs uppercase tracking-[0.2em] mb-6">27 Free Tools</div>
+            <div className="inline-block px-4 py-1 rounded-full bg-orange-100 text-orange-700 font-black text-xs uppercase tracking-[0.2em] mb-6">47 Free Tools</div>
             <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tighter">Free Interactive Tools</h2>
             <p className="text-xl text-zinc-500 max-w-2xl mx-auto font-medium">Interactive guides that answer your exact question — pick your device, get your steps. No jargon, no guessing.</p>
           </div>
@@ -223,7 +223,7 @@ export default function Home() {
           </div>
           <div className="text-center">
             <Link href="/tools" className="inline-flex items-center gap-3 px-10 py-5 bg-zinc-900 text-white rounded-2xl font-black text-lg hover:bg-blue-600 transition-all">
-              View All 27 Free Tools <ArrowRight size={20} />
+              View All 47 Free Tools <ArrowRight size={20} />
             </Link>
           </div>
         </div>
@@ -325,7 +325,7 @@ export default function Home() {
               { q: "Do I need prior technical knowledge?", a: "Not at all. Our guides are written in plain English and designed for all levels, especially those who prefer clear, non-technical explanations." },
               { q: "Can I use these guides at my own pace?", a: "Yes. Every guide is step-by-step, allowing you to pause, repeat, and return to lessons whenever you have a few minutes to spare." },
               { q: "Do you cover different brands?", a: "Yes. We include instructions for popular devices like HP, Canon, Epson, Garmin, Sony, and many others." },
-              { q: "What if I just need a quick answer?", a: "That's what our 27 free interactive tools are for — pick your device, answer 2–3 questions, and get the exact steps for your situation." },
+              { q: "What if I just need a quick answer?", a: "That's what our 47 free interactive tools are for — pick your device, answer 2–3 questions, and get the exact steps for your situation." },
               { q: "Is Setwise Digital affiliated with HP, Canon, or Garmin?", a: "No. Setwise Digital is an independent tech literacy and education platform, not affiliated with any device manufacturer." },
             ].map((faq, i) => (
               <div key={i} className={`border rounded-3xl transition-all duration-300 ${activeFaq === i ? "border-blue-600 bg-blue-50/30" : "border-zinc-200 hover:border-blue-200"}`}>

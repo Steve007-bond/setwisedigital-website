@@ -5,7 +5,7 @@ import Client from "./Client";
 export const metadata: Metadata = {
   title: "Setwise Digital — Technology Simplified | Plain-English Tech Learning",
   description:
-    "Setwise Digital teaches everyday technology in plain English — printers, GPS, smart home, and more. 27 free interactive tools plus step-by-step learning guides for adults 40+. No jargon. No pressure.",
+    "Setwise Digital teaches everyday technology in plain English — printers, GPS, smart home, and more. 47 free interactive tools plus step-by-step learning guides for adults 40+. No jargon. No pressure.",
   keywords: [
     "technology simplified",
     "plain English tech guides",
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
     siteName: "Setwise Digital",
     title: "Setwise Digital — Technology Simplified",
     description:
-      "Plain-English tech learning for adults 40+. 27 free interactive tools covering printers, GPS, smart home, and more. Learn at your own pace — no prior knowledge needed.",
+      "Plain-English tech learning for adults 40+. 47 free interactive tools covering printers, GPS, smart home, and more. Learn at your own pace — no prior knowledge needed.",
     images: [{ url: "https://setwisedigital.com/og-image.png", width: 1200, height: 630, alt: "Setwise Digital — Technology Simplified" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Setwise Digital — Technology Simplified",
-    description: "Plain-English tech learning for adults 40+. 27 free tools covering printers, GPS, smart home and more.",
+    description: "Plain-English tech learning for adults 40+. 47 free tools covering printers, GPS, smart home and more.",
   },
 };
 
@@ -61,7 +61,7 @@ export default function HomePage() {
     "@type": "WebSite",
     name: "Setwise Digital",
     url: "https://setwisedigital.com",
-    description: "Plain-English technology learning platform with 27 free interactive tools for adults 40+.",
+    description: "Plain-English technology learning platform with 47 free interactive tools for adults 40+.",
     potentialAction: {
       "@type": "SearchAction",
       target: { "@type": "EntryPoint", urlTemplate: "https://setwisedigital.com/tools?q={search_term_string}" },
@@ -78,7 +78,7 @@ export default function HomePage() {
         name: "What is Setwise Digital?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Setwise Digital is an independent tech literacy and education platform that teaches everyday technology in plain English. We offer step-by-step guides and 27 free interactive tools for adults 40+ covering printers, GPS, smart home devices, and more. Not affiliated with HP, Canon, Garmin, Amazon, Google, or Apple.",
+          text: "Setwise Digital is an independent tech literacy and education platform that teaches everyday technology in plain English. We offer step-by-step guides and 47 free interactive tools for adults 40+ covering printers, GPS, smart home devices, and more. Not affiliated with HP, Canon, Garmin, Amazon, Google, or Apple.",
         },
       },
       {
@@ -86,7 +86,7 @@ export default function HomePage() {
         name: "Does Setwise Digital have free tools?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Setwise Digital offers 27 free interactive tools at setwisedigital.com/tools. Tools cover printer setup, printer troubleshooting, printing from iPhone and Android, GPS guides, smart home setup, and more. All tools are free with no account required.",
+          text: "Yes. Setwise Digital offers 47 free interactive tools at setwisedigital.com/tools. Tools cover printer setup, printer troubleshooting, printing from iPhone and Android, GPS guides, smart home setup, and more. All tools are free with no account required.",
         },
       },
       {

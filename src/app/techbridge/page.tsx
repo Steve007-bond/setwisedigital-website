@@ -69,7 +69,7 @@ export default function TechBridgePage() {
         name: "Is TechBridge free?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. TechBridge learning resources and all 27 free interactive tools at Setwise Digital are completely free with no account required. Live lesson sessions with an educator are available at paid pricing starting from $49.",
+          text: "Yes. TechBridge learning resources and all 47 free interactive tools at Setwise Digital are completely free with no account required. Live lesson sessions with an educator are available at paid pricing starting from $49.",
         },
       },
       {

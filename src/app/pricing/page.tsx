@@ -7,7 +7,7 @@ import PricingClient from "./PricingClient";
 export const metadata: Metadata = {
   title: "Setwise Digital Pricing — Live Tech Lesson Sessions from $49",
   description:
-    "Technology learning sessions for adults 40+. Single lesson from $49. Skill-Builder Course (3 sessions) from $97. Family Plan (5 sessions) from $147. All 27 free tools always free. No monthly fees.",
+    "Technology learning sessions for adults 40+. Single lesson from $49. Skill-Builder Course (3 sessions) from $97. Family Plan (5 sessions) from $147. All 47 free tools always free. No monthly fees.",
   keywords: [
     "Setwise Digital pricing",
     "tech lesson cost",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://setwisedigital.com/pricing" },
   openGraph: {
     title: "Setwise Digital Pricing — Tech Lesson Sessions from $49",
-    description: "Single lesson from $49, 3-session course from $97, family plan from $147. 27 free tools always included.",
+    description: "Single lesson from $49, 3-session course from $97, family plan from $147. 47 free tools always included.",
     url: "https://setwisedigital.com/pricing",
   },
 };
@@ -75,7 +75,7 @@ export default function PricingPage() {
         name: "How much does a Setwise Digital lesson session cost?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Setwise Digital live lesson sessions start from $49 for a single 1-hour session. The Skill-Builder Course (3 sessions with a personalised learning roadmap) starts from $97. The Family Learning Plan (up to 5 sessions covering multiple devices) starts from $147. All 27 interactive tools on the website are completely free with no account required.",
+          text: "Setwise Digital live lesson sessions start from $49 for a single 1-hour session. The Skill-Builder Course (3 sessions with a personalised learning roadmap) starts from $97. The Family Learning Plan (up to 5 sessions covering multiple devices) starts from $147. All 47 interactive tools on the website are completely free with no account required.",
         },
       },
       {
@@ -83,7 +83,7 @@ export default function PricingPage() {
         name: "Does Setwise Digital have a monthly subscription fee?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "No. Setwise Digital has no monthly subscriptions, ongoing fees, or recurring charges. You pay only for the lesson sessions you book. The 27 free tools are always free with no sign-up required.",
+          text: "No. Setwise Digital has no monthly subscriptions, ongoing fees, or recurring charges. You pay only for the lesson sessions you book. The 47 free tools are always free with no sign-up required.",
         },
       },
       {
@@ -107,7 +107,7 @@ export default function PricingPage() {
         name: "Are the Setwise Digital free tools really free?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. All 27 interactive tools at setwisedigital.com/tools are completely free, with no account, no email address, and no payment required. Tools cover printer troubleshooting, printer setup, GPS guides, smart home setup, and more.",
+          text: "Yes. All 47 interactive tools at setwisedigital.com/tools are completely free, with no account, no email address, and no payment required. Tools cover printer troubleshooting, printer setup, GPS guides, smart home setup, and more.",
         },
       },
     ],

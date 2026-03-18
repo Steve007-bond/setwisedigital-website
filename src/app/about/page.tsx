@@ -36,7 +36,7 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: [
-      { "@type": "Question", name: "What is Setwise Digital?", acceptedAnswer: { "@type": "Answer", text: "Setwise Digital is an independent technology literacy platform founded in 2016. We provide plain-English guides and 27 free tools for adults 40+ covering printers, GPS, smart home, and more. Not affiliated with HP, Canon, Garmin, Amazon, Google, or Apple." } },
+      { "@type": "Question", name: "What is Setwise Digital?", acceptedAnswer: { "@type": "Answer", text: "Setwise Digital is an independent technology literacy platform founded in 2016. We provide plain-English guides and 47 free tools for adults 40+ covering printers, GPS, smart home, and more. Not affiliated with HP, Canon, Garmin, Amazon, Google, or Apple." } },
       { "@type": "Question", name: "Is Setwise Digital affiliated with any manufacturer?", acceptedAnswer: { "@type": "Answer", text: "No. Setwise Digital is completely independent — not affiliated with HP, Canon, Epson, Brother, Garmin, TomTom, Amazon, Google, Apple, Samsung, or any device brand. We are an education company." } },
       { "@type": "Question", name: "Where is Setwise Digital located?", acceptedAnswer: { "@type": "Answer", text: "Setwise Digital operates from physical hubs in Colorado and New Jersey and serves customers nationwide across the United States." } },
     ],
