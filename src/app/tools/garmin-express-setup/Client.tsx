@@ -7,6 +7,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { CheckCircle2, ChevronRight, Shield, Zap, RefreshCw, AlertCircle } from "lucide-react";
+import LeadCaptureBlock from "@/components/LeadCaptureBlock";
 
 const bgs = [
   { url:"https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
@@ -259,6 +260,21 @@ export default function Client() {
           )}
         </AnimatePresence>
       </section>
+      
+      <LeadCaptureBlock
+        source="garmin-express-setup"
+        accentColor="from-blue-600 to-cyan-500"
+        accentHex="#2563eb"
+        headline="Still stuck with your Garmin GPS update?"
+        subline="Enter your details and we'll send you a personalised Garmin guide — plus a free follow-up call if you're still stuck."
+        points={[
+          "🗺️ Personalised guide for your exact Garmin model",
+          "🔧 What to do if Garmin Express still won't connect",
+          "📞 Optional free help call — no pressure at all",
+        ]}
+        ctaText="Get My Free Garmin Guide"
+      />
+
       <Footer />
     </div>
   );

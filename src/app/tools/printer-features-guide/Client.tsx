@@ -7,6 +7,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { ChevronRight, Zap, CheckCircle2 } from "lucide-react";
+import LeadCaptureBlock from "@/components/LeadCaptureBlock";
 
 const bgs = [
   { url:"https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
@@ -92,6 +93,21 @@ export default function Client() {
           </div>
         </div>
       </section>
+      
+      <LeadCaptureBlock
+        source="printer-features-guide"
+        accentColor="from-violet-600 to-purple-500"
+        accentHex="#7c3aed"
+        headline="Not sure which printer features you need?"
+        subline="Enter your details and we'll send you a free personalised printer recommendation — based on what you print, how often, and your budget."
+        points={[
+          "🖨️ Free personalised printer recommendation for your home",
+          "💡 Which features matter for your situation — in plain English",
+          "📞 Optional free help call — no pressure at all",
+        ]}
+        ctaText="Get My Free Printer Guide"
+      />
+
       <Footer/>
     </div>
   );

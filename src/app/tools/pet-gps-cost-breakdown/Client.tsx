@@ -7,6 +7,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { CheckCircle2, ChevronRight, Shield, Zap, RefreshCw, AlertCircle, Star } from "lucide-react";
+import LeadCaptureBlock from "@/components/LeadCaptureBlock";
 
 const bgs = [
   { url:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
@@ -335,6 +336,21 @@ export default function Client() {
 
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5"><div className="flex items-start gap-3"><Shield size={14} className="text-zinc-500 mt-0.5 shrink-0" /><p className="text-sm text-zinc-500 font-medium leading-relaxed">Educational guidance only. Prices and subscription rates are approximate and subject to change. Not affiliated with Tractive, Fi, Whistle, or Apple. Canada LTE coverage depends on carrier agreements — verify before purchasing.</p></div></div>
       </section>
+      
+      <LeadCaptureBlock
+        source="pet-gps-cost-breakdown"
+        accentColor="from-pink-600 to-rose-500"
+        accentHex="#ec4899"
+        headline="Not sure which pet tracker to buy?"
+        subline="Enter your details and we'll send you a free personalised pet GPS recommendation — matched to your pet, budget, and location."
+        points={[
+          "🐕 Free pet tracker recommendation for your specific situation",
+          "💰 Honest breakdown of true 3-year costs for your choice",
+          "📞 Optional free help call — no pressure at all",
+        ]}
+        ctaText="Get My Free Pet Tracker Guide"
+      />
+
       <Footer />
     </div>
   );

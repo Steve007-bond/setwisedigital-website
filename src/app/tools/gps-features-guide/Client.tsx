@@ -7,6 +7,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { ChevronRight, Zap, CheckCircle2 } from "lucide-react";
+import LeadCaptureBlock from "@/components/LeadCaptureBlock";
 
 const bgs = [
   { url:"https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
@@ -93,6 +94,21 @@ export default function Client() {
           </div>
         </div>
       </section>
+      
+      <LeadCaptureBlock
+        source="gps-features-guide"
+        accentColor="from-green-600 to-emerald-500"
+        accentHex="#16a34a"
+        headline="Not sure which GPS to buy?"
+        subline="Tell us your budget and what you drive — we'll send you a personalised GPS recommendation with exactly the features you need."
+        points={[
+          "🧭 Free personalised GPS recommendation for your lifestyle",
+          "💡 Which features you actually need — and which to skip",
+          "📞 Optional free help call — no pressure at all",
+        ]}
+        ctaText="Get My Free GPS Recommendation"
+      />
+
       <Footer/>
     </div>
   );

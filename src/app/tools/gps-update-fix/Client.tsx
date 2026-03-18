@@ -7,6 +7,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import Link from "next/link";
 import { CheckCircle2, ChevronRight, Shield, Zap, RefreshCw, AlertCircle, ArrowRight } from "lucide-react";
+import LeadCaptureBlock from "@/components/LeadCaptureBlock";
 
 const bgs = [
   { url:"https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=60&w=1200", type:"image" as const, theme:"dark" as const },
@@ -255,6 +256,21 @@ export default function Client() {
           )}
         </AnimatePresence>
       </section>
+      
+      <LeadCaptureBlock
+        source="gps-update-fix"
+        accentColor="from-green-600 to-emerald-500"
+        accentHex="#16a34a"
+        headline="Tried all the steps and still stuck?"
+        subline="Enter your details and we'll send you a personalised GPS troubleshooting guide — plus a free help call if your GPS update is still failing."
+        points={[
+          "🔧 Personalised guide for your exact GPS model and problem",
+          "📡 Advanced steps if basic fixes didn't work",
+          "📞 Optional free help call — no pressure at all",
+        ]}
+        ctaText="Get My Free GPS Fix Guide"
+      />
+
       <Footer />
     </div>
   );
