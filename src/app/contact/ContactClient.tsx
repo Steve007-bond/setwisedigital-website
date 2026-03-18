@@ -13,7 +13,7 @@ import EmailInput from "@/components/EmailInput";
 import PhoneInput from "@/components/PhoneInput";
 import { validateEmail, validatePhone } from "@/lib/validation";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function ContactPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);

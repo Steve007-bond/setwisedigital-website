@@ -25,7 +25,7 @@ import EmailInput from "@/components/EmailInput";
 import PhoneInput from "@/components/PhoneInput";
 import { validateEmail, validatePhone } from "@/lib/validation";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function ContactPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -194,7 +194,7 @@ export default function ContactPage() {
                       We'll reply to <span className="font-bold text-zinc-700">{form.email}</span> within 24 hours.
                     </p>
                     <button
-                      onClick={() => { setFormStatus("idle"); setForm({ name: "", email: "", phone: "", message: "" }); }}
+                      onClick={() => { setFormStatus("idle"); setForm({ name: "", email: "", phone: "", countryCode: "+1", message: "" }); }}
                       className="mt-10 px-8 py-4 bg-zinc-100 text-zinc-700 rounded-2xl font-black hover:bg-zinc-200 transition-colors"
                     >
                       Send Another Message
