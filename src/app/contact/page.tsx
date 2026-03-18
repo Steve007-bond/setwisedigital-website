@@ -5,9 +5,9 @@ import ContactClient from "./ContactClient";
 // Then drop this file in as the new contact/page.tsx
 
 export const metadata: Metadata = {
-  title: "Contact Setwise Digital — Tech Learning Guidance | Reply Within 24 Hours",
+  title: "Contact Setwise Digital — Tech Help & Lesson Booking",
   description:
-    "Contact Setwise Digital for technology learning guidance. Book a live lesson session, ask a question about a free tool, or enquire about pricing. Serving adults 40+ nationwide. Reply within 24 hours.",
+    "Book a live tech lesson, ask about a free tool, or enquire about pricing. Adults 40+ served nationwide. We reply within 24 hours.",
   keywords: [
     "contact Setwise Digital",
     "book tech learning session",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "book printer lesson",
     "tech learning for adults over 40",
   ],
-  alternates: { canonical: "https://setwisedigital.com/contact" },
+  alternates: { canonical: "https://www.setwisedigital.com/contact" },
   openGraph: {
-    title: "Contact Setwise Digital — Tech Learning Guidance",
-    description: "Book a live technology lesson session, ask a question, or explore our 47 free tools. Reply within 24 hours.",
-    url: "https://setwisedigital.com/contact",
+    title: "Contact Setwise Digital — Tech Help & Lesson Booking",
+    description: "Book a live tech lesson, ask about a free tool, or enquire about pricing. Adults 40+ served nationwide. We reply within 24 hours.",
+    url: "https://www.setwisedigital.com/contact",
   },
 };
 
@@ -31,13 +31,13 @@ export default function ContactPage() {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     name: "Contact Setwise Digital",
-    url: "https://setwisedigital.com/contact",
+    url: "https://www.setwisedigital.com/contact",
     description: "Contact Setwise Digital for technology learning guidance and live lesson session bookings.",
     mainEntity: {
       "@type": "Organization",
       name: "Setwise Digital",
       email: "support@setwisedigital.com",
-      url: "https://setwisedigital.com",
+      url: "https://www.setwisedigital.com",
       areaServed: { "@type": "Country", name: "United States" },
       contactPoint: {
         "@type": "ContactPoint",
@@ -91,8 +91,8 @@ export default function ContactPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Contact", item: "https://setwisedigital.com/contact" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Contact", item: "https://www.setwisedigital.com/contact" },
     ],
   };
 

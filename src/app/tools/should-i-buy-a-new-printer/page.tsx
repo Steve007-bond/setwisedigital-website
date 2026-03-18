@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Should I Buy a New Printer or Keep My Old One? — Honest Verdict | Setwise Digital",
+  title: "Should I Buy a New Printer? — Honest Keep or Replace Guide",
   description:
-    "4 questions about your printer's age, problems, ink costs, and repair history. Get an honest Keep / Fix First / Replace verdict with clear reasoning. No upselling. Free, under 2 minutes.",
+    "4 questions about your printer's age, problems, and ink costs. Get an honest Keep / Fix First / Replace verdict. Free, under 2 minutes.",
   keywords: [
     "should I buy a new printer",
     "is it worth repairing my printer",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "is my printer worth fixing",
     "printer keeps breaking down what to do",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/should-i-buy-a-new-printer" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/should-i-buy-a-new-printer" },
   openGraph: {
-    title: "Should I Buy a New Printer? — Honest Verdict | Setwise Digital",
-    description: "4 questions. Honest Keep / Fix First / Replace verdict with scoring and reasoning. No upselling.",
-    url: "https://setwisedigital.com/tools/should-i-buy-a-new-printer",
+    title: "Should I Buy a New Printer? — Honest Keep or Replace Guide",
+    description: "4 questions about your printer's age, problems, and ink costs. Get an honest Keep / Fix First / Replace verdict. Free, under 2 minutes.",
+    url: "https://www.setwisedigital.com/tools/should-i-buy-a-new-printer",
   },
 };
 
@@ -34,7 +34,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Free 4-question printer replacement decision tool. Scores keep vs replace based on printer age, problem frequency, annual ink cost, and repair history. Provides a clear Keep / Fix First / Replace verdict with reasoning and next steps.",
   };
 
@@ -89,9 +89,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Should I Buy a New Printer?", item: "https://setwisedigital.com/tools/should-i-buy-a-new-printer" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Should I Buy a New Printer?", item: "https://www.setwisedigital.com/tools/should-i-buy-a-new-printer" },
     ],
   };
 

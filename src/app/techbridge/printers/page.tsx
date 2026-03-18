@@ -4,9 +4,9 @@ import PrintersClient from "./PrintersClient";
 // DEPLOYMENT NOTE: Rename your existing techbridge/printers/page.tsx → techbridge/printers/PrintersClient.tsx
 
 export const metadata: Metadata = {
-  title: "Printer Learning Guide — Wi-Fi Setup, Ink, Jams & Maintenance | Setwise Digital",
+  title: "Printer Learning Guide — Wi-Fi, Ink & Setup | Setwise",
   description:
-    "Learn how printers work in plain English. Wi-Fi printing setup, paper jam prevention, ink management, print quality, and maintenance for HP, Canon, Epson, and Brother. Step-by-step lessons.",
+    "Learn how printers work in plain English. Wi-Fi setup, paper jams, ink management, and print quality for HP, Canon, Epson, and Brother.",
   keywords: [
     "how to set up printer Wi-Fi",
     "printer learning guide seniors",
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     "why is my printer not working",
     "printer for beginners",
   ],
-  alternates: { canonical: "https://setwisedigital.com/techbridge/printers" },
+  alternates: { canonical: "https://www.setwisedigital.com/techbridge/printers" },
   openGraph: {
-    title: "Printer Learning Guide — Plain English | Setwise Digital TechBridge",
-    description: "Step-by-step printer lessons. Wi-Fi setup, paper jams, ink, and maintenance for HP, Canon, Epson, Brother.",
-    url: "https://setwisedigital.com/techbridge/printers",
+    title: "Printer Learning Guide — Wi-Fi, Ink & Setup | Setwise",
+    description: "Learn how printers work in plain English. Wi-Fi setup, paper jams, ink management, and print quality for HP, Canon, Epson, and Brother.",
+    url: "https://www.setwisedigital.com/techbridge/printers",
   },
 };
 
@@ -32,13 +32,13 @@ export default function TechBridgePrintersPage() {
     "@context": "https://schema.org",
     "@type": "LearningResource",
     name: "Printer Learning Guide by Setwise Digital",
-    url: "https://setwisedigital.com/techbridge/printers",
+    url: "https://www.setwisedigital.com/techbridge/printers",
     description:
       "Comprehensive plain-English printer learning guide covering wireless setup, paper jam prevention, ink management, print quality troubleshooting, and maintenance for HP, Canon, Epson, and Brother printers.",
     provider: {
       "@type": "Organization",
       name: "Setwise Digital",
-      url: "https://setwisedigital.com",
+      url: "https://www.setwisedigital.com",
     },
     teaches: [
       "How Wi-Fi printing works",
@@ -95,9 +95,9 @@ export default function TechBridgePrintersPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://setwisedigital.com/techbridge" },
-      { "@type": "ListItem", position: 3, name: "Printers", item: "https://setwisedigital.com/techbridge/printers" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://www.setwisedigital.com/techbridge" },
+      { "@type": "ListItem", position: 3, name: "Printers", item: "https://www.setwisedigital.com/techbridge/printers" },
     ],
   };
 

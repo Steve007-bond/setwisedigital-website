@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Car Navigation Map Update Guide — Honda, Toyota, BMW, Mercedes & More",
-  description: "Step-by-step car navigation update guide for Honda, Toyota, BMW, Mercedes-Benz, Lexus, Audi, Ford, and Nissan. Select your car brand and get exact instructions. Free, plain English.",
+  title: "Car Navigation Map Update Guide — Honda, Toyota, BMW & More",
+  description: "Step-by-step car navigation update for Honda, Toyota, BMW, Mercedes, Lexus, Audi, Ford, and Nissan. Select your car for exact instructions.",
   keywords: [
     "Honda navigation update",
     "Toyota GPS update",
@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     "how to update car GPS maps",
     "Ford SYNC navigation update",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/car-gps-update" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/car-gps-update" },
   openGraph: {
-    title: "Car Navigation Map Update Guide — Honda, Toyota, BMW, Mercedes & More",
-    description: "Step-by-step car navigation update guide for Honda, Toyota, BMW, Mercedes-Benz, Lexus, Audi, Ford, and Nissan. Select your car brand and get exact instructions. Free, plain English.",
-    url: "https://setwisedigital.com/tools/car-gps-update",
+    title: "Car Navigation Map Update Guide — Honda, Toyota, BMW & More",
+    description: "Step-by-step car navigation update for Honda, Toyota, BMW, Mercedes, Lexus, Audi, Ford, and Nissan. Select your car for exact instructions.",
+    url: "https://www.setwisedigital.com/tools/car-gps-update",
   },
 };
 
@@ -31,7 +31,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Step-by-step car navigation update guide for Honda, Toyota, BMW, Mercedes-Benz, Lexus, Audi, Ford, and Nissan. Select your car brand and get exact instructions. Free, plain English.",
   };
 
@@ -72,9 +72,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Car Navigation Map Update Guide — Honda, Toyota, BMW, Mercedes & More", item: "https://setwisedigital.com/tools/car-gps-update" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Car Navigation Map Update Guide — Honda, Toyota, BMW, Mercedes & More", item: "https://www.setwisedigital.com/tools/car-gps-update" },
     ],
   };
 

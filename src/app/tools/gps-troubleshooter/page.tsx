@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "GPS Not Working? Plain-English Fix Guide for Every GPS Problem",
-  description: "GPS lost signal, wrong directions, frozen screen, no voice, battery draining? Step-by-step fix guidance for car GPS, phone navigation, outdoor GPS, and built-in navigation. Free.",
+  title: "GPS Not Working? Plain-English Fix Guide",
+  description: "GPS lost signal, wrong directions, frozen screen, or no voice? Step-by-step fixes for car GPS, phone navigation, and outdoor GPS devices.",
   keywords: [
     "GPS not working fix",
     "GPS lost signal",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "why is my GPS not working",
     "GPS navigation problems step by step fix",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-troubleshooter" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-troubleshooter" },
   openGraph: {
-    title: "GPS Not Working? Plain-English Fix Guide for Every GPS Problem",
-    description: "GPS lost signal, wrong directions, frozen screen, no voice, battery draining? Step-by-step fix guidance for car GPS, phone navigation, outdoor GPS, and built-in navigation. Free.",
-    url: "https://setwisedigital.com/tools/gps-troubleshooter",
+    title: "GPS Not Working? Plain-English Fix Guide",
+    description: "GPS lost signal, wrong directions, frozen screen, or no voice? Step-by-step fixes for car GPS, phone navigation, and outdoor GPS devices.",
+    url: "https://www.setwisedigital.com/tools/gps-troubleshooter",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "GPS lost signal, wrong directions, frozen screen, no voice, battery draining? Step-by-step fix guidance for car GPS, phone navigation, outdoor GPS, and built-in navigation. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "GPS Not Working? Plain-English Fix Guide for Every GPS Problem", item: "https://setwisedigital.com/tools/gps-troubleshooter" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "GPS Not Working? Plain-English Fix Guide for Every GPS Problem", item: "https://www.setwisedigital.com/tools/gps-troubleshooter" },
     ],
   };
 

@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import RoadTripCheckerClient from "./RoadTripCheckerClient";
 
 export const metadata: Metadata = {
-  title: "Road Trip GPS Pre-Check — Is Your GPS Ready Before You Leave?",
-  description: "Free 5-step GPS road trip checklist. Make sure your Garmin, TomTom, or in-car GPS is updated, charged, and route-ready before your next trip. Plain English — takes 3 minutes.",
+  title: "Road Trip GPS Pre-Check — Is Your GPS Ready to Go?",
+  description: "Free 5-step GPS road trip checklist. Garmin, TomTom, or in-car GPS — updated, charged, and route-ready before your next journey.",
   keywords: [
     "GPS road trip checklist",
     "is my GPS ready for road trip",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "GPS pre-trip check",
     "GPS charged and updated for travel",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/road-trip-checker" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/road-trip-checker" },
   openGraph: {
-    title: "Road Trip GPS Pre-Check — Is Your GPS Ready Before You Leave?",
-    description: "Free 5-step GPS road trip checklist. Make sure your Garmin, TomTom, or in-car GPS is updated, charged, and route-ready before your next trip. Plain English — takes 3 minutes.",
-    url: "https://setwisedigital.com/tools/road-trip-checker",
+    title: "Road Trip GPS Pre-Check — Is Your GPS Ready to Go?",
+    description: "Free 5-step GPS road trip checklist. Garmin, TomTom, or in-car GPS — updated, charged, and route-ready before your next journey.",
+    url: "https://www.setwisedigital.com/tools/road-trip-checker",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Free 5-step GPS road trip checklist. Make sure your Garmin, TomTom, or in-car GPS is updated, charged, and route-ready before your next trip. Plain English — takes 3 minutes.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Road Trip GPS Pre-Check — Is Your GPS Ready Before You Leave?", item: "https://setwisedigital.com/tools/road-trip-checker" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Road Trip GPS Pre-Check — Is Your GPS Ready Before You Leave?", item: "https://www.setwisedigital.com/tools/road-trip-checker" },
     ],
   };
 

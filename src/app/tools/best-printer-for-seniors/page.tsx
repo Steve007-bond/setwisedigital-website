@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Best Printer for Seniors 2025 — Find Yours in 2 Minutes | Setwise Digital",
+  title: "Best Printer for Seniors 2025 — Find Yours in 2 Minutes",
   description:
-    "5 simple questions match you to the easiest-to-use printer for your needs. Large buttons, simple setup, low ink costs — recommendations built specifically for adults 55+. Free, no account needed.",
+    "5 questions match you to the easiest-to-use printer for adults 55+. Large buttons, simple setup, low ink costs. Free, no account needed.",
   keywords: [
     "best printer for seniors",
     "easiest printer to use for elderly",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "printer with big buttons",
     "easiest wireless printer to set up",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/best-printer-for-seniors" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/best-printer-for-seniors" },
   openGraph: {
-    title: "Best Printer for Seniors 2025 | Setwise Digital",
-    description: "5 questions match you to the simplest printer for your lifestyle. Built for adults 55+ — plain English, no jargon.",
-    url: "https://setwisedigital.com/tools/best-printer-for-seniors",
+    title: "Best Printer for Seniors 2025 — Find Yours in 2 Minutes",
+    description: "5 questions match you to the easiest-to-use printer for adults 55+. Large buttons, simple setup, low ink costs. Free, no account needed.",
+    url: "https://www.setwisedigital.com/tools/best-printer-for-seniors",
   },
 };
 
@@ -34,7 +34,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Free 5-question printer recommendation tool designed specifically for adults 55+. Considers ease of setup, print volume, fax needs, tech comfort level, and budget to recommend the best simple printer.",
     featureList: [
       "6 specific printer recommendations for seniors",
@@ -97,9 +97,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Best Printer for Seniors", item: "https://setwisedigital.com/tools/best-printer-for-seniors" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Best Printer for Seniors", item: "https://www.setwisedigital.com/tools/best-printer-for-seniors" },
     ],
   };
 

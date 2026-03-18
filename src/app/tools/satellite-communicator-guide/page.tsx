@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Garmin inReach vs ZOLEO vs SPOT — Which Satellite Communicator?",
-  description: "Garmin inReach Mini 2, ZOLEO, or SPOT Gen4? 4 questions about your adventures, your family, and your budget. Honest plain-English comparison of all three. Free.",
+  title: "Garmin inReach vs ZOLEO vs SPOT — Which is Right for You?",
+  description: "Garmin inReach Mini 2, ZOLEO, or SPOT Gen4? 4 questions about your adventures and budget. Honest plain-English satellite communicator comparison.",
   keywords: [
     "Garmin inReach vs SPOT vs ZOLEO",
     "best satellite communicator 2025",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "satellite messenger for hikers",
     "backcountry SOS device comparison",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/satellite-communicator-guide" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/satellite-communicator-guide" },
   openGraph: {
-    title: "Garmin inReach vs ZOLEO vs SPOT — Which Satellite Communicator?",
-    description: "Garmin inReach Mini 2, ZOLEO, or SPOT Gen4? 4 questions about your adventures, your family, and your budget. Honest plain-English comparison of all three. Free.",
-    url: "https://setwisedigital.com/tools/satellite-communicator-guide",
+    title: "Garmin inReach vs ZOLEO vs SPOT — Which is Right for You?",
+    description: "Garmin inReach Mini 2, ZOLEO, or SPOT Gen4? 4 questions about your adventures and budget. Honest plain-English satellite communicator comparison.",
+    url: "https://www.setwisedigital.com/tools/satellite-communicator-guide",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Garmin inReach Mini 2, ZOLEO, or SPOT Gen4? 4 questions about your adventures, your family, and your budget. Honest plain-English comparison of all three. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Garmin inReach vs ZOLEO vs SPOT — Which Satellite Communicator?", item: "https://setwisedigital.com/tools/satellite-communicator-guide" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Garmin inReach vs ZOLEO vs SPOT — Which Satellite Communicator?", item: "https://www.setwisedigital.com/tools/satellite-communicator-guide" },
     ],
   };
 

@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Printer Features Explained in Plain English — ADF, Duplex, PPM & More",
-  description: "What is Auto Duplex, ADF, PPM, or Wi-Fi Direct? Plain-English explanations of every printer feature — what it does, who needs it, and whether it's worth paying extra for. Free.",
+  title: "Printer Features Explained in Plain English — ADF, Duplex",
+  description: "What is Auto Duplex, ADF, PPM, or Wi-Fi Direct? Plain-English explanations of every printer feature — what it does and whether you need it.",
   keywords: [
     "what is duplex printing",
     "what is ADF printer",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "what printer features do I need",
     "printer specs for beginners",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/printer-features-guide" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/printer-features-guide" },
   openGraph: {
-    title: "Printer Features Explained in Plain English — ADF, Duplex, PPM & More",
-    description: "What is Auto Duplex, ADF, PPM, or Wi-Fi Direct? Plain-English explanations of every printer feature — what it does, who needs it, and whether it's worth paying extra for. Free.",
-    url: "https://setwisedigital.com/tools/printer-features-guide",
+    title: "Printer Features Explained in Plain English — ADF, Duplex",
+    description: "What is Auto Duplex, ADF, PPM, or Wi-Fi Direct? Plain-English explanations of every printer feature — what it does and whether you need it.",
+    url: "https://www.setwisedigital.com/tools/printer-features-guide",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "What is Auto Duplex, ADF, PPM, or Wi-Fi Direct? Plain-English explanations of every printer feature — what it does, who needs it, and whether it's worth paying extra for. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Printer Features Explained in Plain English — ADF, Duplex, PPM & More", item: "https://setwisedigital.com/tools/printer-features-guide" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Printer Features Explained in Plain English — ADF, Duplex, PPM & More", item: "https://www.setwisedigital.com/tools/printer-features-guide" },
     ],
   };
 

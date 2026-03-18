@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "How to Send a Fax from Home in 2025 — No Phone Line Needed | Setwise Digital",
+  title: "How to Send a Fax from Home — No Phone Line Needed",
   description:
-    "Need to fax a medical form or legal document from home? Choose your method — printer, computer, phone, or email. Get exact steps. No fax machine or phone line required. Free guide.",
+    "Fax a medical form or legal document from home. Choose printer, computer, phone, or email method. Get exact steps. Free, plain English.",
   keywords: [
     "how to send a fax from home",
     "how to fax without a fax machine",
@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     "send fax from Android phone",
     "free online fax service",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/how-to-send-a-fax-from-home" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/how-to-send-a-fax-from-home" },
   openGraph: {
-    title: "How to Send a Fax from Home — No Phone Line Needed | Setwise Digital",
-    description: "4 methods: printer, computer, phone, or email. Free fax guide for medical forms, legal documents, and insurance paperwork.",
-    url: "https://setwisedigital.com/tools/how-to-send-a-fax-from-home",
+    title: "How to Send a Fax from Home — No Phone Line Needed",
+    description: "Fax a medical form or legal document from home. Choose printer, computer, phone, or email method. Get exact steps. Free, plain English.",
+    url: "https://www.setwisedigital.com/tools/how-to-send-a-fax-from-home",
   },
 };
 
@@ -36,7 +36,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Free interactive fax guide covering 4 methods: traditional printer with phone line, online fax from computer, mobile fax app, and email-to-fax. Covers paper and digital document workflows for both.",
     featureList: [
       "Online fax from computer (no phone line)",
@@ -99,9 +99,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "How to Send a Fax from Home", item: "https://setwisedigital.com/tools/how-to-send-a-fax-from-home" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "How to Send a Fax from Home", item: "https://www.setwisedigital.com/tools/how-to-send-a-fax-from-home" },
     ],
   };
 

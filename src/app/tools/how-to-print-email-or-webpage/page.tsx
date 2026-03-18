@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "How to Print an Email or Webpage — Gmail, Outlook, Chrome & Safari | Setwise Digital",
+  title: "How to Print an Email or Webpage — Gmail, Chrome, Safari",
   description:
-    "Pick your email app or browser, then your device. Get the exact button location and step-by-step print instructions. Gmail, Outlook, Apple Mail, Chrome, Safari, Edge — on Windows, Mac, iPhone, or Android.",
+    "Pick your email app or browser, then your device. Get exact print instructions. Gmail, Outlook, Chrome, Safari — Windows, Mac, iPhone, Android.",
   keywords: [
     "how to print an email",
     "how to print from Gmail",
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     "how to print from Samsung Internet",
     "how to print a website page",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/how-to-print-email-or-webpage" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/how-to-print-email-or-webpage" },
   openGraph: {
-    title: "Print Email or Webpage — Exact Steps for Your App | Setwise Digital",
-    description: "Gmail, Outlook, Chrome, Safari, Edge — pick your app and device. Get the exact print button location for your combination.",
-    url: "https://setwisedigital.com/tools/how-to-print-email-or-webpage",
+    title: "How to Print an Email or Webpage — Gmail, Chrome, Safari",
+    description: "Pick your email app or browser, then your device. Get exact print instructions. Gmail, Outlook, Chrome, Safari — Windows, Mac, iPhone, Android.",
+    url: "https://www.setwisedigital.com/tools/how-to-print-email-or-webpage",
   },
 };
 
@@ -35,7 +35,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Free interactive guide covering exact print button locations for Gmail, Outlook, Apple Mail, Yahoo Mail, Chrome, Safari, Edge, and Samsung Internet — on Windows, Mac, iPhone, and Android.",
   };
 
@@ -90,9 +90,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Print Email or Webpage", item: "https://setwisedigital.com/tools/how-to-print-email-or-webpage" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Print Email or Webpage", item: "https://www.setwisedigital.com/tools/how-to-print-email-or-webpage" },
     ],
   };
 

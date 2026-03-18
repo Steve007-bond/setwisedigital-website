@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Printer Cost Per Page Calculator — Find Your True Printing Cost",
-  description: "Calculate the real cost per page for your printer model. Enter your cartridge price and page yield — get your true cost per page in seconds. Compare HP, Canon, Epson, Brother. Free.",
+  title: "Printer Cost Per Page Calculator — True Printing Cost",
+  description: "Calculate the real cost per page for your printer. Enter cartridge price and page yield — get your true cost instantly. HP, Canon, Epson.",
   keywords: [
     "printer cost per page calculator",
     "how much does it cost to print one page",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "Epson EcoTank cost per page",
     "Brother XL cartridge cost per page",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/printer-cost-per-page" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/printer-cost-per-page" },
   openGraph: {
-    title: "Printer Cost Per Page Calculator — Find Your True Printing Cost",
-    description: "Calculate the real cost per page for your printer model. Enter your cartridge price and page yield — get your true cost per page in seconds. Compare HP, Canon, Epson, Brother. Free.",
-    url: "https://setwisedigital.com/tools/printer-cost-per-page",
+    title: "Printer Cost Per Page Calculator — True Printing Cost",
+    description: "Calculate the real cost per page for your printer. Enter cartridge price and page yield — get your true cost instantly. HP, Canon, Epson.",
+    url: "https://www.setwisedigital.com/tools/printer-cost-per-page",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Calculate the real cost per page for your printer model. Enter your cartridge price and page yield — get your true cost per page in seconds. Compare HP, Canon, Epson, Brother. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Printer Cost Per Page Calculator — Find Your True Printing Cost", item: "https://setwisedigital.com/tools/printer-cost-per-page" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Printer Cost Per Page Calculator — Find Your True Printing Cost", item: "https://www.setwisedigital.com/tools/printer-cost-per-page" },
     ],
   };
 

@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Do I Have to Pay for GPS Map Updates? Free vs Paid Maps Explained",
-  description: "GPS lifetime maps, paid updates, subscriptions — explained in plain English. Find out exactly what map updates cost for your GPS over 3 years. Free honest guide, no jargon.",
+  title: "Do I Have to Pay for GPS Maps? Free vs Paid Explained",
+  description: "GPS lifetime maps, paid updates, and subscriptions explained in plain English. Find out what map updates cost for your GPS over 3 years.",
   keywords: [
     "GPS lifetime maps free",
     "do I have to pay for GPS map updates",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "TomTom map update cost",
     "GPS map subscription fees explained",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-maps-explained" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-maps-explained" },
   openGraph: {
-    title: "Do I Have to Pay for GPS Map Updates? Free vs Paid Maps Explained",
-    description: "GPS lifetime maps, paid updates, subscriptions — explained in plain English. Find out exactly what map updates cost for your GPS over 3 years. Free honest guide, no jargon.",
-    url: "https://setwisedigital.com/tools/gps-maps-explained",
+    title: "Do I Have to Pay for GPS Maps? Free vs Paid Explained",
+    description: "GPS lifetime maps, paid updates, and subscriptions explained in plain English. Find out what map updates cost for your GPS over 3 years.",
+    url: "https://www.setwisedigital.com/tools/gps-maps-explained",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "GPS lifetime maps, paid updates, subscriptions — explained in plain English. Find out exactly what map updates cost for your GPS over 3 years. Free honest guide, no jargon.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Do I Have to Pay for GPS Map Updates? Free vs Paid Maps Explained", item: "https://setwisedigital.com/tools/gps-maps-explained" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Do I Have to Pay for GPS Map Updates? Free vs Paid Maps Explained", item: "https://www.setwisedigital.com/tools/gps-maps-explained" },
     ],
   };
 

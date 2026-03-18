@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Tech Subscription Audit — Find Overlaps and Cancel What You Don't Need",
-  description: "List your digital subscriptions — Netflix, Hulu, Amazon Prime, Apple Music, and more. Calculate your true monthly cost, find overlaps, and see exactly what to cancel. Free.",
+  title: "Tech Subscription Audit — Find Overlaps and Cancel Extras",
+  description: "List your digital subscriptions — Netflix, Amazon Prime, Apple Music. Calculate your true monthly cost and see exactly what to cancel. Free.",
   keywords: [
     "tech subscription audit",
     "cancel unused subscriptions",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "streaming service audit",
     "save money on subscriptions",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/subscription-audit" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/subscription-audit" },
   openGraph: {
-    title: "Tech Subscription Audit — Find Overlaps and Cancel What You Don't Need",
-    description: "List your digital subscriptions — Netflix, Hulu, Amazon Prime, Apple Music, and more. Calculate your true monthly cost, find overlaps, and see exactly what to cancel. Free.",
-    url: "https://setwisedigital.com/tools/subscription-audit",
+    title: "Tech Subscription Audit — Find Overlaps and Cancel Extras",
+    description: "List your digital subscriptions — Netflix, Amazon Prime, Apple Music. Calculate your true monthly cost and see exactly what to cancel. Free.",
+    url: "https://www.setwisedigital.com/tools/subscription-audit",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "List your digital subscriptions — Netflix, Hulu, Amazon Prime, Apple Music, and more. Calculate your true monthly cost, find overlaps, and see exactly what to cancel. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Tech Subscription Audit — Find Overlaps and Cancel What You Don't Need", item: "https://setwisedigital.com/tools/subscription-audit" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Tech Subscription Audit — Find Overlaps and Cancel What You Don't Need", item: "https://www.setwisedigital.com/tools/subscription-audit" },
     ],
   };
 

@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "GPS Features Explained in Plain English — Live Traffic, Lane Assist & More",
-  description: "What does Live Traffic, Lane Assist, LMT, or Bluetooth mean on a GPS? Plain-English explanations of every GPS spec — who needs it and whether it's worth paying more for. Free guide.",
+  title: "GPS Features Explained — Live Traffic, Lane Assist & More",
+  description: "What do Live Traffic, Lane Assist, or LMT mean on a GPS? Plain-English explanations of every GPS spec. Who needs it and what it costs.",
   keywords: [
     "what is live traffic GPS",
     "GPS lane assist explained",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "what GPS features do I need",
     "GPS buying guide 2025",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-features-guide" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-features-guide" },
   openGraph: {
-    title: "GPS Features Explained in Plain English — Live Traffic, Lane Assist & More",
-    description: "What does Live Traffic, Lane Assist, LMT, or Bluetooth mean on a GPS? Plain-English explanations of every GPS spec — who needs it and whether it's worth paying more for. Free guide.",
-    url: "https://setwisedigital.com/tools/gps-features-guide",
+    title: "GPS Features Explained — Live Traffic, Lane Assist & More",
+    description: "What do Live Traffic, Lane Assist, or LMT mean on a GPS? Plain-English explanations of every GPS spec. Who needs it and what it costs.",
+    url: "https://www.setwisedigital.com/tools/gps-features-guide",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "What does Live Traffic, Lane Assist, LMT, or Bluetooth mean on a GPS? Plain-English explanations of every GPS spec — who needs it and whether it's worth paying more for. Free guide.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "GPS Features Explained in Plain English — Live Traffic, Lane Assist & More", item: "https://setwisedigital.com/tools/gps-features-guide" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "GPS Features Explained in Plain English — Live Traffic, Lane Assist & More", item: "https://www.setwisedigital.com/tools/gps-features-guide" },
     ],
   };
 

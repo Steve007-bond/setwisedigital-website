@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Home Security Audit — Find Out How Protected Your Home Really Is",
-  description: "10 yes/no questions reveal your home's true security rating (A–F) and which affordable devices would make the biggest difference. Ring, SimpliSafe, ADT compared. Free, plain English.",
+  title: "Home Security Audit — How Protected Is Your Home?",
+  description: "10 yes/no questions reveal your home's security rating A–F and which affordable devices make the biggest difference. Free, plain English.",
   keywords: [
     "home security audit free",
     "how secure is my home",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "home security checklist",
     "smart home security for seniors",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/home-security-audit" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/home-security-audit" },
   openGraph: {
-    title: "Home Security Audit — Find Out How Protected Your Home Really Is",
-    description: "10 yes/no questions reveal your home's true security rating (A–F) and which affordable devices would make the biggest difference. Ring, SimpliSafe, ADT compared. Free, plain English.",
-    url: "https://setwisedigital.com/tools/home-security-audit",
+    title: "Home Security Audit — How Protected Is Your Home?",
+    description: "10 yes/no questions reveal your home's security rating A–F and which affordable devices make the biggest difference. Free, plain English.",
+    url: "https://www.setwisedigital.com/tools/home-security-audit",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "10 yes/no questions reveal your home's true security rating (A–F) and which affordable devices would make the biggest difference. Ring, SimpliSafe, ADT compared. Free, plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Home Security Audit — Find Out How Protected Your Home Really Is", item: "https://setwisedigital.com/tools/home-security-audit" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Home Security Audit — Find Out How Protected Your Home Really Is", item: "https://www.setwisedigital.com/tools/home-security-audit" },
     ],
   };
 

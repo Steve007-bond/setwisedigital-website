@@ -4,7 +4,7 @@ import Client from "./Client";
 
 export const metadata: Metadata = {
   title: "Best GPS for Your Budget 2025 — Under $100, $150, $200",
-  description: "Pick your budget and see the best GPS devices at each price point — features you get, features you miss, and honest top picks. Garmin and TomTom compared. Free, plain English.",
+  description: "Best GPS devices at every price point. Features you get and features you miss. Garmin and TomTom compared honestly at each budget. Free.",
   keywords: [
     "best GPS under 100",
     "best GPS under 200",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "cheap GPS that works well",
     "GPS value for money",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-budget-finder" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-budget-finder" },
   openGraph: {
     title: "Best GPS for Your Budget 2025 — Under $100, $150, $200",
-    description: "Pick your budget and see the best GPS devices at each price point — features you get, features you miss, and honest top picks. Garmin and TomTom compared. Free, plain English.",
-    url: "https://setwisedigital.com/tools/gps-budget-finder",
+    description: "Best GPS devices at every price point. Features you get and features you miss. Garmin and TomTom compared honestly at each budget. Free.",
+    url: "https://www.setwisedigital.com/tools/gps-budget-finder",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Pick your budget and see the best GPS devices at each price point — features you get, features you miss, and honest top picks. Garmin and TomTom compared. Free, plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Best GPS for Your Budget 2025 — Under $100, $150, $200", item: "https://setwisedigital.com/tools/gps-budget-finder" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Best GPS for Your Budget 2025 — Under $100, $150, $200", item: "https://www.setwisedigital.com/tools/gps-budget-finder" },
     ],
   };
 

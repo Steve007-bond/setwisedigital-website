@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 export const metadata: Metadata = {
   title: "Wi-Fi Speed Checker — Home Wi-Fi Overload Tool | Setwise Digital",
   description: "Check if your home Wi-Fi router is overloaded. Free interactive tool for adults 40+. Setwise Digital.",
-  alternates: { canonical: "https://setwisedigital.com/tools/wifi-checker" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/wifi-checker" },
   robots: { index: false, follow: true },
 };
 

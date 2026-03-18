@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Best GPS for RV and Motorhome 2025 — Garmin RV 795, 895, 1095",
-  description: "Which Garmin RV GPS fits your rig? 4 questions about your motorhome type, size, and travel style. Height routing, campground database, and RV navigation explained in plain English.",
+  title: "Best GPS for RV and Motorhome 2025 — Garmin RV Guide",
+  description: "Which Garmin RV GPS fits your rig? 4 questions about your motorhome type, size, and travel style. Height routing and campgrounds covered.",
   keywords: [
     "best GPS for RV",
     "RV GPS with height restrictions",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "RV navigation campground maps",
     "GPS for large motorhome Class A",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/rv-gps-finder" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/rv-gps-finder" },
   openGraph: {
-    title: "Best GPS for RV and Motorhome 2025 — Garmin RV 795, 895, 1095",
-    description: "Which Garmin RV GPS fits your rig? 4 questions about your motorhome type, size, and travel style. Height routing, campground database, and RV navigation explained in plain English.",
-    url: "https://setwisedigital.com/tools/rv-gps-finder",
+    title: "Best GPS for RV and Motorhome 2025 — Garmin RV Guide",
+    description: "Which Garmin RV GPS fits your rig? 4 questions about your motorhome type, size, and travel style. Height routing and campgrounds covered.",
+    url: "https://www.setwisedigital.com/tools/rv-gps-finder",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Which Garmin RV GPS fits your rig? 4 questions about your motorhome type, size, and travel style. Height routing, campground database, and RV navigation explained in plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Best GPS for RV and Motorhome 2025 — Garmin RV 795, 895, 1095", item: "https://setwisedigital.com/tools/rv-gps-finder" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Best GPS for RV and Motorhome 2025 — Garmin RV 795, 895, 1095", item: "https://www.setwisedigital.com/tools/rv-gps-finder" },
     ],
   };
 

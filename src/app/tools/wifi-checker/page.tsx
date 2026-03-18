@@ -4,7 +4,7 @@ import Client from "./Client";
 
 export const metadata: Metadata = {
   title: "Home Wi-Fi Overload Checker — Is Your Router Struggling?",
-  description: "Count your connected devices and find out if your router can handle the load. Get a plain-English plan to fix slow Wi-Fi, upgrade your router, or reduce congestion. Free.",
+  description: "Count your connected devices and find out if your router can handle the load. Get a plain-English plan to fix slow Wi-Fi at home. Free.",
   keywords: [
     "home WiFi overload checker",
     "too many devices on WiFi router",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "router overloaded symptoms",
     "best router for many devices 2025",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/wifi-checker" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/wifi-checker" },
   openGraph: {
     title: "Home Wi-Fi Overload Checker — Is Your Router Struggling?",
-    description: "Count your connected devices and find out if your router can handle the load. Get a plain-English plan to fix slow Wi-Fi, upgrade your router, or reduce congestion. Free.",
-    url: "https://setwisedigital.com/tools/wifi-checker",
+    description: "Count your connected devices and find out if your router can handle the load. Get a plain-English plan to fix slow Wi-Fi at home. Free.",
+    url: "https://www.setwisedigital.com/tools/wifi-checker",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Count your connected devices and find out if your router can handle the load. Get a plain-English plan to fix slow Wi-Fi, upgrade your router, or reduce congestion. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Home Wi-Fi Overload Checker — Is Your Router Struggling?", item: "https://setwisedigital.com/tools/wifi-checker" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Home Wi-Fi Overload Checker — Is Your Router Struggling?", item: "https://www.setwisedigital.com/tools/wifi-checker" },
     ],
   };
 

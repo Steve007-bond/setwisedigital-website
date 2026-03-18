@@ -4,9 +4,9 @@ import CameraClient from "./CameraClient";
 // DEPLOYMENT NOTE: Rename your existing techbridge/camera/page.tsx → techbridge/camera/CameraClient.tsx
 
 export const metadata: Metadata = {
-  title: "Camera Learning Guide — Firmware, Settings & Better Photos | Setwise Digital",
+  title: "Camera Learning Guide — Firmware & Better Photos | Setwise",
   description:
-    "Learn how to get better photos from your camera in plain English. Update camera firmware, adjust settings, transfer photos, and fix common problems. Step-by-step guide for beginners.",
+    "Better photos and camera setup in plain English. Update firmware, adjust settings, transfer photos, and fix common camera problems.",
   keywords: [
     "how to update camera firmware",
     "camera settings explained plain English",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "why are my photos blurry fix",
     "camera maintenance guide",
   ],
-  alternates: { canonical: "https://setwisedigital.com/techbridge/camera" },
+  alternates: { canonical: "https://www.setwisedigital.com/techbridge/camera" },
   openGraph: {
-    title: "Camera Learning Guide — Firmware, Settings & Better Photos | Setwise Digital",
-    description: "Plain-English camera guide. Firmware updates, settings explained, photo transfer, and troubleshooting.",
-    url: "https://setwisedigital.com/techbridge/camera",
+    title: "Camera Learning Guide — Firmware & Better Photos | Setwise",
+    description: "Better photos and camera setup in plain English. Update firmware, adjust settings, transfer photos, and fix common camera problems.",
+    url: "https://www.setwisedigital.com/techbridge/camera",
   },
 };
 
@@ -31,10 +31,10 @@ export default function TechBridgeCameraPage() {
     "@context": "https://schema.org",
     "@type": "LearningResource",
     name: "Camera Learning Guide by Setwise Digital",
-    url: "https://setwisedigital.com/techbridge/camera",
+    url: "https://www.setwisedigital.com/techbridge/camera",
     description:
       "Plain-English camera learning guide covering firmware updates, camera settings explained, photo transfer to computer, fixing blurry photos, and SD card management.",
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     teaches: [
       "How to update camera firmware",
       "Camera settings explained in plain English",
@@ -81,9 +81,9 @@ export default function TechBridgeCameraPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://setwisedigital.com/techbridge" },
-      { "@type": "ListItem", position: 3, name: "Camera", item: "https://setwisedigital.com/techbridge/camera" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://www.setwisedigital.com/techbridge" },
+      { "@type": "ListItem", position: 3, name: "Camera", item: "https://www.setwisedigital.com/techbridge/camera" },
     ],
   };
 

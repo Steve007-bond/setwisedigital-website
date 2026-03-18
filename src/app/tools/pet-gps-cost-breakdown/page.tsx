@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Pet GPS Tracker Cost Breakdown — Tractive vs Fi vs Whistle vs AirTag",
-  description: "True 3-year cost comparison of Tractive, Fi Series 3, Whistle, and Apple AirTag. Device price plus subscriptions calculated honestly. Plus setup guides. Free, plain English.",
+  title: "Pet GPS Tracker Cost Breakdown — Tractive vs Fi vs AirTag",
+  description: "True 3-year cost of Tractive, Fi Series 3, Whistle, and Apple AirTag. Device price plus subscriptions compared honestly. Free, plain English.",
   keywords: [
     "pet GPS monthly fee comparison",
     "cheapest pet tracker subscription",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "Whistle GPS subscription cost",
     "pet tracker no monthly fee",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/pet-gps-cost-breakdown" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/pet-gps-cost-breakdown" },
   openGraph: {
-    title: "Pet GPS Tracker Cost Breakdown — Tractive vs Fi vs Whistle vs AirTag",
-    description: "True 3-year cost comparison of Tractive, Fi Series 3, Whistle, and Apple AirTag. Device price plus subscriptions calculated honestly. Plus setup guides. Free, plain English.",
-    url: "https://setwisedigital.com/tools/pet-gps-cost-breakdown",
+    title: "Pet GPS Tracker Cost Breakdown — Tractive vs Fi vs AirTag",
+    description: "True 3-year cost of Tractive, Fi Series 3, Whistle, and Apple AirTag. Device price plus subscriptions compared honestly. Free, plain English.",
+    url: "https://www.setwisedigital.com/tools/pet-gps-cost-breakdown",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "True 3-year cost comparison of Tractive, Fi Series 3, Whistle, and Apple AirTag. Device price plus subscriptions calculated honestly. Plus setup guides. Free, plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Pet GPS Tracker Cost Breakdown — Tractive vs Fi vs Whistle vs AirTag", item: "https://setwisedigital.com/tools/pet-gps-cost-breakdown" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Pet GPS Tracker Cost Breakdown — Tractive vs Fi vs Whistle vs AirTag", item: "https://www.setwisedigital.com/tools/pet-gps-cost-breakdown" },
     ],
   };
 

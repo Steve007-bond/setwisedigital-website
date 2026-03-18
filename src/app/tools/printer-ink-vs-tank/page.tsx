@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Ink Cartridge vs Ink Tank Printer — Which is Right for You?",
-  description: "Should you buy a regular inkjet printer or switch to an Epson EcoTank or Canon MegaTank? 5 honest questions give you a clear answer based on how you actually print. Free.",
+  title: "Ink Cartridge vs Ink Tank Printer — Which is Right?",
+  description: "Regular inkjet or EcoTank/MegaTank? 5 honest questions give you a clear answer based on how you actually print. Free, plain English.",
   keywords: [
     "ink cartridge vs ink tank printer",
     "Epson EcoTank vs regular printer",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "ink tank printer worth it",
     "how much does EcoTank save",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/printer-ink-vs-tank" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/printer-ink-vs-tank" },
   openGraph: {
-    title: "Ink Cartridge vs Ink Tank Printer — Which is Right for You?",
-    description: "Should you buy a regular inkjet printer or switch to an Epson EcoTank or Canon MegaTank? 5 honest questions give you a clear answer based on how you actually print. Free.",
-    url: "https://setwisedigital.com/tools/printer-ink-vs-tank",
+    title: "Ink Cartridge vs Ink Tank Printer — Which is Right?",
+    description: "Regular inkjet or EcoTank/MegaTank? 5 honest questions give you a clear answer based on how you actually print. Free, plain English.",
+    url: "https://www.setwisedigital.com/tools/printer-ink-vs-tank",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Should you buy a regular inkjet printer or switch to an Epson EcoTank or Canon MegaTank? 5 honest questions give you a clear answer based on how you actually print. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Ink Cartridge vs Ink Tank Printer — Which is Right for You?", item: "https://setwisedigital.com/tools/printer-ink-vs-tank" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Ink Cartridge vs Ink Tank Printer — Which is Right for You?", item: "https://www.setwisedigital.com/tools/printer-ink-vs-tank" },
     ],
   };
 

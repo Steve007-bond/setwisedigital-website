@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "How to Print from iPhone, Android, Windows or Mac | Setwise Digital",
+  title: "How to Print from iPhone, Android, Windows or Mac",
   description:
-    "Select your device and printer brand — get the exact steps for your combination. iPhone AirPrint, Android print service, Windows Ctrl+P, Mac ⌘+P — 28 combinations covered in plain English.",
+    "Select your device and printer brand for exact wireless printing steps. iPhone AirPrint, Android, Windows, Mac — 28 combinations covered.",
   keywords: [
     "how to print from iPhone",
     "how to print from Android phone",
@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     "Android print service plugin",
     "print from phone wirelessly",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/how-to-print-from-phone-or-laptop" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/how-to-print-from-phone-or-laptop" },
   openGraph: {
-    title: "Print from Phone or Laptop — Exact Steps for Your Device | Setwise Digital",
-    description: "28 device and printer brand combinations. Pick yours — get the exact steps. iPhone, Android, Windows, Mac, Chromebook.",
-    url: "https://setwisedigital.com/tools/how-to-print-from-phone-or-laptop",
+    title: "How to Print from iPhone, Android, Windows or Mac",
+    description: "Select your device and printer brand for exact wireless printing steps. iPhone AirPrint, Android, Windows, Mac — 28 combinations covered.",
+    url: "https://www.setwisedigital.com/tools/how-to-print-from-phone-or-laptop",
   },
 };
 
@@ -36,7 +36,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Free interactive guide covering 28 device and printer brand combinations. Select your device (iPhone, Android, Windows, Mac, Chromebook) and printer brand (HP, Canon, Epson, Brother) for exact wireless printing steps.",
     featureList: [
       "iPhone AirPrint instructions",
@@ -99,9 +99,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Print from Phone or Laptop", item: "https://setwisedigital.com/tools/how-to-print-from-phone-or-laptop" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Print from Phone or Laptop", item: "https://www.setwisedigital.com/tools/how-to-print-from-phone-or-laptop" },
     ],
   };
 

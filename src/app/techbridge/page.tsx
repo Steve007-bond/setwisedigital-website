@@ -4,9 +4,9 @@ import TechBridgeClient from "./TechBridgeClient";
 // DEPLOYMENT NOTE: Rename your existing techbridge/page.tsx → techbridge/TechBridgeClient.tsx
 
 export const metadata: Metadata = {
-  title: "TechBridge — Learn Technology in Plain English | Setwise Digital",
+  title: "TechBridge — Learn Technology in Plain English | Setwise",
   description:
-    "TechBridge by Setwise Digital — interactive technology learning for adults 40+. Step-by-step lessons for printers, GPS, smart home, Alexa, cameras, and online security. No jargon, no pressure.",
+    "Interactive tech lessons for adults 40+. Printers, GPS, smart home, Alexa, cameras, and online security — step-by-step, no jargon.",
   keywords: [
     "TechBridge Setwise Digital",
     "technology learning for seniors",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "tech literacy platform adults",
     "how to learn technology step by step",
   ],
-  alternates: { canonical: "https://setwisedigital.com/techbridge" },
+  alternates: { canonical: "https://www.setwisedigital.com/techbridge" },
   openGraph: {
-    title: "TechBridge — Learn Technology in Plain English | Setwise Digital",
-    description: "Interactive learning for printers, GPS, smart home, Alexa, cameras, and security. Plain English, step by step.",
-    url: "https://setwisedigital.com/techbridge",
+    title: "TechBridge — Learn Technology in Plain English | Setwise",
+    description: "Interactive tech lessons for adults 40+. Printers, GPS, smart home, Alexa, cameras, and online security — step-by-step, no jargon.",
+    url: "https://www.setwisedigital.com/techbridge",
   },
 };
 
@@ -31,13 +31,13 @@ export default function TechBridgePage() {
     "@context": "https://schema.org",
     "@type": "LearningResource",
     name: "TechBridge by Setwise Digital",
-    url: "https://setwisedigital.com/techbridge",
+    url: "https://www.setwisedigital.com/techbridge",
     description:
       "Interactive technology learning hub for adults 40+. Covers printers, GPS, Alexa, smart home, cameras, and security in plain English with step-by-step guidance.",
     provider: {
       "@type": "Organization",
       name: "Setwise Digital",
-      url: "https://setwisedigital.com",
+      url: "https://www.setwisedigital.com",
     },
     teaches: [
       "Printer setup and maintenance",
@@ -87,8 +87,8 @@ export default function TechBridgePage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://setwisedigital.com/techbridge" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://www.setwisedigital.com/techbridge" },
     ],
   };
 

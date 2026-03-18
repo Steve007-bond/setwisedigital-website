@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Smart Home Starter Matcher — Alexa vs Google Nest vs Apple HomeKit",
-  description: "Alexa, Google Nest, or Apple HomeKit? 5 questions match the right smart home system to your lifestyle, devices, and budget — no technical knowledge needed. Free, plain English.",
+  title: "Smart Home Starter Matcher — Alexa vs Google vs HomeKit",
+  description: "Alexa, Google Nest, or Apple HomeKit? 5 questions match the right smart home system to your lifestyle and budget. Free, plain English.",
   keywords: [
     "Alexa vs Google Nest vs HomeKit",
     "best smart home system for beginners",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "Apple HomeKit vs Alexa comparison",
     "smart home starter kit",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/smart-home-matcher" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/smart-home-matcher" },
   openGraph: {
-    title: "Smart Home Starter Matcher — Alexa vs Google Nest vs Apple HomeKit",
-    description: "Alexa, Google Nest, or Apple HomeKit? 5 questions match the right smart home system to your lifestyle, devices, and budget — no technical knowledge needed. Free, plain English.",
-    url: "https://setwisedigital.com/tools/smart-home-matcher",
+    title: "Smart Home Starter Matcher — Alexa vs Google vs HomeKit",
+    description: "Alexa, Google Nest, or Apple HomeKit? 5 questions match the right smart home system to your lifestyle and budget. Free, plain English.",
+    url: "https://www.setwisedigital.com/tools/smart-home-matcher",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Alexa, Google Nest, or Apple HomeKit? 5 questions match the right smart home system to your lifestyle, devices, and budget — no technical knowledge needed. Free, plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Smart Home Starter Matcher — Alexa vs Google Nest vs Apple HomeKit", item: "https://setwisedigital.com/tools/smart-home-matcher" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Smart Home Starter Matcher — Alexa vs Google Nest vs Apple HomeKit", item: "https://www.setwisedigital.com/tools/smart-home-matcher" },
     ],
   };
 

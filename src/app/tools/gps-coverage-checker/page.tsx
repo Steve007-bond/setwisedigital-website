@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Does My GPS Cover Where I Drive? USA and Canada Coverage Check",
-  description: "Pick your region and GPS brand — get an honest coverage verdict for US cities, rural America, rural Canada, and the far north. Free plain-English GPS coverage guide.",
+  title: "GPS Coverage Checker — USA & Canada Regional Guide",
+  description: "Pick your region and GPS brand for an honest coverage verdict. US cities, rural America, rural Canada, and the far north compared. Free.",
   keywords: [
     "does GPS work in rural Canada",
     "GPS maps rural Canada",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "GPS maps remote areas",
     "GPS coverage checker USA Canada",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-coverage-checker" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-coverage-checker" },
   openGraph: {
-    title: "Does My GPS Cover Where I Drive? USA and Canada Coverage Check",
-    description: "Pick your region and GPS brand — get an honest coverage verdict for US cities, rural America, rural Canada, and the far north. Free plain-English GPS coverage guide.",
-    url: "https://setwisedigital.com/tools/gps-coverage-checker",
+    title: "GPS Coverage Checker — USA & Canada Regional Guide",
+    description: "Pick your region and GPS brand for an honest coverage verdict. US cities, rural America, rural Canada, and the far north compared. Free.",
+    url: "https://www.setwisedigital.com/tools/gps-coverage-checker",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Pick your region and GPS brand — get an honest coverage verdict for US cities, rural America, rural Canada, and the far north. Free plain-English GPS coverage guide.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Does My GPS Cover Where I Drive? USA and Canada Coverage Check", item: "https://setwisedigital.com/tools/gps-coverage-checker" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Does My GPS Cover Where I Drive? USA and Canada Coverage Check", item: "https://www.setwisedigital.com/tools/gps-coverage-checker" },
     ],
   };
 

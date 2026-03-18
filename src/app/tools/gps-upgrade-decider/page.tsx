@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Should I Upgrade My GPS or Just Update It? Keep or Replace Guide",
-  description: "4 questions about your GPS — age, problems, features you're missing. Get a clear keep-or-replace verdict plus a clickable step-by-step action plan. Free, plain English.",
+  title: "Should I Upgrade My GPS? — Keep or Replace Guide",
+  description: "4 questions about your GPS age and problems. Get a clear keep-or-replace verdict with a step-by-step action plan. Free, plain English.",
   keywords: [
     "should I upgrade my GPS",
     "is my GPS too old",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "GPS upgrade worth it",
     "GPS vs phone navigation comparison",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-upgrade-decider" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-upgrade-decider" },
   openGraph: {
-    title: "Should I Upgrade My GPS or Just Update It? Keep or Replace Guide",
-    description: "4 questions about your GPS — age, problems, features you're missing. Get a clear keep-or-replace verdict plus a clickable step-by-step action plan. Free, plain English.",
-    url: "https://setwisedigital.com/tools/gps-upgrade-decider",
+    title: "Should I Upgrade My GPS? — Keep or Replace Guide",
+    description: "4 questions about your GPS age and problems. Get a clear keep-or-replace verdict with a step-by-step action plan. Free, plain English.",
+    url: "https://www.setwisedigital.com/tools/gps-upgrade-decider",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "4 questions about your GPS — age, problems, features you're missing. Get a clear keep-or-replace verdict plus a clickable step-by-step action plan. Free, plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Should I Upgrade My GPS or Just Update It? Keep or Replace Guide", item: "https://setwisedigital.com/tools/gps-upgrade-decider" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Should I Upgrade My GPS or Just Update It? Keep or Replace Guide", item: "https://www.setwisedigital.com/tools/gps-upgrade-decider" },
     ],
   };
 

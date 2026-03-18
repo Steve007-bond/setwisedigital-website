@@ -173,7 +173,7 @@ export default function Client() {
   const handleSubmit = async () => {
     if(!validate())return;setSubmitting(true);
     const winner = getWinner();
-    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,issue:`GPS for Seniors — Match: ${winner}`,source:"gps-for-seniors"})});}catch{}
+    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email, phone,issue:`GPS for Seniors — Match: ${winner}`,source:"gps-for-seniors"})});}catch{}
     setSubmitted(true);setSubmitting(false);
   };
   const reset = () => {setStage("intro");setCurrentQ(0);setScores({ds65:0,ds55:0,drive53:0});setAnswers({});setSel(null);setName("");setEmail("");setSubmitted(false);};

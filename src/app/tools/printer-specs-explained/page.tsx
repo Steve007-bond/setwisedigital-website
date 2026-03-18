@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Printer Specs Explained in Plain English — DPI, PPM, ADF & More | Setwise Digital",
+  title: "Printer Specs in Plain English — DPI, PPM, ADF & More",
   description:
-    "Confused by DPI, PPM, ADF, duplex, AirPrint, or EcoTank? Tap any printer specification and get a plain-English explanation — what it means, whether you need it, and what value to look for.",
+    "Confused by DPI, PPM, ADF, duplex, AirPrint, or EcoTank? Tap any printer spec for a plain-English explanation — meaning and whether you need it.",
   keywords: [
     "what does DPI mean printer",
     "what is duplex printing",
@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     "what is scan resolution DPI",
     "inkjet vs laser printer difference explained",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/printer-specs-explained" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/printer-specs-explained" },
   openGraph: {
-    title: "Printer Specs Explained in Plain English | Setwise Digital",
-    description: "DPI, PPM, ADF, duplex, AirPrint, EcoTank — tap any spec for a plain-English explanation and whether you need it.",
-    url: "https://setwisedigital.com/tools/printer-specs-explained",
+    title: "Printer Specs in Plain English — DPI, PPM, ADF & More",
+    description: "Confused by DPI, PPM, ADF, duplex, AirPrint, or EcoTank? Tap any printer spec for a plain-English explanation — meaning and whether you need it.",
+    url: "https://www.setwisedigital.com/tools/printer-specs-explained",
   },
 };
 
@@ -36,7 +36,7 @@ export default function Page() {
     applicationCategory: "EducationalApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Free interactive printer specifications decoder. Explains 12 printer specs in plain English — DPI, PPM, ADF, duplex, AirPrint, Wi-Fi Direct, EcoTank, scan resolution, paper tray capacity, monthly duty cycle, print head, and inkjet vs laser — with need level ratings and good value benchmarks.",
     featureList: [
       "12 printer specifications explained",
@@ -107,9 +107,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Printer Specs Explained", item: "https://setwisedigital.com/tools/printer-specs-explained" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Printer Specs Explained", item: "https://www.setwisedigital.com/tools/printer-specs-explained" },
     ],
   };
 

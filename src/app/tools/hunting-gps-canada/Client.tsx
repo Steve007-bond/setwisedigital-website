@@ -162,7 +162,7 @@ export default function Client() {
   const handleSubmit = async () => {
     if(!validate())return;setSubmitting(true);
     const winner = getWinner();
-    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,issue:`Hunting GPS Canada — Match: ${winner} — Terrain: ${answers.terrain}`,source:"hunting-gps-canada"})});}catch{}
+    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email, phone,issue:`Hunting GPS Canada — Match: ${winner} — Terrain: ${answers.terrain}`,source:"hunting-gps-canada"})});}catch{}
     setSubmitted(true);setSubmitting(false);
   };
   const reset = () => {setStage("intro");setCurrentQ(0);setScores({gpsmap67:0,gpsmap66i:0,alpha:0,montana:0});setAnswers({});setSel(null);setName("");setEmail("");setSubmitted(false);};

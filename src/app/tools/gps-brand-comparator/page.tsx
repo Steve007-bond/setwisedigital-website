@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Garmin vs TomTom vs Google Maps — Side-by-Side Honest Comparison",
-  description: "Compare any two GPS options side by side — Garmin, TomTom, Google Maps, Apple Maps, or Waze. Honest scores for maps accuracy, offline use, traffic, voice control, and 3-year cost. Free.",
+  title: "Garmin vs TomTom vs Google Maps — Honest Comparison",
+  description: "Compare any two GPS options side by side. Honest scores for maps accuracy, offline use, traffic, voice, and 3-year running cost. Free.",
   keywords: [
     "Garmin vs TomTom 2025",
     "best GPS brand",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "GPS brand comparison",
     "best dedicated GPS vs phone navigation",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-brand-comparator" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-brand-comparator" },
   openGraph: {
-    title: "Garmin vs TomTom vs Google Maps — Side-by-Side Honest Comparison",
-    description: "Compare any two GPS options side by side — Garmin, TomTom, Google Maps, Apple Maps, or Waze. Honest scores for maps accuracy, offline use, traffic, voice control, and 3-year cost. Free.",
-    url: "https://setwisedigital.com/tools/gps-brand-comparator",
+    title: "Garmin vs TomTom vs Google Maps — Honest Comparison",
+    description: "Compare any two GPS options side by side. Honest scores for maps accuracy, offline use, traffic, voice, and 3-year running cost. Free.",
+    url: "https://www.setwisedigital.com/tools/gps-brand-comparator",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Compare any two GPS options side by side — Garmin, TomTom, Google Maps, Apple Maps, or Waze. Honest scores for maps accuracy, offline use, traffic, voice control, and 3-year cost. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Garmin vs TomTom vs Google Maps — Side-by-Side Honest Comparison", item: "https://setwisedigital.com/tools/gps-brand-comparator" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Garmin vs TomTom vs Google Maps — Side-by-Side Honest Comparison", item: "https://www.setwisedigital.com/tools/gps-brand-comparator" },
     ],
   };
 

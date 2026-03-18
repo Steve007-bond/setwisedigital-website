@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Setwise Digital — Technology Simplified | Plain-English Tech Learning",
+  title: "Setwise Digital — Plain-English Tech Learning for Adults 40+",
   description:
-    "Setwise Digital teaches everyday technology in plain English — printers, GPS, smart home, and more. 47 free interactive tools plus step-by-step learning guides for adults 40+. No jargon. No pressure.",
+    "Plain-English tech guides for adults 40+. 47 free interactive tools for printers, GPS, smart home, and more. No jargon. No pressure.",
   keywords: [
     "technology simplified",
     "plain English tech guides",
@@ -21,16 +21,16 @@ export const metadata: Metadata = {
     "how to print from iPhone",
     "printer stopped working fix",
   ],
-  alternates: { canonical: "https://setwisedigital.com" },
+  alternates: { canonical: "https://www.setwisedigital.com" },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://setwisedigital.com",
+    url: "https://www.setwisedigital.com",
     siteName: "Setwise Digital",
-    title: "Setwise Digital — Technology Simplified",
+    title: "Setwise Digital — Plain-English Tech Learning for Adults 40+",
     description:
-      "Plain-English tech learning for adults 40+. 47 free interactive tools covering printers, GPS, smart home, and more. Learn at your own pace — no prior knowledge needed.",
-    images: [{ url: "https://setwisedigital.com/og-image.png", width: 1200, height: 630, alt: "Setwise Digital — Technology Simplified" }],
+      "Plain-English tech guides for adults 40+. 47 free interactive tools for printers, GPS, smart home, and more. No jargon. No pressure.",
+    images: [{ url: "https://www.setwisedigital.com/og-image.png", width: 1200, height: 630, alt: "Setwise Digital — Technology Simplified" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -44,15 +44,15 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Setwise Digital",
-    url: "https://setwisedigital.com",
-    logo: "https://setwisedigital.com/logo-dark.png",
+    url: "https://www.setwisedigital.com",
+    logo: "https://www.setwisedigital.com/logo-dark.png",
     description:
       "Setwise Digital is an independent tech literacy and education platform. We provide plain-English learning guides and free interactive tools for adults 40+ covering printers, GPS, smart home devices, and more.",
     sameAs: [],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
-      url: "https://setwisedigital.com/contact",
+      url: "https://www.setwisedigital.com/contact",
     },
   };
 
@@ -60,11 +60,11 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Setwise Digital",
-    url: "https://setwisedigital.com",
+    url: "https://www.setwisedigital.com",
     description: "Plain-English technology learning platform with 47 free interactive tools for adults 40+.",
     potentialAction: {
       "@type": "SearchAction",
-      target: { "@type": "EntryPoint", urlTemplate: "https://setwisedigital.com/tools?q={search_term_string}" },
+      target: { "@type": "EntryPoint", urlTemplate: "https://www.setwisedigital.com/tools?q={search_term_string}" },
       "query-input": "required name=search_term_string",
     },
   };
@@ -120,7 +120,7 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
     ],
   };
 

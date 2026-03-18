@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Best GPS for Hunting in Canada — Boreal Forest, Mountains, Backcountry",
-  description: "Hunting GPS guide built specifically for Canadian conditions. Boreal forest, mountain terrain, dog hunting, remote backcountry. Garmin GPSMAP 67, 66i, Alpha, and Montana compared. Free.",
+  title: "Best GPS for Hunting in Canada — Boreal & Backcountry",
+  description: "Hunting GPS for Canadian boreal forest, mountains, and backcountry. Garmin GPSMAP 67, 66i, Alpha, and Montana compared. Free guide.",
   keywords: [
     "best GPS for hunting Canada",
     "hunting GPS backcountry Canada",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "Garmin GPSMAP hunting",
     "handheld GPS for deer hunting Canada",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/hunting-gps-canada" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/hunting-gps-canada" },
   openGraph: {
-    title: "Best GPS for Hunting in Canada — Boreal Forest, Mountains, Backcountry",
-    description: "Hunting GPS guide built specifically for Canadian conditions. Boreal forest, mountain terrain, dog hunting, remote backcountry. Garmin GPSMAP 67, 66i, Alpha, and Montana compared. Free.",
-    url: "https://setwisedigital.com/tools/hunting-gps-canada",
+    title: "Best GPS for Hunting in Canada — Boreal & Backcountry",
+    description: "Hunting GPS for Canadian boreal forest, mountains, and backcountry. Garmin GPSMAP 67, 66i, Alpha, and Montana compared. Free guide.",
+    url: "https://www.setwisedigital.com/tools/hunting-gps-canada",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Hunting GPS guide built specifically for Canadian conditions. Boreal forest, mountain terrain, dog hunting, remote backcountry. Garmin GPSMAP 67, 66i, Alpha, and Montana compared. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Best GPS for Hunting in Canada — Boreal Forest, Mountains, Backcountry", item: "https://setwisedigital.com/tools/hunting-gps-canada" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Best GPS for Hunting in Canada — Boreal Forest, Mountains, Backcountry", item: "https://www.setwisedigital.com/tools/hunting-gps-canada" },
     ],
   };
 

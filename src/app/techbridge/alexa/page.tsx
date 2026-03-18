@@ -4,9 +4,9 @@ import AlexaClient from "./AlexaClient";
 // DEPLOYMENT NOTE: Rename your existing techbridge/alexa/page.tsx → techbridge/alexa/AlexaClient.tsx
 
 export const metadata: Metadata = {
-  title: "Alexa & Echo Learning Guide — Commands, Setup & Tips | Setwise Digital",
+  title: "Alexa & Echo Learning Guide — Commands & Setup | Setwise",
   description:
-    "Learn how to use Amazon Alexa and Echo in plain English. Set up your Echo Dot, discover useful commands, create routines, and get more from your smart speaker. Step-by-step guide for beginners.",
+    "Learn how to use Amazon Alexa in plain English. Set up your Echo Dot, discover useful commands, create routines. Beginner-friendly guide.",
   keywords: [
     "how to use Alexa",
     "Amazon Echo setup guide",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "Alexa learning guide adults over 50",
     "best Alexa commands everyday",
   ],
-  alternates: { canonical: "https://setwisedigital.com/techbridge/alexa" },
+  alternates: { canonical: "https://www.setwisedigital.com/techbridge/alexa" },
   openGraph: {
-    title: "Alexa & Echo Learning Guide | Setwise Digital TechBridge",
-    description: "Plain-English guide to Alexa commands, Echo setup, and routines. For beginners and adults 40+.",
-    url: "https://setwisedigital.com/techbridge/alexa",
+    title: "Alexa & Echo Learning Guide — Commands & Setup | Setwise",
+    description: "Learn how to use Amazon Alexa in plain English. Set up your Echo Dot, discover useful commands, create routines. Beginner-friendly guide.",
+    url: "https://www.setwisedigital.com/techbridge/alexa",
   },
 };
 
@@ -31,10 +31,10 @@ export default function TechBridgeAlexaPage() {
     "@context": "https://schema.org",
     "@type": "LearningResource",
     name: "Alexa and Echo Learning Guide by Setwise Digital",
-    url: "https://setwisedigital.com/techbridge/alexa",
+    url: "https://www.setwisedigital.com/techbridge/alexa",
     description:
       "Plain-English Alexa learning guide covering Echo Dot setup, Alexa commands, routines, smart home integration, and tips for getting more from Amazon Alexa devices.",
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     teaches: [
       "How to set up Amazon Echo",
       "Useful Alexa commands",
@@ -81,9 +81,9 @@ export default function TechBridgeAlexaPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://setwisedigital.com/techbridge" },
-      { "@type": "ListItem", position: 3, name: "Alexa", item: "https://setwisedigital.com/techbridge/alexa" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://www.setwisedigital.com/techbridge" },
+      { "@type": "ListItem", position: 3, name: "Alexa", item: "https://www.setwisedigital.com/techbridge/alexa" },
     ],
   };
 

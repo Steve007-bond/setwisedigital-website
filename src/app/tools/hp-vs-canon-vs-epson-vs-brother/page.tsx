@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "HP vs Canon vs Epson vs Brother — Which Printer Brand Wins for You? | Setwise Digital",
+  title: "HP vs Canon vs Epson vs Brother — Which Wins for You?",
   description:
-    "3-question quiz scores all 4 printer brands against your actual needs. Animated comparison results, ranked scores, honest pros and cons. Find out which brand is genuinely best for your situation.",
+    "3-question quiz scores all 4 printer brands against your needs. Ranked comparison results with honest pros and cons. Free, plain English.",
   keywords: [
     "HP vs Canon vs Epson vs Brother",
     "best printer brand 2025",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "Epson EcoTank vs HP Smart Tank",
     "Brother vs HP printer for documents",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/hp-vs-canon-vs-epson-vs-brother" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/hp-vs-canon-vs-epson-vs-brother" },
   openGraph: {
-    title: "HP vs Canon vs Epson vs Brother — Honest Brand Comparison | Setwise Digital",
-    description: "3-question quiz ranks all 4 brands against your needs. Animated scores, pros and cons, and an honest winner.",
-    url: "https://setwisedigital.com/tools/hp-vs-canon-vs-epson-vs-brother",
+    title: "HP vs Canon vs Epson vs Brother — Which Wins for You?",
+    description: "3-question quiz scores all 4 printer brands against your needs. Ranked comparison results with honest pros and cons. Free, plain English.",
+    url: "https://www.setwisedigital.com/tools/hp-vs-canon-vs-epson-vs-brother",
   },
 };
 
@@ -34,7 +34,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Free interactive printer brand comparison tool. Answer 3 questions about what you print, how often, and your budget — get a scored comparison of HP, Canon, Epson, and Brother with ranked results and honest pros and cons.",
     featureList: [
       "Weighted scoring across HP, Canon, Epson, Brother",
@@ -96,9 +96,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "HP vs Canon vs Epson vs Brother", item: "https://setwisedigital.com/tools/hp-vs-canon-vs-epson-vs-brother" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "HP vs Canon vs Epson vs Brother", item: "https://www.setwisedigital.com/tools/hp-vs-canon-vs-epson-vs-brother" },
     ],
   };
 

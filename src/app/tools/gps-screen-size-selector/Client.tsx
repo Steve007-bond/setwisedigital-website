@@ -147,7 +147,7 @@ export default function Client() {
   const validate = () => { const e: Record<string,string>={};if(!name.trim())e.name="Please enter your name";if(!email.trim()||!email.includes("@"))e.email="Please enter a valid email";setErrors(e);return Object.keys(e).length===0; };
   const handleSubmit = async () => {
     if(!validate())return;setSubmitting(true);
-    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,issue:`Screen Size — Recommended: ${result.size}`,source:"gps-screen-size-selector"})});}catch{}
+    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email, phone,issue:`Screen Size — Recommended: ${result.size}`,source:"gps-screen-size-selector"})});}catch{}
     setSubmitted(true);setSubmitting(false);
   };
   const reset = () => {setStage("intro");setCurrentQ(0);setScores({size5:0,size55:0,size7:0});setAnswers({});setSel(null);setName("");setEmail("");setSubmitted(false);};

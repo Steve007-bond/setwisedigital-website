@@ -4,9 +4,9 @@ import GpsClient from "./GpsClient";
 // DEPLOYMENT NOTE: Rename your existing techbridge/gps/page.tsx → techbridge/gps/GpsClient.tsx
 
 export const metadata: Metadata = {
-  title: "GPS Learning Guide — Map Updates, Navigation & Garmin Setup | Setwise Digital",
+  title: "GPS Learning Guide — Map Updates & Navigation | Setwise",
   description:
-    "Learn how GPS navigation works in plain English. How to update Garmin maps, read GPS directions, plan routes, and understand GPS features. Step-by-step guide for beginners and seniors.",
+    "Learn GPS navigation in plain English. How to update Garmin maps, read directions, plan routes, and understand GPS features. For beginners.",
   keywords: [
     "how to update Garmin GPS",
     "GPS navigation learning guide",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "car GPS setup guide",
     "GPS learning guide adults over 50",
   ],
-  alternates: { canonical: "https://setwisedigital.com/techbridge/gps" },
+  alternates: { canonical: "https://www.setwisedigital.com/techbridge/gps" },
   openGraph: {
-    title: "GPS Learning Guide — Map Updates & Navigation | Setwise Digital",
-    description: "How to update Garmin maps, read GPS directions, and plan routes. Step-by-step for beginners.",
-    url: "https://setwisedigital.com/techbridge/gps",
+    title: "GPS Learning Guide — Map Updates & Navigation | Setwise",
+    description: "Learn GPS navigation in plain English. How to update Garmin maps, read directions, plan routes, and understand GPS features. For beginners.",
+    url: "https://www.setwisedigital.com/techbridge/gps",
   },
 };
 
@@ -31,10 +31,10 @@ export default function TechBridgeGpsPage() {
     "@context": "https://schema.org",
     "@type": "LearningResource",
     name: "GPS Learning Guide by Setwise Digital",
-    url: "https://setwisedigital.com/techbridge/gps",
+    url: "https://www.setwisedigital.com/techbridge/gps",
     description:
       "Plain-English GPS learning guide covering map updates, Garmin Express setup, route planning, GPS navigation features, and troubleshooting for Garmin, TomTom, and in-car navigation systems.",
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     teaches: [
       "How to update Garmin GPS maps",
       "How GPS navigation works",
@@ -81,9 +81,9 @@ export default function TechBridgeGpsPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://setwisedigital.com/techbridge" },
-      { "@type": "ListItem", position: 3, name: "GPS", item: "https://setwisedigital.com/techbridge/gps" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://www.setwisedigital.com/techbridge" },
+      { "@type": "ListItem", position: 3, name: "GPS", item: "https://www.setwisedigital.com/techbridge/gps" },
     ],
   };
 

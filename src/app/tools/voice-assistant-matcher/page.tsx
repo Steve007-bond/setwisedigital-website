@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Best Voice Assistant for You — Alexa vs Google vs Siri",
-  description: "Alexa, Google Assistant, or Siri? 5 questions about your phone, daily habits, and home devices match you to the best voice assistant for your life. Free, plain English.",
+  title: "Best Voice Assistant — Alexa vs Google vs Siri Comparison",
+  description: "Alexa, Google Assistant, or Siri? 5 questions about your phone and daily habits match you to the best voice assistant. Free, plain English.",
   keywords: [
     "Alexa vs Google Assistant vs Siri",
     "best voice assistant 2025",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "Siri vs Alexa vs Google comparison",
     "smart speaker buying guide",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/voice-assistant-matcher" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/voice-assistant-matcher" },
   openGraph: {
-    title: "Best Voice Assistant for You — Alexa vs Google vs Siri",
-    description: "Alexa, Google Assistant, or Siri? 5 questions about your phone, daily habits, and home devices match you to the best voice assistant for your life. Free, plain English.",
-    url: "https://setwisedigital.com/tools/voice-assistant-matcher",
+    title: "Best Voice Assistant — Alexa vs Google vs Siri Comparison",
+    description: "Alexa, Google Assistant, or Siri? 5 questions about your phone and daily habits match you to the best voice assistant. Free, plain English.",
+    url: "https://www.setwisedigital.com/tools/voice-assistant-matcher",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Alexa, Google Assistant, or Siri? 5 questions about your phone, daily habits, and home devices match you to the best voice assistant for your life. Free, plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Best Voice Assistant for You — Alexa vs Google vs Siri", item: "https://setwisedigital.com/tools/voice-assistant-matcher" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Best Voice Assistant for You — Alexa vs Google vs Siri", item: "https://www.setwisedigital.com/tools/voice-assistant-matcher" },
     ],
   };
 

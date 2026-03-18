@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Best Pet GPS Tracker 2025 — Dog and Cat Tracker Comparison",
-  description: "Compare the 5 best pet GPS trackers: Fi Series 3, Whistle Go, Tractive GPS, Garmin T5, and Apple AirTag. Honest subscription cost breakdown. Free plain-English guide.",
+  title: "Best Pet GPS Tracker 2025 — Dog and Cat Comparison",
+  description: "Compare Fi Series 3, Whistle Go, Tractive GPS, Garmin T5, and Apple AirTag. Honest subscription cost breakdown. Free plain-English guide.",
   keywords: [
     "best dog GPS tracker 2025",
     "best cat GPS tracker",
@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     "pet GPS tracker comparison",
     "dog GPS no subscription",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/pet-gps-selector" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/pet-gps-selector" },
   openGraph: {
-    title: "Best Pet GPS Tracker 2025 — Dog and Cat Tracker Comparison",
-    description: "Compare the 5 best pet GPS trackers: Fi Series 3, Whistle Go, Tractive GPS, Garmin T5, and Apple AirTag. Honest subscription cost breakdown. Free plain-English guide.",
-    url: "https://setwisedigital.com/tools/pet-gps-selector",
+    title: "Best Pet GPS Tracker 2025 — Dog and Cat Comparison",
+    description: "Compare Fi Series 3, Whistle Go, Tractive GPS, Garmin T5, and Apple AirTag. Honest subscription cost breakdown. Free plain-English guide.",
+    url: "https://www.setwisedigital.com/tools/pet-gps-selector",
   },
 };
 
@@ -30,7 +30,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Compare the 5 best pet GPS trackers: Fi Series 3, Whistle Go, Tractive GPS, Garmin T5, and Apple AirTag. Honest subscription cost breakdown. Free plain-English guide.",
   };
 
@@ -64,9 +64,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Best Pet GPS Tracker 2025 — Dog and Cat Tracker Comparison", item: "https://setwisedigital.com/tools/pet-gps-selector" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Best Pet GPS Tracker 2025 — Dog and Cat Tracker Comparison", item: "https://www.setwisedigital.com/tools/pet-gps-selector" },
     ],
   };
 

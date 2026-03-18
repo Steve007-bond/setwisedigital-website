@@ -8,3 +8,7 @@ Sitemap: https://www.setwisedigital.com/sitemap.xml
 # Disallow admin/api routes
 Disallow: /api/
 Disallow: /_next/
+
+# IndexNow
+# Key: setwisedigital47tools2026
+# Verify: https://www.setwisedigital.com/setwisedigital47tools2026.txt

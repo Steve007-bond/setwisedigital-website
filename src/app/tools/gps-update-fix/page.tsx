@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "GPS Map Update Not Working? Step-by-Step Fix for Common Problems",
-  description: "Garmin Express not detecting your GPS, map download failing, Wi-Fi won't connect? Pick your problem and follow step-by-step fixes. Free, plain English. Covers all Garmin models.",
+  title: "GPS Map Update Not Working? Step-by-Step Fix Guide",
+  description: "Garmin Express not detecting GPS, download failing, or Wi-Fi won't connect? Pick your problem and follow step-by-step fixes. Free.",
   keywords: [
     "GPS not updating fix",
     "Garmin Express not working",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "why GPS update not working",
     "GPS update stuck fix",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-update-fix" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-update-fix" },
   openGraph: {
-    title: "GPS Map Update Not Working? Step-by-Step Fix for Common Problems",
-    description: "Garmin Express not detecting your GPS, map download failing, Wi-Fi won't connect? Pick your problem and follow step-by-step fixes. Free, plain English. Covers all Garmin models.",
-    url: "https://setwisedigital.com/tools/gps-update-fix",
+    title: "GPS Map Update Not Working? Step-by-Step Fix Guide",
+    description: "Garmin Express not detecting GPS, download failing, or Wi-Fi won't connect? Pick your problem and follow step-by-step fixes. Free.",
+    url: "https://www.setwisedigital.com/tools/gps-update-fix",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Garmin Express not detecting your GPS, map download failing, Wi-Fi won't connect? Pick your problem and follow step-by-step fixes. Free, plain English. Covers all Garmin models.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "GPS Map Update Not Working? Step-by-Step Fix for Common Problems", item: "https://setwisedigital.com/tools/gps-update-fix" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "GPS Map Update Not Working? Step-by-Step Fix for Common Problems", item: "https://www.setwisedigital.com/tools/gps-update-fix" },
     ],
   };
 

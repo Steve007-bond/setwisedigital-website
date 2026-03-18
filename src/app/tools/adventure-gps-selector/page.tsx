@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Adventure GPS Selector — Hiking, Hunting, Fishing & Boating 2025",
-  description: "Find the exact Garmin GPS for your outdoor adventure. Hiking, hunting, fishing, boating, or off-road — answer 3 questions, get a personalised recommendation with full feature comparison. Free.",
+  title: "Adventure GPS Selector — Hiking, Hunting, Fishing & More",
+  description: "Find the exact Garmin GPS for your outdoor adventure. Hiking, hunting, fishing, or boating — 3 questions get you a personalised match.",
   keywords: [
     "best hiking GPS Garmin",
     "best hunting GPS",
@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     "adventure GPS selector",
     "Garmin inReach vs GPSMAP",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/adventure-gps-selector" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/adventure-gps-selector" },
   openGraph: {
-    title: "Adventure GPS Selector — Hiking, Hunting, Fishing & Boating 2025",
-    description: "Find the exact Garmin GPS for your outdoor adventure. Hiking, hunting, fishing, boating, or off-road — answer 3 questions, get a personalised recommendation with full feature comparison. Free.",
-    url: "https://setwisedigital.com/tools/adventure-gps-selector",
+    title: "Adventure GPS Selector — Hiking, Hunting, Fishing & More",
+    description: "Find the exact Garmin GPS for your outdoor adventure. Hiking, hunting, fishing, or boating — 3 questions get you a personalised match.",
+    url: "https://www.setwisedigital.com/tools/adventure-gps-selector",
   },
 };
 
@@ -31,7 +31,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Find the exact Garmin GPS for your outdoor adventure. Hiking, hunting, fishing, boating, or off-road — answer 3 questions, get a personalised recommendation with full feature comparison. Free.",
   };
 
@@ -72,9 +72,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Adventure GPS Selector — Hiking, Hunting, Fishing & Boating 2025", item: "https://setwisedigital.com/tools/adventure-gps-selector" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Adventure GPS Selector — Hiking, Hunting, Fishing & Boating 2025", item: "https://www.setwisedigital.com/tools/adventure-gps-selector" },
     ],
   };
 

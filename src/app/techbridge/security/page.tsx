@@ -4,9 +4,9 @@ import SecurityClient from "./SecurityClient";
 // DEPLOYMENT NOTE: Rename your existing techbridge/security/page.tsx → techbridge/security/SecurityClient.tsx
 
 export const metadata: Metadata = {
-  title: "Online Security Learning Guide — Antivirus, Passwords & Safe Browsing | Setwise Digital",
+  title: "Online Safety Guide — Antivirus & Passwords | Setwise",
   description:
-    "Learn how to stay safe online in plain English. Set up antivirus, create strong passwords, recognise scams, secure your email, and protect your accounts. Step-by-step guide for adults 40+.",
+    "Stay safe online in plain English. Set up antivirus, create strong passwords, recognise scams, and secure your accounts. Adults 40+.",
   keywords: [
     "online security for seniors",
     "how to set up antivirus",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "cybersecurity plain English",
     "how to protect from hackers beginners",
   ],
-  alternates: { canonical: "https://setwisedigital.com/techbridge/security" },
+  alternates: { canonical: "https://www.setwisedigital.com/techbridge/security" },
   openGraph: {
-    title: "Online Security Learning Guide | Setwise Digital TechBridge",
-    description: "Antivirus, passwords, scam recognition, and email security in plain English for adults 40+.",
-    url: "https://setwisedigital.com/techbridge/security",
+    title: "Online Safety Guide — Antivirus & Passwords | Setwise",
+    description: "Stay safe online in plain English. Set up antivirus, create strong passwords, recognise scams, and secure your accounts. Adults 40+.",
+    url: "https://www.setwisedigital.com/techbridge/security",
   },
 };
 
@@ -31,10 +31,10 @@ export default function TechBridgeSecurityPage() {
     "@context": "https://schema.org",
     "@type": "LearningResource",
     name: "Online Security Learning Guide by Setwise Digital",
-    url: "https://setwisedigital.com/techbridge/security",
+    url: "https://www.setwisedigital.com/techbridge/security",
     description:
       "Plain-English online security learning guide covering antivirus setup, password management, scam recognition, email security, account protection, and safe browsing habits.",
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     teaches: [
       "How to set up antivirus software",
       "How to create and manage strong passwords",
@@ -80,9 +80,9 @@ export default function TechBridgeSecurityPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://setwisedigital.com/techbridge" },
-      { "@type": "ListItem", position: 3, name: "Security", item: "https://setwisedigital.com/techbridge/security" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://www.setwisedigital.com/techbridge" },
+      { "@type": "ListItem", position: 3, name: "Security", item: "https://www.setwisedigital.com/techbridge/security" },
     ],
   };
 

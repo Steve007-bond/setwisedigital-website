@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "My Printer Stopped Working — Step-by-Step Fix Guide | Setwise Digital",
+  title: "My Printer Stopped Working — Step-by-Step Fix Guide",
   description:
-    "Printer offline, blank pages, paper jam, or won't connect to Wi-Fi? Select your exact problem and printer brand. Get the plain-English fix steps written for your specific situation. Free — no account needed.",
+    "Printer offline, blank pages, or paper jam? Select your problem and printer brand. Get plain-English fix steps for your exact situation.",
   keywords: [
     "printer stopped working",
     "printer offline fix",
@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     "printer troubleshooting guide",
     "why is my printer not working",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/my-printer-stopped-working" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/my-printer-stopped-working" },
   openGraph: {
-    title: "My Printer Stopped Working — Free Fix Guide | Setwise Digital",
-    description: "Select your printer problem and brand. Get exact step-by-step fix instructions in plain English. Covers HP, Canon, Epson, and Brother.",
-    url: "https://setwisedigital.com/tools/my-printer-stopped-working",
+    title: "My Printer Stopped Working — Step-by-Step Fix Guide",
+    description: "Printer offline, blank pages, or paper jam? Select your problem and printer brand. Get plain-English fix steps for your exact situation.",
+    url: "https://www.setwisedigital.com/tools/my-printer-stopped-working",
   },
 };
 
@@ -36,7 +36,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Free interactive printer troubleshooting guide. Select your problem (offline, blank pages, paper jam, Wi-Fi lost) and your printer brand (HP, Canon, Epson, Brother) to get exact plain-English fix steps.",
     featureList: [
       "Printer offline fix steps",
@@ -115,9 +115,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "My Printer Stopped Working", item: "https://setwisedigital.com/tools/my-printer-stopped-working" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "My Printer Stopped Working", item: "https://www.setwisedigital.com/tools/my-printer-stopped-working" },
     ],
   };
 

@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "What GPS Screen Size Do I Need? 5, 5.5 or 7 Inch Comparison",
-  description: "5-inch, 5.5-inch, or 6.95-inch GPS screen? 4 questions match the right screen size to your eyesight, car, and driving habits. Best large-screen GPS for seniors 50+. Free.",
+  title: "What GPS Screen Size Do I Need? 5, 5.5 or 7 Inch Guide",
+  description: "5-inch, 5.5-inch, or 7-inch GPS screen? 4 questions match the right size to your eyesight and driving style. Best large-screen GPS for seniors.",
   keywords: [
     "GPS with large screen",
     "best GPS 7 inch screen",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "GPS screen size comparison",
     "GPS touchscreen large display",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-screen-size-selector" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-screen-size-selector" },
   openGraph: {
-    title: "What GPS Screen Size Do I Need? 5, 5.5 or 7 Inch Comparison",
-    description: "5-inch, 5.5-inch, or 6.95-inch GPS screen? 4 questions match the right screen size to your eyesight, car, and driving habits. Best large-screen GPS for seniors 50+. Free.",
-    url: "https://setwisedigital.com/tools/gps-screen-size-selector",
+    title: "What GPS Screen Size Do I Need? 5, 5.5 or 7 Inch Guide",
+    description: "5-inch, 5.5-inch, or 7-inch GPS screen? 4 questions match the right size to your eyesight and driving style. Best large-screen GPS for seniors.",
+    url: "https://www.setwisedigital.com/tools/gps-screen-size-selector",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "5-inch, 5.5-inch, or 6.95-inch GPS screen? 4 questions match the right screen size to your eyesight, car, and driving habits. Best large-screen GPS for seniors 50+. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "What GPS Screen Size Do I Need? 5, 5.5 or 7 Inch Comparison", item: "https://setwisedigital.com/tools/gps-screen-size-selector" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "What GPS Screen Size Do I Need? 5, 5.5 or 7 Inch Comparison", item: "https://www.setwisedigital.com/tools/gps-screen-size-selector" },
     ],
   };
 

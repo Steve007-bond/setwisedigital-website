@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Golf GPS Watch vs Laser Rangefinder vs Handheld — Which is Right for You?",
-  description: "GPS watch, laser rangefinder, or handheld GPS? 5 questions about your game, budget, and priorities. Get a personalised golf distance device recommendation. Free, plain English.",
+  title: "Golf GPS Watch vs Laser Rangefinder — Which is Right?",
+  description: "GPS watch, laser rangefinder, or handheld GPS? 5 questions about your game and budget. Get a personalised golf distance device recommendation.",
   keywords: [
     "golf GPS watch vs rangefinder",
     "best golf GPS 2025",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "best GPS watch for golf seniors",
     "golf distance device comparison",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/golf-gps-decider" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/golf-gps-decider" },
   openGraph: {
-    title: "Golf GPS Watch vs Laser Rangefinder vs Handheld — Which is Right for You?",
-    description: "GPS watch, laser rangefinder, or handheld GPS? 5 questions about your game, budget, and priorities. Get a personalised golf distance device recommendation. Free, plain English.",
-    url: "https://setwisedigital.com/tools/golf-gps-decider",
+    title: "Golf GPS Watch vs Laser Rangefinder — Which is Right?",
+    description: "GPS watch, laser rangefinder, or handheld GPS? 5 questions about your game and budget. Get a personalised golf distance device recommendation.",
+    url: "https://www.setwisedigital.com/tools/golf-gps-decider",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "GPS watch, laser rangefinder, or handheld GPS? 5 questions about your game, budget, and priorities. Get a personalised golf distance device recommendation. Free, plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Golf GPS Watch vs Laser Rangefinder vs Handheld — Which is Right for You?", item: "https://setwisedigital.com/tools/golf-gps-decider" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Golf GPS Watch vs Laser Rangefinder vs Handheld — Which is Right for You?", item: "https://www.setwisedigital.com/tools/golf-gps-decider" },
     ],
   };
 

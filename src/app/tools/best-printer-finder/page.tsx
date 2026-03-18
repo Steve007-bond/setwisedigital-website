@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Best Printer Finder — Photos, Documents or Both? Free 5-Question Match",
-  description: "Answer 5 questions about what you print, how often, and your budget. Setwise Digital matches you to the best HP, Canon, Epson, or Brother printer for your home. Free, plain English.",
+  title: "Best Printer Finder — Free 5-Question Match Tool",
+  description: "5 questions match you to the best HP, Canon, Epson, or Brother printer for your home and budget. Free, plain English, no jargon.",
   keywords: [
     "best printer for home use 2025",
     "best home printer",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "best printer for documents",
     "best printer under 100",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/best-printer-finder" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/best-printer-finder" },
   openGraph: {
-    title: "Best Printer Finder — Photos, Documents or Both? Free 5-Question Match",
-    description: "Answer 5 questions about what you print, how often, and your budget. Setwise Digital matches you to the best HP, Canon, Epson, or Brother printer for your home. Free, plain English.",
-    url: "https://setwisedigital.com/tools/best-printer-finder",
+    title: "Best Printer Finder — Free 5-Question Match Tool",
+    description: "5 questions match you to the best HP, Canon, Epson, or Brother printer for your home and budget. Free, plain English, no jargon.",
+    url: "https://www.setwisedigital.com/tools/best-printer-finder",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Answer 5 questions about what you print, how often, and your budget. Setwise Digital matches you to the best HP, Canon, Epson, or Brother printer for your home. Free, plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Best Printer Finder — Photos, Documents or Both? Free 5-Question Match", item: "https://setwisedigital.com/tools/best-printer-finder" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Best Printer Finder — Photos, Documents or Both? Free 5-Question Match", item: "https://www.setwisedigital.com/tools/best-printer-finder" },
     ],
   };
 

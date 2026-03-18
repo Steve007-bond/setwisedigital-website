@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import AboutClient from "./AboutClient";
 
 export const metadata: Metadata = {
-  title: "About Setwise Digital — Independent Tech Education Platform Since 2016",
-  description: "Setwise Digital is an independent technology literacy platform founded in 2016. We teach printer setup, GPS, smart home, and camera use in plain English for adults 40+. Not affiliated with any manufacturer.",
+  title: "About Setwise Digital — Independent Tech Education Since 2016",
+  description: "Setwise Digital teaches printer setup, GPS, smart home, and security in plain English for adults 40+. Independent — not affiliated with any manufacturer.",
   keywords: [
     "about Setwise Digital",
     "technology literacy platform",
@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     "Setwise Digital Colorado",
     "technology education adults over 40",
   ],
-  alternates: { canonical: "https://setwisedigital.com/about" },
+  alternates: { canonical: "https://www.setwisedigital.com/about" },
   openGraph: {
-    title: "About Setwise Digital — Independent Tech Education Platform Since 2016",
-    description: "Setwise Digital is an independent technology literacy platform founded in 2016. We teach printer setup, GPS, smart home, and camera use in plain English for adults 40+. Not affiliated with any manufacturer.",
-    url: "https://setwisedigital.com/about",
+    title: "About Setwise Digital — Independent Tech Education Since 2016",
+    description: "Setwise Digital teaches printer setup, GPS, smart home, and security in plain English for adults 40+. Independent — not affiliated with any manufacturer.",
+    url: "https://www.setwisedigital.com/about",
   },
 };
 
@@ -26,7 +26,7 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Setwise Digital",
-    url: "https://setwisedigital.com",
+    url: "https://www.setwisedigital.com",
     foundingDate: "2016",
     description: "Independent technology literacy platform for adults 40+. Covers printers, GPS, smart home, and more in plain English.",
     areaServed: { "@type": "Country", name: "United States" },
@@ -46,8 +46,8 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "About", item: "https://setwisedigital.com/about" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "About", item: "https://www.setwisedigital.com/about" },
     ],
   };
 

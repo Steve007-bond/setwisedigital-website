@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "GPS Device vs Phone Navigation — Which is Right for You?",
-  description: "Do you actually need a dedicated GPS or is your phone enough? 4 questions about how you drive, where you go, and your phone habits. Honest plain-English verdict. Free.",
+  title: "GPS Device vs Phone Navigation — Which Do You Need?",
+  description: "Do you need a dedicated GPS or is your phone enough? 4 questions about how you drive and where you go. Honest plain-English verdict. Free.",
   keywords: [
     "do I need a GPS device",
     "GPS or Google Maps",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "GPS device vs phone which is better",
     "Garmin vs Google Maps 2025",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-vs-phone-decider" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-vs-phone-decider" },
   openGraph: {
-    title: "GPS Device vs Phone Navigation — Which is Right for You?",
-    description: "Do you actually need a dedicated GPS or is your phone enough? 4 questions about how you drive, where you go, and your phone habits. Honest plain-English verdict. Free.",
-    url: "https://setwisedigital.com/tools/gps-vs-phone-decider",
+    title: "GPS Device vs Phone Navigation — Which Do You Need?",
+    description: "Do you need a dedicated GPS or is your phone enough? 4 questions about how you drive and where you go. Honest plain-English verdict. Free.",
+    url: "https://www.setwisedigital.com/tools/gps-vs-phone-decider",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Do you actually need a dedicated GPS or is your phone enough? 4 questions about how you drive, where you go, and your phone habits. Honest plain-English verdict. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "GPS Device vs Phone Navigation — Which is Right for You?", item: "https://setwisedigital.com/tools/gps-vs-phone-decider" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "GPS Device vs Phone Navigation — Which is Right for You?", item: "https://www.setwisedigital.com/tools/gps-vs-phone-decider" },
     ],
   };
 

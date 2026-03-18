@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Best GPS for Seniors 2025 — Large Screen, Simple Menus, Easy Voice",
-  description: "Large screen GPS units with simple menus and voice directions — chosen specifically for drivers 55+. 4 questions match you to the right Garmin model. Includes 5 senior GPS tips. Free.",
+  title: "Best GPS for Seniors 2025 — Large Screen, Simple Menus",
+  description: "Large screen GPS with simple menus and voice directions for drivers 55+. 4 questions match you to the right Garmin model. Free guide.",
   keywords: [
     "best GPS for seniors 2025",
     "easy GPS for elderly drivers",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "GPS with big display easy to read",
     "best senior GPS navigation",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-for-seniors" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-for-seniors" },
   openGraph: {
-    title: "Best GPS for Seniors 2025 — Large Screen, Simple Menus, Easy Voice",
-    description: "Large screen GPS units with simple menus and voice directions — chosen specifically for drivers 55+. 4 questions match you to the right Garmin model. Includes 5 senior GPS tips. Free.",
-    url: "https://setwisedigital.com/tools/gps-for-seniors",
+    title: "Best GPS for Seniors 2025 — Large Screen, Simple Menus",
+    description: "Large screen GPS with simple menus and voice directions for drivers 55+. 4 questions match you to the right Garmin model. Free guide.",
+    url: "https://www.setwisedigital.com/tools/gps-for-seniors",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Large screen GPS units with simple menus and voice directions — chosen specifically for drivers 55+. 4 questions match you to the right Garmin model. Includes 5 senior GPS tips. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Best GPS for Seniors 2025 — Large Screen, Simple Menus, Easy Voice", item: "https://setwisedigital.com/tools/gps-for-seniors" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Best GPS for Seniors 2025 — Large Screen, Simple Menus, Easy Voice", item: "https://www.setwisedigital.com/tools/gps-for-seniors" },
     ],
   };
 

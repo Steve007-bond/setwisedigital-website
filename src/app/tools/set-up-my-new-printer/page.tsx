@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "How to Set Up a New Printer — Step-by-Step Wizard | Setwise Digital",
+  title: "How to Set Up a New Printer — Step-by-Step Guide",
   description:
-    "Just got a new HP, Canon, Epson, or Brother printer? Choose your brand and connection type — Wi-Fi, USB, or Bluetooth. Get the exact setup steps for your specific combination. Free interactive guide.",
+    "Just got an HP, Canon, Epson, or Brother printer? Choose your brand and connection type for exact Wi-Fi, USB, or Bluetooth setup steps.",
   keywords: [
     "how to set up a new printer",
     "how to connect printer to WiFi",
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     "how to install a printer Windows 11",
     "how to add printer to iPhone",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/set-up-my-new-printer" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/set-up-my-new-printer" },
   openGraph: {
-    title: "Set Up My New Printer — Step-by-Step Guide | Setwise Digital",
-    description: "Brand and connection-specific setup wizard. Choose HP, Canon, Epson, or Brother + Wi-Fi, USB, or Bluetooth — get the exact steps.",
-    url: "https://setwisedigital.com/tools/set-up-my-new-printer",
+    title: "How to Set Up a New Printer — Step-by-Step Guide",
+    description: "Just got an HP, Canon, Epson, or Brother printer? Choose your brand and connection type for exact Wi-Fi, USB, or Bluetooth setup steps.",
+    url: "https://www.setwisedigital.com/tools/set-up-my-new-printer",
   },
 };
 
@@ -35,7 +35,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Interactive printer setup wizard covering 15 brand and connection combinations. Select your printer brand (HP, Canon, Epson, Brother) and connection type (Wi-Fi, USB, Bluetooth) for exact step-by-step setup instructions in plain English.",
     featureList: [
       "HP printer WiFi setup steps",
@@ -98,9 +98,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Set Up My New Printer", item: "https://setwisedigital.com/tools/set-up-my-new-printer" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Set Up My New Printer", item: "https://www.setwisedigital.com/tools/set-up-my-new-printer" },
     ],
   };
 

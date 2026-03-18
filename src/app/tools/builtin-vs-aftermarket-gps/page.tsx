@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Built-in Car GPS vs Garmin vs Apple CarPlay — Which is Right for You?",
-  description: "Should you use your car's built-in GPS, buy a Garmin, use Apple CarPlay, or stick with Google Maps? 4 honest questions get you a plain-English verdict. Free guide.",
+  title: "Built-in GPS vs Garmin vs CarPlay — Which Should I Use?",
+  description: "Car built-in GPS, Garmin, Apple CarPlay, or phone? 4 honest questions give you a plain-English verdict for your situation. Free guide.",
   keywords: [
     "built-in car GPS vs Garmin",
     "factory navigation vs aftermarket GPS",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "should I buy a Garmin or use phone",
     "car navigation system comparison 2025",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/builtin-vs-aftermarket-gps" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/builtin-vs-aftermarket-gps" },
   openGraph: {
-    title: "Built-in Car GPS vs Garmin vs Apple CarPlay — Which is Right for You?",
-    description: "Should you use your car's built-in GPS, buy a Garmin, use Apple CarPlay, or stick with Google Maps? 4 honest questions get you a plain-English verdict. Free guide.",
-    url: "https://setwisedigital.com/tools/builtin-vs-aftermarket-gps",
+    title: "Built-in GPS vs Garmin vs CarPlay — Which Should I Use?",
+    description: "Car built-in GPS, Garmin, Apple CarPlay, or phone? 4 honest questions give you a plain-English verdict for your situation. Free guide.",
+    url: "https://www.setwisedigital.com/tools/builtin-vs-aftermarket-gps",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Should you use your car's built-in GPS, buy a Garmin, use Apple CarPlay, or stick with Google Maps? 4 honest questions get you a plain-English verdict. Free guide.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Built-in Car GPS vs Garmin vs Apple CarPlay — Which is Right for You?", item: "https://setwisedigital.com/tools/builtin-vs-aftermarket-gps" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Built-in Car GPS vs Garmin vs Apple CarPlay — Which is Right for You?", item: "https://www.setwisedigital.com/tools/builtin-vs-aftermarket-gps" },
     ],
   };
 

@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import BestGPSFinderClient from "./BestGPSFinderClient";
 
 export const metadata: Metadata = {
-  title: "Best GPS Device for You 2025 — 5 Questions, Personal Match",
-  description: "Answer 5 questions about your driving habits and budget. Setwise Digital matches you to the best Garmin or TomTom GPS for your exact lifestyle — free, plain English, no jargon.",
+  title: "Best GPS Device for You 2025 — Personal Match in 5 Questions",
+  description: "5 questions about your driving habits and budget. Get a personalised Garmin or TomTom GPS recommendation. Free, plain English.",
   keywords: [
     "best GPS device 2025",
     "best GPS for seniors",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "easy GPS for beginners",
     "GPS buying guide 2025",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/best-gps-finder" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/best-gps-finder" },
   openGraph: {
-    title: "Best GPS Device for You 2025 — 5 Questions, Personal Match",
-    description: "Answer 5 questions about your driving habits and budget. Setwise Digital matches you to the best Garmin or TomTom GPS for your exact lifestyle — free, plain English, no jargon.",
-    url: "https://setwisedigital.com/tools/best-gps-finder",
+    title: "Best GPS Device for You 2025 — Personal Match in 5 Questions",
+    description: "5 questions about your driving habits and budget. Get a personalised Garmin or TomTom GPS recommendation. Free, plain English.",
+    url: "https://www.setwisedigital.com/tools/best-gps-finder",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Answer 5 questions about your driving habits and budget. Setwise Digital matches you to the best Garmin or TomTom GPS for your exact lifestyle — free, plain English, no jargon.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Best GPS Device for You 2025 — 5 Questions, Personal Match", item: "https://setwisedigital.com/tools/best-gps-finder" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Best GPS Device for You 2025 — 5 Questions, Personal Match", item: "https://www.setwisedigital.com/tools/best-gps-finder" },
     ],
   };
 

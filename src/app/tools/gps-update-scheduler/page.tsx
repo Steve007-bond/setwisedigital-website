@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "GPS Update Scheduler — How Outdated Are Your Maps? Step-by-Step Guide",
-  description: "Find out how outdated your GPS maps are and get a personalised step-by-step update guide specific to your device. Garmin and TomTom covered. Free, plain English.",
+  title: "GPS Update Scheduler — How Outdated Are Your Maps?",
+  description: "Find out how outdated your GPS maps are and get a personalised step-by-step update guide. Garmin and TomTom covered. Free, plain English.",
   keywords: [
     "how to update GPS maps",
     "GPS map update schedule",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "TomTom update guide",
     "GPS maps out of date fix",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-update-scheduler" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-update-scheduler" },
   openGraph: {
-    title: "GPS Update Scheduler — How Outdated Are Your Maps? Step-by-Step Guide",
-    description: "Find out how outdated your GPS maps are and get a personalised step-by-step update guide specific to your device. Garmin and TomTom covered. Free, plain English.",
-    url: "https://setwisedigital.com/tools/gps-update-scheduler",
+    title: "GPS Update Scheduler — How Outdated Are Your Maps?",
+    description: "Find out how outdated your GPS maps are and get a personalised step-by-step update guide. Garmin and TomTom covered. Free, plain English.",
+    url: "https://www.setwisedigital.com/tools/gps-update-scheduler",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Find out how outdated your GPS maps are and get a personalised step-by-step update guide specific to your device. Garmin and TomTom covered. Free, plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "GPS Update Scheduler — How Outdated Are Your Maps? Step-by-Step Guide", item: "https://setwisedigital.com/tools/gps-update-scheduler" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "GPS Update Scheduler — How Outdated Are Your Maps? Step-by-Step Guide", item: "https://www.setwisedigital.com/tools/gps-update-scheduler" },
     ],
   };
 

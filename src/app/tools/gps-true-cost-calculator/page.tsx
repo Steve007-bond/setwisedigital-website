@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "GPS True Cost Calculator — What Will It Really Cost Over 3 Years?",
-  description: "Calculate the real 3-year cost of any GPS device. Map updates, subscriptions, accessories — all included. Compare up to 3 GPS devices side by side. Free honest calculator.",
+  title: "GPS True Cost Calculator — What Will It Cost Over 3 Years?",
+  description: "Calculate the real 3-year cost of any GPS. Map updates, subscriptions, and accessories included. Compare up to 3 GPS devices. Free.",
   keywords: [
     "GPS total cost 3 years",
     "GPS map update annual cost",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "GPS subscription fees breakdown",
     "Garmin cost of ownership",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-true-cost-calculator" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-true-cost-calculator" },
   openGraph: {
-    title: "GPS True Cost Calculator — What Will It Really Cost Over 3 Years?",
-    description: "Calculate the real 3-year cost of any GPS device. Map updates, subscriptions, accessories — all included. Compare up to 3 GPS devices side by side. Free honest calculator.",
-    url: "https://setwisedigital.com/tools/gps-true-cost-calculator",
+    title: "GPS True Cost Calculator — What Will It Cost Over 3 Years?",
+    description: "Calculate the real 3-year cost of any GPS. Map updates, subscriptions, and accessories included. Compare up to 3 GPS devices. Free.",
+    url: "https://www.setwisedigital.com/tools/gps-true-cost-calculator",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Calculate the real 3-year cost of any GPS device. Map updates, subscriptions, accessories — all included. Compare up to 3 GPS devices side by side. Free honest calculator.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "GPS True Cost Calculator — What Will It Really Cost Over 3 Years?", item: "https://setwisedigital.com/tools/gps-true-cost-calculator" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "GPS True Cost Calculator — What Will It Really Cost Over 3 Years?", item: "https://www.setwisedigital.com/tools/gps-true-cost-calculator" },
     ],
   };
 

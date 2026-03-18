@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "GPS Battery Life Checker — Which GPS Lasts Your Whole Trip?",
-  description: "Tell us how long you'll be away from a charger and get a battery life verdict for every major GPS model. Day hike to week-long expedition. Garmin, Spot, and handheld GPS compared. Free.",
+  title: "GPS Battery Life Checker — Which GPS Lasts Your Trip?",
+  description: "How long will you be away from a charger? Get a battery life verdict for every major GPS model — day hike to week expedition. Free.",
   keywords: [
     "GPS with longest battery life",
     "handheld GPS battery life comparison",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "GPS solar charging",
     "Garmin battery life comparison",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-battery-checker" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-battery-checker" },
   openGraph: {
-    title: "GPS Battery Life Checker — Which GPS Lasts Your Whole Trip?",
-    description: "Tell us how long you'll be away from a charger and get a battery life verdict for every major GPS model. Day hike to week-long expedition. Garmin, Spot, and handheld GPS compared. Free.",
-    url: "https://setwisedigital.com/tools/gps-battery-checker",
+    title: "GPS Battery Life Checker — Which GPS Lasts Your Trip?",
+    description: "How long will you be away from a charger? Get a battery life verdict for every major GPS model — day hike to week expedition. Free.",
+    url: "https://www.setwisedigital.com/tools/gps-battery-checker",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Tell us how long you'll be away from a charger and get a battery life verdict for every major GPS model. Day hike to week-long expedition. Garmin, Spot, and handheld GPS compared. Free.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "GPS Battery Life Checker — Which GPS Lasts Your Whole Trip?", item: "https://setwisedigital.com/tools/gps-battery-checker" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "GPS Battery Life Checker — Which GPS Lasts Your Whole Trip?", item: "https://www.setwisedigital.com/tools/gps-battery-checker" },
     ],
   };
 

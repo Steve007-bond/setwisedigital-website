@@ -5,9 +5,9 @@ import PricingClient from "./PricingClient";
 // Then drop this file in as the new pricing/page.tsx
 
 export const metadata: Metadata = {
-  title: "Setwise Digital Pricing — Live Tech Lesson Sessions from $49",
+  title: "Setwise Digital Pricing — Live Tech Lessons from $49",
   description:
-    "Technology learning sessions for adults 40+. Single lesson from $49. Skill-Builder Course (3 sessions) from $97. Family Plan (5 sessions) from $147. All 47 free tools always free. No monthly fees.",
+    "Live tech lesson sessions from $49. Skill-Builder Course (3 sessions) from $97. Family Plan (5 sessions) from $147. All 47 tools always free.",
   keywords: [
     "Setwise Digital pricing",
     "tech lesson cost",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     "GPS lesson booking",
     "technology learning session price adults",
   ],
-  alternates: { canonical: "https://setwisedigital.com/pricing" },
+  alternates: { canonical: "https://www.setwisedigital.com/pricing" },
   openGraph: {
-    title: "Setwise Digital Pricing — Tech Lesson Sessions from $49",
-    description: "Single lesson from $49, 3-session course from $97, family plan from $147. 47 free tools always included.",
-    url: "https://setwisedigital.com/pricing",
+    title: "Setwise Digital Pricing — Live Tech Lessons from $49",
+    description: "Live tech lesson sessions from $49. Skill-Builder Course (3 sessions) from $97. Family Plan (5 sessions) from $147. All 47 tools always free.",
+    url: "https://www.setwisedigital.com/pricing",
   },
 };
 
@@ -35,7 +35,7 @@ export default function PricingPage() {
     provider: {
       "@type": "Organization",
       name: "Setwise Digital",
-      url: "https://setwisedigital.com",
+      url: "https://www.setwisedigital.com",
     },
     description:
       "Live video technology learning sessions for adults 40+. Covers printers, GPS, smart home, cameras. Plain English, step by step. No technical jargon.",
@@ -117,8 +117,8 @@ export default function PricingPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Pricing", item: "https://setwisedigital.com/pricing" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Pricing", item: "https://www.setwisedigital.com/pricing" },
     ],
   };
 

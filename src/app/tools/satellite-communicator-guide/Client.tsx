@@ -185,7 +185,7 @@ export default function Client() {
   const handleSubmit = async () => {
     if(!validate())return;setSubmitting(true);
     const winner = getWinner();
-    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,issue:`Satellite Comm — Match: ${winner}`,source:"satellite-communicator-guide"})});}catch{}
+    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email, phone,issue:`Satellite Comm — Match: ${winner}`,source:"satellite-communicator-guide"})});}catch{}
     setSubmitted(true);setSubmitting(false);
   };
   const reset = () => {setStage("intro");setCurrentQ(0);setScores({inreach:0,zoleo:0,spot:0});setAnswers({});setSel(null);setName("");setEmail("");setSubmitted(false);};

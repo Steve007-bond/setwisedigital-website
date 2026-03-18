@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "GPS Feature Filter — Find a GPS with Exactly the Features You Want",
-  description: "Tick the GPS features you need — no subscription, large screen, offline maps, Canada coverage, Bluetooth — and see matching devices instantly. Free interactive GPS filter tool.",
+  title: "GPS Feature Filter — Find GPS with the Features You Want",
+  description: "Tick the GPS features you need — no subscription, large screen, offline maps, Canada coverage, Bluetooth. See matching devices instantly.",
   keywords: [
     "GPS with no subscription fee",
     "GPS with offline maps",
@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     "waterproof GPS device",
     "best GPS no monthly fee",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/gps-feature-filter" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/gps-feature-filter" },
   openGraph: {
-    title: "GPS Feature Filter — Find a GPS with Exactly the Features You Want",
-    description: "Tick the GPS features you need — no subscription, large screen, offline maps, Canada coverage, Bluetooth — and see matching devices instantly. Free interactive GPS filter tool.",
-    url: "https://setwisedigital.com/tools/gps-feature-filter",
+    title: "GPS Feature Filter — Find GPS with the Features You Want",
+    description: "Tick the GPS features you need — no subscription, large screen, offline maps, Canada coverage, Bluetooth. See matching devices instantly.",
+    url: "https://www.setwisedigital.com/tools/gps-feature-filter",
   },
 };
 
@@ -30,7 +30,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Tick the GPS features you need — no subscription, large screen, offline maps, Canada coverage, Bluetooth — and see matching devices instantly. Free interactive GPS filter tool.",
   };
 
@@ -64,9 +64,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "GPS Feature Filter — Find a GPS with Exactly the Features You Want", item: "https://setwisedigital.com/tools/gps-feature-filter" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "GPS Feature Filter — Find a GPS with Exactly the Features You Want", item: "https://www.setwisedigital.com/tools/gps-feature-filter" },
     ],
   };
 

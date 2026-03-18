@@ -153,7 +153,7 @@ export default function Client() {
   const validate = () => { const e: Record<string,string>={};if(!name.trim())e.name="Please enter your name";if(!email.trim()||!email.includes("@"))e.email="Please enter a valid email";setErrors(e);return Object.keys(e).length===0; };
   const handleSubmit = async () => {
     if(!validate())return;setSubmitting(true);
-    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,issue:`GPS Maps Guide — Device: ${selectedDevice?.name || "overview"}`,source:"gps-maps-explained"})});}catch{}
+    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email, phone,issue:`GPS Maps Guide — Device: ${selectedDevice?.name || "overview"}`,source:"gps-maps-explained"})});}catch{}
     setSubmitted(true);setSubmitting(false);
   };
   const reset = () => {setSelectedDevice(null);setCompareMode(false);setName("");setEmail("");setSubmitted(false);};

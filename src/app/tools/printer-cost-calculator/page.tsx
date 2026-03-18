@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import PrinterCostClient from "./PrinterCostClient";
 
 export const metadata: Metadata = {
-  title: "Printer True Cost Calculator 2025 — HP, Canon, Epson, Brother",
-  description: "Find out exactly how much your printer costs per year — ink, paper, and electricity all included. Free annual cost calculator for HP, Canon, Epson, and Brother. Plain English.",
+  title: "Printer True Cost Calculator 2025 — HP, Canon, Epson",
+  description: "How much does your printer cost per year? Ink, paper, and electricity all included. Free annual cost calculator. Plain English comparison.",
   keywords: [
     "printer true cost calculator",
     "how much does a printer cost per year",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "Epson EcoTank vs cartridge cost",
     "printer cost comparison",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/printer-cost-calculator" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/printer-cost-calculator" },
   openGraph: {
-    title: "Printer True Cost Calculator 2025 — HP, Canon, Epson, Brother",
-    description: "Find out exactly how much your printer costs per year — ink, paper, and electricity all included. Free annual cost calculator for HP, Canon, Epson, and Brother. Plain English.",
-    url: "https://setwisedigital.com/tools/printer-cost-calculator",
+    title: "Printer True Cost Calculator 2025 — HP, Canon, Epson",
+    description: "How much does your printer cost per year? Ink, paper, and electricity all included. Free annual cost calculator. Plain English comparison.",
+    url: "https://www.setwisedigital.com/tools/printer-cost-calculator",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Find out exactly how much your printer costs per year — ink, paper, and electricity all included. Free annual cost calculator for HP, Canon, Epson, and Brother. Plain English.",
   };
 
@@ -63,9 +63,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Printer True Cost Calculator 2025 — HP, Canon, Epson, Brother", item: "https://setwisedigital.com/tools/printer-cost-calculator" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Printer True Cost Calculator 2025 — HP, Canon, Epson, Brother", item: "https://www.setwisedigital.com/tools/printer-cost-calculator" },
     ],
   };
 

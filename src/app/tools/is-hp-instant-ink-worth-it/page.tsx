@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "Is HP Instant Ink Worth It? — Honest Cost Calculator 2025 | Setwise Digital",
+  title: "Is HP Instant Ink Worth It? — Honest Cost Calculator",
   description:
-    "Enter your monthly pages and colour ratio. Get an honest year-by-year cost comparison — HP Instant Ink subscription vs buying cartridges — with the annual saving or loss calculated. No spin.",
+    "Enter your monthly pages and get a year-by-year cost comparison — HP Instant Ink subscription vs buying cartridges. Annual saving calculated.",
   keywords: [
     "is HP Instant Ink worth it",
     "HP Instant Ink review 2025",
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     "Brother Refresh subscription",
     "printer ink subscription comparison",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/is-hp-instant-ink-worth-it" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/is-hp-instant-ink-worth-it" },
   openGraph: {
-    title: "Is HP Instant Ink Worth It? Honest Cost Calculator | Setwise Digital",
-    description: "Calculate your exact annual saving or loss with HP Instant Ink. Covers HP, Canon, Epson, and Brother subscription plans.",
-    url: "https://setwisedigital.com/tools/is-hp-instant-ink-worth-it",
+    title: "Is HP Instant Ink Worth It? — Honest Cost Calculator",
+    description: "Enter your monthly pages and get a year-by-year cost comparison — HP Instant Ink subscription vs buying cartridges. Annual saving calculated.",
+    url: "https://www.setwisedigital.com/tools/is-hp-instant-ink-worth-it",
   },
 };
 
@@ -35,7 +35,7 @@ export default function Page() {
     applicationCategory: "FinanceApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Free honest cost calculator for HP Instant Ink and other printer ink subscriptions. Enter your monthly page volume and colour ratio — get the exact annual subscription cost vs cartridge cost with a clear save/cost verdict.",
     featureList: [
       "HP Instant Ink annual cost calculation",
@@ -98,9 +98,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "Is HP Instant Ink Worth It?", item: "https://setwisedigital.com/tools/is-hp-instant-ink-worth-it" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "Is HP Instant Ink Worth It?", item: "https://www.setwisedigital.com/tools/is-hp-instant-ink-worth-it" },
     ],
   };
 

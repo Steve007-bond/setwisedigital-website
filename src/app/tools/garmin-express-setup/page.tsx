@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import Client from "./Client";
 
 export const metadata: Metadata = {
-  title: "How to Update Garmin GPS Maps — Wi-Fi & Garmin Express Step-by-Step",
-  description: "Clickable step-by-step guide to updating your Garmin GPS using Wi-Fi or Garmin Express on a computer. Tick off each step as you go. Covers all Garmin models. Free, plain English.",
+  title: "How to Update Garmin GPS Maps — Wi-Fi & Garmin Express",
+  description: "Step-by-step guide to updating your Garmin GPS via Wi-Fi or Garmin Express. Tick off each step as you go. All models covered. Free.",
   keywords: [
     "how to update Garmin GPS",
     "Garmin Express step by step guide",
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "how to use Garmin Express",
     "Garmin GPS update stuck",
   ],
-  alternates: { canonical: "https://setwisedigital.com/tools/garmin-express-setup" },
+  alternates: { canonical: "https://www.setwisedigital.com/tools/garmin-express-setup" },
   openGraph: {
-    title: "How to Update Garmin GPS Maps — Wi-Fi & Garmin Express Step-by-Step",
-    description: "Clickable step-by-step guide to updating your Garmin GPS using Wi-Fi or Garmin Express on a computer. Tick off each step as you go. Covers all Garmin models. Free, plain English.",
-    url: "https://setwisedigital.com/tools/garmin-express-setup",
+    title: "How to Update Garmin GPS Maps — Wi-Fi & Garmin Express",
+    description: "Step-by-step guide to updating your Garmin GPS via Wi-Fi or Garmin Express. Tick off each step as you go. All models covered. Free.",
+    url: "https://www.setwisedigital.com/tools/garmin-express-setup",
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://www.setwisedigital.com" },
     description: "Clickable step-by-step guide to updating your Garmin GPS using Wi-Fi or Garmin Express on a computer. Tick off each step as you go. Covers all Garmin models. Free, plain English.",
   };
 
@@ -70,9 +70,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://setwisedigital.com/tools" },
-      { "@type": "ListItem", position: 3, name: "How to Update Garmin GPS Maps — Wi-Fi & Garmin Express Step-by-Step", item: "https://setwisedigital.com/tools/garmin-express-setup" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "Free Tools", item: "https://www.setwisedigital.com/tools" },
+      { "@type": "ListItem", position: 3, name: "How to Update Garmin GPS Maps — Wi-Fi & Garmin Express Step-by-Step", item: "https://www.setwisedigital.com/tools/garmin-express-setup" },
     ],
   };
 
