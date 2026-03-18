@@ -160,7 +160,7 @@ export default function Client() {
   const handleSubmit = async () => {
     if(!validate())return;setSubmitting(true);
     const winner = getWinner();
-    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email, phone,issue:`Built-in vs Aftermarket — Verdict: ${winner}`,source:"builtin-vs-aftermarket-gps"})});}catch{}
+    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email, issue:`Built-in vs Aftermarket — Verdict: ${winner}`,source:"builtin-vs-aftermarket-gps"})});}catch{}
     setSubmitted(true);setSubmitting(false);
   };
   const reset = () => {setStage("intro");setCurrentQ(0);setScores({builtin:0,garmin:0,carplay:0,phone:0});setAnswers({});setSel(null);setName("");setEmail("");setSubmitted(false);};

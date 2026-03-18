@@ -144,7 +144,7 @@ export default function Client() {
   const handleSubmit = async () => {
     if(!validate())return;setSubmitting(true);
     const winner = getWinner();
-    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email, phone,issue:`RV GPS — Match: ${winner} — RV Type: ${answers.rv_type}`,source:"rv-gps-finder"})});}catch{}
+    try{await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email, issue:`RV GPS — Match: ${winner} — RV Type: ${answers.rv_type}`,source:"rv-gps-finder"})});}catch{}
     setSubmitted(true);setSubmitting(false);
   };
   const reset = () => {setStage("intro");setCurrentQ(0);setScores({rv795:0,rv895:0,rv1095:0});setAnswers({});setSel(null);setName("");setEmail("");setSubmitted(false);};

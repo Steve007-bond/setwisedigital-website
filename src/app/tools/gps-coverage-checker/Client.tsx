@@ -140,7 +140,7 @@ export default function Client() {
   const validate = () => { const e: Record<string,string> = {}; if (!name.trim()) e.name = "Please enter your name"; if (!email.trim() || !email.includes("@")) e.email = "Please enter a valid email"; setErrors(e); return Object.keys(e).length === 0; };
   const handleSubmit = async () => {
     if (!validate()) return; setSubmitting(true);
-    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Coverage Check — Region: ${region}, Brand: ${brand}, Level: ${coverage?.level}`, source: "gps-coverage-checker" }) }); } catch (e) { console.error("[lead] error:", e); }
+    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, issue: `Coverage Check — Region: ${region}, Brand: ${brand}, Level: ${coverage?.level}`, source: "gps-coverage-checker" }) }); } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true); setSubmitting(false);
   };
   const reset = () => { setRegion(null); setBrand(null); setCompletedSteps(new Set()); setName(""); setEmail(""); setSubmitted(false); };
@@ -286,7 +286,7 @@ export default function Client() {
               {!submitted ? (
                 <div className="bg-zinc-900 rounded-[2rem] border border-zinc-800 p-7">
                   <h3 className="text-xl font-black text-white mb-2">Save your coverage report 📧</h3>
-                  <p className="text-zinc-400 text-base mb-5">Get this coverage check emailed to you for reference.</p>
+                  <p className="text-zinc-400 text-base mb-5">Get this coverage check email, ed to you for reference.</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     <div><label className="text-sm font-black text-zinc-400 uppercase tracking-widest block mb-2">First Name *</label><div className="relative"><User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" /><input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Mary" className="w-full pl-12 pr-4 py-4 bg-zinc-800 border border-zinc-700 rounded-xl text-white focus:outline-none focus:border-cyan-500 text-lg placeholder:text-zinc-600" /></div>{errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}</div>
                     <div><label className="text-sm font-black text-zinc-400 uppercase tracking-widest block mb-2">Email *</label><div className="relative"><Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" /><input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="name@email.com" className="w-full pl-12 pr-4 py-4 bg-zinc-800 border border-zinc-700 rounded-xl text-white focus:outline-none focus:border-cyan-500 text-lg placeholder:text-zinc-600" /></div>{errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}</div>
