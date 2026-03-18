@@ -166,7 +166,7 @@ export default function Client() {
   const handleSubmit = async () => {
     if (!validate()) return; setSubmitting(true);
     const verdict = getVerdict();
-    try { await fetch("/api/leads", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name, email, phone, issue: `GPS vs Phone — Verdict: ${verdict.verdict}`, source:"gps-vs-phone-decider" }) }); } catch {}
+    try { await fetch("/api/leads", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name, email, phone, issue: `GPS vs Phone — Verdict: ${verdict.verdict}`, source:"gps-vs-phone-decider" }) }); } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true); setSubmitting(false); setStage("results");
   };
 

@@ -561,7 +561,7 @@ export default function AITroubleshooter({ topic, brandExamples, starterQuestion
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...leadForm, topic, issue: selections.join(" → "), source: `${topic.toLowerCase()}-troubleshooter` }),
       });
-    } catch {}
+    } catch (e) { console.error("[lead] error:", e); }
     setLeadLoading(false);
     setLeadDone(true);
   };

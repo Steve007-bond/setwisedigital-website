@@ -60,7 +60,7 @@ export default function RoadTripCheckerClient() {
   const validate = () => { const e: Record<string,string> = {}; if (!name.trim()) e.name = "Please enter your name"; if (!email.trim() || !email.includes("@")) e.email = "Please enter a valid email"; setErrors(e); return Object.keys(e).length === 0; };
   const handleLeadSubmit = async () => {
     if (!validate()) return; setSubmitting(true);
-    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, brand: gpsBrand, issue: `Road Trip Check — Score: ${score}% — ${verdict.label}`, source: "road-trip-checker", extra: checks.map(c => `${c.question}: ${c.status}`).join(" | ") }) }); } catch {}
+    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, brand: gpsBrand, issue: `Road Trip Check — Score: ${score}% — ${verdict.label}`, source: "road-trip-checker", extra: checks.map(c => `${c.question}: ${c.status}`).join(" | ") }) }); } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true); setSubmitting(false); setStage("results");
   };
   const reset = () => { setStage("intro"); setGpsBrand(""); setChecks(CHECKS.map(c => ({ ...c, status: null }))); setCurrentCheck(0); setName(""); setEmail(""); setPhone(""); setSubmitted(false); };

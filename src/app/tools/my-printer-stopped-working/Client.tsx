@@ -272,7 +272,7 @@ export default function Client() {
   };
   const handleSubmit = async () => {
     if (!validate()) return; setSubmitting(true);
-    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Printer Not Working — Problem: ${problem} — Brand: ${brand}`, source: "my-printer-stopped-working" }) }); } catch {}
+    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Printer Not Working — Problem: ${problem} — Brand: ${brand}`, source: "my-printer-stopped-working" }) }); } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true); setSubmitting(false); setStage("guide");
   };
   const reset = () => { setStage("intro"); setProblem(null); setBrand(null); setCompletedSteps(new Set()); setName(""); setEmail(""); setPhone(""); setSubmitted(false); setStillBroken(false); };

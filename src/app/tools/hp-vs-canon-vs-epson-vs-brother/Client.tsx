@@ -156,7 +156,7 @@ export default function Client() {
   };
   const handleSubmit = async () => {
     if (!validate()) return; setSubmitting(true);
-    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Brand Comparison — Winner: ${winner?.toUpperCase()}`, source: "hp-vs-canon-vs-epson-vs-brother" }) }); } catch {}
+    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Brand Comparison — Winner: ${winner?.toUpperCase()}`, source: "hp-vs-canon-vs-epson-vs-brother" }) }); } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true); setSubmitting(false); setStage("results");
   };
   const reset = () => { setStage("intro"); setCurrentQ(0); setScores({ hp: 0, canon: 0, epson: 0, brother: 0 }); setAnswers({}); setSelectedOption(null); setName(""); setEmail(""); setPhone(""); setSubmitted(false); setCompareMode(null); };

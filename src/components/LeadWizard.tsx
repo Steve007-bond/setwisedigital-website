@@ -76,12 +76,17 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
     });
     setTimeout(() => { clearInterval(interval); setProgress(100); }, 2600);
     try {
-      await fetch("/api/leads", {
+      const leadsRes = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone, brand, issue: `${issue} / ${goal}`, source: config.source }),
       });
-    } catch {}
+      if (!leadsRes.ok) {
+        console.error("[LeadWizard] /api/leads returned", leadsRes.status, await leadsRes.text().catch(() => ""));
+      }
+    } catch (e) {
+      console.error("[LeadWizard] fetch error:", e);
+    }
     setTimeout(async () => {
       setDone(true);
       onComplete?.({ name, email, phone, brand, issue, source: config.source });
@@ -101,7 +106,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
           a.click();
           URL.revokeObjectURL(url);
         }
-      } catch {}
+      } catch (e) { console.error("[lead] error:", e); }
     }, 3200);
   };
 
@@ -125,7 +130,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
             const topicName = config.source.replace("-page", "").replace("-", " ");
             const res = await fetch("/api/generate-pdf", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, brand, issue, topic: topicName }) });
             if (res.ok) { const blob = await res.blob(); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = `setwise-guide.html`; a.click(); URL.revokeObjectURL(url); }
-          } catch {}
+          } catch (e) { console.error("[lead] error:", e); }
         }}
         className={`w-full py-4 mb-6 rounded-2xl font-black text-white bg-gradient-to-r ${accent} flex items-center justify-center gap-3 shadow-lg`}>
         <Mail size={20} /> Download Your Guide Again

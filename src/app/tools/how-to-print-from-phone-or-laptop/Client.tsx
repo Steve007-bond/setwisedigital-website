@@ -210,7 +210,7 @@ export default function Client() {
 
   const handleSubmit = async () => {
     if (!validate()) return; setSubmitting(true);
-    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Print from Device — ${device} → ${brand} printer`, source: "how-to-print-from-phone-or-laptop" }) }); } catch {}
+    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Print from Device — ${device} → ${brand} printer`, source: "how-to-print-from-phone-or-laptop" }) }); } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true); setSubmitting(false); setStage("guide");
   };
 

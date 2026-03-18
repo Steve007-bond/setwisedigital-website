@@ -218,7 +218,7 @@ export default function Client() {
           source: "set-up-my-new-printer",
         }),
       });
-    } catch {}
+    } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true);
     setSubmitting(false);
     setStage("steps");

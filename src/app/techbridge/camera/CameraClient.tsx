@@ -93,7 +93,7 @@ function LeadForm() {
         method:"POST", headers:{"Content-Type":"application/json"},
         body:JSON.stringify({ name, email, phone, issue:"camera-page landing page guide request", source:"camera-page-cta" }),
       });
-    } catch {}
+    } catch (e) { console.error("[lead] error:", e); }
     setStatus("done");
   };
   if (status === "done") return (

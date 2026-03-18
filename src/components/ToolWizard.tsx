@@ -89,7 +89,7 @@ export default function ToolWizard({
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone, brand: topResult?.title, issue: `${toolName} — Top: ${topResult?.title}`, source: toolId, extra: JSON.stringify(answers) }),
       });
-    } catch {}
+    } catch (e) { console.error("[lead] error:", e); }
     onLeadSubmit?.({ name, email, phone, answers });
     setSubmitted(true); setSubmitting(false); setStage("results");
   };

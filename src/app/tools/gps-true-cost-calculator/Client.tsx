@@ -66,7 +66,7 @@ export default function Client() {
   const validate = () => { const e: Record<string,string> = {}; if (!name.trim()) e.name = "Please enter your name"; if (!email.trim() || !email.includes("@")) e.email = "Please enter a valid email"; setErrors(e); return Object.keys(e).length === 0; };
   const handleSubmit = async () => {
     if (!validate()) return; setSubmitting(true);
-    try { await fetch("/api/leads", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name, email, phone, issue: `GPS Cost Calc — Devices: ${selectedDevices.join(", ")} — Years: ${years}`, source:"gps-true-cost-calculator" }) }); } catch {}
+    try { await fetch("/api/leads", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name, email, phone, issue: `GPS Cost Calc — Devices: ${selectedDevices.join(", ")} — Years: ${years}`, source:"gps-true-cost-calculator" }) }); } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true); setSubmitting(false);
   };
   const reset = () => { setSelectedDevices([]); setSelectedAccessories([]); setYears(3); setStage("build"); setName(""); setEmail(""); setPhone(""); setSubmitted(false); };

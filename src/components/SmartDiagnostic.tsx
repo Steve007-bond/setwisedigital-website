@@ -67,7 +67,7 @@ function LeadForm({ topic, onDone }: { topic: string; onDone: () => void }) {
           availability: "Via Smart Diagnostic lead", contactMethod: "Email",
         }),
       });
-    } catch {}
+    } catch (e) { console.error("[lead] error:", e); }
     setLoading(false);
     setSubmitted(true);
     setTimeout(onDone, 2500);

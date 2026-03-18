@@ -166,7 +166,7 @@ export default function Client() {
   };
   const handleSubmit = async () => {
     if (!validate()) return; setSubmitting(true);
-    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Ink Subscription Calc — Brand: ${brand} — Verdict: ${verdict} — Pages: ${pages}/mo`, source: "is-hp-instant-ink-worth-it" }) }); } catch {}
+    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Ink Subscription Calc — Brand: ${brand} — Verdict: ${verdict} — Pages: ${pages}/mo`, source: "is-hp-instant-ink-worth-it" }) }); } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true); setSubmitting(false); setStage("results");
   };
   const reset = () => { setStage("intro"); setBrand(null); setPages(null); setColorPct(null); setName(""); setEmail(""); setPhone(""); setSubmitted(false); };

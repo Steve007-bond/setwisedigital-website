@@ -149,7 +149,7 @@ export default function Client() {
   const validate = () => { const e: Record<string,string> = {}; if (!name.trim()) e.name = "Please enter your name"; if (!email.trim() || !email.includes("@")) e.email = "Please enter a valid email"; setErrors(e); return Object.keys(e).length === 0; };
   const handleSubmit = async () => {
     if (!validate()) return; setSubmitting(true);
-    try { await fetch("/api/leads", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name, email, phone, issue: `Ink vs Tank — Recommended: ${winner.name} — Confidence: ${confidence > 30 ? "High" : "Moderate"}`, source:"printer-ink-vs-tank" }) }); } catch {}
+    try { await fetch("/api/leads", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name, email, phone, issue: `Ink vs Tank — Recommended: ${winner.name} — Confidence: ${confidence > 30 ? "High" : "Moderate"}`, source:"printer-ink-vs-tank" }) }); } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true); setSubmitting(false); setStage("results");
   };
   const reset = () => { setStage("intro"); setCurrentQ(0); setScores({cartridge:0,tank:0}); setAnswers({}); setSelectedOption(null); setName(""); setEmail(""); setPhone(""); setSubmitted(false); };

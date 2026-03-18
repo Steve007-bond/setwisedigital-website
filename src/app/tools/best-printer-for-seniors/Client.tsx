@@ -179,7 +179,7 @@ export default function Client() {
   const handleSubmit = async () => {
     if (!validate()) return; setSubmitting(true);
     const rec = PRINTERS[pickPrinter(answers)];
-    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Best Printer for Seniors — Recommended: ${rec?.name}`, source: "best-printer-for-seniors" }) }); } catch {}
+    try { await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, issue: `Best Printer for Seniors — Recommended: ${rec?.name}`, source: "best-printer-for-seniors" }) }); } catch (e) { console.error("[lead] error:", e); }
     setSubmitted(true); setSubmitting(false); setStage("results");
   };
   const reset = () => { setStage("intro"); setCurrentQ(0); setAnswers({}); setSelectedOption(null); setName(""); setEmail(""); setPhone(""); setSubmitted(false); };
