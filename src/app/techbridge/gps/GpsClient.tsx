@@ -63,7 +63,7 @@ const TOOLS: Tool[] = [
   { href:"/tools/gps-vs-phone-decider", emoji:"📱", label:"Compare", labelBg:"bg-violet-600", title:"GPS Device vs Phone Navigation", desc:"4 honest questions — do you need a GPS or is your phone enough?", tags:["GPS","Google Maps","Apple"], gradient:"from-violet-500 to-fuchsia-400" },
   { href:"/tools/gps-upgrade-decider", emoji:"🆙", label:"Upgrade?", labelBg:"bg-amber-600", title:"Should I Upgrade My GPS?", desc:"4 questions about your GPS — get a clear keep-or-replace verdict.", tags:["Age","Cost","Features"], gradient:"from-amber-500 to-orange-400" }
 ];
-const ISSUES = [
+const ISSUES: [string, string, string][] = [
   ["🔄","Update Maps","Learn exactly how to update Garmin or TomTom maps — Wi-Fi or Garmin Express."],
   ["🧊","Frozen Screen","Understand what causes GPS freezes and the simple steps to resolve them."],
   ["✅","Wrong Directions","Why GPS gives wrong routes — and how to make sure yours is accurate."],
@@ -236,7 +236,8 @@ export default function PageClient() {
               <Link href="/contact">
                 <motion.div whileHover={{scale:1.03}} whileTap={{scale:0.97}}
                   className="px-9 py-5 border-2 border-zinc-700 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 transition-colors cursor-pointer"
-                  style={{':hover':{borderColor:ACCENT_HEX}}}>
+                  onMouseEnter={e=>(e.currentTarget.style.borderColor=ACCENT_HEX)}
+                onMouseLeave={e=>(e.currentTarget.style.borderColor="#3f3f46")}>
                   Book a Live Lesson
                 </motion.div>
               </Link>
@@ -286,7 +287,7 @@ export default function PageClient() {
               <motion.div key={i} initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true}}
                 transition={{delay:i*0.1}} whileHover={{y:-8,scale:1.02}}
                 className="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 transition-all duration-300 group"
-                style={{['&:hover' as string]:{borderColor:ACCENT_HEX+"80"}}}>
+                >
                 <div className="text-5xl mb-6">{issue[0]}</div>
                 <h3 className="text-xl font-black text-white mb-3 group-hover:text-blue-300 transition-colors">{issue[1]}</h3>
                 <p className="text-zinc-400 text-[15px] leading-relaxed">{issue[2]}</p>

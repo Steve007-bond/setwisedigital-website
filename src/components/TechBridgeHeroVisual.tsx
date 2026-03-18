@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export interface HeroFrame {
@@ -296,7 +296,8 @@ interface Props {
 export default function TechBridgeHeroVisual({ frames, currentFrame, onFrameChange }: Props) {
   const frame = frames[currentFrame];
 
-  const SVGMap: Record<string, React.ComponentType<{ color: string }>> = {
+  type DeviceComponent = (props: { color: string }) => React.ReactElement | null;
+  const SVGMap: Record<string, DeviceComponent> = {
     printer: PrinterDevice,
     gps: GPSDevice,
     shield: ShieldDevice,

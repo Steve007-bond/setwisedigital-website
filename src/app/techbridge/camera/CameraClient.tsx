@@ -63,7 +63,7 @@ const TOOLS: Tool[] = [
   { href:"/tools/home-security-audit", emoji:"🔒", label:"Secure", labelBg:"bg-red-600", title:"Home Security Audit", desc:"Secure your photo storage and camera devices.", tags:["Security","Backup","Storage"], gradient:"from-red-500 to-rose-400" },
   { href:"/tools/subscription-audit", emoji:"📊", label:"Audit", labelBg:"bg-teal-600", title:"Tech Subscription Audit", desc:"Check if your photo storage subscriptions are worth keeping.", tags:["iCloud","Google Photos","Save"], gradient:"from-teal-500 to-cyan-400" }
 ];
-const ISSUES = [
+const ISSUES: [string, string, string][] = [
   ["🔄","Firmware Updates","Update safely to fix bugs and unlock new features — 10 minutes."],
   ["📸","Better Photos","Simple settings that transform every shot you take."],
   ["💾","Photo Transfer","Get photos onto your computer or phone easily."],
@@ -236,7 +236,8 @@ export default function PageClient() {
               <Link href="/contact">
                 <motion.div whileHover={{scale:1.03}} whileTap={{scale:0.97}}
                   className="px-9 py-5 border-2 border-zinc-700 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 transition-colors cursor-pointer"
-                  style={{':hover':{borderColor:ACCENT_HEX}}}>
+                  onMouseEnter={e=>(e.currentTarget.style.borderColor=ACCENT_HEX)}
+                onMouseLeave={e=>(e.currentTarget.style.borderColor="#3f3f46")}>
                   Book a Live Lesson
                 </motion.div>
               </Link>
@@ -286,7 +287,7 @@ export default function PageClient() {
               <motion.div key={i} initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true}}
                 transition={{delay:i*0.1}} whileHover={{y:-8,scale:1.02}}
                 className="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 transition-all duration-300 group"
-                style={{['&:hover' as string]:{borderColor:ACCENT_HEX+"80"}}}>
+                >
                 <div className="text-5xl mb-6">{issue[0]}</div>
                 <h3 className="text-xl font-black text-white mb-3 group-hover:text-blue-300 transition-colors">{issue[1]}</h3>
                 <p className="text-zinc-400 text-[15px] leading-relaxed">{issue[2]}</p>
