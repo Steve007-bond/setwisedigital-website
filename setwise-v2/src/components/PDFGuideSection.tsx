@@ -3,7 +3,10 @@
 import React from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, CheckCircle2, AlertCircle, Loader2, Download, Shield, ChevronDown, ChevronUp } from "lucide-react";
+import { FileText, CheckCircle2, AlertCircle, Loader2, Download, Shield, ChevronDown, ChevronUp, User } from "lucide-react";
+import EmailInput from "@/components/EmailInput";
+import PhoneInput from "@/components/PhoneInput";
+import { validateEmail, validatePhone } from "@/lib/validation";
 
 interface PDFGuideSectionProps {
   topic: string;
@@ -24,11 +27,17 @@ export default function PDFGuideSection({
 }: PDFGuideSectionProps) {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [countryCode, setCountryCode] = useState("+1");
   const [agreed, setAgreed] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const isValid = firstName.trim() !== "" && email.trim() !== "" && agreed && email.includes("@");
+  const isValid =
+    firstName.trim() !== "" &&
+    validateEmail(email).valid &&
+    validatePhone(phone).valid &&
+    agreed;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +48,7 @@ export default function PDFGuideSection({
       const res = await fetch("/api/pdf-request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName, email, topic, pdfTitle }),
+        body: JSON.stringify({ firstName, email, phone: `${countryCode} ${phone}`, topic, pdfTitle }),
       });
 
       if (!res.ok) throw new Error("Server error");
@@ -137,29 +146,41 @@ export default function PDFGuideSection({
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
                       <label className="block text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">
-                        First Name
+                        First Name *
                       </label>
-                      <input
-                        type="text"
-                        value={firstName}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
-                        placeholder="e.g. Mary"
-                        className="w-full px-5 py-4 bg-zinc-50 border border-zinc-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium text-zinc-900"
-                        required
+                      <div className="relative">
+                        <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
+                        <input
+                          type="text"
+                          value={firstName}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
+                          placeholder="e.g. Mary"
+                          className="w-full pl-11 pr-4 py-4 bg-zinc-50 border border-zinc-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium text-zinc-900"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">
+                        Email Address *
+                      </label>
+                      <EmailInput
+                        value={email}
+                        onChange={setEmail}
+                        theme="light"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">
-                        Email Address
+                        Phone Number *
                       </label>
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                        placeholder="name@email.com"
-                        className="w-full px-5 py-4 bg-zinc-50 border border-zinc-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium text-zinc-900"
-                        required
+                      <PhoneInput
+                        value={phone}
+                        countryCode={countryCode}
+                        onChange={(val, cc) => { setPhone(val); setCountryCode(cc); }}
+                        theme="light"
                       />
                     </div>
 

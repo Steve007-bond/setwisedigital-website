@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { firstName, email, topic, pdfTitle } = body;
+    const { firstName, email, phone, topic, pdfTitle } = body;
 
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
             fields: [
               { name: "👤 Name", value: firstName || "Not provided", inline: true },
               { name: "📧 Email", value: email || "Not provided", inline: true },
+              { name: "📞 Phone", value: phone || "Not provided", inline: true },
               { name: "📘 Guide Requested", value: pdfTitle || topic, inline: false },
               { name: "✅ Action", value: `Email the guide to **${email}**`, inline: false },
             ],

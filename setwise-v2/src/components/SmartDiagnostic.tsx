@@ -8,6 +8,9 @@ import {
   Zap, BookOpen, UserCheck, AlertCircle, ThumbsUp,
   Sparkles, Trophy, Heart
 } from "lucide-react";
+import EmailInput from "@/components/EmailInput";
+import PhoneInput from "@/components/PhoneInput";
+import { validateEmail, validatePhone } from "@/lib/validation";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -45,7 +48,7 @@ interface DiagnosticProps {
 // ─── Lead Form ────────────────────────────────────────────────────────────────
 
 function LeadForm({ topic, onDone }: { topic: string; onDone: () => void }) {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", age: "", purpose: "", device: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", countryCode: "+1", age: "", purpose: "", device: "" });
   const [interests, setInterests] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -53,15 +56,23 @@ function LeadForm({ topic, onDone }: { topic: string; onDone: () => void }) {
   const toggleInterest = (i: string) =>
     setInterests((p) => p.includes(i) ? p.filter((x) => x !== i) : [...p, i]);
 
+  const isValid =
+    form.name.trim() !== "" &&
+    validateEmail(form.email).valid &&
+    validatePhone(form.phone).valid &&
+    form.purpose.trim() !== "";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isValid) return;
     setLoading(true);
     try {
       await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: form.name, email: form.email, phone: form.phone, topic,
+          name: form.name, email: form.email,
+          phone: `${form.countryCode} ${form.phone}`, topic,
           device: form.device,
           issue: `Age: ${form.age} | Purpose: ${form.purpose} | Interests: ${interests.join(", ")}`,
           availability: "Via Smart Diagnostic lead", contactMethod: "Email",
@@ -79,7 +90,7 @@ function LeadForm({ topic, onDone }: { topic: string; onDone: () => void }) {
       <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
         <Trophy size={36} className="text-green-600" />
       </div>
-      <h3 className="text-2xl font-black text-zinc-900 mb-2">You're all set, {form.name}! 🎉</h3>
+      <h3 className="text-2xl font-black text-zinc-900 mb-2">You&apos;re all set, {form.name}! 🎉</h3>
       <p className="text-zinc-500 font-medium">Our team will reach out to {form.email} with personalised tips.</p>
     </motion.div>
   );
@@ -111,20 +122,26 @@ function LeadForm({ topic, onDone }: { topic: string; onDone: () => void }) {
               className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl text-sm font-medium focus:outline-none focus:border-blue-500 focus:bg-white transition-all" />
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="text-xs font-black text-zinc-500 uppercase tracking-widest block mb-1">Email *</label>
-            <input type="email" placeholder="name@email.com" value={form.email} required
-              onChange={(e) => setForm(p => ({ ...p, email: e.target.value }))}
-              className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl text-sm font-medium focus:outline-none focus:border-blue-500 focus:bg-white transition-all" />
-          </div>
-          <div>
-            <label className="text-xs font-black text-zinc-500 uppercase tracking-widest block mb-1">Phone (optional)</label>
-            <input type="tel" placeholder="+1 555 000 0000" value={form.phone}
-              onChange={(e) => setForm(p => ({ ...p, phone: e.target.value }))}
-              className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl text-sm font-medium focus:outline-none focus:border-blue-500 focus:bg-white transition-all" />
-          </div>
+
+        <div>
+          <label className="text-xs font-black text-zinc-500 uppercase tracking-widest block mb-1">Email Address *</label>
+          <EmailInput
+            value={form.email}
+            onChange={(val) => setForm(p => ({ ...p, email: val }))}
+            theme="light"
+          />
         </div>
+
+        <div>
+          <label className="text-xs font-black text-zinc-500 uppercase tracking-widest block mb-1">Phone Number *</label>
+          <PhoneInput
+            value={form.phone}
+            countryCode={form.countryCode}
+            onChange={(val, cc) => setForm(p => ({ ...p, phone: val, countryCode: cc }))}
+            theme="light"
+          />
+        </div>
+
         <div>
           <label className="text-xs font-black text-zinc-500 uppercase tracking-widest block mb-1">What do you use your {topic.toLowerCase()} for? *</label>
           <input type="text" placeholder={`e.g. printing medical forms, photos`} value={form.purpose} required
@@ -152,8 +169,12 @@ function LeadForm({ topic, onDone }: { topic: string; onDone: () => void }) {
           </div>
         </div>
 
-        <button type="submit" disabled={loading}
-          className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-black text-lg rounded-2xl transition-all shadow-lg shadow-blue-500/20 flex items-center justify-center gap-3">
+        <button type="submit" disabled={!isValid || loading}
+          className={`w-full py-4 font-black text-lg rounded-2xl transition-all shadow-lg flex items-center justify-center gap-3 ${
+            isValid && !loading
+              ? "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-500/20"
+              : "bg-zinc-200 text-zinc-400 cursor-not-allowed"
+          }`}>
           {loading ? <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />Sending...</>
             : <><Star size={20} />Get My Free Personalised Guide</>}
         </button>

@@ -21,14 +21,16 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import EmailInput from "@/components/EmailInput";
+import PhoneInput from "@/components/PhoneInput";
+import { validateEmail, validatePhone } from "@/lib/validation";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function ContactPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
-  // Contact form state
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", countryCode: "+1", message: "" });
   const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [formError, setFormError] = useState("");
 
@@ -36,7 +38,11 @@ export default function ContactPage() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
-  const isValid = form.name.trim() && form.email.includes("@") && form.message.trim();
+  const isValid =
+    form.name.trim() !== "" &&
+    validateEmail(form.email).valid &&
+    validatePhone(form.phone).valid &&
+    form.message.trim() !== "";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,7 +57,7 @@ export default function ContactPage() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          phone: form.phone,
+          phone: `${form.countryCode} ${form.phone}`,
           issue: form.message,
           topic: "General Enquiry",
           contactMethod: "Email",
@@ -213,26 +219,22 @@ export default function ContactPage() {
                         </div>
                         <div className="space-y-4">
                           <label className="text-xs font-black text-zinc-400 uppercase tracking-[0.3em] ml-2">Email Address *</label>
-                          <input
-                            type="email"
-                            name="email"
+                          <EmailInput
                             value={form.email}
-                            onChange={handleChange}
+                            onChange={(val) => setForm((f) => ({ ...f, email: val }))}
+                            theme="light"
                             placeholder="john@example.com"
-                            required
-                            className="w-full px-10 py-6 bg-zinc-50 border-2 border-transparent rounded-[2.5rem] focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-xl shadow-inner"
                           />
                         </div>
                       </div>
                       <div className="space-y-4">
-                        <label className="text-xs font-black text-zinc-400 uppercase tracking-[0.3em] ml-2">Phone (Optional)</label>
-                        <input
-                          type="tel"
-                          name="phone"
+                        <label className="text-xs font-black text-zinc-400 uppercase tracking-[0.3em] ml-2">Phone Number *</label>
+                        <PhoneInput
                           value={form.phone}
-                          onChange={handleChange}
-                          placeholder="(555) 000-0000"
-                          className="w-full px-10 py-6 bg-zinc-50 border-2 border-transparent rounded-[2.5rem] focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-xl shadow-inner"
+                          countryCode={form.countryCode}
+                          onChange={(val, cc) => setForm((f) => ({ ...f, phone: val, countryCode: cc }))}
+                          theme="light"
+                          placeholder="555 000 0000"
                         />
                       </div>
                       <div className="space-y-4">

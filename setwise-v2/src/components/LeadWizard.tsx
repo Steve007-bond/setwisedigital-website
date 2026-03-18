@@ -3,6 +3,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, ArrowLeft, ChevronRight, Loader2, Star, Phone, Mail, User, Zap } from "lucide-react";
+import EmailInput from "@/components/EmailInput";
+import PhoneInput from "@/components/PhoneInput";
+import { validateEmail, validatePhone } from "@/lib/validation";
 
 export interface WizardConfig {
   source: string;
@@ -39,6 +42,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [countryCode, setCountryCode] = useState("+1");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -52,8 +56,8 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
   const validate = () => {
     const e: Record<string, string> = {};
     if (!name.trim()) e.name = "Please enter your name";
-    if (!email.trim() || !email.includes("@")) e.email = "Please enter a valid email";
-    if (!phone.trim()) e.phone = "Phone number is required";
+    if (!validateEmail(email).valid) e.email = validateEmail(email).message;
+    if (!validatePhone(phone).valid) e.phone = validatePhone(phone).message;
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -61,7 +65,7 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
   const validateStep2 = () => {
     const e: Record<string, string> = {};
     if (!name.trim()) e.name = "Please enter your name";
-    if (!email.trim() || !email.includes("@")) e.email = "Please enter a valid email";
+    if (!validateEmail(email).valid) e.email = validateEmail(email).message;
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -79,14 +83,19 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
       await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, brand, issue: `${issue} / ${goal}`, source: config.source }),
+        body: JSON.stringify({ name, email, phone: `${countryCode} ${phone}`, brand, issue: `${issue} / ${goal}`, source: config.source }),
       });
     } catch {}
     setTimeout(async () => {
       setDone(true);
       onComplete?.({ name, email, phone, brand, issue, source: config.source });
       try {
-        const topicName = config.source.replace("-page", "").replace("-", " ");
+        const SOURCE_TO_TOPIC: Record<string, string> = {
+          "printers-page": "Printer", "gps-page": "GPS",
+          "smarthome-page": "Smart Home", "alexa-page": "Alexa",
+          "camera-page": "Camera", "security-page": "Security",
+        };
+        const topicName = SOURCE_TO_TOPIC[config.source] || config.source.replace("-page", "").replace(/-/g, " ");
         const res = await fetch("/api/generate-pdf", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -122,7 +131,12 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
       <motion.button initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
         onClick={async () => {
           try {
-            const topicName = config.source.replace("-page", "").replace("-", " ");
+            const SOURCE_TO_TOPIC: Record<string, string> = {
+              "printers-page": "Printer", "gps-page": "GPS",
+              "smarthome-page": "Smart Home", "alexa-page": "Alexa",
+              "camera-page": "Camera", "security-page": "Security",
+            };
+            const topicName = SOURCE_TO_TOPIC[config.source] || config.source.replace("-page", "").replace(/-/g, " ");
             const res = await fetch("/api/generate-pdf", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, phone, brand, issue, topic: topicName }) });
             if (res.ok) { const blob = await res.blob(); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = `setwise-guide.html`; a.click(); URL.revokeObjectURL(url); }
           } catch {}
@@ -254,17 +268,12 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
           </div>
           <div>
             <label className="text-xs font-black text-zinc-400 uppercase tracking-widest block mb-2">Email Address *</label>
-            <div className="relative">
-              <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
-              <input type="email" value={email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                placeholder="name@email.com"
-                className="w-full pl-11 pr-10 py-4 bg-white/5 border border-white/10 rounded-2xl text-white text-base font-medium focus:outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-600" />
-              {email.includes("@") && (
-                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute right-4 top-1/2 -translate-y-1/2">
-                  <CheckCircle2 size={18} className="text-green-500" />
-                </motion.div>
-              )}
-            </div>
+            <EmailInput
+              value={email}
+              onChange={setEmail}
+              theme="dark"
+              error={errors.email}
+            />
             {errors.email && <p className="text-red-400 text-xs mt-1.5 font-bold">{errors.email}</p>}
           </div>
         </div>
@@ -288,18 +297,13 @@ export default function LeadWizard({ config, onComplete }: LeadWizardProps) {
         </div>
         <div>
           <label className="text-xs font-black text-zinc-400 uppercase tracking-widest block mb-2">Phone Number *</label>
-          <div className="relative">
-            <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
-            <input type="tel" value={phone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
-              placeholder="+1 555 000 0000"
-              className="w-full pl-11 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-white text-base font-medium focus:outline-none focus:border-blue-500 transition-colors placeholder:text-zinc-600" />
-            {phone.length >= 8 && (
-              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute right-4 top-1/2 -translate-y-1/2">
-                <CheckCircle2 size={18} className="text-green-500" />
-              </motion.div>
-            )}
-          </div>
-          {errors.phone && <p className="text-red-400 text-xs mt-1.5 font-bold">{errors.phone}</p>}
+          <PhoneInput
+            value={phone}
+            countryCode={countryCode}
+            onChange={(val, cc) => { setPhone(val); setCountryCode(cc); }}
+            error={errors.phone}
+            theme="dark"
+          />
         </div>
 
         {/* Summary card */}
