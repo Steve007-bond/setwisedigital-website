@@ -20,7 +20,7 @@ const BRANDS: Record<BrandId, {
   subName: string;
   plans: { name: string; pages: number; price: number; overagePer10: number }[];
   cartridgeCostBW: number; cartridgeCostColor: number;
-  pagesBWperCart: number; pagesColorPerCart: number;
+  cartridgePagesBW: number; pagesColorPerCart: number;
   hiddenRules: string[];
   cancelWarning: string;
 }> = {
@@ -34,7 +34,7 @@ const BRANDS: Record<BrandId, {
       { name: "300 pages/mo", pages: 300, price: 9.99, overagePer10: 1.00 },
       { name: "700 pages/mo", pages: 700, price: 19.99, overagePer10: 1.00 },
     ],
-    cartridgeCostBW: 14.99, cartridgePagessBW: 120,
+    cartridgeCostBW: 14.99, cartridgePagesBW: 120,
     cartridgeCostColor: 18.99, pagesColorPerCart: 100,
     hiddenRules: [
       "If you cancel, your cartridges stop working — they are 'subscription cartridges'",
@@ -52,7 +52,7 @@ const BRANDS: Record<BrandId, {
       { name: "100 pages/mo", pages: 100, price: 5.99, overagePer10: 1.50 },
       { name: "200 pages/mo", pages: 200, price: 9.99, overagePer10: 1.50 },
     ],
-    cartridgeCostBW: 16.99, cartridgePagessBW: 300,
+    cartridgeCostBW: 16.99, cartridgePagesBW: 300,
     cartridgeCostColor: 19.99, pagesColorPerCart: 250,
     hiddenRules: [
       "Canon's subscription is less widely pushed than HP Instant Ink",
@@ -70,7 +70,7 @@ const BRANDS: Record<BrandId, {
       { name: "100 pages/mo", pages: 100, price: 3.99, overagePer10: 0.99 },
       { name: "200 pages/mo", pages: 200, price: 6.99, overagePer10: 0.99 },
     ],
-    cartridgeCostBW: 12.99, cartridgePagessBW: 200,
+    cartridgeCostBW: 12.99, cartridgePagesBW: 200,
     cartridgeCostColor: 14.99, pagesColorPerCart: 150,
     hiddenRules: [
       "ReadyPrint is available for select Epson models only",
@@ -88,7 +88,7 @@ const BRANDS: Record<BrandId, {
       { name: "100 pages/mo", pages: 100, price: 4.99, overagePer10: 1.00 },
       { name: "200 pages/mo", pages: 200, price: 7.99, overagePer10: 1.00 },
     ],
-    cartridgeCostBW: 9.99, cartridgePagessBW: 300,
+    cartridgeCostBW: 9.99, cartridgePagesBW: 300,
     cartridgeCostColor: 17.99, pagesColorPerCart: 200,
     hiddenRules: [
       "Brother XL cartridges often make subscriptions unnecessary",
@@ -133,7 +133,7 @@ export default function Client() {
     const colorPages = pages - bwPages;
 
     // Cartridge cost annual
-    const bwCartridgesPerYear = (bwPages * 12) / (brandData.cartridgePagessBW || 200);
+    const bwCartridgesPerYear = (bwPages * 12) / (brandData.cartridgePagesBW || 200);
     const colorCartridgesPerYear = (colorPages * 12) / (brandData.pagesColorPerCart || 150);
     const annualCartridge = bwCartridgesPerYear * brandData.cartridgeCostBW + colorCartridgesPerYear * brandData.cartridgeCostColor;
 
