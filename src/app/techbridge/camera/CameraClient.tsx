@@ -1,0 +1,357 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
+import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
+import { ArrowRight, CheckCircle2, Phone, Mail, User, Loader2, Star, Shield, Zap, ChevronRight } from "lucide-react";
+import Link from "next/link";
+
+const WIZARD_CONFIG = {
+  source: "camera-page",
+  accentColor: "from-purple-600 to-violet-400",
+  accentHex: "#9333ea",
+  step1Title: "What do you need help with?",
+  step1Options: [
+    { label: "Getting started", icon: "🚀", popular: true },
+    { label: "Something is not working", icon: "🔧", popular: true },
+    { label: "Learn the features", icon: "📚" },
+    { label: "Book a lesson", icon: "👤" },
+  ],
+  step2Title: "Tell us a bit more",
+  brandOptions: [
+    { label: "Option A", icon: "🔵" },
+    { label: "Option B", icon: "🟢" },
+    { label: "Option C", icon: "🔴" },
+    { label: "Not sure", icon: "❓" },
+  ],
+  step2Options: [
+    { label: "Show me how it works", icon: "⚡" },
+    { label: "Learn step by step", icon: "📚" },
+    { label: "Book a live lesson", icon: "👤" },
+    { label: "Get PDF guide", icon: "📄" },
+  ],
+  processingMessages: [
+    "Preparing your learning guide...",
+    "Almost ready, [name]...",
+    "Your personalised guide is ready!",
+  ],
+};
+
+const AI_PROPS = {
+  brandExamples: ["Option A", "Option B", "Option C", "Option D"],
+  starterQuestions: ["How do I get started?", "Something is not working right", "What do you recommend?"],
+};
+
+type Tool = { href: string; emoji: string; label: string; labelBg: string; title: string; desc: string; tags: string[]; gradient: string };
+
+const TOOLS: Tool[] = [
+  { href: "/tools/best-printer-finder", emoji: "🖨️", label: "Find Yours", labelBg: "bg-indigo-600", title: "Best Printer Finder", desc: "5 questions match you to the right printer to print your best photos at home.", tags: ["HP", "Canon", "Epson"], gradient: "from-indigo-500 to-blue-400" },
+  { href: "/tools/printer-cost-calculator", emoji: "💰", label: "Calculate", labelBg: "bg-amber-600", title: "Printer True Cost Calculator", desc: "Find out exactly what your printer costs per year — ink, paper, and electricity.", tags: ["HP", "Canon", "Cost"], gradient: "from-amber-500 to-orange-400" },
+  { href: "/tools/smart-home-matcher", emoji: "🏠", label: "Setup", labelBg: "bg-amber-600", title: "Smart Home Starter Matcher", desc: "Connect your camera to a smart home system for automatic photo backups and alerts.", tags: ["Alexa", "Google", "HomeKit"], gradient: "from-amber-500 to-orange-400" },
+  { href: "/tools/wifi-checker", emoji: "📶", label: "Check", labelBg: "bg-sky-600", title: "Home Wi-Fi Overload Checker", desc: "Ensure your home network is fast enough for photo uploads and camera backups.", tags: ["Wi-Fi", "Router", "Speed"], gradient: "from-sky-500 to-blue-400" },
+  { href: "/tools/home-security-audit", emoji: "🔒", label: "Secure", labelBg: "bg-red-600", title: "Home Security Audit", desc: "Secure your photo storage and make sure your camera devices are protected.", tags: ["Security", "Backup", "Storage"], gradient: "from-red-500 to-rose-400" },
+  { href: "/tools/subscription-audit", emoji: "📊", label: "Audit", labelBg: "bg-teal-600", title: "Tech Subscription Audit", desc: "Check if your photo storage subscriptions — iCloud, Google Photos — are worth keeping.", tags: ["iCloud", "Google Photos", "Save"], gradient: "from-teal-500 to-cyan-400" }
+];
+
+const ISSUES = [
+  ["🔄", "Firmware Updates", "Update safely to fix bugs and unlock new features — takes about 10 minutes."],
+  ["📸", "Better Photos", "Simple settings that transform every single shot you take."],
+  ["💾", "Photo Transfer", "Get photos onto your computer or phone easily — no cables required."],
+  ["⚙️", "Camera Settings", "A plain-English guide to every important setting on your camera."]
+];
+
+const STATS = [
+  ["40%", "of camera issues are resolved with a simple firmware update"],
+  ["Free", "firmware updates available for all major camera brands"],
+  ["3 steps", "to transfer photos from camera to phone or computer"]
+];
+
+function ToolCard({ tool, i }: { tool: Tool; i: number }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 36 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }} whileHover={{ y: -6 }}>
+      <Link href={tool.href} className="block h-full">
+        <div className="h-full bg-zinc-900 border border-zinc-800 hover:border-purple-500/60 rounded-3xl overflow-hidden transition-all duration-300 shadow-md hover:shadow-xl hover:shadow-black/40 group">
+          <div className={`h-1.5 w-full bg-gradient-to-r ${tool.gradient}`} />
+          <div className="p-7">
+            <div className="flex items-start justify-between mb-5">
+              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${tool.gradient} flex items-center justify-center text-2xl shadow-lg`}>{tool.emoji}</div>
+              <span className={`${tool.labelBg} text-white text-xs font-black px-3 py-1.5 rounded-full`}>{tool.label}</span>
+            </div>
+            <h3 className="text-xl font-black text-white mb-3 leading-snug group-hover:text-purple-300 transition-colors">{tool.title}</h3>
+            <p className="text-zinc-400 text-[15px] leading-relaxed mb-5">{tool.desc}</p>
+            <div className="flex flex-wrap gap-2 mb-5">
+              {tool.tags.map(t => <span key={t} className="text-xs font-semibold px-3 py-1 rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700">{t}</span>)}
+            </div>
+            <div className="flex items-center gap-2 text-sm font-black text-purple-300 group-hover:gap-3 transition-all">Try Free <ArrowRight size={14} /></div>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
+function LeadForm() {
+  const [name, setName] = useState(""); const [email, setEmail] = useState(""); const [phone, setPhone] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({ });
+  const [status, setStatus] = useState<"idle"|"loading"|"done">("idle");
+
+  const validate = () => {
+    const e: Record<string, string> = { };
+    if (!name.trim()) e.name = "Please enter your name";
+    if (!email.trim() || !email.includes("@")) e.email = "Please enter a valid email";
+    setErrors(e); return Object.keys(e).length === 0;
+  };
+
+  const submit = async () => {
+    if (!validate()) return;
+    setStatus("loading");
+    try {
+      await fetch("/api/leads", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, issue: "camera-page landing page — guide request", source: "camera-page-cta" }),
+      });
+    } catch {}
+    setStatus("done");
+  };
+
+  if (status === "done") return (
+    <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-10">
+      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
+        className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-400 rounded-full flex items-center justify-center mx-auto mb-5 shadow-2xl shadow-green-500/30">
+        <CheckCircle2 size={36} className="text-white" />
+      </motion.div>
+      <h3 className="text-2xl font-black text-white mb-2">You&#39;re all set, {name}!</h3>
+      <p className="text-zinc-400 font-medium">We&#39;ll be in touch within 24 hours.</p>
+    </motion.div>
+  );
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <label className="text-xs font-black text-zinc-400 uppercase tracking-widest block mb-2 ml-1">Your Name *</label>
+        <div className="relative">
+          <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+          <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Margaret"
+            className="w-full pl-11 pr-4 py-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-[#9333ea] rounded-2xl text-white text-lg placeholder:text-zinc-600 font-medium outline-none transition-colors" />
+        </div>
+        {errors.name && <p className="text-red-400 text-sm mt-1.5 font-semibold ml-1">{errors.name}</p>}
+      </div>
+      <div>
+        <label className="text-xs font-black text-zinc-400 uppercase tracking-widest block mb-2 ml-1">Email Address *</label>
+        <div className="relative">
+          <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com"
+            className="w-full pl-11 pr-4 py-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-[#9333ea] rounded-2xl text-white text-lg placeholder:text-zinc-600 font-medium outline-none transition-colors" />
+        </div>
+        {errors.email && <p className="text-red-400 text-sm mt-1.5 font-semibold ml-1">{errors.email}</p>}
+      </div>
+      <div>
+        <label className="text-xs font-black text-zinc-400 uppercase tracking-widest block mb-2 ml-1">Phone <span className="text-zinc-600 normal-case font-normal">(optional — for a free help call)</span></label>
+        <div className="relative">
+          <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+          <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="(555) 000-0000"
+            className="w-full pl-11 pr-4 py-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-600 focus:border-[#9333ea] rounded-2xl text-white text-lg placeholder:text-zinc-600 font-medium outline-none transition-colors" />
+        </div>
+      </div>
+      <motion.button onClick={submit} disabled={status === "loading"} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+        className="w-full py-5 bg-gradient-to-r from-purple-600 to-violet-400 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-purple-900/40 mt-2">
+        {status === "loading" ? <Loader2 size={22} className="animate-spin" /> : <><Zap size={20} /> Get My Free Guide</>}
+      </motion.button>
+      <p className="text-center text-zinc-600 text-sm font-medium">No spam · Unsubscribe anytime · 100% free</p>
+    </div>
+  );
+}
+
+export default function PageClient() {
+  return (
+    <div className="min-h-screen text-white font-sans overflow-x-hidden" style={{ backgroundColor: "#070510" }}>
+      <Navbar /><ScrollToTop />
+
+      {/* HERO */}
+      <section className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center opacity-[0.07]" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=50&w=700')" }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-950/60 via-[#070510]/90 to-[#070510]" />
+        {[...Array(14)].map((_,i) => (
+          <motion.div key={i} className="absolute rounded-full opacity-20"
+            style={{ width:`${6+(i%4)*3}px`, height:`${6+(i%4)*3}px`, left:`${(i*19+5)%100}%`, top:`${(i*27+8)%100}%`, backgroundColor: "#9333ea" }}
+            animate={{ opacity:[0,0.6,0], y:[-8,8,-8] }} transition={{ duration:4+(i%3), repeat:Infinity, delay:(i*0.35)%5 }} />
+        ))}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.05 }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-purple-500/10 border-purple-500/25 text-purple-300 text-sm font-black uppercase tracking-[0.14em] mb-8 border">
+              Camera & Photography Mastery
+            </motion.div>
+            <h1 className="font-black leading-[0.92] tracking-tighter mb-8">
+              <motion.span className="block text-7xl md:text-8xl text-white" initial={{opacity:0,y:50}} animate={{opacity:1,y:0}} transition={{delay:0.15,type:"spring",stiffness:80}}>Capture</motion.span>
+              <motion.span className="block text-7xl md:text-8xl text-white" initial={{opacity:0,y:50}} animate={{opacity:1,y:0}} transition={{delay:0.24,type:"spring",stiffness:80}}>Every</motion.span>
+              <motion.span className="block text-7xl md:text-8xl from-purple-600 to-violet-400 bg-gradient-to-r bg-clip-text text-transparent italic" initial={{opacity:0,y:50}} animate={{opacity:1,y:0}} transition={{delay:0.32999999999999996,type:"spring",stiffness:80}}>Moment.</motion.span>
+            </h1>
+            <motion.p className="text-xl md:text-2xl text-zinc-300 font-medium mb-3 leading-relaxed max-w-lg"
+              initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.55 }}>
+              Firmware updates, sharper photo tips, and camera settings explained — all in plain English for any camera brand.
+            </motion.p>
+            <motion.p className="text-base text-zinc-500 mb-10 max-w-lg"
+              initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.65 }}>
+              Camera guidance for adults 45+ who want sharper photos and a camera that works perfectly.
+            </motion.p>
+            <motion.div className="flex flex-col sm:flex-row gap-4 mb-10"
+              initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.75 }}>
+              <motion.a href="#learn" whileHover={{ scale:1.03 }} whileTap={{ scale:0.97 }}
+                className="px-9 py-5 bg-gradient-to-r from-purple-600 to-violet-400 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-purple-900/50">
+                Start Camera Masterclass <ArrowRight size={20} />
+              </motion.a>
+              <Link href="/contact">
+                <motion.div whileHover={{ scale:1.03 }} whileTap={{ scale:0.97 }}
+                  className="px-9 py-5 border-2 border-zinc-700 hover:border-[#9333ea] text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 transition-colors cursor-pointer">
+                  Book a Live Lesson
+                </motion.div>
+              </Link>
+            </motion.div>
+            <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.9 }}
+              className="flex flex-wrap items-center gap-5">
+              <div className="flex items-center gap-1">
+                {[1,2,3,4,5].map(s => <Star key={s} size={16} className="text-amber-400 fill-amber-400" />)}
+                <span className="text-zinc-400 text-sm font-medium ml-1">2,400+ learners</span>
+              </div>
+              <div className="flex items-center gap-2 text-green-400 text-sm font-bold"><Shield size={14} /> 100% Free</div>
+              <div className="flex items-center gap-2 text-zinc-400 text-sm"><CheckCircle2 size={14} className="text-purple-300" /> Plain English</div>
+            </motion.div>
+          </div>
+          <motion.div initial={{ opacity:0, x:30 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.3 }} className="hidden lg:block">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/60 border border-zinc-800">
+              <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=50&w=700" alt="Technology learning guide" className="w-full h-[500px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <motion.div animate={{ y:[0,-8,0] }} transition={{ duration:3, repeat:Infinity }}
+                className="absolute bottom-8 left-8 bg-zinc-900/90 backdrop-blur-sm border border-zinc-700 rounded-2xl px-5 py-4 shadow-xl">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-violet-400 flex items-center justify-center text-xl">📷</div>
+                  <div>
+                    <div className="text-white font-black text-base">Camera Guide</div>
+                    <div className="text-zinc-400 text-sm">Canon, Sony, Nikon, Fujifilm</div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section className="py-14 border-y border-zinc-800/60 bg-zinc-950/70">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {STATS.map((s,i) => (
+            <motion.div key={i} initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:i*0.1 }}
+              className="flex flex-col items-center md:items-start text-center md:text-left gap-2 p-6 rounded-2xl border border-zinc-800/50">
+              <span className="text-4xl font-black tabular-nums text-purple-400">{s[0]}</span>
+              <span className="text-zinc-400 text-base leading-relaxed">{s[1]}</span>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ISSUES */}
+      <section className="py-24 bg-zinc-950/50 border-y border-zinc-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">Camera Lessons That Actually Stick</h2>
+            <p className="text-zinc-400 text-lg">Every camera question answered in plain, calm English</p>
+          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {ISSUES.map((issue,i) => (
+              <motion.div key={i} initial={{ opacity:0, y:40 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
+                transition={{ delay:i*0.1 }} whileHover={{ y:-8, scale:1.02 }}
+                className="bg-zinc-900 border border-zinc-800 hover:border-purple-500/60 rounded-3xl p-8 transition-all duration-300 group">
+                <div className="text-5xl mb-6">{issue[0]}</div>
+                <h3 className="text-xl font-black text-white mb-3 group-hover:text-purple-300 transition-colors">{issue[1]}</h3>
+                <p className="text-zinc-400 text-[15px] leading-relaxed">{issue[2]}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <TechBridgeLearningHub
+        topic="Camera" accentColor="from-purple-600 to-violet-400" accentHex="#9333ea"
+        wizardConfig={WIZARD_CONFIG} aiProps={AI_PROPS}
+      />
+
+      {/* RELATED TOOLS */}
+      <section id="tools" className="py-28 border-t border-zinc-800/50" style={{ backgroundColor:"#070510" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-black uppercase tracking-widest mb-6"
+              style={{ backgroundColor:"#9333ea"+"15", borderColor:"#9333ea"+"30", color:"#9333ea" }}>
+              <Zap size={14} /> 6 Free Tech Tools
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5 text-white">
+              Free Tools — For Your<br className="hidden md:block" />
+              <span className="bg-gradient-to-r from-purple-400 to-violet-300 bg-clip-text text-transparent">Other Tech Questions</span>
+            </h2>
+            <p className="text-zinc-400 text-xl max-w-2xl mx-auto leading-relaxed">Each tool gives you step-by-step guidance for your specific tech and situation.</p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {TOOLS.map((tool,i) => <ToolCard key={tool.href} tool={tool} i={i} />)}
+          </div>
+          <div className="text-center">
+            <Link href="/tools">
+              <motion.div whileHover={{ scale:1.03 }} className="inline-flex items-center gap-3 px-10 py-5 border-2 border-zinc-700 hover:border-[#9333ea] text-white font-black text-lg rounded-2xl transition-colors cursor-pointer">
+                See All 27 Free Tools <ChevronRight size={20} />
+              </motion.div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* LEAD CAPTURE */}
+      <section className="py-28 relative overflow-hidden border-t border-zinc-800/50">
+        <div className="absolute inset-0 opacity-[0.04] bg-cover bg-center" style={{ backgroundImage:"url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=50&w=700')" }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-950/60 via-[#070510]/95 to-[#070510]" />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }}>
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-black uppercase tracking-widest mb-8"
+              style={{ backgroundColor:"#9333ea"+"15", borderColor:"#9333ea"+"30", color:"#9333ea" }}>
+              <Zap size={14} /> Free Learning Guide
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight tracking-tight">Get Your Free Camera Learning Guide</h2>
+            <p className="text-zinc-300 text-xl leading-relaxed mb-10">We'll send you our complete camera guide — firmware updates, better photos, settings explained, and photo transfer.</p>
+            <div className="space-y-5">
+              <motion.div key={0} initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{delay:0.0}} className="flex items-start gap-4"><span className="text-2xl flex-shrink-0 mt-0.5">🔄</span><span className="text-zinc-300 text-lg leading-relaxed">How to update camera firmware safely — step by step for any brand</span></motion.div>
+              <motion.div key={1} initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{delay:0.1}} className="flex items-start gap-4"><span className="text-2xl flex-shrink-0 mt-0.5">📸</span><span className="text-zinc-300 text-lg leading-relaxed">5 simple settings for dramatically better photos every time</span></motion.div>
+              <motion.div key={2} initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{delay:0.2}} className="flex items-start gap-4"><span className="text-2xl flex-shrink-0 mt-0.5">💾</span><span className="text-zinc-300 text-lg leading-relaxed">How to transfer photos to your phone or computer easily</span></motion.div>
+              <motion.div key={3} initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} viewport={{once:true}} transition={{delay:0.30000000000000004}} className="flex items-start gap-4"><span className="text-2xl flex-shrink-0 mt-0.5">⚙️</span><span className="text-zinc-300 text-lg leading-relaxed">What every camera setting actually means in plain English</span></motion.div>
+            </div>
+          </motion.div>
+          <motion.div initial={{ opacity:0, x:30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }}>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-[2.5rem] p-8 md:p-10 shadow-2xl">
+              <h3 className="text-2xl font-black text-white mb-1">Get Instant Access</h3>
+              <p className="text-zinc-400 font-medium mb-8">Free — no credit card, no commitments.</p>
+              <LeadForm />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="py-20 border-t border-zinc-800/50 bg-zinc-950/40">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-5 tracking-tight">Want hands-on camera help?</h2>
+          <p className="text-zinc-400 text-xl leading-relaxed mb-10">Our live sessions cover your specific camera model — Canon, Sony, Nikon, Fujifilm, or any other brand.</p>
+          <Link href="/contact">
+            <motion.div whileHover={{ scale:1.03 }} className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-purple-600 to-violet-400 text-white font-black text-xl rounded-2xl shadow-xl shadow-purple-900/40 cursor-pointer">
+              Book a Live Camera Lesson <ArrowRight size={22} />
+            </motion.div>
+          </Link>
+          <p className="mt-5 text-zinc-600 text-base">From $49 · No tech knowledge needed · Plain English</p>
+        </div>
+      </section>
+      <Footer />
+    </div>
+  );
+}

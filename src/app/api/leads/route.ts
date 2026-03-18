@@ -1,16 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Basic email validation
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+const SOURCE_COLORS: Record<string, number> = {
+  "printers-page": 0x2563eb, "printers-page-cta": 0x1d4ed8,
+  "gps-page": 0x16a34a, "gps-page-cta": 0x15803d,
+  "smarthome-page": 0xf59e0b, "smarthome-page-cta": 0xd97706,
+  "alexa-page": 0x06b6d4, "alexa-page-cta": 0x0891b2,
+  "camera-page": 0x9333ea, "camera-page-cta": 0x7e22ce,
+  "security-page": 0xef4444, "security-page-cta": 0xdc2626,
+  "my-printer-stopped-working": 0xf97316,
+  "set-up-my-new-printer": 0x06b6d4,
+  "hp-vs-canon-vs-epson-vs-brother": 0x8b5cf6,
+  "is-hp-instant-ink-worth-it": 0x10b981,
+  "best-printer-for-seniors": 0xf43f5e,
+  "how-to-print-from-phone-or-laptop": 0x0ea5e9,
+  "how-to-send-a-fax-from-home": 0x6366f1,
+  "how-to-print-email-or-webpage": 0x14b8a6,
+  "should-i-buy-a-new-printer": 0xf59e0b,
+  "printer-specs-explained": 0x7c3aed,
+  "road-trip-checker": 0x16a34a,
+  "best-gps-finder": 0x2563eb,
+  "garmin-express-setup": 0x06b6d4,
+  "gps-update-scheduler": 0x06b6d4,
+  "gps-troubleshooter": 0xf97316,
+  "contact-page": 0x2563eb,
+  "website": 0x2563eb,
+};
+
+function label(source: string): string {
+  return source.replace(/-page(-cta)?$/, "").replace(/-/g, " ")
+    .replace(/\b\w/g, l => l.toUpperCase()) || "Website";
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, email, phone, brand, issue, source, deviceType, learningGoals, deviceCount, extra } = body;
+    const { name, email, phone, brand, issue, source, deviceType, learningGoals, deviceCount, extra, contactMethod } = body;
 
-    // Validate required fields
     if (!email || !isValidEmail(email)) {
       return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
     }
@@ -27,35 +56,23 @@ export async function POST(req: NextRequest) {
         { name: "📍 Source", value: source || "website", inline: true },
       ];
 
+      if (contactMethod) fields.push({ name: "📬 Contact Method", value: String(contactMethod), inline: true });
       if (deviceCount) fields.push({ name: "🔢 Device Count", value: String(deviceCount), inline: true });
-      if (extra) fields.push({ name: "📝 Extra Info", value: String(extra).slice(0, 1024), inline: false });
+      if (extra) fields.push({ name: "📝 Notes", value: String(extra).slice(0, 1024), inline: false });
 
-      const colors: Record<string, number> = {
-        "printers-page": 0x2563eb,
-        "gps-page": 0x16a34a,
-        "smarthome-page": 0xf59e0b,
-        "alexa-page": 0x06b6d4,
-        "camera-page": 0x9333ea,
-        "security-page": 0xef4444,
-      };
-
-      const discordRes = await fetch(webhookUrl, {
+      await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           embeds: [{
-            title: `🎯 New Lead — ${source?.replace("-page", "").toUpperCase() || "Website"}`,
-            color: colors[source] ?? 0x2563eb,
+            title: `🎯 New Lead — ${label(source || "website")}`,
+            color: SOURCE_COLORS[source] ?? 0x2563eb,
             fields,
-            footer: { text: "Setwise Digital Lead Capture • support@setwisedigital.com" },
+            footer: { text: "Setwise Digital Leads • support@setwisedigital.com" },
             timestamp: new Date().toISOString(),
           }],
         }),
-      });
-
-      if (!discordRes.ok) {
-        console.error("Discord webhook error:", discordRes.status, await discordRes.text());
-      }
+      }).catch(e => console.error("Discord webhook error:", e));
     }
 
     return NextResponse.json({ success: true, id: `lead_${Date.now()}` });

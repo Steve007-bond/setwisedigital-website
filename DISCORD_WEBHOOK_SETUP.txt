@@ -1,0 +1,117 @@
+HOW TO SET UP YOUR DISCORD WEBHOOK
+Receive every lead directly in Discord the moment they submit
+=============================================================
+
+STEP 1 — CREATE THE WEBHOOK IN DISCORD
+---------------------------------------
+1. Open Discord on your computer
+2. Go to the server and channel where you want leads
+   (e.g. create a channel called #leads or #new-enquiries)
+3. Right-click the channel name → Edit Channel
+4. Click "Integrations" in the left sidebar
+5. Click "Webhooks" → "New Webhook"
+6. Give it a name like "Setwise Leads"
+7. Click "Copy Webhook URL"
+   It will look like: https://discord.com/api/webhooks/123456/abc-xyz
+8. Save that URL — you'll need it in Step 2
+
+
+STEP 2 — ADD TO VERCEL ENVIRONMENT VARIABLES
+---------------------------------------------
+1. Go to vercel.com and open your project
+2. Click "Settings" in the top navigation
+3. Click "Environment Variables" in the left sidebar
+4. Click "Add New"
+5. Fill in:
+   Key:   DISCORD_WEBHOOK_URL
+   Value: (paste your webhook URL from Step 1)
+   Environments: tick Production, Preview, and Development
+6. Click "Save"
+
+
+STEP 3 — REDEPLOY
+------------------
+1. Go to "Deployments" in your Vercel project
+2. Click the three dots (...) on your most recent deployment
+3. Click "Redeploy"
+4. Wait ~2 minutes for the deployment to complete
+5. Done! All leads now go to Discord automatically
+
+
+WHAT YOU'LL SEE IN DISCORD
+---------------------------
+Every lead shows as a colour-coded card with:
+
+  🎯 New Lead — [Source Page]   ← title
+  👤 Name       ← what they typed
+  📧 Email      ← their email address
+  📞 Phone      ← phone number (if provided)
+  📟 Device     ← printer brand, GPS model, etc.
+  🔍 Issue      ← what they need help with
+  📍 Source     ← which page/tool they came from
+
+Colour coding per section:
+  🔵 Blue     — Printer pages and tools
+  🟢 Green    — GPS pages and tools
+  🟡 Amber    — Smart Home pages
+  🩵 Cyan     — Alexa pages
+  🟣 Purple   — Camera pages
+  🔴 Red      — Security pages
+  🟠 Orange   — Printer troubleshooter tools
+
+
+WHERE LEADS COME FROM
+----------------------
+Every form on the site sends to the same Discord channel:
+
+TechBridge landing pages:
+  /techbridge/printers        (main form + quick guide form)
+  /techbridge/gps
+  /techbridge/alexa
+  /techbridge/smart-home
+  /techbridge/security
+  /techbridge/camera
+
+Printer tool pages:
+  /tools/my-printer-stopped-working
+  /tools/set-up-my-new-printer
+  /tools/hp-vs-canon-vs-epson-vs-brother
+  /tools/is-hp-instant-ink-worth-it
+  /tools/best-printer-for-seniors
+  /tools/how-to-print-from-phone-or-laptop
+  /tools/how-to-send-a-fax-from-home
+  /tools/how-to-print-email-or-webpage
+  /tools/should-i-buy-a-new-printer
+  /tools/printer-specs-explained
+
+GPS and other tools:
+  /tools/road-trip-checker
+  /tools/best-gps-finder
+  /tools/garmin-express-setup
+  All other tools
+
+Contact page:
+  /contact
+
+
+TESTING YOUR SETUP
+-------------------
+After deploying, test it:
+1. Go to setwisedigital.com/techbridge/printers
+2. Scroll to the "Get Your Free Printer Guide" section
+3. Fill in a test name and email
+4. Click the button
+5. Check your Discord channel — the lead should appear instantly
+
+
+TROUBLESHOOTING
+----------------
+Lead not appearing in Discord?
+  → Check that DISCORD_WEBHOOK_URL is saved in Vercel environment variables
+  → Make sure you redeployed AFTER adding the variable
+  → Check that the webhook URL is complete (starts with https://discord.com/api/webhooks/)
+  → Try creating a new webhook in Discord (they can expire)
+
+Getting an error on the form?
+  → Check Vercel function logs: Vercel project → Functions → view logs
+  → Most common cause: webhook URL is wrong or expired

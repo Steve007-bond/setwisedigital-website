@@ -1,245 +1,112 @@
-"use client";
+import type { Metadata } from "next";
+import PrintersClient from "./PrintersClient";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ScrollToTop from "@/components/ScrollToTop";
-import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
-import { Wifi, AlertCircle, ArrowRight } from "lucide-react";
-import Link from "next/link";
+// DEPLOYMENT NOTE: Rename your existing techbridge/printers/page.tsx → techbridge/printers/PrintersClient.tsx
 
-const WIZARD_CONFIG = {
-  source: "printers-page",
-  accentColor: "from-blue-600 to-blue-400",
-  accentHex: "#2563eb",
-  step1Title: "What's going on with your printer?",
-  step1Options: [
-    { label: "Paper jam", icon: "📄", popular: true },
-    { label: "Wi-Fi setup", icon: "📶", popular: true },
-    { label: "Replace ink", icon: "🖨️" },
-    { label: "Scanner help", icon: "🔍" },
-    { label: "Offline error", icon: "❌" },
-    { label: "Print quality", icon: "🖼️" },
+export const metadata: Metadata = {
+  title: "Printer Learning Guide — Wi-Fi Setup, Ink, Jams & Maintenance | Setwise Digital",
+  description:
+    "Learn how printers work in plain English. Wi-Fi printing setup, paper jam prevention, ink management, print quality, and maintenance for HP, Canon, Epson, and Brother. Step-by-step lessons.",
+  keywords: [
+    "how to set up printer Wi-Fi",
+    "printer learning guide seniors",
+    "how to fix paper jam",
+    "printer maintenance guide",
+    "how does Wi-Fi printing work",
+    "printer ink explained",
+    "HP printer setup guide plain English",
+    "Canon printer learning guide",
+    "why is my printer not working",
+    "printer for beginners",
   ],
-  step2Title: "Which brand is your printer?",
-  brandOptions: [
-    { label: "HP", icon: "🔵" },
-    { label: "Canon", icon: "🔴" },
-    { label: "Epson", icon: "⚫" },
-    { label: "Brother", icon: "🟢" },
-    { label: "Lexmark", icon: "🟡" },
-    { label: "Other", icon: "❓" },
-  ],
-  step2Options: [
-    { label: "Show me how it works", icon: "⚡" },
-    { label: "Learn step by step", icon: "📚" },
-    { label: "Book a live lesson", icon: "👤" },
-    { label: "Get PDF guide", icon: "📄" },
-  ],
-  processingMessages: [
-    "Preparing your printer learning guide...",
-    "Adding lessons for your [brand] printer...",
-    "Almost ready, [name]...",
-    "Your personalised learning guide is ready!",
-  ],
+  alternates: { canonical: "https://setwisedigital.com/techbridge/printers" },
+  openGraph: {
+    title: "Printer Learning Guide — Plain English | Setwise Digital TechBridge",
+    description: "Step-by-step printer lessons. Wi-Fi setup, paper jams, ink, and maintenance for HP, Canon, Epson, Brother.",
+    url: "https://setwisedigital.com/techbridge/printers",
+  },
 };
 
-const AI_PROPS = {
-  brandExamples: ["HP", "Canon", "Epson", "Brother", "Lexmark"],
-  starterQuestions: [
-    "My printer won't connect to Wi-Fi",
-    "How do I fix a paper jam?",
-    "My printer shows offline — how do I fix it?",
-    "How do I replace ink cartridges?",
-    "My prints look blurry or faded",
-  ],
-};
+export default function TechBridgePrintersPage() {
+  const learningResourceSchema = {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    name: "Printer Learning Guide by Setwise Digital",
+    url: "https://setwisedigital.com/techbridge/printers",
+    description:
+      "Comprehensive plain-English printer learning guide covering wireless setup, paper jam prevention, ink management, print quality troubleshooting, and maintenance for HP, Canon, Epson, and Brother printers.",
+    provider: {
+      "@type": "Organization",
+      name: "Setwise Digital",
+      url: "https://setwisedigital.com",
+    },
+    teaches: [
+      "How Wi-Fi printing works",
+      "Printer setup step by step",
+      "How to prevent paper jams",
+      "Printer ink and cartridge management",
+      "Print quality troubleshooting",
+      "Printer maintenance and care",
+    ],
+    audience: { "@type": "Audience", audienceType: "Adults 40+" },
+    isAccessibleForFree: true,
+  };
 
-function PrinterSVG() {
-  return (
-    <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      className="relative w-64 h-64 mx-auto">
-      <svg viewBox="0 0 200 200" className="w-full h-full">
-        <rect x="20" y="80" width="160" height="90" rx="8" fill="#1e293b" stroke="#334155" strokeWidth="2" />
-        <rect x="30" y="90" width="140" height="60" rx="4" fill="#0f172a" />
-        <rect x="60" y="145" width="80" height="6" rx="2" fill="#334155" />
-        <rect x="50" y="55" width="100" height="30" rx="4" fill="#1e293b" stroke="#334155" strokeWidth="1.5" />
-        <circle cx="150" cy="110" r="6" fill="#2563eb" opacity="0.8" />
-        <circle cx="135" cy="110" r="4" fill="#1d4ed8" opacity="0.6" />
-        <motion.circle cx="150" cy="110" r="6" fill="#3b82f6"
-          animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
-        {[1, 2, 3].map(i => (
-          <motion.circle key={i} cx="100" cy="75" r={i * 10} fill="none" stroke="#2563eb" strokeWidth="1.5"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: [0, 0.8, 0], scale: [0.5, 1.5, 2] }}
-            transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.5 }} />
-        ))}
-      </svg>
-      {[
-        { color: "#06b6d4", x: 60, delay: 0 },
-        { color: "#ec4899", x: 80, delay: 0.3 },
-        { color: "#eab308", x: 100, delay: 0.6 },
-        { color: "#1e293b", x: 120, delay: 0.9 },
-      ].map((drop, i) => (
-        <motion.div key={i} className="absolute w-3 h-4 rounded-full"
-          style={{ backgroundColor: drop.color, left: drop.x, top: 20 }}
-          animate={{ y: [0, 50, 0], scale: [1, 0.8, 1] }}
-          transition={{ duration: 1.5, repeat: Infinity, delay: drop.delay, type: "spring", stiffness: 400, damping: 15 }} />
-      ))}
-    </motion.div>
-  );
-}
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "How does Wi-Fi printing work?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Wi-Fi printing works by connecting your printer and your phone or computer to the same home Wi-Fi network. Once both devices are on the same network, your phone or computer can send print jobs wirelessly. On iPhone, this works automatically via AirPrint — no app needed. On Windows or Mac, you add the printer once in Settings, then press Ctrl+P or ⌘+P to print from any app.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Why does my printer keep getting paper jams?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "According to Setwise Digital, the most common causes of repeated paper jams are: using paper that is too old or has absorbed moisture, overloading the paper tray beyond its capacity, loading paper that is not aligned squarely in the tray, or small torn pieces of paper still inside the printer from a previous jam. Always fan paper before loading, never overfill the tray, and check carefully for torn fragments after clearing a jam.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I print from my iPhone?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "To print from iPhone: ensure your iPhone and printer are on the same Wi-Fi network. Open the document or photo → tap the Share button (square with upward arrow) → scroll down and tap Print → tap Printer → select your printer → tap Print. This works via AirPrint, which is built into every iPhone and compatible with most HP, Canon, Epson, and Brother printers made after 2015.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How often should I clean my printer?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Run a print head cleaning cycle from your printer's Maintenance menu when you notice streaky, faded, or patchy output. For preventive maintenance, print at least one full-colour test page once per week — this keeps the ink nozzles from drying out. Inkjet printers that sit unused for weeks develop clogged print heads, which is the most common cause of blank page printing.",
+        },
+      },
+    ],
+  };
 
-function InkBar({ label, value, color, warning }: { label: string; value: number; color: string; warning?: boolean }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: false });
-  return (
-    <div ref={ref} className="space-y-2">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded-sm" style={{ backgroundColor: color }} />
-          <span className="text-sm font-black text-white uppercase tracking-widest">{label}</span>
-          {warning && (
-            <motion.div animate={{ rotate: [-5, 5, -5, 5, 0] }} transition={{ duration: 0.4, repeat: Infinity, repeatDelay: 3.6 }}>
-              <AlertCircle size={16} className="text-red-400" />
-            </motion.div>
-          )}
-        </div>
-        <span className={`text-sm font-black ${warning ? "text-red-400" : "text-zinc-300"}`}>{value}%</span>
-      </div>
-      <div className="h-3 bg-zinc-800 rounded-full overflow-hidden">
-        <motion.div className="h-full rounded-full" style={{ backgroundColor: warning ? "#ef4444" : color }}
-          initial={{ width: 0 }} animate={{ width: inView ? `${value}%` : 0 }}
-          transition={{ type: "spring", stiffness: 60, damping: 15, delay: 0.15 }} />
-      </div>
-      {warning && (
-        <motion.p className="text-red-400 text-xs font-bold"
-          animate={{ opacity: [1, 0.5, 1] }} transition={{ duration: 1, repeat: Infinity }}>
-          Low ink — replace soon!
-        </motion.p>
-      )}
-    </div>
-  );
-}
-
-const ISSUES = [
-  { icon: "📄", title: "Paper Jams", desc: "Learn what causes paper jams and how to prevent them." },
-  { icon: "📶", title: "Wi-Fi Setup", desc: "Understand how Wi-Fi printing works and how to set it up." },
-  { icon: "🖨️", title: "Replace Ink", desc: "Learn how ink cartridges work and when to replace them." },
-  { icon: "🔍", title: "Scanner Help", desc: "Learn how scanners work and how to send documents digitally." },
-];
-
-export default function PrintersPage() {
-  const inkRef = useRef(null);
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://setwisedigital.com/techbridge" },
+      { "@type": "ListItem", position: 3, name: "Printers", item: "https://setwisedigital.com/techbridge/printers" },
+    ],
+  };
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white font-sans">
-      <Navbar />
-      <ScrollToTop />
-
-      {/* HERO */}
-      <section className="min-h-screen flex items-center pt-20 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-950/30 via-transparent to-indigo-950/20" />
-          {[...Array(20)].map((_, i) => (
-            <motion.div key={i} className="absolute w-1 h-1 bg-blue-500 rounded-full"
-              style={{ left: `${(i * 17 + 7) % 100}%`, top: `${(i * 23 + 11) % 100}%` }}
-              animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
-              transition={{ duration: 2 + (i % 3), repeat: Infinity, delay: (i * 0.4) % 5 }} />
-          ))}
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-          <div>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-widest mb-8">
-              <Wifi size={14} /> Printer & Scanner Literacy
-            </motion.div>
-            <div className="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8">
-              {"Print Without".split(" ").map((word, i) => (
-                <motion.span key={i} className="block" initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.08, type: "spring", stiffness: 100 }}>
-                  {word}
-                </motion.span>
-              ))}
-              <motion.span className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent italic"
-                initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, type: "spring" }}>
-                Pressure.
-              </motion.span>
-            </div>
-            <motion.p className="text-xl text-zinc-400 font-medium mb-10 leading-relaxed max-w-lg"
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
-              Understand how printers work — wireless setup, maintenance, and features explained in plain English.
-            </motion.p>
-            <motion.div className="flex flex-col sm:flex-row gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}>
-              <motion.a href="#learn"
-                className="relative px-8 py-5 bg-blue-600 text-white font-black text-lg rounded-2xl flex items-center justify-center gap-3 overflow-hidden"
-                whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                animate={{ boxShadow: ["0 0 0 0 rgba(37,99,235,0)", "0 0 0 12px rgba(37,99,235,0)", "0 0 0 0 rgba(37,99,235,0)"] }}
-                transition={{ boxShadow: { duration: 2, repeat: Infinity } }}>
-                Start Printer Masterclass <ArrowRight size={20} />
-              </motion.a>
-              <Link href="/contact"
-                className="relative px-8 py-5 border-2 border-zinc-600 text-white font-black text-lg rounded-2xl flex items-center justify-center gap-3 overflow-hidden group hover:border-blue-500 transition-colors">
-                <span className="absolute inset-0 bg-blue-600 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                <span className="relative">Book a Live Lesson</span>
-              </Link>
-            </motion.div>
-          </div>
-          <div className="flex items-center justify-center">
-            <PrinterSVG />
-          </div>
-        </div>
-      </section>
-
-      {/* INK LEVELS */}
-      <section ref={inkRef} className="py-20 bg-zinc-950/50 border-y border-zinc-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-black text-white mb-3">Ink Level Diagnostics</h2>
-            <p className="text-zinc-500 font-medium">Our guide covers when and how to replace every cartridge</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-zinc-900/80 rounded-[2rem] p-8 border border-zinc-800">
-            <InkBar label="Cyan" value={78} color="#06b6d4" />
-            <InkBar label="Magenta" value={45} color="#ec4899" />
-            <InkBar label="Yellow" value={61} color="#eab308" />
-            <InkBar label="Black" value={12} color="#ef4444" warning />
-          </div>
-        </div>
-      </section>
-
-      {/* ISSUE CARDS */}
-      <section className="py-24 bg-[#080808]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-4">Topics Covered in This Course</h2>
-            <p className="text-zinc-500 text-lg font-medium">Every problem — explained in plain English</p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {ISSUES.map((issue, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.12 }}
-                whileHover={{ scale: 1.04, y: -8 }}
-                className="bg-zinc-900 border border-zinc-800 rounded-[2rem] p-8 cursor-pointer group hover:border-blue-500 transition-all">
-                <div className="text-4xl mb-6">{issue.icon}</div>
-                <h3 className="text-xl font-black text-white mb-3 group-hover:text-blue-400 transition-colors">{issue.title}</h3>
-                <p className="text-zinc-500 font-medium text-sm leading-relaxed">{issue.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── THE 3-OPTION LEARNING HUB ─────────────────────────────── */}
-      <TechBridgeLearningHub
-        topic="Printer"
-        accentColor="from-blue-400 to-cyan-400"
-        accentHex="#2563eb"
-        wizardConfig={WIZARD_CONFIG}
-        aiProps={AI_PROPS}
-      />
-
-      <Footer />
-    </div>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(learningResourceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <PrintersClient />
+    </>
   );
 }

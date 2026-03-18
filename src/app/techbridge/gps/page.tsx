@@ -1,226 +1,98 @@
-"use client";
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
-import ScrollToTop from "@/components/ScrollToTop";
-import Link from "next/link";
-import { Navigation, ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
+import GpsClient from "./GpsClient";
 
-const WIZARD_CONFIG = {
-  source: "gps-page",
-  accentColor: "from-green-600 to-emerald-400",
-  accentHex: "#16a34a",
-  step1Title: "What's going on with your GPS?",
-  step1Options: [
-    { label: "Maps outdated", icon: "🗺️", popular: true },
-    { label: "Frozen screen", icon: "🧊" },
-    { label: "Wrong directions", icon: "🔀", popular: true },
-    { label: "No signal", icon: "📡" },
-    { label: "Plan a route", icon: "📍" },
-    { label: "Software error", icon: "⚠️" },
+// DEPLOYMENT NOTE: Rename your existing techbridge/gps/page.tsx → techbridge/gps/GpsClient.tsx
+
+export const metadata: Metadata = {
+  title: "GPS Learning Guide — Map Updates, Navigation & Garmin Setup | Setwise Digital",
+  description:
+    "Learn how GPS navigation works in plain English. How to update Garmin maps, read GPS directions, plan routes, and understand GPS features. Step-by-step guide for beginners and seniors.",
+  keywords: [
+    "how to update Garmin GPS",
+    "GPS navigation learning guide",
+    "how to use GPS plain English",
+    "GPS map update guide seniors",
+    "TomTom update guide",
+    "how does GPS work plain English",
+    "Garmin GPS for beginners",
+    "car GPS setup guide",
+    "GPS learning guide adults over 50",
   ],
-  step2Title: "Which GPS device do you have?",
-  brandOptions: [
-    { label: "Garmin", icon: "🟠" },
-    { label: "TomTom", icon: "🔴" },
-    { label: "Magellan", icon: "🔵" },
-    { label: "In-car GPS", icon: "🚗" },
-    { label: "Google Maps", icon: "📱" },
-    { label: "Other", icon: "❓" },
-  ],
-  step2Options: [
-    { label: "Update my maps", icon: "🔄" },
-    { label: "Show me how it works", icon: "🔧" },
-    { label: "Learn features", icon: "📚" },
-    { label: "Book a live lesson", icon: "👤" },
-  ],
-  processingMessages: [
-    "Checking your GPS model...",
-    "Finding your update steps...",
-    "Almost ready, [name]...",
-    "Your GPS guide is ready!",
-  ],
+  alternates: { canonical: "https://setwisedigital.com/techbridge/gps" },
+  openGraph: {
+    title: "GPS Learning Guide — Map Updates & Navigation | Setwise Digital",
+    description: "How to update Garmin maps, read GPS directions, and plan routes. Step-by-step for beginners.",
+    url: "https://setwisedigital.com/techbridge/gps",
+  },
 };
 
-function GPSHeroSVG() {
+export default function TechBridgeGpsPage() {
+  const learningResourceSchema = {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    name: "GPS Learning Guide by Setwise Digital",
+    url: "https://setwisedigital.com/techbridge/gps",
+    description:
+      "Plain-English GPS learning guide covering map updates, Garmin Express setup, route planning, GPS navigation features, and troubleshooting for Garmin, TomTom, and in-car navigation systems.",
+    provider: { "@type": "Organization", name: "Setwise Digital", url: "https://setwisedigital.com" },
+    teaches: [
+      "How to update Garmin GPS maps",
+      "How GPS navigation works",
+      "How to use Garmin Express",
+      "Route planning basics",
+      "Understanding GPS features like live traffic and lane assist",
+    ],
+    audience: { "@type": "Audience", audienceType: "Adults 40+" },
+    isAccessibleForFree: true,
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "How do I update my Garmin GPS maps?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "To update Garmin GPS maps: Method 1 (Wi-Fi, easiest): on your Garmin screen tap Settings → Map & Vehicle → Manage Maps → tap the update button if available. Method 2 (computer): download Garmin Express free from garmin.com/express, connect your GPS to your computer with a USB cable, open Garmin Express, and it will show available map updates. Updates are free if your GPS came with lifetime maps.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How often should I update my GPS maps?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Garmin and TomTom release map updates quarterly (4 times per year). According to Setwise Digital, approximately 72% of GPS users never update their maps — which means their GPS may show roads, speed limits, or points of interest that are years out of date. For regular drivers, updating maps at least once or twice per year is recommended.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Should I use a GPS device or just my phone for navigation?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A dedicated GPS device is better if: you drive in areas with poor cell signal, you want offline maps that work without internet, your phone mount and battery use cause problems, or you prefer a dedicated screen at eye level. Your phone (Google Maps or Apple Maps) is sufficient if you always have good cell signal, drive in familiar areas, and don't mind the battery drain.",
+        },
+      },
+    ],
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://setwisedigital.com" },
+      { "@type": "ListItem", position: 2, name: "TechBridge", item: "https://setwisedigital.com/techbridge" },
+      { "@type": "ListItem", position: 3, name: "GPS", item: "https://setwisedigital.com/techbridge/gps" },
+    ],
+  };
+
   return (
-    <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-      className="relative w-72 h-72 mx-auto">
-      <svg viewBox="0 0 240 260" className="w-full h-full">
-        {/* Device body */}
-        <rect x="60" y="20" width="120" height="180" rx="16" fill="#0d1117" stroke="#1e3a5f" strokeWidth="2.5" />
-        <rect x="68" y="30" width="104" height="145" rx="8" fill="#0a1628" />
-        {/* Road lines on screen */}
-        <line x1="120" y1="35" x2="120" y2="170" stroke="#1e40af" strokeWidth="8" strokeLinecap="round" />
-        <motion.line x1="120" y1="80" x2="120" y2="100" stroke="white" strokeWidth="2" strokeDasharray="8 8"
-          animate={{ strokeDashoffset: [0, -32] }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
-        {/* Map pin */}
-        <motion.g animate={{ y: [0, -5, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-          <circle cx="120" cy="95" r="10" fill="#16a34a" />
-          <circle cx="120" cy="95" r="5" fill="white" />
-          {[1, 2].map(i => (
-            <motion.circle key={i} cx="120" cy="95" r={i * 14} fill="none" stroke="#16a34a" strokeWidth="1.5"
-              animate={{ opacity: [0.8, 0], scale: [0.5, 1.5] }}
-              transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.4 }} />
-          ))}
-        </motion.g>
-        {/* Route line */}
-        <motion.path d="M 90 150 Q 120 110 150 80" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeDasharray="200"
-          animate={{ strokeDashoffset: [200, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 1 }} />
-        {/* Mount */}
-        <rect x="110" y="200" width="20" height="30" rx="4" fill="#1e293b" />
-        <rect x="95" y="225" width="50" height="8" rx="4" fill="#1e293b" />
-        {/* Buttons */}
-        <circle cx="85" cy="125" r="6" fill="#1e3a5f" />
-        <circle cx="155" cy="125" r="6" fill="#1e3a5f" />
-        <rect x="95" y="178" width="50" height="6" rx="3" fill="#1e3a5f" />
-      </svg>
-    </motion.div>
-  );
-}
-
-const ISSUES = [
-  { icon: "🔄", title: "Update Maps", desc: "Understand how GPS maps are structured and how updates work." },
-  { icon: "🧊", title: "Frozen Screen", desc: "Learn what causes GPS screen issues and how to address them." },
-  { icon: "✅", title: "Wrong Directions", desc: "Understand how GPS routing works and why directions sometimes differ." },
-  { icon: "📍", title: "Plan a Route", desc: "Multi-stop planning and travel time estimates." },
-];
-
-export default function GPSPage() {
-  return (
-    <div className="min-h-screen bg-[#0d1117] text-white font-sans">
-      <Navbar />
-      <ScrollToTop />
-      {/* Road ambient */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <motion.div className="absolute inset-0 opacity-5"
-          style={{ backgroundImage: "repeating-linear-gradient(to bottom, transparent, transparent 40px, rgba(255,255,255,0.3) 40px, rgba(255,255,255,0.3) 48px)" }}
-          animate={{ backgroundPositionY: ["0px", "48px"] }}
-          transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }} />
-      </div>
-
-      <section className="min-h-screen flex items-center pt-20 pb-16 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-black uppercase tracking-widest mb-8">
-              <Navigation size={14} /> GPS & Navigation Mastery
-            </motion.div>
-            <div className="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8">
-              {["Update", "Your GPS", "in Minutes"].map((word, i) => (
-                <motion.span key={i} className={`block ${i === 2 ? "bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent italic" : ""}`}
-                  initial={{ opacity: 0, filter: "blur(8px)" }} animate={{ opacity: 1, filter: "blur(0px)" }}
-                  transition={{ delay: 0.2 + i * 0.1 }}>
-                  {word}
-                </motion.span>
-              ))}
-            </div>
-            <motion.p className="text-xl text-zinc-400 font-medium mb-10 leading-relaxed max-w-lg"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-              Keep your maps current, master navigation features, and discover shortcuts — all in plain English.
-            </motion.p>
-            <motion.div className="flex flex-col sm:flex-row gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}>
-              <motion.a href="#learn"
-                className="px-8 py-5 font-black text-lg rounded-2xl text-white bg-gradient-to-r from-green-600 to-emerald-500 flex items-center justify-center gap-3"
-                whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                animate={{ boxShadow: ["0 0 0 0 rgba(22,163,74,0)", "0 0 0 12px rgba(22,163,74,0)", "0 0 0 0 rgba(22,163,74,0)"] }}
-                transition={{ boxShadow: { duration: 2, repeat: Infinity } }}>
-                Learn GPS Updates <ArrowRight size={20} />
-              </motion.a>
-              <Link href="/contact" className="px-8 py-5 border-2 border-zinc-600 hover:border-green-500 text-white font-black text-lg rounded-2xl flex items-center justify-center gap-3 transition-colors">
-                Book a Live Lesson
-              </Link>
-            </motion.div>
-          </div>
-          <div className="flex items-center justify-center"><GPSHeroSVG /></div>
-        </div>
-      </section>
-
-      {/* Old vs New Maps */}
-      <section className="py-24 bg-zinc-950/50 border-y border-zinc-800">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl font-black text-white mb-4">Outdated vs Updated Maps</h2>
-            <p className="text-zinc-500 font-medium">See why keeping maps current matters</p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              { label: "Your maps now", year: "2019", color: "#f59e0b", bg: "from-yellow-950/30", desc: "Missing new roads, wrong directions, outdated points of interest", tag: "Outdated" },
-              { label: "After update", year: "2025", color: "#16a34a", bg: "from-green-950/30", desc: "All current roads, accurate directions, new restaurants and services", tag: "Updated" },
-            ].map((panel, i) => (
-              <motion.div key={i} initial={{ opacity: 0, x: i === 0 ? -40 : 40 }} whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.2 }}
-                className={`bg-gradient-to-br ${panel.bg} to-transparent border border-zinc-800 rounded-[2rem] p-8`}>
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-zinc-400 font-bold text-sm">{panel.label}</span>
-                  <span className="px-3 py-1 rounded-full text-xs font-black" style={{ backgroundColor: panel.color + "20", color: panel.color }}>{panel.tag}</span>
-                </div>
-                <div className="h-32 bg-zinc-900/50 rounded-2xl mb-4 flex items-center justify-center relative overflow-hidden">
-                  <svg viewBox="0 0 200 80" className="w-full h-full p-4">
-                    {i === 0 ? (
-                      <>
-                        <path d="M10 40 L50 40 L70 25 L90 40 L190 40" stroke="#f59e0b" strokeWidth="2" fill="none" strokeDasharray="4 4" />
-                        <text x="100" y="60" fill="#f59e0b" fontSize="8" textAnchor="middle">? Road missing</text>
-                      </>
-                    ) : (
-                      <>
-                        <motion.path d="M10 40 L50 40 L70 25 L90 40 L190 40" stroke="#16a34a" strokeWidth="2" fill="none"
-                          strokeDasharray="300" initial={{ strokeDashoffset: 300 }} whileInView={{ strokeDashoffset: 0 }}
-                          transition={{ duration: 1.5 }} />
-                        <motion.path d="M70 25 L70 10 L130 10 L130 25" stroke="#22c55e" strokeWidth="1.5" fill="none"
-                          strokeDasharray="100" initial={{ strokeDashoffset: 100 }} whileInView={{ strokeDashoffset: 0 }}
-                          transition={{ duration: 1, delay: 1.5 }} />
-                        <text x="100" y="65" fill="#16a34a" fontSize="8" textAnchor="middle">New road added</text>
-                      </>
-                    )}
-                  </svg>
-                </div>
-                <p className="text-zinc-400 text-sm font-medium">{panel.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl font-black tracking-tighter mb-4">What You Will Learn</h2>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {ISSUES.map((issue, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.12 }}
-                whileHover={{ scale: 1.04, y: -8 }} whileTap={{ scale: 0.97 }}
-                className="bg-zinc-900 border border-zinc-800 rounded-[2rem] p-8 cursor-pointer group hover:border-green-500 transition-all">
-                <div className="text-4xl mb-6">{issue.icon}</div>
-                <h3 className="text-xl font-black text-white mb-3 group-hover:text-green-400 transition-colors">{issue.title}</h3>
-                <p className="text-zinc-500 font-medium text-sm leading-relaxed">{issue.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <TechBridgeLearningHub
-        topic="GPS"
-        accentColor="from-green-400 to-emerald-400"
-        accentHex="#16a34a"
-        wizardConfig={WIZARD_CONFIG}
-        aiProps={{
-          brandExamples: ["Garmin", "TomTom", "Magellan", "In-car GPS", "Google Maps"],
-          starterQuestions: [
-            "My GPS maps are outdated — how do I update them?",
-            "My Garmin screen is frozen",
-            "GPS is giving wrong directions",
-            "How do I plan a route with multiple stops?",
-            "My GPS has no signal",
-          ],
-        }}
-      />
-      <Footer />
-    </div>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(learningResourceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <GpsClient />
+    </>
   );
 }

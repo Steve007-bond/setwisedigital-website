@@ -1,0 +1,10 @@
+# Setwise Digital - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.setwisedigital.com/sitemap.xml
+
+# Disallow admin/api routes
+Disallow: /api/
+Disallow: /_next/
