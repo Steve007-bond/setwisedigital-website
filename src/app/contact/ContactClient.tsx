@@ -626,160 +626,19 @@ export default function ContactPage() {
             </ol>
           </nav>
 
-          {/* ── CREATIVE LAYOUT: Character with REAL form inside her monitor ── */}
+          {/* ── Two-column: Character+Info left, Form right ── */}
           <div id="contact-form" className="scroll-mt-28 pt-8">
-            {/* Section heading */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-10"
-            >
-              <motion.div
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-100 rounded-full mb-5"
-              >
-                <HeartHandshake size={16} className="text-blue-600" />
-                <span className="text-blue-700 font-bold text-sm">She&apos;s already reaching out — your turn!</span>
-              </motion.div>
-              <h2 className="text-4xl sm:text-5xl font-black tracking-tight mb-4 text-zinc-900 leading-tight">
-                We&apos;re Here <span className="text-blue-600">to Help You.</span>
-              </h2>
-              <p className="text-lg text-zinc-500 font-medium max-w-2xl mx-auto">
-                Fill out the form on her screen — or scroll down to use the full version. We&apos;ll respond within 24 hours.
-              </p>
-            </motion.div>
+            <div id="full-contact-form" className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-            {/* ── The Character + Form-in-Monitor Composition ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative max-w-5xl mx-auto mb-16"
-            >
-              {/* Character image container — floating gently */}
-              <motion.div
-                animate={{ y: [0, -8, 0, -5, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                className="relative"
-              >
-                {/* Glow behind */}
-                <div className="absolute top-[10%] left-[5%] w-[50%] h-[70%] rounded-full opacity-15 pointer-events-none"
-                  style={{ background: "radial-gradient(circle, rgba(59,130,246,0.4) 0%, rgba(139,92,246,0.2) 50%, transparent 70%)" }} />
-
-                {/* The character image */}
-                <picture>
-                  <source media="(max-width: 640px)" srcSet="/contact-character-mobile.webp" type="image/webp" />
-                  <source media="(max-width: 640px)" srcSet="/contact-character-mobile.png" type="image/png" />
-                  <source media="(max-width: 1024px)" srcSet="/contact-character-tablet.webp" type="image/webp" />
-                  <source media="(max-width: 1024px)" srcSet="/contact-character-tablet.png" type="image/png" />
-                  <source srcSet="/contact-character-desktop.webp" type="image/webp" />
-                  <Image
-                    src="/contact-character-desktop.png"
-                    alt="Friendly woman waving hello at the Setwise Digital contact form on her computer"
-                    width={800}
-                    height={449}
-                    priority
-                    className="w-full h-auto select-none relative z-[1]"
-                    style={{ filter: "drop-shadow(0 16px 40px rgba(13,148,136,0.12))" }}
-                    draggable={false}
-                  />
-                </picture>
-
-                {/* ═══ REAL WORKING FORM overlaid exactly on the monitor screen ═══ */}
-                <div className="absolute z-[2] overflow-hidden rounded-sm hidden sm:block"
-                  style={{ left: "13.5%", top: "18%", width: "34%", height: "47%" }}>
-                  <div className="w-full h-full bg-gradient-to-b from-[#1a1f3a] to-[#151930] flex flex-col p-[5%] gap-[3%]"
-                    style={{ fontSize: "clamp(6px, 1.1vw, 12px)" }}>
-                    {/* Mini header */}
-                    <div className="text-center">
-                      <p style={{ fontSize: "clamp(5px, 0.8vw, 9px)", letterSpacing: "0.1em", textTransform: "uppercase" }} className="text-blue-300/70 font-bold mb-[2%]">Contact Us</p>
-                      <p className="text-white font-black leading-tight" style={{ fontSize: "clamp(8px, 1.4vw, 16px)" }}>
-                        We&apos;d love to<br />hear from you
-                      </p>
-                    </div>
-
-                    {/* Form fields — actually functional */}
-                    <div className="flex gap-[3%]">
-                      <input
-                        type="text"
-                        placeholder="Name"
-                        className="flex-1 bg-white/8 border border-white/15 rounded px-[4%] text-white placeholder-white/40 outline-none focus:border-blue-400/60 transition-colors"
-                        style={{ fontSize: "inherit", height: "clamp(14px, 2.5vw, 28px)" }}
-                      />
-                      <input
-                        type="email"
-                        placeholder="Email"
-                        className="flex-1 bg-white/8 border border-white/15 rounded px-[4%] text-white placeholder-white/40 outline-none focus:border-blue-400/60 transition-colors"
-                        style={{ fontSize: "inherit", height: "clamp(14px, 2.5vw, 28px)" }}
-                      />
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="Subject — e.g. Printer Setup Help"
-                      className="w-full bg-white/8 border border-white/15 rounded px-[4%] text-white placeholder-white/40 outline-none focus:border-blue-400/60 transition-colors"
-                      style={{ fontSize: "inherit", height: "clamp(14px, 2.5vw, 28px)" }}
-                    />
-                    <textarea
-                      placeholder="Your message..."
-                      className="flex-1 w-full bg-white/8 border border-white/15 rounded px-[4%] py-[3%] text-white placeholder-white/40 outline-none focus:border-blue-400/60 transition-colors resize-none"
-                      style={{ fontSize: "inherit", minHeight: "clamp(20px, 4vw, 50px)" }}
-                    />
-                    <button className="w-full bg-blue-500 hover:bg-blue-400 text-white font-bold rounded transition-colors flex items-center justify-center gap-[4%]"
-                      style={{ fontSize: "inherit", height: "clamp(16px, 2.5vw, 30px)" }}
-                      onClick={() => {
-                        const formEl = document.getElementById("full-contact-form");
-                        if (formEl) formEl.scrollIntoView({ behavior: "smooth" });
-                      }}
-                    >
-                      <Send style={{ width: "clamp(6px, 1vw, 12px)", height: "clamp(6px, 1vw, 12px)" }} />
-                      Send Message
-                    </button>
-                  </div>
-                </div>
-
-                {/* Sparkles around the character */}
-                {[
-                  { x: "55%", y: "8%", del: 0 },
-                  { x: "92%", y: "20%", del: 1 },
-                  { x: "88%", y: "65%", del: 2 },
-                  { x: "3%", y: "50%", del: 1.5 },
-                  { x: "60%", y: "85%", del: 0.5 },
-                ].map((sp, i) => (
-                  <motion.div key={i}
-                    className="absolute w-[3px] h-[3px] rounded-full bg-blue-400 z-[3]"
-                    style={{ left: sp.x, top: sp.y }}
-                    animate={{ opacity: [0, 0.7, 0], scale: [0.5, 1.3, 0.5] }}
-                    transition={{ duration: 2.5, delay: sp.del, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                ))}
-              </motion.div>
-
-              {/* Mobile-only: message to scroll to full form */}
-              <div className="sm:hidden text-center mt-4">
-                <motion.div
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <a href="#full-contact-form" className="inline-flex items-center gap-2 text-blue-600 font-bold text-sm">
-                    <ChevronDown size={18} /> Scroll to fill the form
-                  </a>
-                </motion.div>
-              </div>
-            </motion.div>
-
-            {/* ── Full-size form below (always accessible, especially for mobile) ── */}
-            <div id="full-contact-form" className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* ═══ Left Side ═══ */}
+            {/* ═══ Left Side: Character + Info ═══ */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="space-y-10"
+              className="space-y-8"
             >
+              {/* Heading */}
               <div>
                 <h2 className="text-4xl sm:text-5xl font-black tracking-tight mb-5 text-zinc-900 leading-tight">
                   We&apos;re Here<br className="hidden sm:block" />
@@ -792,7 +651,62 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              {/* Contact cards */}
+              {/* ── Floating Character Image ── */}
+              <motion.div
+                animate={{ y: [0, -12, 0, -8, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="relative"
+              >
+                {/* Glow behind */}
+                <div className="absolute top-[10%] left-[10%] w-[80%] h-[70%] rounded-full opacity-10 pointer-events-none"
+                  style={{ background: "radial-gradient(circle, rgba(59,130,246,0.5) 0%, rgba(139,92,246,0.3) 40%, transparent 70%)" }} />
+
+                <picture>
+                  <source media="(max-width: 640px)" srcSet="/contact-character-mobile.webp" type="image/webp" />
+                  <source media="(max-width: 640px)" srcSet="/contact-character-mobile.png" type="image/png" />
+                  <source media="(max-width: 1024px)" srcSet="/contact-character-tablet.webp" type="image/webp" />
+                  <source media="(max-width: 1024px)" srcSet="/contact-character-tablet.png" type="image/png" />
+                  <source srcSet="/contact-character-desktop.webp" type="image/webp" />
+                  <Image
+                    src="/contact-character-desktop.png"
+                    alt="Friendly woman waving hello with a contact form on her computer screen — Setwise Digital"
+                    width={700}
+                    height={384}
+                    priority
+                    className="relative z-10 w-full h-auto select-none max-w-[500px] mx-auto"
+                    style={{ filter: "drop-shadow(0 16px 40px rgba(59,130,246,0.1))" }}
+                    draggable={false}
+                  />
+                </picture>
+
+                {/* Animated badge */}
+                <motion.div
+                  animate={{ y: [0, -6, 0], x: [0, 3, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-2 right-[5%] sm:right-[10%] z-20 px-4 py-2 bg-white rounded-2xl shadow-lg border border-blue-100 flex items-center gap-2"
+                >
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-xs font-bold text-zinc-700">Online now</span>
+                </motion.div>
+
+                {/* Sparkle particles */}
+                {[
+                  { x: "5%", y: "15%", del: 0 },
+                  { x: "92%", y: "25%", del: 1.2 },
+                  { x: "88%", y: "70%", del: 0.6 },
+                  { x: "8%", y: "75%", del: 2 },
+                  { x: "50%", y: "5%", del: 1.8 },
+                ].map((sp, i) => (
+                  <motion.div key={`csp${i}`}
+                    className="absolute w-[3px] h-[3px] rounded-full bg-blue-400 z-20"
+                    style={{ left: sp.x, top: sp.y }}
+                    animate={{ opacity: [0, 0.8, 0], scale: [0.5, 1.3, 0.5] }}
+                    transition={{ duration: 2.5, delay: sp.del, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                ))}
+              </motion.div>
+
+              {/* Contact info cards */}
               <div className="space-y-5">
                 {[
                   { icon: <Mail size={28} />, title: "Email Us", desc: "We respond within 24 hours.", link: "support@setwisedigital.com", href: "mailto:support@setwisedigital.com", iconColor: "bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white" },
