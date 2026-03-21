@@ -185,7 +185,7 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#fafafa] to-transparent z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-24 lg:pt-0">
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+          <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-12">
 
             {/* LEFT — Text content */}
             <motion.div variants={stagger} initial="hidden" animate="visible"
@@ -308,29 +308,29 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            {/* RIGHT — 3D Character Image with creative floating effects */}
+            {/* RIGHT — 3D Character Image — BIG, responsive, floating effects */}
             <motion.div
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="hidden lg:flex items-center justify-center w-[440px] xl:w-[520px] shrink-0 relative"
+              className="relative w-full lg:w-[480px] xl:w-[560px] shrink-0 flex items-center justify-center mt-8 lg:mt-0"
             >
               {/* Orbital rings behind the character */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <motion.div
                   animate={{ rotate: -360 }}
                   transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                  className="absolute w-[380px] h-[380px] xl:w-[450px] xl:h-[450px] rounded-full border border-blue-500/10"
+                  className="absolute w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] lg:w-[420px] lg:h-[420px] xl:w-[500px] xl:h-[500px] rounded-full border border-blue-500/10"
                 />
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-                  className="absolute w-[320px] h-[320px] xl:w-[380px] xl:h-[380px] rounded-full border border-violet-500/8"
+                  className="absolute w-[230px] h-[230px] sm:w-[280px] sm:h-[280px] lg:w-[350px] lg:h-[350px] xl:w-[420px] xl:h-[420px] rounded-full border border-violet-500/8"
                 />
                 <motion.div
                   animate={{ rotate: -360 }}
                   transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
-                  className="absolute w-[440px] h-[440px] xl:w-[520px] xl:h-[520px] rounded-full border border-teal-500/5"
+                  className="absolute w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] xl:w-[580px] xl:h-[580px] rounded-full border border-teal-500/5"
                 />
               </div>
 
@@ -338,20 +338,20 @@ export default function Home() {
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute w-[360px] h-[360px] xl:w-[430px] xl:h-[430px]"
+                className="absolute w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] lg:w-[400px] lg:h-[400px] xl:w-[480px] xl:h-[480px]"
               >
                 {[
-                  { icon: <Printer size={18} />, top: "0%", left: "45%", color: "bg-blue-500/20 text-blue-300" },
-                  { icon: <Navigation size={16} />, top: "25%", left: "95%", color: "bg-emerald-500/20 text-emerald-300" },
-                  { icon: <HomeIcon size={16} />, top: "70%", left: "90%", color: "bg-violet-500/20 text-violet-300" },
-                  { icon: <Camera size={16} />, top: "90%", left: "40%", color: "bg-amber-500/20 text-amber-300" },
-                  { icon: <Shield size={16} />, top: "65%", left: "0%", color: "bg-rose-500/20 text-rose-300" },
-                  { icon: <Smartphone size={15} />, top: "15%", left: "2%", color: "bg-cyan-500/20 text-cyan-300" },
+                  { icon: <Printer size={18} />, top: "0%", left: "45%", color: "bg-blue-500/20 text-blue-300 border-blue-400/20" },
+                  { icon: <Navigation size={16} />, top: "25%", left: "95%", color: "bg-emerald-500/20 text-emerald-300 border-emerald-400/20" },
+                  { icon: <HomeIcon size={16} />, top: "70%", left: "90%", color: "bg-violet-500/20 text-violet-300 border-violet-400/20" },
+                  { icon: <Camera size={16} />, top: "90%", left: "40%", color: "bg-amber-500/20 text-amber-300 border-amber-400/20" },
+                  { icon: <Shield size={16} />, top: "65%", left: "0%", color: "bg-rose-500/20 text-rose-300 border-rose-400/20" },
+                  { icon: <Smartphone size={15} />, top: "15%", left: "2%", color: "bg-cyan-500/20 text-cyan-300 border-cyan-400/20" },
                 ].map((orb, i) => (
                   <motion.div key={i}
                     animate={{ rotate: 360 }}
                     transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                    className={`absolute w-9 h-9 rounded-xl ${orb.color} backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-lg`}
+                    className={`absolute w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-xl ${orb.color} backdrop-blur-sm border flex items-center justify-center shadow-lg`}
                     style={{ top: orb.top, left: orb.left }}
                   >
                     {orb.icon}
@@ -360,48 +360,75 @@ export default function Home() {
               </motion.div>
 
               {/* Glow behind the character */}
-              <div className="absolute w-[300px] h-[300px] xl:w-[360px] xl:h-[360px] rounded-full opacity-30"
+              <div className="absolute w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] lg:w-[380px] lg:h-[380px] xl:w-[440px] xl:h-[440px] rounded-full opacity-30"
                 style={{ background: "radial-gradient(circle, rgba(13,148,136,0.4) 0%, rgba(99,102,241,0.2) 40%, transparent 70%)" }} />
 
-              {/* The character image — floating + gentle tilt */}
+              {/* Character image — floating + gentle tilt */}
               <motion.div
                 animate={{
-                  y: [0, -12, 0, -8, 0],
-                  rotateY: [0, 3, 0, -3, 0],
-                  rotateZ: [0, 1, 0, -1, 0],
+                  y: [0, -14, 0, -10, 0],
+                  rotateZ: [0, 1.5, 0, -1.5, 0],
                 }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                className="relative z-10"
-                style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+                className="relative z-10 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[460px] xl:max-w-[540px]"
               >
-                {/* Reflection/shadow beneath */}
-                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[70%] h-[20px] rounded-[50%] bg-blue-500/10 blur-xl" />
+                {/* Shadow beneath */}
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[60%] h-[16px] rounded-[50%] bg-violet-500/15 blur-xl" />
 
-                <Image
-                  src="/hero-character.jpg"
-                  alt="Friendly elderly man learning technology at his computer — Setwise Digital"
-                  width={480}
-                  height={320}
-                  priority
-                  className="w-full h-auto drop-shadow-[0_20px_60px_rgba(13,148,136,0.3)] select-none"
-                  style={{ filter: "contrast(1.05) brightness(1.02)" }}
-                  draggable={false}
-                />
+                {/* Responsive image with picture element for WebP + PNG fallback */}
+                <picture>
+                  <source
+                    media="(max-width: 640px)"
+                    srcSet="/hero-character-mobile.webp"
+                    type="image/webp"
+                  />
+                  <source
+                    media="(max-width: 640px)"
+                    srcSet="/hero-character-mobile.png"
+                    type="image/png"
+                  />
+                  <source
+                    media="(max-width: 1024px)"
+                    srcSet="/hero-character-tablet.webp"
+                    type="image/webp"
+                  />
+                  <source
+                    media="(max-width: 1024px)"
+                    srcSet="/hero-character-tablet.png"
+                    type="image/png"
+                  />
+                  <source
+                    srcSet="/hero-character-desktop.webp"
+                    type="image/webp"
+                  />
+                  <Image
+                    src="/hero-character-desktop.png"
+                    alt="Friendly elderly man learning technology at his computer — Setwise Digital"
+                    width={900}
+                    height={541}
+                    priority
+                    className="w-full h-auto select-none"
+                    style={{ filter: "drop-shadow(0 20px 40px rgba(13,148,136,0.25)) drop-shadow(0 8px 16px rgba(99,102,241,0.15))" }}
+                    draggable={false}
+                  />
+                </picture>
               </motion.div>
 
-              {/* Sparkle particles around the character */}
+              {/* Sparkle particles */}
               {[
-                { x: "10%", y: "15%", d: 3, del: 0 },
-                { x: "85%", y: "20%", d: 2.5, del: 1 },
-                { x: "5%", y: "60%", d: 2, del: 2 },
-                { x: "90%", y: "70%", d: 3, del: 0.5 },
-                { x: "50%", y: "5%", d: 2, del: 1.5 },
-                { x: "30%", y: "85%", d: 2.5, del: 3 },
+                { x: "8%", y: "12%", d: 3, del: 0 },
+                { x: "88%", y: "18%", d: 2.5, del: 1 },
+                { x: "3%", y: "55%", d: 2, del: 2 },
+                { x: "92%", y: "65%", d: 3, del: 0.5 },
+                { x: "50%", y: "3%", d: 2.5, del: 1.5 },
+                { x: "35%", y: "90%", d: 2, del: 3 },
+                { x: "70%", y: "8%", d: 2, del: 2.5 },
+                { x: "20%", y: "80%", d: 3, del: 4 },
               ].map((sp, i) => (
                 <motion.div key={`sp${i}`}
                   className="absolute rounded-full bg-white"
                   style={{ left: sp.x, top: sp.y, width: sp.d, height: sp.d }}
-                  animate={{ opacity: [0, 0.8, 0], scale: [0.5, 1.2, 0.5] }}
+                  animate={{ opacity: [0, 0.8, 0], scale: [0.5, 1.3, 0.5] }}
                   transition={{ duration: 3, delay: sp.del, repeat: Infinity, ease: "easeInOut" }}
                 />
               ))}
