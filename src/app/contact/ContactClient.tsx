@@ -626,11 +626,15 @@ export default function ContactPage() {
             </ol>
           </nav>
 
-          {/* ── Two-column: Character+Info left, Form right ── */}
-          <div id="contact-form" className="scroll-mt-28 pt-8">
-            <div id="full-contact-form" className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* ── DARK SECTION: Character floating beside form ── */}
+          <div id="contact-form" className="scroll-mt-28 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-16 lg:py-20 bg-zinc-950 relative overflow-hidden rounded-3xl my-8">
+            {/* Subtle aurora glow */}
+            <div className="absolute top-0 left-[20%] w-[500px] h-[300px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-0 right-[10%] w-[400px] h-[250px] bg-violet-600/5 rounded-full blur-[80px] pointer-events-none" />
 
-            {/* ═══ Left Side: Character + Info ═══ */}
+            <div id="full-contact-form" className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-10 lg:gap-14 items-start max-w-6xl mx-auto">
+
+            {/* ═══ Left Side: Heading + Character + Contact info ═══ */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -638,67 +642,62 @@ export default function ContactPage() {
               transition={{ duration: 0.7 }}
               className="space-y-8"
             >
-              {/* Heading */}
+              {/* Heading — white text on dark bg */}
               <div>
-                <h2 className="text-4xl sm:text-5xl font-black tracking-tight mb-5 text-zinc-900 leading-tight">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-4 text-white leading-tight">
                   We&apos;re Here<br className="hidden sm:block" />
-                  <span className="text-blue-600">to Help You.</span>
+                  <span className="text-blue-400">to Help You.</span>
                 </h2>
-                <p className="text-lg text-zinc-500 leading-relaxed font-medium max-w-lg">
+                <p className="text-base lg:text-lg text-zinc-400 leading-relaxed font-medium max-w-lg">
                   Whether you have a question about our free tools, want to book a live
                   learning session, or just need a friendly nudge in the right direction —
                   reach out anytime.
                 </p>
               </div>
 
-              {/* ── Floating Character Image ── */}
+              {/* ── Floating Character Image — small, elegant ── */}
               <motion.div
-                animate={{ y: [0, -12, 0, -8, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                className="relative"
+                animate={{ y: [0, -10, 0, -6, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative max-w-[360px]"
               >
-                {/* Glow behind */}
-                <div className="absolute top-[10%] left-[10%] w-[80%] h-[70%] rounded-full opacity-10 pointer-events-none"
-                  style={{ background: "radial-gradient(circle, rgba(59,130,246,0.5) 0%, rgba(139,92,246,0.3) 40%, transparent 70%)" }} />
+                <Image
+                  src="/contact-lady.jpg"
+                  alt="Friendly woman waving hello with a contact form on her computer screen"
+                  width={700}
+                  height={384}
+                  className="w-full h-auto select-none rounded-2xl"
+                  draggable={false}
+                />
 
-                <picture>
-                  <source media="(max-width: 640px)" srcSet="/contact-character-mobile.webp" type="image/webp" />
-                  <source media="(max-width: 640px)" srcSet="/contact-character-mobile.png" type="image/png" />
-                  <source media="(max-width: 1024px)" srcSet="/contact-character-tablet.webp" type="image/webp" />
-                  <source media="(max-width: 1024px)" srcSet="/contact-character-tablet.png" type="image/png" />
-                  <source srcSet="/contact-character-desktop.webp" type="image/webp" />
-                  <Image
-                    src="/contact-character-desktop.png"
-                    alt="Friendly woman waving hello with a contact form on her computer screen — Setwise Digital"
-                    width={700}
-                    height={384}
-                    priority
-                    className="relative z-10 w-full h-auto select-none max-w-[500px] mx-auto"
-                    style={{ filter: "drop-shadow(0 16px 40px rgba(59,130,246,0.1))" }}
-                    draggable={false}
-                  />
-                </picture>
-
-                {/* Animated badge */}
+                {/* Animated badges floating around the image */}
                 <motion.div
                   animate={{ y: [0, -6, 0], x: [0, 3, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-2 right-[5%] sm:right-[10%] z-20 px-4 py-2 bg-white rounded-2xl shadow-lg border border-blue-100 flex items-center gap-2"
+                  className="absolute -top-3 -right-3 z-20 px-3 py-1.5 bg-emerald-500 rounded-xl shadow-lg flex items-center gap-1.5"
                 >
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-xs font-bold text-zinc-700">Online now</span>
+                  <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                  <span className="text-[11px] font-bold text-white">Online now</span>
                 </motion.div>
 
-                {/* Sparkle particles */}
+                <motion.div
+                  animate={{ y: [0, 5, 0], x: [0, -3, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute -bottom-3 -left-2 z-20 px-3 py-1.5 bg-blue-500 rounded-xl shadow-lg flex items-center gap-1.5"
+                >
+                  <Mail size={11} className="text-white" />
+                  <span className="text-[11px] font-bold text-white">24hr reply</span>
+                </motion.div>
+
+                {/* Sparkles */}
                 {[
-                  { x: "5%", y: "15%", del: 0 },
-                  { x: "92%", y: "25%", del: 1.2 },
-                  { x: "88%", y: "70%", del: 0.6 },
-                  { x: "8%", y: "75%", del: 2 },
-                  { x: "50%", y: "5%", del: 1.8 },
+                  { x: "0%", y: "20%", del: 0 },
+                  { x: "95%", y: "15%", del: 1 },
+                  { x: "90%", y: "80%", del: 2 },
+                  { x: "5%", y: "85%", del: 1.5 },
                 ].map((sp, i) => (
-                  <motion.div key={`csp${i}`}
-                    className="absolute w-[3px] h-[3px] rounded-full bg-blue-400 z-20"
+                  <motion.div key={`sp${i}`}
+                    className="absolute w-[3px] h-[3px] rounded-full bg-blue-400"
                     style={{ left: sp.x, top: sp.y }}
                     animate={{ opacity: [0, 0.8, 0], scale: [0.5, 1.3, 0.5] }}
                     transition={{ duration: 2.5, delay: sp.del, repeat: Infinity, ease: "easeInOut" }}
@@ -706,59 +705,29 @@ export default function ContactPage() {
                 ))}
               </motion.div>
 
-              {/* Contact info cards */}
-              <div className="space-y-5">
+              {/* Contact info cards — dark themed */}
+              <div className="space-y-4">
                 {[
-                  { icon: <Mail size={28} />, title: "Email Us", desc: "We respond within 24 hours.", link: "support@setwisedigital.com", href: "mailto:support@setwisedigital.com", iconColor: "bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white" },
-                  { icon: <MapPin size={28} />, title: "Serving the US & Canada", desc: "Online tech education from coast to coast.", tags: ["United States", "Canada"], iconColor: "bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white" },
-                  { icon: <Clock size={28} />, title: "Business Hours", desc: "Monday – Friday, 9 AM – 6 PM EST.", iconColor: "bg-violet-50 text-violet-600 group-hover:bg-violet-600 group-hover:text-white" },
+                  { icon: <Mail size={24} />, title: "Email Us", desc: "We respond within 24 hours.", link: "support@setwisedigital.com", href: "mailto:support@setwisedigital.com", iconColor: "bg-blue-500/20 text-blue-400" },
+                  { icon: <MapPin size={24} />, title: "US & Canada", desc: "Online tech education coast to coast.", iconColor: "bg-emerald-500/20 text-emerald-400" },
+                  { icon: <Clock size={24} />, title: "Mon–Fri, 9–6 EST", desc: "We reply within 24 hours.", iconColor: "bg-violet-500/20 text-violet-400" },
                 ].map((item, i) => (
-                  <motion.div key={i} whileHover={{ x: 8 }}
-                    className="flex items-start gap-5 p-7 rounded-2xl bg-white border border-zinc-100 shadow-sm hover:shadow-lg hover:border-blue-100 transition-all group">
-                    <div className={`w-14 h-14 rounded-xl flex items-center justify-center shrink-0 transition-all duration-400 shadow-sm ${item.iconColor}`}>
+                  <motion.div key={i} whileHover={{ x: 4 }}
+                    className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-blue-500/30 transition-all group">
+                    <div className={`w-11 h-11 rounded-lg flex items-center justify-center shrink-0 ${item.iconColor}`}>
                       {item.icon}
                     </div>
                     <div>
-                      <h3 className="font-bold text-xl mb-1 tracking-tight text-zinc-900">{item.title}</h3>
-                      <p className="text-zinc-500 font-medium mb-3 text-base leading-relaxed">{item.desc}</p>
+                      <h3 className="font-bold text-sm text-white">{item.title}</h3>
+                      <p className="text-zinc-500 font-medium text-xs">{item.desc}</p>
                       {item.link && (
-                        <a href={item.href} className="text-blue-600 font-bold text-lg hover:underline underline-offset-4 decoration-2 inline-flex items-center gap-2">
-                          {item.link} <ArrowUpRight size={16} />
+                        <a href={item.href} className="text-blue-400 font-bold text-xs hover:underline underline-offset-2 inline-flex items-center gap-1 mt-0.5">
+                          {item.link} <ArrowUpRight size={12} />
                         </a>
-                      )}
-                      {item.tags && (
-                        <div className="flex flex-wrap gap-3">
-                          {item.tags.map((tag, j) => (
-                            <span key={j} className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded-xl border border-zinc-200 font-bold text-zinc-700 text-sm">
-                              <Globe size={14} className="text-blue-500" />{tag}
-                            </span>
-                          ))}
-                        </div>
                       )}
                     </div>
                   </motion.div>
                 ))}
-              </div>
-
-              {/* Trust section */}
-              <div className="p-8 rounded-3xl bg-zinc-900 text-white relative overflow-hidden">
-                <motion.div animate={{ scale: [1, 1.3, 1], rotate: [0, 90, 0] }} transition={{ duration: 20, repeat: Infinity }}
-                  className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-blue-600/20 to-violet-600/20 rounded-full blur-[60px]" aria-hidden="true" />
-                <h3 className="text-2xl font-black tracking-tight relative z-10 mb-6">Why Adults 45+ Trust Us</h3>
-                <div className="grid grid-cols-2 gap-4 relative z-10">
-                  {[
-                    { icon: <Award size={24} className="text-blue-400" />, text: "Since 2016" },
-                    { icon: <HeartHandshake size={24} className="text-emerald-400" />, text: "Patient Teaching" },
-                    { icon: <UserCheck size={24} className="text-violet-400" />, text: "Plain English" },
-                    { icon: <Users size={24} className="text-cyan-400" />, text: "US & Canada" },
-                  ].map((item, i) => (
-                    <motion.div key={i} whileHover={{ scale: 1.05 }}
-                      className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-xl">
-                      {item.icon}
-                      <span className="font-bold text-sm text-zinc-300">{item.text}</span>
-                    </motion.div>
-                  ))}
-                </div>
               </div>
             </motion.div>
 
