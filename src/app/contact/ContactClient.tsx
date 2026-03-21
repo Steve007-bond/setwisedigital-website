@@ -1138,6 +1138,7 @@ export default function ContactPage() {
               </div>
             </motion.div>
           </div>
+          </div>
 
           {/* ════════════════ PROCESS SECTION ════════════════ */}
           <section className="mt-28 pt-20 border-t border-zinc-100" aria-labelledby="process-heading">
