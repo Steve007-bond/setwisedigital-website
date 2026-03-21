@@ -10,6 +10,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import Image from "next/image";
 import ScrollToTop from "@/components/ScrollToTop";
 import { useState, useRef, useEffect } from "react";
 
@@ -307,173 +308,107 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            {/* RIGHT — 3D Character — LARGE & COLORFUL with anticlockwise rotation */}
+            {/* RIGHT — 3D Character Image with creative floating effects */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-              className="hidden lg:flex items-center justify-center w-[420px] xl:w-[500px] shrink-0"
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="hidden lg:flex items-center justify-center w-[440px] xl:w-[520px] shrink-0 relative"
             >
-              <div style={{ animation: "spinAntiClock 35s linear infinite", transformStyle: "preserve-3d", perspective: "900px" }}>
-                <svg viewBox="0 0 380 420" width="100%" height="auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* Floor shadow */}
-                  <ellipse cx="190" cy="410" rx="150" ry="6" fill="rgba(59,130,246,.06)"/>
-
-                  {/* DESK */}
-                  <rect x="18" y="235" width="160" height="12" rx="4" fill="#5c4433"/>
-                  <rect x="18" y="235" width="160" height="4" rx="2" fill="#6b5040"/>
-                  <rect x="24" y="247" width="7" height="168" rx="2.5" fill="#5c4433"/>
-                  <rect x="165" y="247" width="7" height="168" rx="2.5" fill="#5c4433"/>
-                  <rect x="24" y="407" width="152" height="6" rx="3" fill="#4a3828"/>
-                  <rect x="55" y="335" width="85" height="5" rx="2" fill="#4a3828" opacity=".4"/>
-
-                  {/* MONITOR */}
-                  <g>
-                    <rect x="30" y="108" width="140" height="108" rx="9" fill="#1a1a2e" stroke="#2a2a45" strokeWidth="1.2"/>
-                    <rect x="36" y="114" width="128" height="94" rx="5" fill="#0b0f1a"/>
-                    <rect x="42" y="122" width="52" height="5" rx="2.5" fill="#3b82f6" opacity=".6">
-                      <animate attributeName="opacity" values=".6;.35;.6" dur="2.5s" repeatCount="indefinite"/>
-                    </rect>
-                    <rect x="42" y="131" width="76" height="4" rx="2" fill="#6366f1" opacity=".38"/>
-                    <rect x="42" y="139" width="40" height="4" rx="2" fill="#22d3ee" opacity=".3"/>
-                    <rect x="42" y="147" width="62" height="3" rx="1.5" fill="#818cf8" opacity=".22"/>
-                    <rect x="42" y="154" width="46" height="3" rx="1.5" fill="#34d399" opacity=".2"/>
-                    <rect x="42" y="161" width="56" height="3" rx="1.5" fill="#f472b6" opacity=".16"/>
-                    <rect x="42" y="168" width="35" height="3" rx="1.5" fill="#60a5fa" opacity=".14"/>
-                    <rect x="42" y="175" width="50" height="3" rx="1.5" fill="#a78bfa" opacity=".12"/>
-                    <rect x="115" y="122" width="38" height="24" rx="4" fill="#12203a" opacity=".6"/>
-                    <rect x="119" y="126" width="28" height="5" rx="2" fill="#3b82f6" opacity=".25"/>
-                    <rect x="119" y="134" width="20" height="4" rx="2" fill="#8b5cf6" opacity=".15"/>
-                    <line x1="148" y1="188" x2="151" y2="188" stroke="#22d3ee" strokeWidth="3" strokeLinecap="round">
-                      <animate attributeName="opacity" values="1;0;1" dur="1.1s" repeatCount="indefinite"/>
-                    </line>
-                    <rect x="36" y="114" width="128" height="2" rx="1" fill="rgba(80,140,255,.06)">
-                      <animate attributeName="opacity" values=".06;.14;.06" dur="3s" repeatCount="indefinite"/>
-                    </rect>
-                    <path d="M80 216 L80 228 L118 228 L118 216" stroke="#1a1a2e" strokeWidth="5" fill="none"/>
-                    <rect x="62" y="228" width="75" height="5" rx="2.5" fill="#1a1a2e"/>
-                  </g>
-
-                  {/* KEYBOARD */}
-                  <rect x="30" y="216" width="138" height="17" rx="4" fill="#1a1a2e" stroke="#2a2a45" strokeWidth=".8"/>
-                  <g opacity=".6">
-                    <rect x="36" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
-                    <rect x="48" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
-                    <rect x="60" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
-                    <rect x="72" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
-                    <rect x="84" y="219" width="18" height="5" rx="1.5" fill="#252540"/>
-                    <rect x="105" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
-                    <rect x="117" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
-                    <rect x="129" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
-                    <rect x="141" y="219" width="20" height="5" rx="1.5" fill="#252540"/>
-                    <rect x="36" y="226" width="30" height="4" rx="1.5" fill="#252540" opacity=".6"/>
-                    <rect x="70" y="226" width="9" height="4" rx="1.5" fill="#252540" opacity=".6"/>
-                    <rect x="83" y="226" width="9" height="4" rx="1.5" fill="#252540" opacity=".6"/>
-                  </g>
-
-                  {/* COFFEE MUG */}
-                  <ellipse cx="24" cy="175" rx="8" ry="11" fill="#8b6914"/>
-                  <ellipse cx="24" cy="171" rx="6.5" ry="4.5" fill="#a07818"/>
-                  <path d="M21 166 C20 158, 19 153, 21 149" stroke="rgba(255,255,255,.1)" strokeWidth="1.5" strokeLinecap="round" fill="none">
-                    <animate attributeName="d" values="M21 166 C20 158, 19 153, 21 149;M21 166 C23 158, 21 151, 19 145;M21 166 C20 158, 19 153, 21 149" dur="3s" repeatCount="indefinite"/>
-                  </path>
-                  <path d="M26 167 C27 160, 28 155, 26 151" stroke="rgba(255,255,255,.07)" strokeWidth="1" strokeLinecap="round" fill="none">
-                    <animate attributeName="d" values="M26 167 C27 160, 28 155, 26 151;M26 167 C25 159, 27 153, 29 148;M26 167 C27 160, 28 155, 26 151" dur="3.5s" repeatCount="indefinite"/>
-                  </path>
-
-                  {/* CHAIR */}
-                  <path d="M255 315 L255 405 C255 410, 252 413, 248 413 L240 413" stroke="#4f46e5" strokeWidth="8" strokeLinecap="round" fill="none"/>
-                  <path d="M335 315 L335 405 C335 410, 338 413, 342 413 L350 413" stroke="#4f46e5" strokeWidth="8" strokeLinecap="round" fill="none"/>
-                  <rect x="245" y="278" width="100" height="42" rx="8" fill="#4f46e5"/>
-                  <rect x="249" y="282" width="92" height="34" rx="6" fill="#6366f1"/>
-                  <path d="M249 300 L341 300" stroke="#4f46e5" strokeWidth="1"/>
-                  <rect x="273" y="266" width="44" height="15" rx="5" fill="#6366f1" stroke="#4f46e5" strokeWidth=".8"/>
-                  <circle cx="233" cy="416" r="6" fill="#4338ca"/>
-                  <circle cx="357" cy="416" r="6" fill="#4338ca"/>
-                  <rect x="260" y="413" width="70" height="6" rx="3" fill="#4338ca"/>
-
-                  {/* CHARACTER BODY (breathing) */}
-                  <g style={{ animation: "charBreathe 5s ease-in-out infinite", transformOrigin: "295px 275px" }}>
-                    <path d="M265 190 C265 168, 325 168, 325 190 L330 270 C330 288, 320 300, 308 303 L282 303 C270 300, 260 288, 260 270 Z" fill="#0d9488"/>
-                    <path d="M270 195 C270 178, 320 178, 320 195 L322 245 C322 250, 318 254, 312 254 L278 254 C272 254, 268 250, 268 245 Z" fill="#14b8a6"/>
-                    <path d="M278 254 L274 282 C273 290, 276 298, 282 300 L308 300 C314 298, 317 290, 316 282 L312 254 Z" fill="#0d9488"/>
-                    <line x1="295" y1="195" x2="295" y2="300" stroke="#2f5680" strokeWidth="1" opacity=".2"/>
-                    <circle cx="285" cy="288" r="3" fill="#14b8a6" opacity=".3"/>
-                    <circle cx="295" cy="288" r="3" fill="#14b8a6" opacity=".3"/>
-                    <circle cx="305" cy="288" r="3" fill="#14b8a6" opacity=".3"/>
-                    {/* Sleeves */}
-                    <path d="M260 198 C254 198, 248 206, 248 214 L248 234 C248 242, 254 248, 262 248" fill="#0d9488"/>
-                    <path d="M330 198 C336 198, 342 206, 342 214 L342 234 C342 242, 336 248, 328 248" fill="#0d9488"/>
-                  </g>
-
-                  {/* LEFT ARM + typing hand */}
-                  <path d="M262 210 L238 250 C234 258, 222 264, 212 260 L190 248" stroke="#e8c4a0" strokeWidth="9" strokeLinecap="round" fill="none"/>
-                  <path d="M190 248 L172 278 C168 290, 166 302, 170 312" stroke="#e8c4a0" strokeWidth="7" strokeLinecap="round" fill="none"/>
-                  <g style={{ animation: "typeL .55s ease-in-out infinite" }}>
-                    <circle cx="158" cy="222" r="5" fill="#e8c4a0"/>
-                    <circle cx="152" cy="221" r="4" fill="#dcb48e"/>
-                    <circle cx="164" cy="223" r="3.5" fill="#dcb48e"/>
-                  </g>
-
-                  {/* RIGHT ARM + typing hand */}
-                  <path d="M328 210 L352 245 C356 252, 362 258, 368 256" stroke="#e8c4a0" strokeWidth="9" strokeLinecap="round" fill="none"/>
-                  <path d="M368 256 L378 286 C380 296, 376 304, 372 308" stroke="#e8c4a0" strokeWidth="7" strokeLinecap="round" fill="none"/>
-                  <g style={{ animation: "typeR .65s ease-in-out infinite .12s" }}>
-                    <circle cx="165" cy="222" r="5" fill="#e8c4a0" transform="translate(200,0) scale(-1,1) translate(-200,0)"/>
-                    <circle cx="160" cy="221" r="4" fill="#dcb48e" transform="translate(200,0) scale(-1,1) translate(-200,0)"/>
-                  </g>
-
-                  {/* LEGS */}
-                  <path d="M270 303 L268 340 C267 350, 270 358, 278 360 L308 360 C316 358, 319 350, 318 340 L316 303" fill="#1e3a5f"/>
-                  <path d="M270 354 L254 388 C252 394, 248 398, 242 400 L236 402" stroke="#2d5280" strokeWidth="10" strokeLinecap="round" fill="none"/>
-                  <path d="M316 354 L332 388 C334 394, 338 398, 344 400 L350 402" stroke="#2d5280" strokeWidth="10" strokeLinecap="round" fill="none"/>
-                  <rect x="226" y="398" width="20" height="10" rx="5" fill="#1e293b"/>
-                  <rect x="342" y="398" width="20" height="10" rx="5" fill="#1e293b"/>
-
-                  {/* HEAD */}
-                  <g>
-                    <ellipse cx="295" cy="145" rx="38" ry="44" fill="#e8c4a0"/>
-                    <ellipse cx="295" cy="149" rx="34" ry="38" fill="#f0d4b4"/>
-                    {/* Hair */}
-                    <path d="M261 124 C259 106, 266 88, 282 80 C290 77, 300 77, 308 80 C324 88, 331 106, 329 124" fill="#d4d4dc"/>
-                    <path d="M261 124 L261 135 L329 135 L329 124" fill="#c8c8d2"/>
-                    <path d="M257 124 C253 114, 257 98, 268 90" stroke="#c0c0cc" strokeWidth="4" fill="none" strokeLinecap="round"/>
-                    <path d="M333 124 C337 114, 333 98, 322 90" stroke="#c0c0cc" strokeWidth="4" fill="none" strokeLinecap="round"/>
-                    {/* Ears */}
-                    <ellipse cx="268" cy="130" rx="5" ry="7" fill="#f0d4b4"/>
-                    <ellipse cx="322" cy="130" rx="5" ry="7" fill="#f0d4b4"/>
-                    {/* Glasses */}
-                    <rect x="273" y="140" width="44" height="20" rx="10" fill="none" stroke="#b8860b" strokeWidth="2.2"/>
-                    <circle cx="287" cy="150" r="10" fill="none" stroke="#b8860b" strokeWidth="2.2"/>
-                    <circle cx="303" cy="150" r="10" fill="none" stroke="#b8860b" strokeWidth="2.2"/>
-                    <line x1="313" y1="147" x2="330" y2="141" stroke="#b8860b" strokeWidth="2.2" strokeLinecap="round"/>
-                    <line x1="273" y1="147" x2="258" y2="141" stroke="#b8860b" strokeWidth="2.2" strokeLinecap="round"/>
-                    {/* Pupils with reflections */}
-                    <circle cx="287" cy="150" r="4" fill="#1a2030">
-                      <animate attributeName="r" values="4;3.5;4" dur="4s" repeatCount="indefinite"/>
-                    </circle>
-                    <circle cx="303" cy="150" r="4" fill="#1a2030">
-                      <animate attributeName="r" values="4;3.5;4" dur="4s" repeatCount="indefinite"/>
-                    </circle>
-                    <circle cx="285" cy="148" r="1.5" fill="rgba(255,255,255,.35)"/>
-                    <circle cx="301" cy="148" r="1.5" fill="rgba(255,255,255,.35)"/>
-                    {/* Eyebrows */}
-                    <path d="M279 137 Q284 134, 291 136" stroke="#b8860b" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-                    <path d="M311 137 Q306 134, 299 136" stroke="#b8860b" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-                    {/* Nose */}
-                    <path d="M292 164 C292 162, 294 160, 295 160 C296 160, 298 162, 298 164 L297 167 C296 168, 294 168, 293 167 Z" fill="#dcb48e"/>
-                    {/* Smile */}
-                    <path d="M287 174 Q295 183, 303 174" stroke="#c06848" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-                    <path d="M289 176 Q295 180, 301 176" fill="#b85a42" opacity=".2"/>
-                    {/* Cheeks */}
-                    <ellipse cx="278" cy="165" rx="6" ry="4.5" fill="#e08870" opacity=".25"/>
-                    <ellipse cx="312" cy="165" rx="6" ry="4.5" fill="#e08870" opacity=".25"/>
-                  </g>
-                </svg>
+              {/* Orbital rings behind the character */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  className="absolute w-[380px] h-[380px] xl:w-[450px] xl:h-[450px] rounded-full border border-blue-500/10"
+                />
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+                  className="absolute w-[320px] h-[320px] xl:w-[380px] xl:h-[380px] rounded-full border border-violet-500/8"
+                />
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
+                  className="absolute w-[440px] h-[440px] xl:w-[520px] xl:h-[520px] rounded-full border border-teal-500/5"
+                />
               </div>
+
+              {/* Floating device icons orbiting the character */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="absolute w-[360px] h-[360px] xl:w-[430px] xl:h-[430px]"
+              >
+                {[
+                  { icon: <Printer size={18} />, top: "0%", left: "45%", color: "bg-blue-500/20 text-blue-300" },
+                  { icon: <Navigation size={16} />, top: "25%", left: "95%", color: "bg-emerald-500/20 text-emerald-300" },
+                  { icon: <HomeIcon size={16} />, top: "70%", left: "90%", color: "bg-violet-500/20 text-violet-300" },
+                  { icon: <Camera size={16} />, top: "90%", left: "40%", color: "bg-amber-500/20 text-amber-300" },
+                  { icon: <Shield size={16} />, top: "65%", left: "0%", color: "bg-rose-500/20 text-rose-300" },
+                  { icon: <Smartphone size={15} />, top: "15%", left: "2%", color: "bg-cyan-500/20 text-cyan-300" },
+                ].map((orb, i) => (
+                  <motion.div key={i}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                    className={`absolute w-9 h-9 rounded-xl ${orb.color} backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-lg`}
+                    style={{ top: orb.top, left: orb.left }}
+                  >
+                    {orb.icon}
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              {/* Glow behind the character */}
+              <div className="absolute w-[300px] h-[300px] xl:w-[360px] xl:h-[360px] rounded-full opacity-30"
+                style={{ background: "radial-gradient(circle, rgba(13,148,136,0.4) 0%, rgba(99,102,241,0.2) 40%, transparent 70%)" }} />
+
+              {/* The character image — floating + gentle tilt */}
+              <motion.div
+                animate={{
+                  y: [0, -12, 0, -8, 0],
+                  rotateY: [0, 3, 0, -3, 0],
+                  rotateZ: [0, 1, 0, -1, 0],
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10"
+                style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+              >
+                {/* Reflection/shadow beneath */}
+                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[70%] h-[20px] rounded-[50%] bg-blue-500/10 blur-xl" />
+
+                <Image
+                  src="/hero-character.jpg"
+                  alt="Friendly elderly man learning technology at his computer — Setwise Digital"
+                  width={480}
+                  height={320}
+                  priority
+                  className="w-full h-auto drop-shadow-[0_20px_60px_rgba(13,148,136,0.3)] select-none"
+                  style={{ filter: "contrast(1.05) brightness(1.02)" }}
+                  draggable={false}
+                />
+              </motion.div>
+
+              {/* Sparkle particles around the character */}
+              {[
+                { x: "10%", y: "15%", d: 3, del: 0 },
+                { x: "85%", y: "20%", d: 2.5, del: 1 },
+                { x: "5%", y: "60%", d: 2, del: 2 },
+                { x: "90%", y: "70%", d: 3, del: 0.5 },
+                { x: "50%", y: "5%", d: 2, del: 1.5 },
+                { x: "30%", y: "85%", d: 2.5, del: 3 },
+              ].map((sp, i) => (
+                <motion.div key={`sp${i}`}
+                  className="absolute rounded-full bg-white"
+                  style={{ left: sp.x, top: sp.y, width: sp.d, height: sp.d }}
+                  animate={{ opacity: [0, 0.8, 0], scale: [0.5, 1.2, 0.5] }}
+                  transition={{ duration: 3, delay: sp.del, repeat: Infinity, ease: "easeInOut" }}
+                />
+              ))}
             </motion.div>
           </div>
         </div>
+
 
         {/* Scroll indicator */}
         <motion.div
@@ -485,10 +420,6 @@ export default function Home() {
         </motion.div>
 
         <style>{`
-          @keyframes spinAntiClock { from { transform: rotateY(0deg); } to { transform: rotateY(-360deg); } }
-          @keyframes charBreathe { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-1.5px) scale(1.006); } }
-          @keyframes typeL { 0%,55%,100% { transform: translateY(0); } 25% { transform: translateY(-2.5px); } }
-          @keyframes typeR { 0%,65%,100% { transform: translateY(0); } 30% { transform: translateY(-2.5px); } }
           @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         `}</style>
       </header>
