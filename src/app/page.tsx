@@ -123,7 +123,7 @@ export default function Home() {
 
       {/* ── HERO ────────────────────────────────────────────────────────── */}
       <header className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden text-white bg-zinc-950">
-        {/* Animated aurora background — no images */}
+        {/* Animated aurora background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <motion.div className="absolute w-[140%] h-[600px] -left-[20%] top-[5%] opacity-20"
             style={{ background: "linear-gradient(135deg, rgba(59,130,246,0.35) 0%, rgba(139,92,246,0.25) 25%, rgba(236,72,153,0.15) 50%, rgba(34,211,238,0.25) 75%, rgba(59,130,246,0.35) 100%)", filter: "blur(80px)", borderRadius: "50%" }}
@@ -135,164 +135,340 @@ export default function Home() {
             transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 3 }} />
         </div>
 
-        {/* Scrolling search queries — parallax text background */}
-        <motion.div style={{ y: y1 }} className="absolute inset-0 overflow-hidden pointer-events-none z-[1]" aria-hidden="true">
-          <div className="absolute top-[18%] w-full overflow-hidden opacity-[0.04]">
-            <div className="flex whitespace-nowrap animate-marquee">
-              {["How to setup HP printer", "Garmin GPS map update", "Alexa smart home setup", "Ring camera installation", "Canon printer Wi-Fi", "How to setup HP printer", "Garmin GPS map update", "Alexa smart home setup", "Ring camera installation", "Canon printer Wi-Fi"].map((q, i) => (
-                <span key={i} className="text-white text-2xl font-black mx-8 tracking-tight">{q}</span>
-              ))}
-            </div>
-          </div>
-          <div className="absolute top-[45%] w-full overflow-hidden opacity-[0.03]">
-            <div className="flex whitespace-nowrap" style={{ animation: "marquee 45s linear infinite reverse" }}>
-              {["Smart home for beginners", "Print from iPhone", "GPS not working fix", "Google Home setup", "Epson ink reset", "Smart home for beginners", "Print from iPhone", "GPS not working fix", "Google Home setup", "Epson ink reset"].map((q, i) => (
-                <span key={i} className="text-white text-xl font-bold mx-8 tracking-tight">{q}</span>
-              ))}
-            </div>
-          </div>
-          <div className="absolute top-[68%] w-full overflow-hidden opacity-[0.025]">
-            <div className="flex whitespace-nowrap animate-marquee" style={{ animationDuration: "55s" }}>
-              {["Brother printer setup", "TomTom update help", "Security camera app", "Wi-Fi router fix", "Computer safety tips", "Brother printer setup", "TomTom update help", "Security camera app", "Wi-Fi router fix", "Computer safety tips"].map((q, i) => (
-                <span key={i} className="text-white text-lg font-bold mx-8 tracking-tight">{q}</span>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Particles */}
+        {/* Floating device symbols background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          {Array.from({ length: 18 }).map((_, i) => (
-            <motion.div key={i} className="absolute rounded-full"
-              style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`, width: Math.random() * 3 + 1, height: Math.random() * 3 + 1, background: ["rgba(59,130,246,0.5)", "rgba(139,92,246,0.4)", "rgba(34,211,238,0.4)"][i % 3] }}
-              animate={{ y: [0, -25, 10, -15, 0], opacity: [0, 0.6, 0.3, 0.5, 0] }}
-              transition={{ duration: Math.random() * 12 + 10, delay: Math.random() * 5, repeat: Infinity, ease: "easeInOut" }} />
+          {[
+            { icon: "printer", x: "8%", y: "12%", size: 44, delay: 0, dur: 18, color: "rgba(59,130,246,0.12)" },
+            { icon: "gps", x: "85%", y: "8%", size: 38, delay: 2, dur: 22, color: "rgba(16,185,129,0.10)" },
+            { icon: "home", x: "72%", y: "65%", size: 50, delay: 1, dur: 20, color: "rgba(139,92,246,0.10)" },
+            { icon: "camera", x: "15%", y: "70%", size: 36, delay: 3, dur: 16, color: "rgba(245,158,11,0.10)" },
+            { icon: "shield", x: "90%", y: "40%", size: 40, delay: 0.5, dur: 24, color: "rgba(244,63,94,0.10)" },
+            { icon: "wifi", x: "5%", y: "42%", size: 32, delay: 4, dur: 19, color: "rgba(34,211,238,0.10)" },
+            { icon: "phone", x: "55%", y: "85%", size: 30, delay: 1.5, dur: 21, color: "rgba(168,85,247,0.08)" },
+            { icon: "monitor", x: "40%", y: "5%", size: 42, delay: 2.5, dur: 17, color: "rgba(59,130,246,0.08)" },
+            { icon: "printer", x: "65%", y: "20%", size: 28, delay: 5, dur: 25, color: "rgba(16,185,129,0.07)" },
+            { icon: "gps", x: "25%", y: "88%", size: 34, delay: 3.5, dur: 23, color: "rgba(245,158,11,0.08)" },
+            { icon: "home", x: "48%", y: "50%", size: 26, delay: 6, dur: 20, color: "rgba(139,92,246,0.06)" },
+            { icon: "shield", x: "30%", y: "30%", size: 30, delay: 4.5, dur: 18, color: "rgba(244,63,94,0.07)" },
+          ].map((d, i) => (
+            <motion.div key={i}
+              className="absolute"
+              style={{ left: d.x, top: d.y }}
+              animate={{
+                y: [0, -20, 8, -15, 0],
+                x: [0, 12, -8, 10, 0],
+                rotate: [0, 10, -5, 8, 0],
+                scale: [1, 1.1, 0.95, 1.05, 1],
+              }}
+              transition={{ duration: d.dur, delay: d.delay, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div style={{ width: d.size, height: d.size, color: d.color }} className="flex items-center justify-center">
+                {d.icon === "printer" && <Printer size={d.size * 0.7} />}
+                {d.icon === "gps" && <Navigation size={d.size * 0.7} />}
+                {d.icon === "home" && <HomeIcon size={d.size * 0.7} />}
+                {d.icon === "camera" && <Camera size={d.size * 0.7} />}
+                {d.icon === "shield" && <Shield size={d.size * 0.7} />}
+                {d.icon === "wifi" && <Globe size={d.size * 0.7} />}
+                {d.icon === "phone" && <Smartphone size={d.size * 0.7} />}
+                {d.icon === "monitor" && <TrendingUp size={d.size * 0.7} />}
+              </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Bottom fade */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#fafafa] to-transparent z-10" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <motion.div variants={stagger} initial="hidden" animate="visible"
-            className="text-center max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-24 lg:pt-0">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
 
-            {/* Eyebrow pill — PRESERVED */}
-            <motion.div variants={item}
-              className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-black uppercase tracking-[0.25em] mb-10 shadow-xl">
-              <Sparkles size={13} className="text-yellow-400 fill-yellow-400" />
-              <span className="text-blue-200">Experience Technology Differently</span>
-            </motion.div>
+            {/* LEFT — Text content */}
+            <motion.div variants={stagger} initial="hidden" animate="visible"
+              className="flex-1 text-center lg:text-left max-w-2xl">
 
-            {/* Headline — PRESERVED */}
-            <motion.h1 variants={item}
-              className="font-black tracking-tighter leading-[0.88] mb-8"
-              style={{ fontSize: "clamp(3.8rem, 10vw, 9rem)" }}>
-              Technology<br />
-              <em className="not-italic bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-400 bg-[length:200%_auto] animate-gradient bg-clip-text text-transparent">
-                Simplified.
-              </em>
-            </motion.h1>
+              {/* Eyebrow pill — PRESERVED */}
+              <motion.div variants={item}
+                className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-black uppercase tracking-[0.25em] mb-8 shadow-xl">
+                <Sparkles size={13} className="text-yellow-400 fill-yellow-400" />
+                <span className="text-blue-200">Experience Technology Differently</span>
+              </motion.div>
 
-            {/* NEW — Flip-card cycling subtext */}
-            <motion.div variants={item} className="mb-5">
-              <p className="text-xl md:text-2xl leading-relaxed font-medium text-white/80 max-w-3xl mx-auto">
-                We teach everyday technology{" "}
-                <span className="inline-block" style={{ perspective: "300px" }}>
-                  <span id="flip1" className="inline-block font-black text-blue-400 transition-all duration-500" style={{ transformOrigin: "center bottom" }}>
-                    in plain English.
+              {/* Headline — PRESERVED */}
+              <motion.h1 variants={item}
+                className="font-black tracking-tighter leading-[0.88] mb-6"
+                style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
+                Technology<br />
+                <em className="not-italic bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-400 bg-[length:200%_auto] animate-gradient bg-clip-text text-transparent">
+                  Simplified.
+                </em>
+              </motion.h1>
+
+              {/* Flip-card cycling subtext */}
+              <motion.div variants={item} className="mb-4">
+                <p className="text-xl md:text-2xl leading-relaxed font-medium text-white/80">
+                  We teach everyday technology{" "}
+                  <span className="inline-block" style={{ perspective: "300px" }}>
+                    <span id="flip1" className="inline-block font-black text-blue-400 transition-all duration-500" style={{ transformOrigin: "center bottom" }}>
+                      in plain English.
+                    </span>
                   </span>
-                </span>
-              </p>
-            </motion.div>
-            <motion.div variants={item} className="mb-12">
-              <p className="text-lg md:text-xl leading-relaxed font-medium text-white/60 max-w-3xl mx-auto">
-                What you can learn by yourself:{" "}
-                <span className="inline-block" style={{ perspective: "300px" }}>
-                  <span id="flip2" className="inline-block font-black text-blue-400 transition-all duration-500" style={{ transformOrigin: "center bottom" }}>
-                    Printer Setup
+                </p>
+              </motion.div>
+              <motion.div variants={item} className="mb-8">
+                <p className="text-lg md:text-xl leading-relaxed font-medium text-white/60">
+                  What you can learn by yourself:{" "}
+                  <span className="inline-block" style={{ perspective: "300px" }}>
+                    <span id="flip2" className="inline-block font-black text-blue-400 transition-all duration-500" style={{ transformOrigin: "center bottom" }}>
+                      Printer Setup
+                    </span>
                   </span>
-                </span>
-              </p>
+                </p>
+              </motion.div>
+
+              {/* CTAs */}
+              <motion.div variants={item} className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-5 mb-8 relative">
+                <div className="relative">
+                  <button
+                    onClick={() => setShowTopics(!showTopics)}
+                    className="shine-effect group w-full sm:w-auto px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-xl
+                      hover:bg-blue-500 hover:shadow-[0_20px_60px_rgba(37,99,235,0.5)] hover:-translate-y-1
+                      transition-all duration-300 flex items-center justify-center gap-3 shadow-xl shadow-blue-600/30">
+                    Start Learning Now
+                    <ArrowRight size={22} className={`transition-transform duration-300 ${showTopics ? "rotate-90" : "group-hover:translate-x-1.5"}`} />
+                  </button>
+
+                  {/* Animated 6 topic options popup */}
+                  {showTopics && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[380px] max-w-[90vw] bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 shadow-2xl z-50"
+                    >
+                      <p className="text-center text-white/50 text-xs font-bold uppercase tracking-widest mb-3">Choose a topic</p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {[
+                          { label: "Printer Setup", href: "/techbridge/printers", icon: <Printer size={20} />, color: "from-blue-500 to-blue-700" },
+                          { label: "GPS Updates", href: "/techbridge/gps", icon: <Navigation size={20} />, color: "from-emerald-500 to-emerald-700" },
+                          { label: "Smart Home", href: "/techbridge/smart-home", icon: <HomeIcon size={20} />, color: "from-violet-500 to-violet-700" },
+                          { label: "Camera Basics", href: "/techbridge/camera", icon: <Camera size={20} />, color: "from-amber-500 to-amber-700" },
+                          { label: "Alexa & Voice", href: "/techbridge/alexa", icon: <Smartphone size={20} />, color: "from-cyan-500 to-cyan-700" },
+                          { label: "Security Basics", href: "/techbridge/security", icon: <Shield size={20} />, color: "from-rose-500 to-rose-700" },
+                        ].map((topic, i) => (
+                          <motion.div key={i}
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.06, type: "spring", stiffness: 300 }}
+                          >
+                            <Link href={topic.href}
+                              className={`flex items-center gap-3 px-4 py-3.5 rounded-xl bg-gradient-to-r ${topic.color} text-white font-bold text-sm hover:scale-[1.04] active:scale-95 transition-all shadow-lg min-h-[48px]`}>
+                              {topic.icon}
+                              {topic.label}
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                      <button onClick={() => setShowTopics(false)}
+                        className="w-full mt-3 py-2 text-white/40 text-xs font-bold hover:text-white/60 transition-colors">
+                        Close
+                      </button>
+                    </motion.div>
+                  )}
+                </div>
+
+                <Link href="/pricing"
+                  className="group flex items-center gap-3 text-white/80 hover:text-white font-black text-lg transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center
+                    group-hover:bg-white/20 transition-colors">
+                    <Zap size={20} />
+                  </div>
+                  View Pricing
+                </Link>
+              </motion.div>
+
+              {/* Hero 3-pillars */}
+              <motion.div variants={item}
+                className="grid grid-cols-3 gap-3 max-w-md lg:max-w-lg mx-auto lg:mx-0">
+                {[
+                  { icon: <BookOpen size={16} />, label: "Plain Language" },
+                  { icon: <Zap size={16} />, label: "Quick Lessons" },
+                  { icon: <Globe size={16} />, label: "Everyday Devices" },
+                ].map((p, i) => (
+                  <div key={i}
+                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl
+                      bg-white/10 backdrop-blur-md border border-white/10 text-xs font-bold text-white/90">
+                    <span className="text-blue-300">{p.icon}</span>
+                    {p.label}
+                  </div>
+                ))}
+              </motion.div>
             </motion.div>
 
-            {/* CTAs — Start Learning opens popup, View Pricing stays */}
-            <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-10 relative">
-              <div className="relative">
-                <button
-                  onClick={() => setShowTopics(!showTopics)}
-                  className="shine-effect group w-full sm:w-auto px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-xl
-                    hover:bg-blue-500 hover:shadow-[0_20px_60px_rgba(37,99,235,0.5)] hover:-translate-y-1
-                    transition-all duration-300 flex items-center justify-center gap-3 shadow-xl shadow-blue-600/30">
-                  Start Learning Now
-                  <ArrowRight size={22} className={`transition-transform duration-300 ${showTopics ? "rotate-90" : "group-hover:translate-x-1.5"}`} />
-                </button>
+            {/* RIGHT — 3D Character with anticlockwise rotation */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+              className="hidden lg:flex items-center justify-center w-[340px] xl:w-[400px] shrink-0"
+            >
+              <div style={{ animation: "spinAntiClock 35s linear infinite", transformStyle: "preserve-3d", perspective: "900px" }}>
+                <svg viewBox="0 0 380 420" width="100%" height="auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Floor shadow */}
+                  <ellipse cx="190" cy="410" rx="150" ry="6" fill="rgba(59,130,246,.06)"/>
 
-                {/* Animated 6 topic options popup */}
-                {showTopics && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[380px] max-w-[90vw] bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 shadow-2xl z-50"
-                  >
-                    <p className="text-center text-white/50 text-xs font-bold uppercase tracking-widest mb-3">Choose a topic</p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {[
-                        { label: "Printer Setup", href: "/techbridge/printers", icon: <Printer size={20} />, color: "from-blue-500 to-blue-700" },
-                        { label: "GPS Updates", href: "/techbridge/gps", icon: <Navigation size={20} />, color: "from-emerald-500 to-emerald-700" },
-                        { label: "Smart Home", href: "/techbridge/smart-home", icon: <HomeIcon size={20} />, color: "from-violet-500 to-violet-700" },
-                        { label: "Camera Basics", href: "/techbridge/camera", icon: <Camera size={20} />, color: "from-amber-500 to-amber-700" },
-                        { label: "Alexa & Voice", href: "/techbridge/alexa", icon: <Smartphone size={20} />, color: "from-cyan-500 to-cyan-700" },
-                        { label: "Security Basics", href: "/techbridge/security", icon: <Shield size={20} />, color: "from-rose-500 to-rose-700" },
-                      ].map((topic, i) => (
-                        <motion.div key={i}
-                          initial={{ opacity: 0, y: 12 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.06, type: "spring", stiffness: 300 }}
-                        >
-                          <Link href={topic.href}
-                            className={`flex items-center gap-3 px-4 py-3.5 rounded-xl bg-gradient-to-r ${topic.color} text-white font-bold text-sm hover:scale-[1.04] active:scale-95 transition-all shadow-lg min-h-[48px]`}>
-                            {topic.icon}
-                            {topic.label}
-                          </Link>
-                        </motion.div>
-                      ))}
-                    </div>
-                    <button onClick={() => setShowTopics(false)}
-                      className="w-full mt-3 py-2 text-white/40 text-xs font-bold hover:text-white/60 transition-colors">
-                      Close
-                    </button>
-                  </motion.div>
-                )}
+                  {/* DESK */}
+                  <rect x="18" y="235" width="160" height="12" rx="4" fill="#5c4433"/>
+                  <rect x="18" y="235" width="160" height="4" rx="2" fill="#6b5040"/>
+                  <rect x="24" y="247" width="7" height="168" rx="2.5" fill="#5c4433"/>
+                  <rect x="165" y="247" width="7" height="168" rx="2.5" fill="#5c4433"/>
+                  <rect x="24" y="407" width="152" height="6" rx="3" fill="#4a3828"/>
+                  <rect x="55" y="335" width="85" height="5" rx="2" fill="#4a3828" opacity=".4"/>
+
+                  {/* MONITOR */}
+                  <g>
+                    <rect x="30" y="108" width="140" height="108" rx="9" fill="#1a1a2e" stroke="#2a2a45" strokeWidth="1.2"/>
+                    <rect x="36" y="114" width="128" height="94" rx="5" fill="#0b0f1a"/>
+                    <rect x="42" y="122" width="52" height="5" rx="2.5" fill="#3b82f6" opacity=".6">
+                      <animate attributeName="opacity" values=".6;.35;.6" dur="2.5s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="42" y="131" width="76" height="4" rx="2" fill="#6366f1" opacity=".38"/>
+                    <rect x="42" y="139" width="40" height="4" rx="2" fill="#22d3ee" opacity=".3"/>
+                    <rect x="42" y="147" width="62" height="3" rx="1.5" fill="#818cf8" opacity=".22"/>
+                    <rect x="42" y="154" width="46" height="3" rx="1.5" fill="#34d399" opacity=".2"/>
+                    <rect x="42" y="161" width="56" height="3" rx="1.5" fill="#f472b6" opacity=".16"/>
+                    <rect x="42" y="168" width="35" height="3" rx="1.5" fill="#60a5fa" opacity=".14"/>
+                    <rect x="42" y="175" width="50" height="3" rx="1.5" fill="#a78bfa" opacity=".12"/>
+                    <rect x="115" y="122" width="38" height="24" rx="4" fill="#12203a" opacity=".6"/>
+                    <rect x="119" y="126" width="28" height="5" rx="2" fill="#3b82f6" opacity=".25"/>
+                    <rect x="119" y="134" width="20" height="4" rx="2" fill="#8b5cf6" opacity=".15"/>
+                    <line x1="148" y1="188" x2="151" y2="188" stroke="#22d3ee" strokeWidth="3" strokeLinecap="round">
+                      <animate attributeName="opacity" values="1;0;1" dur="1.1s" repeatCount="indefinite"/>
+                    </line>
+                    <rect x="36" y="114" width="128" height="2" rx="1" fill="rgba(80,140,255,.06)">
+                      <animate attributeName="opacity" values=".06;.14;.06" dur="3s" repeatCount="indefinite"/>
+                    </rect>
+                    <path d="M80 216 L80 228 L118 228 L118 216" stroke="#1a1a2e" strokeWidth="5" fill="none"/>
+                    <rect x="62" y="228" width="75" height="5" rx="2.5" fill="#1a1a2e"/>
+                  </g>
+
+                  {/* KEYBOARD */}
+                  <rect x="30" y="216" width="138" height="17" rx="4" fill="#1a1a2e" stroke="#2a2a45" strokeWidth=".8"/>
+                  <g opacity=".6">
+                    <rect x="36" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
+                    <rect x="48" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
+                    <rect x="60" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
+                    <rect x="72" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
+                    <rect x="84" y="219" width="18" height="5" rx="1.5" fill="#252540"/>
+                    <rect x="105" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
+                    <rect x="117" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
+                    <rect x="129" y="219" width="9" height="5" rx="1.5" fill="#252540"/>
+                    <rect x="141" y="219" width="20" height="5" rx="1.5" fill="#252540"/>
+                    <rect x="36" y="226" width="30" height="4" rx="1.5" fill="#252540" opacity=".6"/>
+                    <rect x="70" y="226" width="9" height="4" rx="1.5" fill="#252540" opacity=".6"/>
+                    <rect x="83" y="226" width="9" height="4" rx="1.5" fill="#252540" opacity=".6"/>
+                  </g>
+
+                  {/* COFFEE MUG */}
+                  <ellipse cx="24" cy="175" rx="8" ry="11" fill="#8b6914"/>
+                  <ellipse cx="24" cy="171" rx="6.5" ry="4.5" fill="#a07818"/>
+                  <path d="M21 166 C20 158, 19 153, 21 149" stroke="rgba(255,255,255,.1)" strokeWidth="1.5" strokeLinecap="round" fill="none">
+                    <animate attributeName="d" values="M21 166 C20 158, 19 153, 21 149;M21 166 C23 158, 21 151, 19 145;M21 166 C20 158, 19 153, 21 149" dur="3s" repeatCount="indefinite"/>
+                  </path>
+                  <path d="M26 167 C27 160, 28 155, 26 151" stroke="rgba(255,255,255,.07)" strokeWidth="1" strokeLinecap="round" fill="none">
+                    <animate attributeName="d" values="M26 167 C27 160, 28 155, 26 151;M26 167 C25 159, 27 153, 29 148;M26 167 C27 160, 28 155, 26 151" dur="3.5s" repeatCount="indefinite"/>
+                  </path>
+
+                  {/* CHAIR */}
+                  <path d="M255 315 L255 405 C255 410, 252 413, 248 413 L240 413" stroke="#52525b" strokeWidth="8" strokeLinecap="round" fill="none"/>
+                  <path d="M335 315 L335 405 C335 410, 338 413, 342 413 L350 413" stroke="#52525b" strokeWidth="8" strokeLinecap="round" fill="none"/>
+                  <rect x="245" y="278" width="100" height="42" rx="8" fill="#52525b"/>
+                  <rect x="249" y="282" width="92" height="34" rx="6" fill="#616168"/>
+                  <path d="M249 300 L341 300" stroke="#52525b" strokeWidth="1"/>
+                  <rect x="273" y="266" width="44" height="15" rx="5" fill="#616168" stroke="#52525b" strokeWidth=".8"/>
+                  <circle cx="233" cy="416" r="6" fill="#3f3f46"/>
+                  <circle cx="357" cy="416" r="6" fill="#3f3f46"/>
+                  <rect x="260" y="413" width="70" height="6" rx="3" fill="#3f3f46"/>
+
+                  {/* CHARACTER BODY (breathing) */}
+                  <g style={{ animation: "charBreathe 5s ease-in-out infinite", transformOrigin: "295px 275px" }}>
+                    <path d="M265 190 C265 168, 325 168, 325 190 L330 270 C330 288, 320 300, 308 303 L282 303 C270 300, 260 288, 260 270 Z" fill="#3a6494"/>
+                    <path d="M270 195 C270 178, 320 178, 320 195 L322 245 C322 250, 318 254, 312 254 L278 254 C272 254, 268 250, 268 245 Z" fill="#4878ae"/>
+                    <path d="M278 254 L274 282 C273 290, 276 298, 282 300 L308 300 C314 298, 317 290, 316 282 L312 254 Z" fill="#3a6494"/>
+                    <line x1="295" y1="195" x2="295" y2="300" stroke="#2f5680" strokeWidth="1" opacity=".2"/>
+                    <circle cx="285" cy="288" r="3" fill="#4878ae" opacity=".3"/>
+                    <circle cx="295" cy="288" r="3" fill="#4878ae" opacity=".3"/>
+                    <circle cx="305" cy="288" r="3" fill="#4878ae" opacity=".3"/>
+                    {/* Sleeves */}
+                    <path d="M260 198 C254 198, 248 206, 248 214 L248 234 C248 242, 254 248, 262 248" fill="#3a6494"/>
+                    <path d="M330 198 C336 198, 342 206, 342 214 L342 234 C342 242, 336 248, 328 248" fill="#3a6494"/>
+                  </g>
+
+                  {/* LEFT ARM + typing hand */}
+                  <path d="M262 210 L238 250 C234 258, 222 264, 212 260 L190 248" stroke="#deb88c" strokeWidth="9" strokeLinecap="round" fill="none"/>
+                  <path d="M190 248 L172 278 C168 290, 166 302, 170 312" stroke="#deb88c" strokeWidth="7" strokeLinecap="round" fill="none"/>
+                  <g style={{ animation: "typeL .55s ease-in-out infinite" }}>
+                    <circle cx="158" cy="222" r="5" fill="#deb88c"/>
+                    <circle cx="152" cy="221" r="4" fill="#d4a87c"/>
+                    <circle cx="164" cy="223" r="3.5" fill="#d4a87c"/>
+                  </g>
+
+                  {/* RIGHT ARM + typing hand */}
+                  <path d="M328 210 L352 245 C356 252, 362 258, 368 256" stroke="#deb88c" strokeWidth="9" strokeLinecap="round" fill="none"/>
+                  <path d="M368 256 L378 286 C380 296, 376 304, 372 308" stroke="#deb88c" strokeWidth="7" strokeLinecap="round" fill="none"/>
+                  <g style={{ animation: "typeR .65s ease-in-out infinite .12s" }}>
+                    <circle cx="165" cy="222" r="5" fill="#deb88c" transform="translate(200,0) scale(-1,1) translate(-200,0)"/>
+                    <circle cx="160" cy="221" r="4" fill="#d4a87c" transform="translate(200,0) scale(-1,1) translate(-200,0)"/>
+                  </g>
+
+                  {/* LEGS */}
+                  <path d="M270 303 L268 340 C267 350, 270 358, 278 360 L308 360 C316 358, 319 350, 318 340 L316 303" fill="#2d5280"/>
+                  <path d="M270 354 L254 388 C252 394, 248 398, 242 400 L236 402" stroke="#2d5280" strokeWidth="10" strokeLinecap="round" fill="none"/>
+                  <path d="M316 354 L332 388 C334 394, 338 398, 344 400 L350 402" stroke="#2d5280" strokeWidth="10" strokeLinecap="round" fill="none"/>
+                  <rect x="226" y="398" width="20" height="10" rx="5" fill="#1e293b"/>
+                  <rect x="342" y="398" width="20" height="10" rx="5" fill="#1e293b"/>
+
+                  {/* HEAD */}
+                  <g>
+                    <ellipse cx="295" cy="145" rx="38" ry="44" fill="#deb88c"/>
+                    <ellipse cx="295" cy="149" rx="34" ry="38" fill="#ebc89e"/>
+                    {/* Hair */}
+                    <path d="M261 124 C259 106, 266 88, 282 80 C290 77, 300 77, 308 80 C324 88, 331 106, 329 124" fill="#c8ccd2"/>
+                    <path d="M261 124 L261 135 L329 135 L329 124" fill="#bec3ca"/>
+                    <path d="M257 124 C253 114, 257 98, 268 90" stroke="#b8bdc5" strokeWidth="4" fill="none" strokeLinecap="round"/>
+                    <path d="M333 124 C337 114, 333 98, 322 90" stroke="#b8bdc5" strokeWidth="4" fill="none" strokeLinecap="round"/>
+                    {/* Ears */}
+                    <ellipse cx="268" cy="130" rx="5" ry="7" fill="#ebc89e"/>
+                    <ellipse cx="322" cy="130" rx="5" ry="7" fill="#ebc89e"/>
+                    {/* Glasses */}
+                    <rect x="273" y="140" width="44" height="20" rx="10" fill="none" stroke="#52606e" strokeWidth="2.2"/>
+                    <circle cx="287" cy="150" r="10" fill="none" stroke="#52606e" strokeWidth="2.2"/>
+                    <circle cx="303" cy="150" r="10" fill="none" stroke="#52606e" strokeWidth="2.2"/>
+                    <line x1="313" y1="147" x2="330" y2="141" stroke="#52606e" strokeWidth="2.2" strokeLinecap="round"/>
+                    <line x1="273" y1="147" x2="258" y2="141" stroke="#52606e" strokeWidth="2.2" strokeLinecap="round"/>
+                    {/* Pupils with reflections */}
+                    <circle cx="287" cy="150" r="4" fill="#1a2030">
+                      <animate attributeName="r" values="4;3.5;4" dur="4s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="303" cy="150" r="4" fill="#1a2030">
+                      <animate attributeName="r" values="4;3.5;4" dur="4s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="285" cy="148" r="1.5" fill="rgba(255,255,255,.35)"/>
+                    <circle cx="301" cy="148" r="1.5" fill="rgba(255,255,255,.35)"/>
+                    {/* Eyebrows */}
+                    <path d="M279 137 Q284 134, 291 136" stroke="#52606e" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                    <path d="M311 137 Q306 134, 299 136" stroke="#52606e" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                    {/* Nose */}
+                    <path d="M292 164 C292 162, 294 160, 295 160 C296 160, 298 162, 298 164 L297 167 C296 168, 294 168, 293 167 Z" fill="#d4a87c"/>
+                    {/* Smile */}
+                    <path d="M287 174 Q295 183, 303 174" stroke="#be7e6a" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                    <path d="M289 176 Q295 180, 301 176" fill="#b8706a" opacity=".2"/>
+                    {/* Cheeks */}
+                    <ellipse cx="278" cy="165" rx="6" ry="4.5" fill="#d4956e" opacity=".25"/>
+                    <ellipse cx="312" cy="165" rx="6" ry="4.5" fill="#d4956e" opacity=".25"/>
+                  </g>
+                </svg>
               </div>
-
-              <Link href="/pricing"
-                className="group flex items-center gap-3 text-white/80 hover:text-white font-black text-lg transition-all">
-                <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center
-                  group-hover:bg-white/20 transition-colors">
-                  <Zap size={20} />
-                </div>
-                View Pricing
-              </Link>
             </motion.div>
-
-            {/* Hero 3-pillars */}
-            <motion.div variants={item}
-              className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-              {[
-                { icon: <BookOpen size={18} />, label: "Plain Language" },
-                { icon: <Zap size={18} />, label: "Quick Lessons" },
-                { icon: <Globe size={18} />, label: "Everyday Devices" },
-              ].map((p, i) => (
-                <div key={i}
-                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl
-                    bg-white/10 backdrop-blur-md border border-white/10 text-sm font-bold text-white/90">
-                  <span className="text-blue-300">{p.icon}</span>
-                  {p.label}
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Scroll indicator */}
@@ -303,6 +479,14 @@ export default function Home() {
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}
             className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent" />
         </motion.div>
+
+        <style>{`
+          @keyframes spinAntiClock { from { transform: rotateY(0deg); } to { transform: rotateY(-360deg); } }
+          @keyframes charBreathe { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-1.5px) scale(1.006); } }
+          @keyframes typeL { 0%,55%,100% { transform: translateY(0); } 25% { transform: translateY(-2.5px); } }
+          @keyframes typeR { 0%,65%,100% { transform: translateY(0); } 30% { transform: translateY(-2.5px); } }
+          @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        `}</style>
       </header>
 
       {/* ── TICKER ─────────────────────────────────────────────────────── */}
