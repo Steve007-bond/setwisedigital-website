@@ -3,16 +3,17 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import {
   CheckCircle2, XCircle, ArrowRight, Zap, BookOpen, UserCheck,
-  ShieldCheck, Award, Star, ChevronRight, ChevronDown, Users,
-  HeartHandshake, Sparkles, Phone, Mail, Clock, Gift, Shield,
-  Monitor, Printer, Navigation, Home as HomeIcon, ArrowUpRight,
-  MessageSquare, PhoneCall, BadgeCheck, CircleDollarSign,
-  GraduationCap, Repeat, FileText, Video, Calendar,
+  ShieldCheck, Award, Star, ChevronRight, Users,
+  HeartHandshake, Sparkles, Clock, Gift, Shield,
+  ArrowUpRight, PhoneCall, BadgeCheck, CircleDollarSign,
+  GraduationCap, Repeat, Video, MousePointerClick,
+  TrendingUp, FileText, Headphones, Wrench,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -34,7 +35,7 @@ function AuroraBackground() {
 }
 
 function ParticleField() {
-  const particles = Array.from({ length: 25 }, (_, i) => ({
+  const particles = Array.from({ length: 20 }, (_, i) => ({
     id: i, left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`,
     size: Math.random() * 3 + 1, duration: Math.random() * 15 + 10, delay: Math.random() * 8,
     color: ["rgba(59,130,246,0.5)", "rgba(139,92,246,0.4)", "rgba(34,211,238,0.4)", "rgba(250,204,21,0.3)"][Math.floor(Math.random() * 4)],
@@ -44,117 +45,59 @@ function ParticleField() {
       {particles.map((p) => (
         <motion.div key={p.id} className="absolute rounded-full"
           style={{ left: p.left, top: p.top, width: p.size, height: p.size, background: p.color }}
-          animate={{ y: [0, -30, 10, -20, 0], opacity: [0, 0.7, 0.3, 0.6, 0], scale: [0.5, 1.2, 0.8, 1, 0.5] }}
+          animate={{ y: [0, -30, 10, -20, 0], opacity: [0, 0.7, 0.3, 0.6, 0] }}
           transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: "easeInOut" }} />
       ))}
     </div>
   );
 }
 
-function AnimatedCounter({ target, suffix = "", prefix = "" }: { target: number; suffix?: string; prefix?: string }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const hasAnimated = useRef(false);
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !hasAnimated.current) {
-        hasAnimated.current = true;
-        let start = 0;
-        const step = Math.max(1, Math.floor(target / 35));
-        const interval = setInterval(() => { start += step; if (start >= target) { setCount(target); clearInterval(interval); } else setCount(start); }, 40);
-      }
-    }, { threshold: 0.5 });
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [target]);
-  return <span ref={ref}>{prefix}{count}{suffix}</span>;
-}
+/* ═══════════════════════════════════════════════════════════════
+   FREE TOOLS DATA — colorful, clickable
+   ═══════════════════════════════════════════════════════════════ */
+const freeToolCards = [
+  { icon: <Zap size={30} />, text: "TechBridge Tools", href: "/techbridge", gradient: "from-amber-400 to-orange-500", glow: "shadow-amber-500/30", desc: "Interactive learning hub" },
+  { icon: <BookOpen size={30} />, text: "Step-by-Step PDFs", href: "/tools", gradient: "from-blue-400 to-blue-600", glow: "shadow-blue-500/30", desc: "Downloadable guides" },
+  { icon: <ShieldCheck size={30} />, text: "Helpful Updates", href: "/techbridge", gradient: "from-emerald-400 to-emerald-600", glow: "shadow-emerald-500/30", desc: "Stay current & safe" },
+  { icon: <UserCheck size={30} />, text: "Self-Paced Learning", href: "/tools", gradient: "from-violet-400 to-purple-600", glow: "shadow-violet-500/30", desc: "Learn at your speed" },
+];
 
 /* ═══════════════════════════════════════════════════════════════
    PLAN DATA
    ═══════════════════════════════════════════════════════════════ */
 const plans = [
   {
-    id: "single",
-    name: "Single Lesson",
-    price: 49,
-    period: "one-time",
-    tagline: "Perfect for learning one device or topic in depth.",
+    id: "single", name: "Single Lesson", price: 49, tagline: "Perfect for learning one device or topic in depth.",
     badge: null,
-    features: [
-      "1-hour live video lesson with an educator",
-      "Covers one device or topic of your choice",
-      "Plain-English, step-by-step explanations",
-      "Lesson summary PDF to keep forever",
-      "Email follow-up within 48 hours",
-    ],
-    notIncluded: [
-      "Multiple device coverage",
-      "Custom learning roadmap",
-    ],
-    cta: "Book a Single Lesson",
-    ctaIcon: <Video size={20} />,
-    accent: "blue",
-    gradient: "from-blue-600 to-blue-700",
-    lightBg: "bg-blue-50",
-    iconColor: "text-blue-600",
-    borderColor: "border-blue-200",
-    glowColor: "shadow-blue-500/15",
-    popular: false,
+    features: ["1-hour live video lesson with an educator", "Covers one device or topic of your choice", "Plain-English, step-by-step explanations", "Lesson summary PDF to keep forever", "Email follow-up within 48 hours"],
+    notIncluded: ["Multiple device coverage", "Custom learning roadmap"],
+    cta: "Book a Single Lesson", ctaIcon: <Video size={22} />,
+    gradient: "from-blue-600 to-blue-700", hoverGradient: "from-blue-500 to-blue-600",
+    iconColor: "text-blue-600", borderColor: "border-blue-200", glowColor: "shadow-blue-500/20",
+    bgGlow: "rgba(59,130,246,0.08)", priceColor: "text-blue-600",
+    popular: false, bestValue: false,
   },
   {
-    id: "skill",
-    name: "Skill-Builder Course",
-    price: 97,
-    period: "one-time",
-    tagline: "Build lasting confidence across multiple tech topics.",
+    id: "skill", name: "Skill-Builder Course", price: 97, tagline: "Build lasting confidence across multiple tech topics.",
     badge: "Most Popular",
-    features: [
-      "3 live video lesson sessions",
-      "Personalised learning roadmap",
-      "Covers multiple topics or devices",
-      "Progress recap after each lesson",
-      "Priority email support",
-      "Lesson summary PDFs for all sessions",
-    ],
-    notIncluded: [
-      "Family member coverage",
-    ],
-    cta: "Start Skill-Builder Course",
-    ctaIcon: <GraduationCap size={20} />,
-    accent: "violet",
-    gradient: "from-violet-600 to-indigo-700",
-    lightBg: "bg-violet-50",
-    iconColor: "text-violet-600",
-    borderColor: "border-violet-300",
-    glowColor: "shadow-violet-500/20",
-    popular: true,
+    features: ["3 live video lesson sessions", "Personalised learning roadmap", "Covers multiple topics or devices", "Progress recap after each lesson", "Priority email support", "Lesson summary PDFs for all sessions"],
+    notIncluded: ["Family member coverage"],
+    cta: "Start Skill-Builder", ctaIcon: <GraduationCap size={22} />,
+    gradient: "from-violet-600 to-indigo-700", hoverGradient: "from-violet-500 to-indigo-600",
+    iconColor: "text-violet-600", borderColor: "border-violet-300", glowColor: "shadow-violet-500/25",
+    bgGlow: "rgba(139,92,246,0.08)", priceColor: "text-violet-600",
+    popular: true, bestValue: false,
   },
   {
-    id: "family",
-    name: "Family Learning Plan",
-    price: 147,
-    period: "one-time",
-    tagline: "Learning for the whole household, across all devices.",
+    id: "family", name: "Family Learning Plan", price: 147, tagline: "Learning for the whole household, across all devices.",
     badge: "Best Value",
-    features: [
-      "Up to 5 lesson sessions",
-      "Covers printers, GPS, Alexa, smart home & more",
-      "Personalised tips for every family member",
-      "Flexible scheduling to suit everyone",
-      "Family progress dashboard",
-      "Priority support & follow-ups",
-    ],
+    features: ["Up to 5 lesson sessions", "Covers printers, GPS, Alexa, smart home & more", "Personalised tips for every family member", "Flexible scheduling to suit everyone", "Family progress dashboard", "Priority support & follow-ups"],
     notIncluded: [],
-    cta: "Get the Family Plan",
-    ctaIcon: <Users size={20} />,
-    accent: "emerald",
-    gradient: "from-emerald-600 to-teal-700",
-    lightBg: "bg-emerald-50",
-    iconColor: "text-emerald-600",
-    borderColor: "border-emerald-200",
-    glowColor: "shadow-emerald-500/15",
-    popular: false,
+    cta: "Get the Family Plan", ctaIcon: <Users size={22} />,
+    gradient: "from-emerald-600 to-teal-700", hoverGradient: "from-emerald-500 to-teal-600",
+    iconColor: "text-emerald-600", borderColor: "border-emerald-200", glowColor: "shadow-emerald-500/20",
+    bgGlow: "rgba(16,185,129,0.08)", priceColor: "text-emerald-600",
+    popular: false, bestValue: true,
   },
 ];
 
@@ -181,19 +124,25 @@ const testimonials = [
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════════════ */
 export default function PricingPage() {
+  const router = useRouter();
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [hoveredPlan, setHoveredPlan] = useState<string | null>(null);
+  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
-  /* Auto-rotate testimonials */
   useEffect(() => {
     const timer = setInterval(() => setActiveTestimonial((p) => (p + 1) % testimonials.length), 6000);
     return () => clearInterval(timer);
   }, []);
+
+  const navigateToContact = (planName?: string) => {
+    router.push(`/contact${planName ? `?plan=${encodeURIComponent(planName)}` : ""}`);
+  };
 
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-zinc-900 font-sans selection:bg-blue-100 selection:text-blue-900">
@@ -234,26 +183,30 @@ export default function PricingPage() {
               <strong className="text-white">No contracts.</strong> Pay only for what you need.
             </motion.p>
 
-            {/* Price anchors */}
+            {/* Price anchors — clickable */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7 }}
-              className="mt-12 flex flex-wrap justify-center gap-6 sm:gap-10">
-              {[
-                { price: "$49", label: "Single Lesson", color: "text-blue-400" },
-                { price: "$97", label: "Skill-Builder", color: "text-violet-400" },
-                { price: "$147", label: "Family Plan", color: "text-emerald-400" },
-              ].map((item, i) => (
-                <a href="#plans" key={i} className="text-center group cursor-pointer">
-                  <div className={`text-3xl sm:text-4xl font-black ${item.color} group-hover:scale-110 transition-transform`}>{item.price}</div>
-                  <div className="text-sm text-zinc-500 font-bold mt-1">{item.label}</div>
-                </a>
+              className="mt-12 flex flex-wrap justify-center gap-4 sm:gap-6">
+              {plans.map((plan, i) => (
+                <motion.button key={plan.id} onClick={() => document.getElementById("plans")?.scrollIntoView({ behavior: "smooth" })}
+                  whileHover={{ scale: 1.08, y: -4 }} whileTap={{ scale: 0.95 }}
+                  className="relative text-center px-6 py-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-colors cursor-pointer group min-w-[130px]">
+                  {plan.badge && (
+                    <span className={`absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] font-bold px-2.5 py-0.5 rounded-full text-white whitespace-nowrap ${plan.popular ? "bg-violet-500" : "bg-emerald-500"}`}>
+                      {plan.badge}
+                    </span>
+                  )}
+                  <div className={`text-3xl sm:text-4xl font-black ${plan.priceColor.replace("text-", "text-").replace("-600", "-400")} group-hover:scale-105 transition-transform`}>
+                    ${plan.price}
+                  </div>
+                  <div className="text-sm text-zinc-500 font-bold mt-1">{plan.name}</div>
+                </motion.button>
               ))}
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}
-              className="mt-10">
-              <a href="#plans" className="inline-flex items-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-blue-600/25 min-h-[60px]">
-                Choose Your Plan <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
-              </a>
+              className="mt-10 flex items-center justify-center gap-2 text-zinc-500 text-sm font-medium">
+              <MousePointerClick size={16} className="text-blue-400" />
+              <span>Click any plan to learn more</span>
             </motion.div>
           </div>
         </motion.div>
@@ -273,50 +226,74 @@ export default function PricingPage() {
             </ol>
           </nav>
 
-          {/* ════════ FREE TIER HIGHLIGHT ════════ */}
+          {/* ════════ FREE TOOLS — COLORFUL, ANIMATED, CLICKABLE ════════ */}
           <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="mt-8 mb-20 bg-zinc-900 text-white rounded-3xl p-8 sm:p-12 lg:p-16 relative overflow-hidden">
             <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }} transition={{ duration: 20, repeat: Infinity }}
               className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-600/15 rounded-full blur-[100px]" aria-hidden="true" />
+            <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 15, repeat: Infinity, delay: 5 }}
+              className="absolute bottom-[-15%] left-[-5%] w-[40%] h-[40%] bg-violet-600/10 rounded-full blur-[80px]" aria-hidden="true" />
+
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-400 font-bold text-sm mb-6">
                   <Gift size={14} /> Always Free — No Account Needed
                 </span>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-6 leading-tight">
-                  Start With <span className="text-blue-400">47 Free</span> Interactive Tools
+                  Start With <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">47 Free</span> Interactive Tools
                 </h2>
                 <p className="text-lg text-zinc-400 font-medium leading-relaxed mb-8">
                   No sign-up. No email. No credit card. Explore printer troubleshooters, GPS guides, smart home planners, and more — completely free, forever.
                 </p>
-                <Link href="/tools" className="inline-flex items-center gap-3 px-7 py-4 bg-white text-zinc-900 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-all hover:scale-[1.03] active:scale-[0.98] min-h-[56px]">
+                <Link href="/tools" className="shine-effect inline-flex items-center gap-3 px-7 py-4 bg-white text-zinc-900 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-all hover:scale-[1.03] active:scale-[0.98] min-h-[56px]">
                   <Sparkles size={20} className="text-blue-600" />
                   Explore Free Tools
                   <ArrowRight size={18} />
                 </Link>
               </div>
+
+              {/* ── Colorful animated clickable cards ── */}
               <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: <Zap className="text-yellow-400" size={28} />, text: "TechBridge Tools" },
-                  { icon: <BookOpen className="text-blue-400" size={28} />, text: "Step-by-Step PDFs" },
-                  { icon: <ShieldCheck className="text-green-400" size={28} />, text: "Helpful Updates" },
-                  { icon: <UserCheck className="text-violet-400" size={28} />, text: "Self-Paced Learning" },
-                ].map((item, i) => (
-                  <motion.div key={i} whileHover={{ scale: 1.05, y: -3 }}
-                    className="flex flex-col gap-3 bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-                    <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">{item.icon}</div>
-                    <span className="font-bold text-base text-zinc-200">{item.text}</span>
-                  </motion.div>
+                {freeToolCards.map((card, i) => (
+                  <Link key={i} href={card.href}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      whileHover={{ scale: 1.08, y: -6, rotate: 1 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`relative flex flex-col gap-3 p-6 rounded-2xl border border-white/10 cursor-pointer overflow-hidden group min-h-[140px]`}
+                      style={{ background: "rgba(255,255,255,0.05)" }}
+                    >
+                      {/* Animated color glow on hover */}
+                      <motion.div
+                        className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-15 transition-opacity duration-500`}
+                      />
+                      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center text-white shadow-lg ${card.glow} group-hover:scale-110 transition-transform duration-300`}>
+                        {card.icon}
+                      </div>
+                      <div>
+                        <span className="font-bold text-base text-white block">{card.text}</span>
+                        <span className="text-xs text-zinc-500 font-medium">{card.desc}</span>
+                      </div>
+                      <ArrowUpRight size={16} className="absolute top-4 right-4 text-zinc-600 group-hover:text-white transition-colors" />
+                    </motion.div>
+                  </Link>
                 ))}
               </div>
             </div>
           </motion.section>
 
-          {/* ════════ PRICING CARDS ════════ */}
+          {/* ════════ PRICING CARDS — FULLY CLICKABLE ════════ */}
           <section id="plans" className="scroll-mt-24" aria-labelledby="plans-heading">
             <div className="text-center mb-14">
               <h2 id="plans-heading" className="text-3xl sm:text-4xl font-extrabold text-zinc-900 mb-4">Choose Your Learning Plan</h2>
               <p className="text-lg text-zinc-500 font-medium max-w-2xl mx-auto">Every plan includes live video sessions with a patient, real educator. No rushing, no jargon, no pressure.</p>
+              <p className="text-sm text-blue-600 font-bold mt-3 flex items-center justify-center gap-2">
+                <MousePointerClick size={16} />
+                Click any card below to get started
+              </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -325,12 +302,12 @@ export default function PricingPage() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  transition={{ delay: i * 0.12, duration: 0.5 }}
                   className="relative"
                 >
-                  {/* Popular badge */}
+                  {/* Badge */}
                   {plan.badge && (
-                    <div className={`absolute -top-4 left-1/2 -translate-x-1/2 z-10 px-5 py-1.5 rounded-full font-bold text-sm text-white shadow-lg ${
+                    <div className={`absolute -top-4 left-1/2 -translate-x-1/2 z-20 px-5 py-1.5 rounded-full font-bold text-sm text-white shadow-lg ${
                       plan.popular ? "bg-gradient-to-r from-violet-600 to-indigo-600 shadow-violet-500/30" : "bg-gradient-to-r from-emerald-500 to-teal-500 shadow-emerald-500/30"
                     }`}>
                       <span className="flex items-center gap-1.5">
@@ -340,47 +317,80 @@ export default function PricingPage() {
                     </div>
                   )}
 
+                  {/* ENTIRE CARD IS CLICKABLE */}
                   <motion.div
-                    whileHover={{ y: -8, scale: 1.01 }}
-                    className={`h-full bg-white rounded-3xl p-8 sm:p-10 flex flex-col border-2 transition-all duration-300 ${
+                    onClick={() => navigateToContact(plan.name)}
+                    onMouseEnter={() => setHoveredPlan(plan.id)}
+                    onMouseLeave={() => setHoveredPlan(null)}
+                    whileHover={{ y: -12, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`h-full bg-white rounded-3xl p-8 sm:p-10 flex flex-col cursor-pointer transition-all duration-400 relative overflow-hidden group ${
                       plan.popular
-                        ? `${plan.borderColor} shadow-xl ${plan.glowColor} ring-1 ring-violet-200/50`
-                        : `border-zinc-200 shadow-lg hover:${plan.borderColor} hover:${plan.glowColor}`
+                        ? `border-2 ${plan.borderColor} ring-1 ring-violet-200/50`
+                        : "border-2 border-zinc-200 hover:border-blue-200"
                     }`}
-                    style={plan.popular ? { boxShadow: "0 20px 60px rgba(139,92,246,0.15), 0 8px 24px rgba(0,0,0,0.06)" } : undefined}
+                    style={{
+                      boxShadow: hoveredPlan === plan.id
+                        ? `0 25px 60px ${plan.bgGlow.replace("0.08", "0.2")}, 0 8px 24px rgba(0,0,0,0.08)`
+                        : plan.popular
+                          ? "0 20px 60px rgba(139,92,246,0.12), 0 8px 24px rgba(0,0,0,0.06)"
+                          : "0 4px 16px rgba(0,0,0,0.04)",
+                    }}
                   >
+                    {/* Hover glow background */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 rounded-3xl`} />
+
+                    {/* Floating "Click to book" indicator */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: hoveredPlan === plan.id ? 1 : 0, y: hoveredPlan === plan.id ? 0 : 5 }}
+                      className="absolute top-4 right-4 flex items-center gap-1.5 text-xs font-bold text-blue-500 bg-blue-50 px-3 py-1.5 rounded-full"
+                    >
+                      <MousePointerClick size={12} /> Click to book
+                    </motion.div>
+
                     {/* Plan header */}
-                    <div className="mb-6">
+                    <div className="mb-6 relative z-10">
                       <h3 className="text-2xl font-black tracking-tight text-zinc-900 mb-2">{plan.name}</h3>
                       <p className="text-zinc-500 font-medium text-base leading-relaxed">{plan.tagline}</p>
                     </div>
 
-                    {/* Price */}
-                    <div className="mb-8 flex items-baseline gap-2">
-                      <span className={`text-5xl sm:text-6xl font-black tracking-tight ${plan.iconColor}`}>
+                    {/* Price — BIG and clear */}
+                    <div className="mb-6 flex items-baseline gap-2 relative z-10">
+                      <motion.span
+                        className={`text-5xl sm:text-6xl font-black tracking-tight ${plan.priceColor}`}
+                        animate={hoveredPlan === plan.id ? { scale: [1, 1.05, 1] } : {}}
+                        transition={{ duration: 0.4 }}
+                      >
                         ${plan.price}
-                      </span>
+                      </motion.span>
                       <span className="text-zinc-400 font-bold text-base">one-time</span>
                     </div>
 
-                    {/* CTA — Large, clear, unmistakable */}
-                    <Link href="/contact"
-                      className={`shine-effect w-full py-5 rounded-2xl font-bold text-xl flex items-center justify-center gap-3 transition-all active:scale-[0.98] hover:scale-[1.02] min-h-[64px] mb-8 text-white bg-gradient-to-r ${plan.gradient} shadow-lg ${plan.glowColor}`}>
+                    {/* CTA Button */}
+                    <div className={`shine-effect w-full py-5 rounded-2xl font-bold text-xl flex items-center justify-center gap-3 transition-all min-h-[64px] mb-8 text-white bg-gradient-to-r ${
+                      hoveredPlan === plan.id ? plan.hoverGradient : plan.gradient
+                    } shadow-lg ${plan.glowColor} group-hover:shadow-xl relative z-10`}>
                       {plan.ctaIcon}
                       {plan.cta}
-                    </Link>
+                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
 
                     {/* Features */}
-                    <div className="space-y-4 flex-grow">
+                    <div className="space-y-4 flex-grow relative z-10">
                       <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">What&apos;s included:</p>
                       {plan.features.map((feat, j) => (
-                        <div key={j} className="flex items-start gap-3">
+                        <motion.div key={j} className="flex items-start gap-3"
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.3 + j * 0.05 }}>
                           <CheckCircle2 size={20} className={`${plan.iconColor} shrink-0 mt-0.5`} />
                           <span className="font-medium text-base text-zinc-700 leading-snug">{feat}</span>
-                        </div>
+                        </motion.div>
                       ))}
                       {plan.notIncluded.map((feat, j) => (
-                        <div key={`no-${j}`} className="flex items-start gap-3 opacity-40">
+                        <div key={`no-${j}`} className="flex items-start gap-3 opacity-35">
                           <XCircle size={20} className="text-zinc-400 shrink-0 mt-0.5" />
                           <span className="font-medium text-base text-zinc-400 leading-snug line-through">{feat}</span>
                         </div>
@@ -391,8 +401,9 @@ export default function PricingPage() {
               ))}
             </div>
 
-            {/* Reassurance strip */}
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-sm text-zinc-500 font-bold">
+            {/* Reassurance */}
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+              className="mt-10 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-sm text-zinc-500 font-bold">
               {[
                 { icon: <ShieldCheck size={18} className="text-green-500" />, text: "Satisfaction Guaranteed" },
                 { icon: <Repeat size={18} className="text-blue-500" />, text: "No Subscriptions" },
@@ -401,25 +412,21 @@ export default function PricingPage() {
               ].map((item, i) => (
                 <span key={i} className="flex items-center gap-2">{item.icon}{item.text}</span>
               ))}
-            </div>
+            </motion.div>
           </section>
 
           {/* ════════ WHY WE PRICE THIS WAY ════════ */}
           <section className="mt-28" aria-labelledby="why-heading">
-            <h2 id="why-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">
-              Why Our Pricing Works for You
-            </h2>
+            <h2 id="why-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">Why Our Pricing Works for You</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {[
-                { icon: <CircleDollarSign size={32} className="text-blue-600" />, title: "Pay Once, Learn Forever", desc: "No monthly bills to worry about. Buy a session, get your lesson, keep your summary PDF forever. Simple." },
+                { icon: <CircleDollarSign size={32} className="text-blue-600" />, title: "Pay Once, Learn Forever", desc: "No monthly bills. Buy a session, keep your summary PDF forever. Simple and straightforward." },
                 { icon: <HeartHandshake size={32} className="text-violet-600" />, title: "Patient & Personal", desc: "Every session is 1-on-1 with a real educator. No group classes, no recorded videos. Just patient, live help." },
                 { icon: <Shield size={32} className="text-emerald-600" />, title: "Honest & Transparent", desc: "The price you see is the price you pay. No upsells, no hidden upgrades, no subscription tricks." },
               ].map((item, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                   className="text-center p-8 rounded-2xl bg-white border border-zinc-100 shadow-sm hover:shadow-lg transition-all group">
-                  <div className="w-16 h-16 bg-zinc-50 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform">
-                    {item.icon}
-                  </div>
+                  <div className="w-16 h-16 bg-zinc-50 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform">{item.icon}</div>
                   <h3 className="font-extrabold text-xl mb-3 text-zinc-900">{item.title}</h3>
                   <p className="text-zinc-500 font-medium leading-relaxed text-base">{item.desc}</p>
                 </motion.div>
@@ -427,76 +434,90 @@ export default function PricingPage() {
             </div>
           </section>
 
-          {/* ════════ COMPARISON TABLE ════════ */}
+          {/* ════════ ANIMATED COMPARISON TABLE ════════ */}
           <section className="mt-28" aria-labelledby="compare-heading">
-            <h2 id="compare-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">
-              Compare All Plans at a Glance
-            </h2>
+            <h2 id="compare-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-zinc-900">Compare All Plans at a Glance</h2>
+            <p className="text-center text-zinc-500 font-medium mb-10">Hover over any row to highlight it. Click a column header to choose that plan.</p>
+
             <div className="overflow-x-auto bg-white rounded-3xl border border-zinc-200 shadow-xl">
               <table className="w-full min-w-[700px]">
                 <thead>
                   <tr className="border-b-2 border-zinc-100">
-                    <th className="py-6 px-6 text-left font-bold text-zinc-400 uppercase tracking-widest text-xs w-[30%]">Feature</th>
-                    <th className="py-6 px-4 text-center font-bold text-sm">
-                      <div className="text-emerald-600">Free Tools</div>
+                    <th className="py-6 px-6 text-left font-bold text-zinc-400 uppercase tracking-widest text-xs w-[28%]">Feature</th>
+                    <th className="py-6 px-4 text-center cursor-pointer group" onClick={() => router.push("/tools")}>
+                      <div className="text-emerald-600 font-bold group-hover:scale-105 transition-transform">Free Tools</div>
                       <div className="text-zinc-400 text-xs font-medium mt-1">$0 forever</div>
                     </th>
-                    <th className="py-6 px-4 text-center font-bold text-sm">
-                      <div className="text-blue-600">Single Lesson</div>
+                    <th className="py-6 px-4 text-center cursor-pointer group" onClick={() => navigateToContact("Single Lesson")}>
+                      <div className="text-blue-600 font-bold group-hover:scale-105 transition-transform">Single Lesson</div>
                       <div className="text-zinc-400 text-xs font-medium mt-1">$49</div>
                     </th>
-                    <th className="py-6 px-4 text-center font-bold text-sm relative">
-                      <div className="absolute -top-0.5 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-t-lg" />
-                      <div className="text-violet-600">Skill-Builder</div>
-                      <div className="text-zinc-400 text-xs font-medium mt-1">$97</div>
+                    <th className="py-6 px-4 text-center cursor-pointer group relative" onClick={() => navigateToContact("Skill-Builder Course")}>
+                      <div className="absolute -top-0.5 left-2 right-2 h-1.5 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-t-lg" />
+                      <div className="text-violet-600 font-bold group-hover:scale-105 transition-transform">Skill-Builder</div>
+                      <div className="text-zinc-400 text-xs font-medium mt-1">$97 ⭐</div>
                     </th>
-                    <th className="py-6 px-4 text-center font-bold text-sm">
-                      <div className="text-emerald-600">Family Plan</div>
+                    <th className="py-6 px-4 text-center cursor-pointer group" onClick={() => navigateToContact("Family Learning Plan")}>
+                      <div className="text-emerald-600 font-bold group-hover:scale-105 transition-transform">Family Plan</div>
                       <div className="text-zinc-400 text-xs font-medium mt-1">$147</div>
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-50">
+                <tbody>
                   {comparison.map((row, i) => (
-                    <tr key={i} className="hover:bg-zinc-50/50 transition-colors">
+                    <motion.tr key={i}
+                      onMouseEnter={() => setHoveredRow(i)}
+                      onMouseLeave={() => setHoveredRow(null)}
+                      initial={{ opacity: 0, x: -15 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.04 }}
+                      className={`border-b border-zinc-50 transition-colors duration-200 ${
+                        hoveredRow === i ? "bg-blue-50/60" : "hover:bg-zinc-50/50"
+                      }`}
+                    >
                       <td className="py-5 px-6 font-bold text-zinc-700 text-base">{row.feature}</td>
                       {(["free", "single", "skill", "family"] as const).map((col) => {
                         const val = row[col];
                         return (
                           <td key={col} className="py-5 px-4 text-center">
                             {typeof val === "boolean" ? (
-                              val ? <CheckCircle2 size={22} className="mx-auto text-green-500" /> : <XCircle size={22} className="mx-auto text-zinc-200" />
+                              val ? (
+                                <motion.div animate={hoveredRow === i ? { scale: [1, 1.2, 1] } : {}} transition={{ duration: 0.3 }}>
+                                  <CheckCircle2 size={24} className="mx-auto text-green-500" />
+                                </motion.div>
+                              ) : (
+                                <XCircle size={24} className="mx-auto text-zinc-200" />
+                              )
                             ) : (
-                              <span className="font-bold text-zinc-600 text-sm">{val}</span>
+                              <span className={`font-bold text-sm ${hoveredRow === i ? "text-blue-600" : "text-zinc-600"} transition-colors`}>{val}</span>
                             )}
                           </td>
                         );
                       })}
-                    </tr>
+                    </motion.tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            {/* Table CTA */}
+
             <div className="mt-8 text-center">
-              <Link href="/contact" className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-2xl font-bold text-lg hover:from-violet-500 hover:to-indigo-500 transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-violet-500/20 min-h-[56px]">
-                Get Started Today <ArrowRight size={20} />
-              </Link>
+              <button onClick={() => navigateToContact("Skill-Builder Course")}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-2xl font-bold text-lg hover:from-violet-500 hover:to-indigo-500 transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-violet-500/20 min-h-[56px]">
+                Get Started with Skill-Builder <ArrowRight size={20} />
+              </button>
             </div>
           </section>
 
           {/* ════════ TESTIMONIALS ════════ */}
           <section className="mt-28" aria-labelledby="reviews-heading">
-            <h2 id="reviews-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">
-              What Our Learners Say
-            </h2>
+            <h2 id="reviews-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">What Our Learners Say</h2>
             <div className="max-w-3xl mx-auto">
               <AnimatePresence mode="wait">
                 <motion.div key={activeTestimonial}
                   initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }}
                   transition={{ duration: 0.4 }}
                   className="bg-white rounded-3xl p-8 sm:p-12 border border-zinc-200 shadow-lg text-center">
-                  {/* Stars */}
                   <div className="flex items-center justify-center gap-1 mb-6">
                     {Array.from({ length: testimonials[activeTestimonial].rating }).map((_, j) => (
                       <Star key={j} size={24} className="text-amber-400 fill-amber-400" />
@@ -505,13 +526,10 @@ export default function PricingPage() {
                   <p className="text-xl sm:text-2xl text-zinc-700 font-medium leading-relaxed italic mb-8">
                     &ldquo;{testimonials[activeTestimonial].text}&rdquo;
                   </p>
-                  <div>
-                    <div className="font-bold text-lg text-zinc-900">{testimonials[activeTestimonial].name}</div>
-                    <div className="text-zinc-400 font-medium text-sm">{testimonials[activeTestimonial].location}</div>
-                  </div>
+                  <div className="font-bold text-lg text-zinc-900">{testimonials[activeTestimonial].name}</div>
+                  <div className="text-zinc-400 font-medium text-sm">{testimonials[activeTestimonial].location}</div>
                 </motion.div>
               </AnimatePresence>
-              {/* Dots */}
               <div className="flex items-center justify-center gap-3 mt-6">
                 {testimonials.map((_, i) => (
                   <button key={i} onClick={() => setActiveTestimonial(i)}
@@ -522,44 +540,43 @@ export default function PricingPage() {
             </div>
           </section>
 
-          {/* ════════ SATISFACTION GUARANTEE ════════ */}
+          {/* ════════ GUARANTEE ════════ */}
           <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="mt-28 bg-gradient-to-br from-blue-50 to-violet-50 rounded-3xl p-8 sm:p-12 lg:p-16 border border-blue-100 text-center relative overflow-hidden">
-            <div className="absolute top-4 right-4 w-32 h-32 bg-blue-500/5 rounded-full blur-[50px]" aria-hidden="true" />
             <div className="relative z-10 max-w-2xl mx-auto">
               <div className="w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center mx-auto mb-8">
                 <ShieldCheck size={40} className="text-blue-600" />
               </div>
-              <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-5 text-zinc-900">
-                100% Satisfaction Guarantee
-              </h2>
+              <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-5 text-zinc-900">100% Satisfaction Guarantee</h2>
               <p className="text-lg text-zinc-600 font-medium leading-relaxed mb-8">
-                If your first lesson session doesn&apos;t meet your expectations, contact us within 24 hours and we&apos;ll give you a full refund. No questions asked. We believe in our educators — and we want you to feel confident in your purchase.
+                If your first lesson doesn&apos;t meet expectations, contact us within 24 hours for a full refund. No questions asked.
               </p>
-              <Link href="/contact"
+              <button onClick={() => navigateToContact()}
                 className="inline-flex items-center gap-3 px-8 py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-blue-500/20 min-h-[60px]">
-                <PhoneCall size={22} />
-                Book Your First Session
-              </Link>
+                <PhoneCall size={22} /> Book Your First Session
+              </button>
             </div>
           </motion.section>
 
           {/* ════════ FAQ ════════ */}
           <section className="mt-28 max-w-4xl mx-auto" aria-labelledby="faq-heading">
-            <h2 id="faq-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">
-              Pricing Questions Answered
-            </h2>
+            <h2 id="faq-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">Pricing Questions Answered</h2>
             <div className="space-y-4">
               {[
-                { q: "Are there any monthly fees or subscriptions?", a: "Absolutely not. Setwise Digital has zero subscriptions, zero recurring fees, and zero hidden charges. You pay once per plan, and that's it. Our 47 free tools are always free." },
-                { q: "What's the difference between the plans?", a: "The Single Lesson ($49) covers one topic in one session. The Skill-Builder ($97) gives you 3 sessions with a custom roadmap to build deeper confidence. The Family Plan ($147) gives you 5 sessions so your whole household can learn together across multiple topics." },
-                { q: "Can I upgrade from a Single Lesson to Skill-Builder later?", a: "Yes! If you start with a Single Lesson and want to continue, just contact us. We'll credit the difference toward your Skill-Builder or Family Plan." },
-                { q: "What if I'm not satisfied with my session?", a: "We offer a 100% satisfaction guarantee. If your first session doesn't meet expectations, contact us within 24 hours for a full refund. No questions asked." },
-                { q: "How do the sessions work?", a: "Sessions are live 1-on-1 video calls with one of our educators. You pick the topic, we guide you step by step. Afterward, you receive a PDF summary of everything covered." },
-                { q: "Do you serve customers in both the US and Canada?", a: "Yes! We serve adults 45+ across both the United States and Canada. All sessions are conducted via video call, so location doesn't matter." },
-                { q: "Are the 47 free tools really free?", a: "100% free. No account, no email address, no credit card needed. You can use all 47 tools right now at setwisedigital.com/tools." },
+                { q: "Are there any monthly fees or subscriptions?", a: "Absolutely not. Zero subscriptions, zero recurring fees, zero hidden charges. You pay once per plan, and that's it. Our 47 free tools are always free." },
+                { q: "What's the difference between the plans?", a: "Single Lesson ($49) covers one topic in one session. Skill-Builder ($97) gives 3 sessions with a custom roadmap. Family Plan ($147) gives 5 sessions for the whole household." },
+                { q: "Can I upgrade later?", a: "Yes! Start with a Single Lesson and if you want to continue, we'll credit the difference toward a Skill-Builder or Family Plan." },
+                { q: "What if I'm not satisfied?", a: "We offer a 100% satisfaction guarantee. If your first session doesn't meet expectations, contact us within 24 hours for a full refund." },
+                { q: "How do sessions work?", a: "Sessions are live 1-on-1 video calls with an educator. You pick the topic, we guide you step by step. Afterward, you get a PDF summary." },
+                { q: "Do you serve the US and Canada?", a: "Yes! We serve adults 45+ across both countries. All sessions are via video call." },
+                { q: "Are the 47 free tools really free?", a: "100% free. No account, no email, no credit card. Use them right now at setwisedigital.com/tools." },
               ].map((faq, i) => (
-                <div key={i} className={`border rounded-2xl transition-all duration-300 ${activeFaq === i ? "border-blue-500 bg-blue-50/40 shadow-sm" : "border-zinc-200 hover:border-blue-200"}`}>
+                <motion.div key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className={`border rounded-2xl transition-all duration-300 ${activeFaq === i ? "border-blue-500 bg-blue-50/40 shadow-sm" : "border-zinc-200 hover:border-blue-200"}`}>
                   <button onClick={() => setActiveFaq(activeFaq === i ? null : i)}
                     className="w-full px-7 py-6 text-left flex items-center justify-between gap-4 min-h-[72px]" aria-expanded={activeFaq === i}>
                     <span className="text-lg font-bold text-zinc-800">{faq.q}</span>
@@ -570,7 +587,7 @@ export default function PricingPage() {
                   <div className={`overflow-hidden transition-all duration-300 ${activeFaq === i ? "max-h-60" : "max-h-0"}`}>
                     <div className="px-7 pb-6 text-zinc-600 leading-relaxed font-medium text-base">{faq.a}</div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </section>
@@ -578,33 +595,30 @@ export default function PricingPage() {
           {/* ════════ FINAL CTA ════════ */}
           <section className="mt-28 text-center">
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-5 text-zinc-900">Ready to Get Started?</h2>
-            <p className="text-lg text-zinc-500 font-medium mb-10 max-w-xl mx-auto">
-              Pick a plan that works for you, or try our 47 free tools first. No pressure, no rush — just friendly tech help when you need it.
-            </p>
+            <p className="text-lg text-zinc-500 font-medium mb-10 max-w-xl mx-auto">Pick a plan or try our free tools first. No pressure, no rush.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-blue-600/25 min-h-[60px]">
+              <button onClick={() => navigateToContact()}
+                className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-blue-600/25 min-h-[60px]">
                 <PhoneCall size={22} /> Book a Lesson
-              </Link>
-              <Link href="/tools" className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] min-h-[60px]">
+              </button>
+              <Link href="/tools"
+                className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] min-h-[60px]">
                 <Sparkles size={22} className="text-blue-600" /> Try Free Tools First
               </Link>
             </div>
           </section>
 
-          {/* ════════ INTERNAL LINKS ════════ */}
-          <section className="mt-28" aria-label="Explore more pages">
+          {/* ════════ LINKS ════════ */}
+          <section className="mt-28" aria-label="Explore more">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { href: "/about", title: "About Setwise Digital", desc: "Learn our story" },
                 { href: "/contact", title: "Contact Us", desc: "Get in touch" },
                 { href: "/tools", title: "47 Free Tech Tools", desc: "Try them free" },
               ].map((item, i) => (
-                <Link key={i} href={item.href}
-                  className="p-7 bg-zinc-50 rounded-2xl group border border-zinc-100 hover:bg-white hover:shadow-lg hover:border-blue-100 transition-all min-h-[100px]">
+                <Link key={i} href={item.href} className="p-7 bg-zinc-50 rounded-2xl group border border-zinc-100 hover:bg-white hover:shadow-lg hover:border-blue-100 transition-all min-h-[100px]">
                   <h3 className="font-extrabold text-xl mb-2 group-hover:text-blue-600 transition-colors">{item.title}</h3>
-                  <p className="text-zinc-500 font-bold flex items-center gap-2 text-sm">
-                    {item.desc} <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </p>
+                  <p className="text-zinc-500 font-bold flex items-center gap-2 text-sm">{item.desc} <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></p>
                 </Link>
               ))}
             </div>
