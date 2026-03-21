@@ -1,18 +1,57 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
   CheckCircle2, Heart, ShieldCheck, Users, Target, MapPin,
   ArrowRight, Printer, Navigation, Camera, Home as HomeIcon,
   BookOpen, MessageSquare, UserCheck, Calendar, Zap, Globe,
   Sparkles, Award, HeartHandshake, Clock, Star, ArrowUpRight,
   ChevronRight, Shield, Phone, BadgeCheck, GraduationCap,
+  Search,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
+
+/* ═══════════════════════════════════════════════════════════════
+   CYCLING TEXT — simulates real search queries typing
+   ═══════════════════════════════════════════════════════════════ */
+const searchQueries = [
+  "How to setup HP printer Wi-Fi...",
+  "Garmin GPS map update not working...",
+  "How to connect Alexa to smart home...",
+  "Canon printer not printing from phone...",
+  "Ring doorbell camera setup help...",
+  "How to print from my iPhone...",
+  "Google Home setup for beginners...",
+  "Epson printer ink cartridge help...",
+  "TomTom GPS update download...",
+  "Smart home security for seniors...",
+];
+
+function CyclingText() {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => setIndex((p) => (p + 1) % searchQueries.length), 3000);
+    return () => clearInterval(timer);
+  }, []);
+  return (
+    <AnimatePresence mode="wait">
+      <motion.span
+        key={index}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.35 }}
+        className="text-zinc-300 font-medium text-base"
+      >
+        {searchQueries[index]}
+      </motion.span>
+    </AnimatePresence>
+  );
+}
 
 /* ═══════════════════════════════════════════════════════════════
    BACKGROUND
@@ -65,8 +104,8 @@ export default function About() {
       <Navbar />
       <ScrollToTop />
 
-      {/* ════════ HERO ════════ */}
-      <header ref={heroRef} className="relative overflow-hidden bg-zinc-950 min-h-[80vh] lg:min-h-[88vh] flex items-center">
+      {/* ════════ HERO — Parallax with rotating search queries ════════ */}
+      <header ref={heroRef} className="relative overflow-hidden bg-zinc-950 min-h-[88vh] lg:min-h-[95vh] flex items-center">
         <AuroraBackground />
         {/* Particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
@@ -77,57 +116,130 @@ export default function About() {
               transition={{ duration: Math.random() * 12 + 10, delay: Math.random() * 6, repeat: Infinity, ease: "easeInOut" }} />
           ))}
         </div>
+
+        {/* Scrolling search queries background — parallax layer */}
+        <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [0, 150]) }}
+          className="absolute inset-0 overflow-hidden pointer-events-none z-[1]" aria-hidden="true">
+          {/* Row 1 */}
+          <div className="absolute top-[15%] w-full overflow-hidden opacity-[0.06]">
+            <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }} className="flex whitespace-nowrap">
+              {["How to setup HP printer", "Garmin GPS map update", "How to connect Alexa to Wi-Fi", "Printer not printing fix", "How to update Garmin GPS", "Ring camera setup help", "How to setup HP printer", "Garmin GPS map update", "How to connect Alexa to Wi-Fi", "Printer not printing fix", "How to update Garmin GPS", "Ring camera setup help"].map((q, i) => (
+                <span key={i} className="text-white text-2xl sm:text-3xl font-black mx-8 tracking-tight">{q}</span>
+              ))}
+            </motion.div>
+          </div>
+          {/* Row 2 — opposite direction */}
+          <div className="absolute top-[35%] w-full overflow-hidden opacity-[0.04]">
+            <motion.div animate={{ x: ["-50%", "0%"] }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }} className="flex whitespace-nowrap">
+              {["Smart home for beginners", "How to print from iPhone", "Canon printer Wi-Fi setup", "GPS not working fix", "Alexa routines setup", "Download security camera app", "Smart home for beginners", "How to print from iPhone", "Canon printer Wi-Fi setup", "GPS not working fix", "Alexa routines setup", "Download security camera app"].map((q, i) => (
+                <span key={i} className="text-white text-xl sm:text-2xl font-bold mx-8 tracking-tight">{q}</span>
+              ))}
+            </motion.div>
+          </div>
+          {/* Row 3 */}
+          <div className="absolute top-[55%] w-full overflow-hidden opacity-[0.03]">
+            <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 50, repeat: Infinity, ease: "linear" }} className="flex whitespace-nowrap">
+              {["Brother printer setup guide", "TomTom update help", "Google Home setup for seniors", "Epson ink troubleshooting", "Computer security for beginners", "Wi-Fi router setup help", "Brother printer setup guide", "TomTom update help", "Google Home setup for seniors", "Epson ink troubleshooting", "Computer security for beginners", "Wi-Fi router setup help"].map((q, i) => (
+                <span key={i} className="text-white text-lg sm:text-xl font-bold mx-8 tracking-tight">{q}</span>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
+
         <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-[#FDFDFD] to-transparent z-10" />
 
         <motion.div style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
           className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-32 pb-28 lg:pt-40 lg:pb-36">
-          <div className="max-w-4xl">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-              <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-sm font-bold tracking-wide">
-                <Calendar size={16} className="text-blue-400" />
-                Patient Guidance Since 2016
-              </span>
-            </motion.div>
-
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
-              className="mt-8 text-[2.75rem] sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white">
-              We Help Adults 45+{" "}
-              <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
-                  Master Technology.
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left — Main message */}
+            <div>
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+                <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-sm font-bold tracking-wide">
+                  <Calendar size={16} className="text-blue-400" />
+                  Education-First Company Since 2016
                 </span>
-                <motion.span className="absolute -bottom-2 left-0 h-1.5 rounded-full bg-gradient-to-r from-blue-500 via-cyan-400 to-violet-500"
-                  initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: 1.2, delay: 1.0 }} />
-              </span>
-            </motion.h1>
+              </motion.div>
 
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}
-              className="mt-8 text-xl sm:text-2xl text-zinc-400 leading-relaxed font-medium max-w-2xl">
-              Setwise Digital is an <strong className="text-white">independent tech education company</strong> serving the{" "}
-              <strong className="text-white">United States & Canada</strong>. We teach printers, GPS, smart home, Alexa, and more — in{" "}
-              <strong className="text-white">plain English</strong>, with patience and zero pressure.
-            </motion.p>
+              <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
+                className="mt-8 text-[2.5rem] sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-white">
+                People Search for{" "}
+                <span className="relative inline-block">
+                  <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
+                    Tech Help.
+                  </span>
+                </span>
+                <br />
+                <span className="text-zinc-400">We Teach Them</span>{" "}
+                <span className="relative inline-block">
+                  <span className="text-white">How.</span>
+                  <motion.span className="absolute -bottom-1.5 left-0 h-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500"
+                    initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: 1, delay: 1.0 }} />
+                </span>
+              </motion.h1>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7 }}
-              className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Link href="/pricing" className="shine-effect inline-flex items-center justify-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-blue-600/25 min-h-[60px]">
-                Browse Learning Plans <ArrowRight size={20} />
-              </Link>
-              <Link href="/tools" className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-white/10 hover:bg-white/15 text-white border border-white/20 rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] backdrop-blur-sm min-h-[60px]">
-                <Sparkles size={20} /> 47 Free Tools
-              </Link>
-            </motion.div>
+              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}
+                className="mt-8 text-lg sm:text-xl text-zinc-400 leading-relaxed font-medium max-w-xl">
+                Every day, thousands of adults 45+ search for help with their <strong className="text-white">printers</strong>,{" "}
+                <strong className="text-white">GPS devices</strong>, <strong className="text-white">Alexa</strong>, and{" "}
+                <strong className="text-white">smart home</strong>. We don&apos;t just give answers — we{" "}
+                <em className="text-blue-300 not-italic font-bold">teach</em> them, step by step, in plain English.
+              </motion.p>
 
-            {/* Trust stats in hero */}
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7 }}
+                className="mt-10 flex flex-col sm:flex-row gap-4">
+                <Link href="/pricing" className="shine-effect inline-flex items-center justify-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-blue-600/25 min-h-[60px]">
+                  Browse Learning Plans <ArrowRight size={20} />
+                </Link>
+                <Link href="/tools" className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-white/10 hover:bg-white/15 text-white border border-white/20 rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] backdrop-blur-sm min-h-[60px]">
+                  <Sparkles size={20} /> 47 Free Tools
+                </Link>
+              </motion.div>
+            </div>
+
+            {/* Right — Animated cycling "search queries" + stats */}
+            <div className="hidden lg:block">
+              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }}
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 space-y-5">
+                {/* Simulated search bar */}
+                <div className="flex items-center gap-3 px-5 py-4 bg-white/10 rounded-xl border border-white/10">
+                  <Search size={20} className="text-zinc-500" />
+                  <CyclingText />
+                </div>
+
+                {/* What we actually do */}
+                <div className="p-6 bg-gradient-to-br from-blue-600/20 to-violet-600/20 rounded-2xl border border-blue-500/20">
+                  <p className="text-sm font-bold text-blue-300 mb-2 uppercase tracking-wider">What Setwise Digital Does</p>
+                  <p className="text-white font-bold text-lg leading-relaxed">
+                    We don&apos;t just fix — we <span className="text-cyan-300">educate</span>. Patient, 1-on-1 guidance that builds lasting confidence with everyday technology.
+                  </p>
+                </div>
+
+                {/* Stats grid */}
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { value: 2016, suffix: "", label: "Founded" },
+                    { value: 47, suffix: "+", label: "Free Tools" },
+                    { value: 2, suffix: "", label: "Countries" },
+                  ].map((s, i) => (
+                    <div key={i} className="text-center p-4 bg-white/5 rounded-xl border border-white/5">
+                      <div className="text-2xl font-black text-white"><AnimatedCounter target={s.value} suffix={s.suffix} /></div>
+                      <div className="text-xs text-zinc-500 font-bold mt-1">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Mobile stats */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}
-              className="mt-12 flex flex-wrap gap-8">
+              className="flex flex-wrap gap-8 lg:hidden">
               {[
                 { value: 2016, suffix: "", label: "Founded" },
                 { value: 47, suffix: "+", label: "Free Tools" },
-                { value: 2, suffix: "", label: "Countries Served" },
+                { value: 2, suffix: "", label: "Countries" },
               ].map((s, i) => (
                 <div key={i}>
-                  <div className="text-3xl sm:text-4xl font-black text-white tracking-tight"><AnimatedCounter target={s.value} suffix={s.suffix} /></div>
+                  <div className="text-3xl font-black text-white"><AnimatedCounter target={s.value} suffix={s.suffix} /></div>
                   <div className="text-sm text-zinc-500 font-bold mt-1">{s.label}</div>
                 </div>
               ))}
@@ -147,54 +259,158 @@ export default function About() {
             </ol>
           </nav>
 
-          {/* ════════ OUR STORY ════════ */}
-          <section className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center" aria-labelledby="story-heading">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          {/* ════════ OUR STORY — Enhanced with animated highlights ════════ */}
+          <section className="mt-16 grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start" aria-labelledby="story-heading">
+            {/* Left — Story (3 cols) */}
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
+              className="lg:col-span-3">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-sm font-bold mb-6">
                 <BookOpen size={14} /> Our Story
               </span>
-              <h2 id="story-heading" className="text-3xl sm:text-4xl font-black tracking-tight mb-6 leading-tight text-zinc-900">
+              <h2 id="story-heading" className="text-3xl sm:text-4xl font-black tracking-tight mb-8 leading-tight text-zinc-900">
                 It Started With a <span className="text-blue-600">Single Moment</span>
               </h2>
-              <div className="space-y-5 text-lg text-zinc-600 leading-relaxed font-medium">
-                <p>
-                  In 2016, we noticed something happening across homes in the US and Canada: adults were buying printers, GPS devices, smart home gadgets — but instead of feeling confident, they felt <strong className="text-zinc-900">stuck, overwhelmed, and afraid</strong> of breaking something.
-                </p>
-                <motion.blockquote whileHover={{ scale: 1.01 }}
-                  className="p-8 bg-blue-50 border-l-4 border-blue-500 rounded-2xl italic text-zinc-800 relative">
-                  <p className="text-xl font-bold leading-snug">
-                    &ldquo;We bought this printer to print medical forms… but we still go to the library because we&apos;re scared we&apos;ll mess it up.&rdquo;
+
+              <div className="space-y-6 text-lg text-zinc-600 leading-relaxed font-medium">
+                {/* Paragraph 1 — key words animate in */}
+                <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                  In 2016, we noticed something happening across homes in the US and Canada: adults were buying{" "}
+                  <motion.span initial={{ backgroundColor: "transparent" }} whileInView={{ backgroundColor: "rgba(59,130,246,0.1)" }} viewport={{ once: true }}
+                    transition={{ delay: 0.5, duration: 0.8 }} className="px-1 rounded font-bold text-zinc-900 inline">
+                    printers, GPS devices, smart home gadgets
+                  </motion.span>
+                  {" "}— but instead of feeling confident, they felt:
+                </motion.p>
+
+                {/* Animated emotion pills */}
+                <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
+                  className="flex flex-wrap gap-3">
+                  {[
+                    { text: "Stuck", color: "bg-red-50 text-red-700 border-red-200" },
+                    { text: "Overwhelmed", color: "bg-amber-50 text-amber-700 border-amber-200" },
+                    { text: "Afraid of breaking something", color: "bg-orange-50 text-orange-700 border-orange-200" },
+                  ].map((emotion, i) => (
+                    <motion.span key={i}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 + i * 0.15, type: "spring", stiffness: 300 }}
+                      className={`px-4 py-2 rounded-full font-bold text-sm border ${emotion.color}`}>
+                      {emotion.text}
+                    </motion.span>
+                  ))}
+                </motion.div>
+
+                {/* Animated quote card */}
+                <motion.blockquote
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2, duration: 0.7 }}
+                  className="relative p-8 bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-500 rounded-2xl group overflow-hidden"
+                >
+                  {/* Decorative big quote mark */}
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 0.08, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, type: "spring" }}
+                    className="absolute -top-4 -left-2 text-blue-600 text-[120px] font-serif leading-none select-none pointer-events-none"
+                    aria-hidden="true"
+                  >
+                    &ldquo;
+                  </motion.span>
+                  <p className="text-xl font-bold leading-snug text-zinc-800 italic relative z-10">
+                    &ldquo;We bought this printer to print medical forms… but we still go to the library because we&apos;re{" "}
+                    <motion.span
+                      initial={{ color: "rgb(39,39,42)" }}
+                      whileInView={{ color: "rgb(37,99,235)" }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 1, duration: 0.6 }}
+                      className="font-black"
+                    >
+                      scared we&apos;ll mess it up
+                    </motion.span>.&rdquo;
                   </p>
-                  <footer className="mt-4 text-blue-600 font-bold not-italic text-sm">— A senior couple who shaped our mission</footer>
+                  <footer className="mt-4 text-blue-600 font-bold not-italic text-sm relative z-10 flex items-center gap-2">
+                    <span className="w-6 h-[2px] bg-blue-500 rounded-full" />
+                    A senior couple who shaped our mission
+                  </footer>
                 </motion.blockquote>
-                <p>
-                  That moment changed everything. We decided: we won&apos;t just fix technology — we&apos;ll <strong className="text-zinc-900">teach people</strong> patiently, clearly, and kindly. No jargon. No pressure. Just step-by-step guidance that builds real confidence.
-                </p>
+
+                {/* Paragraph 2 — mission statement with highlight animation */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="p-6 bg-zinc-50 rounded-2xl border border-zinc-100"
+                >
+                  <p className="text-lg text-zinc-600 font-medium leading-relaxed">
+                    That moment changed everything. We decided: we won&apos;t just fix technology — we&apos;ll{" "}
+                    <motion.span
+                      initial={{ backgroundColor: "transparent", padding: "0" }}
+                      whileInView={{ backgroundColor: "rgba(37,99,235,0.1)", padding: "2px 6px" }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.6, duration: 0.5 }}
+                      className="rounded font-black text-blue-700 inline"
+                    >
+                      teach people
+                    </motion.span>{" "}
+                    — patiently, clearly, and kindly.
+                  </p>
+                  <div className="flex flex-wrap gap-3 mt-4">
+                    {["No jargon", "No pressure", "No scare tactics", "Step-by-step guidance"].map((item, i) => (
+                      <motion.span key={i}
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.8 + i * 0.1 }}
+                        className="flex items-center gap-1.5 text-sm font-bold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
+                        <CheckCircle2 size={14} /> {item}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
 
-            {/* Visual timeline */}
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.15 }}>
-              <div className="space-y-6">
-                {[
-                  { year: "2016", title: "Founded", desc: "Started helping families one-on-one with everyday tech.", color: "from-blue-500 to-blue-600" },
-                  { year: "2020", title: "Went Digital", desc: "Launched online learning to reach more people nationwide.", color: "from-violet-500 to-indigo-600" },
-                  { year: "2023", title: "47 Free Tools", desc: "Built interactive tools anyone can use — no sign-up needed.", color: "from-emerald-500 to-teal-600" },
-                  { year: "2025", title: "US & Canada", desc: "Expanded to serve adults 45+ across both countries.", color: "from-amber-500 to-orange-600" },
-                  { year: "Now", title: "Growing", desc: "Adding new tools, topics, and educators every month.", color: "from-rose-500 to-pink-600" },
-                ].map((item, i) => (
-                  <motion.div key={i} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex gap-5 items-start group">
-                    <div className={`w-14 h-14 shrink-0 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white font-black text-sm shadow-lg group-hover:scale-110 transition-transform`}>
-                      {item.year}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-zinc-900">{item.title}</h3>
-                      <p className="text-zinc-500 font-medium text-base">{item.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
+            {/* Right — Timeline (2 cols) */}
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.15 }}
+              className="lg:col-span-2">
+              <div className="sticky top-28">
+                <p className="text-xs font-black text-zinc-400 uppercase tracking-widest mb-6">Our Journey</p>
+                <div className="relative">
+                  {/* Vertical connecting line */}
+                  <div className="absolute left-[27px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-blue-500 via-violet-500 to-rose-500 opacity-20 rounded-full" />
+
+                  <div className="space-y-5">
+                    {[
+                      { year: "2016", title: "Founded", desc: "Started helping families one-on-one with everyday tech.", color: "from-blue-500 to-blue-600" },
+                      { year: "2020", title: "Went Digital", desc: "Launched online learning to reach people nationwide.", color: "from-violet-500 to-indigo-600" },
+                      { year: "2023", title: "47 Free Tools", desc: "Built interactive tools anyone can use — no sign-up.", color: "from-emerald-500 to-teal-600" },
+                      { year: "2025", title: "US & Canada", desc: "Expanded to serve adults 45+ across both countries.", color: "from-amber-500 to-orange-600" },
+                      { year: "Now", title: "Growing", desc: "New tools, topics, and educators every month.", color: "from-rose-500 to-pink-600" },
+                    ].map((item, i) => (
+                      <motion.div key={i}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.12 }}
+                        className="flex gap-4 items-start group relative">
+                        <motion.div
+                          whileHover={{ scale: 1.15, rotate: 3 }}
+                          className={`w-14 h-14 shrink-0 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white font-black text-sm shadow-lg relative z-10`}>
+                          {item.year}
+                        </motion.div>
+                        <div className="pt-1">
+                          <h3 className="font-bold text-lg text-zinc-900 group-hover:text-blue-600 transition-colors">{item.title}</h3>
+                          <p className="text-zinc-500 font-medium text-base">{item.desc}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
           </section>
