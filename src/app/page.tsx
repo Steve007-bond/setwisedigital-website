@@ -370,48 +370,41 @@ export default function Home() {
                   rotateZ: [0, 1.5, 0, -1.5, 0],
                 }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                className="relative z-10 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[460px] xl:max-w-[540px]"
+                className="relative z-10 w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[500px] xl:max-w-[580px]"
               >
                 {/* Shadow beneath */}
                 <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[60%] h-[16px] rounded-[50%] bg-violet-500/15 blur-xl" />
 
-                {/* Responsive image with picture element for WebP + PNG fallback */}
+                {/* Responsive image */}
                 <picture>
-                  <source
-                    media="(max-width: 640px)"
-                    srcSet="/hero-character-mobile.webp"
-                    type="image/webp"
-                  />
-                  <source
-                    media="(max-width: 640px)"
-                    srcSet="/hero-character-mobile.png"
-                    type="image/png"
-                  />
-                  <source
-                    media="(max-width: 1024px)"
-                    srcSet="/hero-character-tablet.webp"
-                    type="image/webp"
-                  />
-                  <source
-                    media="(max-width: 1024px)"
-                    srcSet="/hero-character-tablet.png"
-                    type="image/png"
-                  />
-                  <source
-                    srcSet="/hero-character-desktop.webp"
-                    type="image/webp"
-                  />
+                  <source media="(max-width: 640px)" srcSet="/hero-character-mobile.webp" type="image/webp" />
+                  <source media="(max-width: 640px)" srcSet="/hero-character-mobile.png" type="image/png" />
+                  <source media="(max-width: 1024px)" srcSet="/hero-character-tablet.webp" type="image/webp" />
+                  <source media="(max-width: 1024px)" srcSet="/hero-character-tablet.png" type="image/png" />
+                  <source srcSet="/hero-character-desktop.webp" type="image/webp" />
                   <Image
                     src="/hero-character-desktop.png"
-                    alt="Friendly elderly man learning technology at his computer — Setwise Digital"
-                    width={900}
-                    height={541}
+                    alt="Friendly elderly man browsing Setwise Digital Technology Simplified website on his computer"
+                    width={960}
+                    height={554}
                     priority
                     className="w-full h-auto select-none"
                     style={{ filter: "drop-shadow(0 20px 40px rgba(13,148,136,0.25)) drop-shadow(0 8px 16px rgba(99,102,241,0.15))" }}
                     draggable={false}
                   />
                 </picture>
+
+                {/* Animated pointing arrow toward Start Learning button */}
+                <motion.div
+                  className="absolute -left-4 bottom-[25%] lg:-left-8 hidden sm:flex items-center gap-2"
+                  animate={{ x: [0, -8, 0, -6, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 rounded-full">
+                    <span className="text-blue-300 text-xs font-bold whitespace-nowrap">Try it here!</span>
+                    <ArrowRight size={14} className="text-blue-400 rotate-180" />
+                  </div>
+                </motion.div>
               </motion.div>
 
               {/* Sparkle particles */}
