@@ -1,28 +1,61 @@
 import type { Metadata } from "next";
 import ContactClient from "./ContactClient";
 
-// DEPLOYMENT NOTE: Rename your existing contact/page.tsx → contact/ContactClient.tsx
-// Then drop this file in as the new contact/page.tsx
-
 export const metadata: Metadata = {
-  title: "Contact Setwise Digital — Tech Help & Lesson Booking",
+  title: "Contact Setwise Digital — Free Tech Help for Adults 45+ in US & Canada",
   description:
-    "Book a live tech lesson, ask about a free tool, or enquire about pricing. Adults 40+ served nationwide. We reply within 24 hours.",
+    "Get in touch with Setwise Digital for personalized technology learning sessions. We help adults 45+ across the United States and Canada master printers, GPS, smart home devices, and more. Free consultation — reply within 24 hours.",
   keywords: [
     "contact Setwise Digital",
-    "book tech learning session",
-    "technology help for seniors",
-    "tech tutor contact",
-    "Setwise Digital support email",
-    "technology education contact",
-    "book printer lesson",
+    "tech help for seniors",
+    "technology help adults over 45",
+    "book tech lesson United States",
+    "book tech lesson Canada",
+    "printer help for seniors",
+    "GPS help for older adults",
+    "smart home setup help",
+    "technology tutor for seniors",
+    "Setwise Digital support",
+    "patient tech education",
     "tech learning for adults over 40",
+    "technology lessons near me",
+    "digital literacy for seniors US Canada",
   ],
   alternates: { canonical: "https://www.setwisedigital.com/contact" },
   openGraph: {
-    title: "Contact Setwise Digital — Tech Help & Lesson Booking",
-    description: "Book a live tech lesson, ask about a free tool, or enquire about pricing. Adults 40+ served nationwide. We reply within 24 hours.",
+    title: "Contact Setwise Digital — Free Tech Help for Adults 45+",
+    description:
+      "Personalized, patient technology education for adults 45+ across the US & Canada. Printers, GPS, smart home, and more. Free consultation — we reply within 24 hours.",
     url: "https://www.setwisedigital.com/contact",
+    type: "website",
+    locale: "en_US",
+    siteName: "Setwise Digital",
+    images: [
+      {
+        url: "https://www.setwisedigital.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Contact Setwise Digital — Technology Made Easy for Adults 45+",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Setwise Digital — Free Tech Help for Adults 45+",
+    description:
+      "Patient, personalized technology education for adults 45+ across the US & Canada. Reply within 24 hours.",
+    images: ["https://www.setwisedigital.com/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -32,18 +65,35 @@ export default function ContactPage() {
     "@type": "ContactPage",
     name: "Contact Setwise Digital",
     url: "https://www.setwisedigital.com/contact",
-    description: "Contact Setwise Digital for technology learning guidance and live lesson session bookings.",
+    description:
+      "Contact Setwise Digital for personalized technology learning guidance and live lesson session bookings. Serving adults 45+ across the United States and Canada.",
     mainEntity: {
       "@type": "Organization",
       name: "Setwise Digital",
       email: "support@setwisedigital.com",
       url: "https://www.setwisedigital.com",
-      areaServed: { "@type": "Country", name: "United States" },
+      foundingDate: "2016",
+      areaServed: [
+        { "@type": "Country", name: "United States" },
+        { "@type": "Country", name: "Canada" },
+      ],
       contactPoint: {
         "@type": "ContactPoint",
         email: "support@setwisedigital.com",
         contactType: "customer service",
-        availableLanguage: "English",
+        availableLanguage: ["English"],
+        areaServed: [
+          { "@type": "Country", name: "United States" },
+          { "@type": "Country", name: "Canada" },
+        ],
+      },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "137 Mazzeo Drive",
+        addressLocality: "Glassboro",
+        addressRegion: "NJ",
+        postalCode: "08028",
+        addressCountry: "US",
       },
     },
   };
@@ -58,6 +108,14 @@ export default function ContactPage() {
         acceptedAnswer: {
           "@type": "Answer",
           text: "Contact Setwise Digital via the contact form at setwisedigital.com/contact or by emailing support@setwisedigital.com. We respond to all enquiries within 24 hours.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Does Setwise Digital serve customers in both the United States and Canada?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Setwise Digital provides technology education services to adults aged 45 and older across both the United States and Canada through online sessions.",
         },
       },
       {
@@ -84,6 +142,14 @@ export default function ContactPage() {
           text: "Setwise Digital responds to all contact form submissions and emails within 24 hours on business days.",
         },
       },
+      {
+        "@type": "Question",
+        name: "What technology topics does Setwise Digital teach?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Setwise Digital offers educational guidance on printers, GPS navigation, smart home devices like Alexa, security cameras, and general technology literacy for adults over 45.",
+        },
+      },
     ],
   };
 
@@ -91,16 +157,35 @@ export default function ContactPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.setwisedigital.com" },
-      { "@type": "ListItem", position: 2, name: "Contact", item: "https://www.setwisedigital.com/contact" },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.setwisedigital.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Contact Us",
+        item: "https://www.setwisedigital.com/contact",
+      },
     ],
   };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <ContactClient />
     </>
   );
