@@ -3,21 +3,23 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import {
   CheckCircle2, XCircle, ArrowRight, Zap, BookOpen, UserCheck,
-  ShieldCheck, Award, Star, ChevronRight, Users,
+  ShieldCheck, Award, Star, ChevronRight, Users, X,
   HeartHandshake, Sparkles, Clock, Gift, Shield,
   ArrowUpRight, PhoneCall, BadgeCheck, CircleDollarSign,
   GraduationCap, Repeat, Video, MousePointerClick,
-  TrendingUp, FileText, Headphones, Wrench,
+  Send, Loader2, AlertCircle,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import EmailInput from "@/components/EmailInput";
+import PhoneInput from "@/components/PhoneInput";
+import { validateEmail, validatePhone } from "@/lib/validation";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   BACKGROUND COMPONENTS
+   BACKGROUND
    ═══════════════════════════════════════════════════════════════ */
 function AuroraBackground() {
   return (
@@ -53,7 +55,7 @@ function ParticleField() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   FREE TOOLS DATA — colorful, clickable
+   FREE TOOLS DATA
    ═══════════════════════════════════════════════════════════════ */
 const freeToolCards = [
   { icon: <Zap size={30} />, text: "TechBridge Tools", href: "/techbridge", gradient: "from-amber-400 to-orange-500", glow: "shadow-amber-500/30", desc: "Interactive learning hub" },
@@ -75,7 +77,7 @@ const plans = [
     gradient: "from-blue-600 to-blue-700", hoverGradient: "from-blue-500 to-blue-600",
     iconColor: "text-blue-600", borderColor: "border-blue-200", glowColor: "shadow-blue-500/20",
     bgGlow: "rgba(59,130,246,0.08)", priceColor: "text-blue-600",
-    popular: false, bestValue: false,
+    sessions: 1, popular: false, bestValue: false,
   },
   {
     id: "skill", name: "Skill-Builder Course", price: 97, tagline: "Build lasting confidence across multiple tech topics.",
@@ -86,7 +88,7 @@ const plans = [
     gradient: "from-violet-600 to-indigo-700", hoverGradient: "from-violet-500 to-indigo-600",
     iconColor: "text-violet-600", borderColor: "border-violet-300", glowColor: "shadow-violet-500/25",
     bgGlow: "rgba(139,92,246,0.08)", priceColor: "text-violet-600",
-    popular: true, bestValue: false,
+    sessions: 3, popular: true, bestValue: false,
   },
   {
     id: "family", name: "Family Learning Plan", price: 147, tagline: "Learning for the whole household, across all devices.",
@@ -97,21 +99,8 @@ const plans = [
     gradient: "from-emerald-600 to-teal-700", hoverGradient: "from-emerald-500 to-teal-600",
     iconColor: "text-emerald-600", borderColor: "border-emerald-200", glowColor: "shadow-emerald-500/20",
     bgGlow: "rgba(16,185,129,0.08)", priceColor: "text-emerald-600",
-    popular: false, bestValue: true,
+    sessions: 5, popular: false, bestValue: true,
   },
-];
-
-const comparison = [
-  { feature: "47 Free Interactive Tools", free: true, single: true, skill: true, family: true },
-  { feature: "TechBridge Learning Hub", free: true, single: true, skill: true, family: true },
-  { feature: "Downloadable PDF Guides", free: true, single: true, skill: true, family: true },
-  { feature: "Live 1-on-1 Video Sessions", free: false, single: "1 session", skill: "3 sessions", family: "5 sessions" },
-  { feature: "Lesson Summary PDF", free: false, single: true, skill: true, family: true },
-  { feature: "Custom Learning Roadmap", free: false, single: false, skill: true, family: true },
-  { feature: "Multiple Devices Covered", free: false, single: false, skill: true, family: true },
-  { feature: "Family Member Access", free: false, single: false, skill: false, family: true },
-  { feature: "Priority Email Support", free: false, single: false, skill: true, family: true },
-  { feature: "Progress Tracking", free: false, single: false, skill: true, family: true },
 ];
 
 const testimonials = [
@@ -121,14 +110,166 @@ const testimonials = [
 ];
 
 /* ═══════════════════════════════════════════════════════════════
+   CONTACT FORM MODAL
+   ═══════════════════════════════════════════════════════════════ */
+function ContactModal({ isOpen, onClose, selectedPlan }: { isOpen: boolean; onClose: () => void; selectedPlan: string }) {
+  const [form, setForm] = useState({ name: "", email: "", phone: "", countryCode: "+1", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [error, setError] = useState("");
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const isValid = form.name.trim() !== "" && validateEmail(form.email).valid && validatePhone(form.phone).valid;
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      setForm((f) => ({ ...f, message: selectedPlan ? `I'm interested in the ${selectedPlan} plan.` : "" }));
+      setStatus("idle");
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen, selectedPlan]);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isValid) return;
+    setStatus("loading");
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name, email: form.email,
+          phone: `${form.countryCode} ${form.phone}`,
+          issue: form.message || `Interested in ${selectedPlan}`,
+          topic: selectedPlan || "Pricing Enquiry",
+          contactMethod: "Email",
+        }),
+      });
+      if (!res.ok) throw new Error("Network error");
+      setStatus("success");
+    } catch {
+      setError("Something went wrong. Please email support@setwisedigital.com");
+      setStatus("error");
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+
+          {/* Modal */}
+          <motion.div ref={modalRef}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 30 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="relative bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto z-10"
+            style={{ boxShadow: "0 30px 80px rgba(0,0,0,0.25)" }}>
+
+            {/* Gradient top bar */}
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-violet-500 to-emerald-500 rounded-t-3xl" />
+
+            {/* Close button */}
+            <button onClick={onClose} className="absolute top-5 right-5 w-10 h-10 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center transition-colors z-10" aria-label="Close">
+              <X size={20} className="text-zinc-500" />
+            </button>
+
+            <div className="p-8 sm:p-10">
+              <AnimatePresence mode="wait">
+                {status === "success" ? (
+                  <motion.div key="success" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-8">
+                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
+                      className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/30">
+                      <CheckCircle2 size={40} className="text-white" />
+                    </motion.div>
+                    <h3 className="text-2xl font-black text-zinc-900 mb-3">Message Sent!</h3>
+                    <p className="text-zinc-500 font-medium text-lg mb-1">Thanks <span className="font-bold text-zinc-900">{form.name}</span>!</p>
+                    <p className="text-zinc-400 font-medium">We&apos;ll reply to <span className="font-bold text-zinc-700">{form.email}</span> within 24 hours.</p>
+                    <button onClick={onClose} className="mt-8 px-8 py-4 bg-zinc-100 text-zinc-700 rounded-2xl font-bold hover:bg-zinc-200 transition-colors min-h-[52px]">Close</button>
+                  </motion.div>
+                ) : (
+                  <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                    {selectedPlan && (
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-sm font-bold mb-5">
+                        <Sparkles size={14} /> {selectedPlan}
+                      </div>
+                    )}
+                    <h3 className="text-2xl sm:text-3xl font-black tracking-tight mb-2 text-zinc-900">
+                      Get Started <span className="text-blue-600">Today.</span>
+                    </h3>
+                    <p className="text-zinc-500 font-medium mb-7 text-sm">Fill in your details and we&apos;ll get back within 24 hours to book your session.</p>
+
+                    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                      <div className="space-y-1.5">
+                        <label className="text-sm font-bold text-zinc-600 ml-1 block">Full Name *</label>
+                        <input type="text" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} placeholder="John Doe" required autoComplete="name"
+                          className="w-full px-5 py-4 bg-zinc-50 border-2 border-transparent rounded-xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium text-lg min-h-[54px]" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-sm font-bold text-zinc-600 ml-1 block">Email *</label>
+                        <EmailInput value={form.email} onChange={(val) => setForm((f) => ({ ...f, email: val }))} theme="light" placeholder="john@example.com" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-sm font-bold text-zinc-600 ml-1 block">Phone *</label>
+                        <PhoneInput value={form.phone} countryCode={form.countryCode} onChange={(val, cc) => setForm((f) => ({ ...f, phone: val, countryCode: cc }))} theme="light" placeholder="555 000 0000" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-sm font-bold text-zinc-600 ml-1 block">Message</label>
+                        <textarea value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} rows={2} placeholder="Any details..."
+                          className="w-full px-5 py-3 bg-zinc-50 border-2 border-transparent rounded-xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium text-base resize-none" />
+                      </div>
+                      {status === "error" && (
+                        <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-100 rounded-xl">
+                          <AlertCircle size={20} className="text-red-500 shrink-0 mt-0.5" />
+                          <p className="text-red-600 font-medium text-base">{error}</p>
+                        </div>
+                      )}
+                      <button type="submit" disabled={!isValid || status === "loading"}
+                        className={`shine-effect w-full py-5 rounded-2xl font-bold text-xl flex items-center justify-center gap-3 transition-all active:scale-[0.98] min-h-[60px] ${
+                          isValid && status !== "loading"
+                            ? "bg-gradient-to-r from-blue-600 to-violet-600 text-white hover:from-blue-500 hover:to-violet-500 shadow-lg shadow-blue-600/25"
+                            : "bg-zinc-200 text-zinc-400 cursor-not-allowed"
+                        }`}>
+                        {status === "loading" ? <><Loader2 size={24} className="animate-spin" />Sending...</> : <><Send size={22} />Submit & Book Session</>}
+                      </button>
+                      <div className="flex items-center justify-center gap-2 text-zinc-400 font-bold text-xs">
+                        <ShieldCheck size={14} className="text-green-500" /> Secure & never shared
+                      </div>
+                    </form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════════════ */
 export default function PricingPage() {
-  const router = useRouter();
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [hoveredPlan, setHoveredPlan] = useState<string | null>(null);
-  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("");
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
@@ -140,18 +281,20 @@ export default function PricingPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const navigateToContact = (planName?: string) => {
-    router.push(`/contact${planName ? `?plan=${encodeURIComponent(planName)}` : ""}`);
-  };
+  const openModal = useCallback((plan: string = "") => {
+    setSelectedPlan(plan);
+    setModalOpen(true);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-zinc-900 font-sans selection:bg-blue-100 selection:text-blue-900">
       <Navbar />
       <ScrollToTop />
 
-      {/* ════════════════════════════════════════════════════════════
-          HERO HEADER
-          ════════════════════════════════════════════════════════════ */}
+      {/* CONTACT FORM POPUP */}
+      <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} selectedPlan={selectedPlan} />
+
+      {/* ════════ HERO ════════ */}
       <header ref={heroRef} className="relative overflow-hidden bg-zinc-950 min-h-[75vh] lg:min-h-[82vh] flex items-center">
         <AuroraBackground />
         <ParticleField />
@@ -183,11 +326,11 @@ export default function PricingPage() {
               <strong className="text-white">No contracts.</strong> Pay only for what you need.
             </motion.p>
 
-            {/* Price anchors — clickable */}
+            {/* Price anchors */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7 }}
               className="mt-12 flex flex-wrap justify-center gap-4 sm:gap-6">
-              {plans.map((plan, i) => (
-                <motion.button key={plan.id} onClick={() => document.getElementById("plans")?.scrollIntoView({ behavior: "smooth" })}
+              {plans.map((plan) => (
+                <motion.button key={plan.id} onClick={() => openModal(plan.name)}
                   whileHover={{ scale: 1.08, y: -4 }} whileTap={{ scale: 0.95 }}
                   className="relative text-center px-6 py-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-colors cursor-pointer group min-w-[130px]">
                   {plan.badge && (
@@ -195,29 +338,18 @@ export default function PricingPage() {
                       {plan.badge}
                     </span>
                   )}
-                  <div className={`text-3xl sm:text-4xl font-black ${plan.priceColor.replace("text-", "text-").replace("-600", "-400")} group-hover:scale-105 transition-transform`}>
-                    ${plan.price}
-                  </div>
+                  <div className={`text-3xl sm:text-4xl font-black ${plan.priceColor.replace("-600", "-400")}`}>${plan.price}</div>
                   <div className="text-sm text-zinc-500 font-bold mt-1">{plan.name}</div>
                 </motion.button>
               ))}
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}
-              className="mt-10 flex items-center justify-center gap-2 text-zinc-500 text-sm font-medium">
-              <MousePointerClick size={16} className="text-blue-400" />
-              <span>Click any plan to learn more</span>
             </motion.div>
           </div>
         </motion.div>
       </header>
 
-      {/* ════════════════════════════════════════════════════════════
-          MAIN CONTENT
-          ════════════════════════════════════════════════════════════ */}
+      {/* ════════ MAIN ════════ */}
       <main className="pb-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="pt-8 pb-4">
             <ol className="flex items-center gap-2 text-sm text-zinc-400 font-medium">
               <li><Link href="/" className="hover:text-blue-600 transition-colors">Home</Link></li>
@@ -226,14 +358,11 @@ export default function PricingPage() {
             </ol>
           </nav>
 
-          {/* ════════ FREE TOOLS — COLORFUL, ANIMATED, CLICKABLE ════════ */}
+          {/* ════════ FREE TOOLS — COLORFUL CLICKABLE ════════ */}
           <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="mt-8 mb-20 bg-zinc-900 text-white rounded-3xl p-8 sm:p-12 lg:p-16 relative overflow-hidden">
             <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }} transition={{ duration: 20, repeat: Infinity }}
               className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-600/15 rounded-full blur-[100px]" aria-hidden="true" />
-            <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 15, repeat: Infinity, delay: 5 }}
-              className="absolute bottom-[-15%] left-[-5%] w-[40%] h-[40%] bg-violet-600/10 rounded-full blur-[80px]" aria-hidden="true" />
-
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-400 font-bold text-sm mb-6">
@@ -242,37 +371,20 @@ export default function PricingPage() {
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-6 leading-tight">
                   Start With <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">47 Free</span> Interactive Tools
                 </h2>
-                <p className="text-lg text-zinc-400 font-medium leading-relaxed mb-8">
-                  No sign-up. No email. No credit card. Explore printer troubleshooters, GPS guides, smart home planners, and more — completely free, forever.
-                </p>
+                <p className="text-lg text-zinc-400 font-medium leading-relaxed mb-8">No sign-up. No email. No credit card. Explore printer troubleshooters, GPS guides, smart home planners — completely free, forever.</p>
                 <Link href="/tools" className="shine-effect inline-flex items-center gap-3 px-7 py-4 bg-white text-zinc-900 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-all hover:scale-[1.03] active:scale-[0.98] min-h-[56px]">
-                  <Sparkles size={20} className="text-blue-600" />
-                  Explore Free Tools
-                  <ArrowRight size={18} />
+                  <Sparkles size={20} className="text-blue-600" /> Explore Free Tools <ArrowRight size={18} />
                 </Link>
               </div>
-
-              {/* ── Colorful animated clickable cards ── */}
               <div className="grid grid-cols-2 gap-4">
                 {freeToolCards.map((card, i) => (
                   <Link key={i} href={card.href}>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      whileHover={{ scale: 1.08, y: -6, rotate: 1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`relative flex flex-col gap-3 p-6 rounded-2xl border border-white/10 cursor-pointer overflow-hidden group min-h-[140px]`}
-                      style={{ background: "rgba(255,255,255,0.05)" }}
-                    >
-                      {/* Animated color glow on hover */}
-                      <motion.div
-                        className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-15 transition-opacity duration-500`}
-                      />
-                      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center text-white shadow-lg ${card.glow} group-hover:scale-110 transition-transform duration-300`}>
-                        {card.icon}
-                      </div>
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }} whileHover={{ scale: 1.08, y: -6, rotate: 1 }} whileTap={{ scale: 0.95 }}
+                      className="relative flex flex-col gap-3 p-6 rounded-2xl border border-white/10 cursor-pointer overflow-hidden group min-h-[140px]"
+                      style={{ background: "rgba(255,255,255,0.05)" }}>
+                      <motion.div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-15 transition-opacity duration-500`} />
+                      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center text-white shadow-lg ${card.glow} group-hover:scale-110 transition-transform duration-300`}>{card.icon}</div>
                       <div>
                         <span className="font-bold text-base text-white block">{card.text}</span>
                         <span className="text-xs text-zinc-500 font-medium">{card.desc}</span>
@@ -285,106 +397,56 @@ export default function PricingPage() {
             </div>
           </motion.section>
 
-          {/* ════════ PRICING CARDS — FULLY CLICKABLE ════════ */}
+          {/* ════════ PRICING CARDS — CLICK OPENS POPUP ════════ */}
           <section id="plans" className="scroll-mt-24" aria-labelledby="plans-heading">
             <div className="text-center mb-14">
               <h2 id="plans-heading" className="text-3xl sm:text-4xl font-extrabold text-zinc-900 mb-4">Choose Your Learning Plan</h2>
-              <p className="text-lg text-zinc-500 font-medium max-w-2xl mx-auto">Every plan includes live video sessions with a patient, real educator. No rushing, no jargon, no pressure.</p>
-              <p className="text-sm text-blue-600 font-bold mt-3 flex items-center justify-center gap-2">
-                <MousePointerClick size={16} />
-                Click any card below to get started
-              </p>
+              <p className="text-lg text-zinc-500 font-medium max-w-2xl mx-auto">Every plan includes live video sessions with a patient, real educator. Click any plan to get started.</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
               {plans.map((plan, i) => (
-                <motion.div key={plan.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.12, duration: 0.5 }}
-                  className="relative"
-                >
-                  {/* Badge */}
+                <motion.div key={plan.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                  transition={{ delay: i * 0.12, duration: 0.5 }} className="relative">
                   {plan.badge && (
                     <div className={`absolute -top-4 left-1/2 -translate-x-1/2 z-20 px-5 py-1.5 rounded-full font-bold text-sm text-white shadow-lg ${
                       plan.popular ? "bg-gradient-to-r from-violet-600 to-indigo-600 shadow-violet-500/30" : "bg-gradient-to-r from-emerald-500 to-teal-500 shadow-emerald-500/30"
-                    }`}>
-                      <span className="flex items-center gap-1.5">
-                        {plan.popular ? <Star size={14} /> : <Award size={14} />}
-                        {plan.badge}
-                      </span>
-                    </div>
+                    }`}><span className="flex items-center gap-1.5">{plan.popular ? <Star size={14} /> : <Award size={14} />}{plan.badge}</span></div>
                   )}
 
-                  {/* ENTIRE CARD IS CLICKABLE */}
-                  <motion.div
-                    onClick={() => navigateToContact(plan.name)}
-                    onMouseEnter={() => setHoveredPlan(plan.id)}
-                    onMouseLeave={() => setHoveredPlan(null)}
-                    whileHover={{ y: -12, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                  <motion.div onClick={() => openModal(plan.name)}
+                    onMouseEnter={() => setHoveredPlan(plan.id)} onMouseLeave={() => setHoveredPlan(null)}
+                    whileHover={{ y: -12, scale: 1.02 }} whileTap={{ scale: 0.98 }}
                     className={`h-full bg-white rounded-3xl p-8 sm:p-10 flex flex-col cursor-pointer transition-all duration-400 relative overflow-hidden group ${
-                      plan.popular
-                        ? `border-2 ${plan.borderColor} ring-1 ring-violet-200/50`
-                        : "border-2 border-zinc-200 hover:border-blue-200"
+                      plan.popular ? `border-2 ${plan.borderColor} ring-1 ring-violet-200/50` : "border-2 border-zinc-200 hover:border-blue-200"
                     }`}
-                    style={{
-                      boxShadow: hoveredPlan === plan.id
-                        ? `0 25px 60px ${plan.bgGlow.replace("0.08", "0.2")}, 0 8px 24px rgba(0,0,0,0.08)`
-                        : plan.popular
-                          ? "0 20px 60px rgba(139,92,246,0.12), 0 8px 24px rgba(0,0,0,0.06)"
-                          : "0 4px 16px rgba(0,0,0,0.04)",
-                    }}
-                  >
-                    {/* Hover glow background */}
+                    style={{ boxShadow: hoveredPlan === plan.id ? `0 25px 60px ${plan.bgGlow.replace("0.08", "0.2")}, 0 8px 24px rgba(0,0,0,0.08)` : plan.popular ? "0 20px 60px rgba(139,92,246,0.12), 0 8px 24px rgba(0,0,0,0.06)" : "0 4px 16px rgba(0,0,0,0.04)" }}>
                     <div className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500 rounded-3xl`} />
-
-                    {/* Floating "Click to book" indicator */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: hoveredPlan === plan.id ? 1 : 0, y: hoveredPlan === plan.id ? 0 : 5 }}
-                      className="absolute top-4 right-4 flex items-center gap-1.5 text-xs font-bold text-blue-500 bg-blue-50 px-3 py-1.5 rounded-full"
-                    >
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: hoveredPlan === plan.id ? 1 : 0 }}
+                      className="absolute top-4 right-4 flex items-center gap-1.5 text-xs font-bold text-blue-500 bg-blue-50 px-3 py-1.5 rounded-full z-10">
                       <MousePointerClick size={12} /> Click to book
                     </motion.div>
 
-                    {/* Plan header */}
                     <div className="mb-6 relative z-10">
                       <h3 className="text-2xl font-black tracking-tight text-zinc-900 mb-2">{plan.name}</h3>
                       <p className="text-zinc-500 font-medium text-base leading-relaxed">{plan.tagline}</p>
                     </div>
-
-                    {/* Price — BIG and clear */}
                     <div className="mb-6 flex items-baseline gap-2 relative z-10">
-                      <motion.span
-                        className={`text-5xl sm:text-6xl font-black tracking-tight ${plan.priceColor}`}
-                        animate={hoveredPlan === plan.id ? { scale: [1, 1.05, 1] } : {}}
-                        transition={{ duration: 0.4 }}
-                      >
+                      <motion.span className={`text-5xl sm:text-6xl font-black tracking-tight ${plan.priceColor}`}
+                        animate={hoveredPlan === plan.id ? { scale: [1, 1.05, 1] } : {}} transition={{ duration: 0.4 }}>
                         ${plan.price}
                       </motion.span>
                       <span className="text-zinc-400 font-bold text-base">one-time</span>
                     </div>
-
-                    {/* CTA Button */}
                     <div className={`shine-effect w-full py-5 rounded-2xl font-bold text-xl flex items-center justify-center gap-3 transition-all min-h-[64px] mb-8 text-white bg-gradient-to-r ${
                       hoveredPlan === plan.id ? plan.hoverGradient : plan.gradient
                     } shadow-lg ${plan.glowColor} group-hover:shadow-xl relative z-10`}>
-                      {plan.ctaIcon}
-                      {plan.cta}
-                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                      {plan.ctaIcon} {plan.cta} <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </div>
-
-                    {/* Features */}
                     <div className="space-y-4 flex-grow relative z-10">
                       <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">What&apos;s included:</p>
                       {plan.features.map((feat, j) => (
-                        <motion.div key={j} className="flex items-start gap-3"
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.3 + j * 0.05 }}>
+                        <motion.div key={j} className="flex items-start gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 + j * 0.05 }}>
                           <CheckCircle2 size={20} className={`${plan.iconColor} shrink-0 mt-0.5`} />
                           <span className="font-medium text-base text-zinc-700 leading-snug">{feat}</span>
                         </motion.div>
@@ -401,7 +463,6 @@ export default function PricingPage() {
               ))}
             </div>
 
-            {/* Reassurance */}
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
               className="mt-10 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-sm text-zinc-500 font-bold">
               {[
@@ -415,14 +476,94 @@ export default function PricingPage() {
             </motion.div>
           </section>
 
+          {/* ════════ VISUAL COMPARISON — Cards, not a table ════════ */}
+          <section className="mt-28" aria-labelledby="compare-heading">
+            <h2 id="compare-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-zinc-900">See What Each Plan Includes</h2>
+            <p className="text-center text-zinc-500 font-medium mb-14 max-w-xl mx-auto">A quick visual guide to help you pick the right plan. More filled circles = more included.</p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {plans.map((plan, i) => {
+                const totalFeatures = 10;
+                const included = plan.id === "single" ? 5 : plan.id === "skill" ? 8 : 10;
+                const pct = Math.round((included / totalFeatures) * 100);
+
+                return (
+                  <motion.div key={plan.id} initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    onClick={() => openModal(plan.name)}
+                    className="bg-white rounded-3xl p-8 border-2 border-zinc-100 hover:border-blue-200 shadow-sm hover:shadow-xl transition-all cursor-pointer group relative overflow-hidden">
+
+                    {plan.badge && (
+                      <span className={`absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-full text-white ${plan.popular ? "bg-violet-500" : "bg-emerald-500"}`}>{plan.badge}</span>
+                    )}
+
+                    <h3 className="text-xl font-black text-zinc-900 mb-1">{plan.name}</h3>
+                    <div className={`text-3xl font-black ${plan.priceColor} mb-4`}>${plan.price}</div>
+
+                    {/* Visual bar */}
+                    <div className="mb-6">
+                      <div className="flex justify-between text-xs font-bold text-zinc-400 mb-2">
+                        <span>Features included</span>
+                        <span>{included}/{totalFeatures}</span>
+                      </div>
+                      <div className="w-full h-3 bg-zinc-100 rounded-full overflow-hidden">
+                        <motion.div
+                          className={`h-full rounded-full bg-gradient-to-r ${plan.gradient}`}
+                          initial={{ width: "0%" }}
+                          whileInView={{ width: `${pct}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1, delay: 0.3 + i * 0.15, ease: "easeOut" }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Key highlights */}
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center gap-2.5">
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${plan.gradient} flex items-center justify-center text-white text-sm font-black`}>{plan.sessions}</div>
+                        <span className="font-bold text-zinc-700">Live Video Session{plan.sessions > 1 ? "s" : ""}</span>
+                      </div>
+                      {plan.id === "skill" || plan.id === "family" ? (
+                        <div className="flex items-center gap-2.5">
+                          <CheckCircle2 size={20} className="text-green-500" />
+                          <span className="font-medium text-zinc-600">Custom learning roadmap</span>
+                        </div>
+                      ) : null}
+                      {plan.id === "family" ? (
+                        <div className="flex items-center gap-2.5">
+                          <CheckCircle2 size={20} className="text-green-500" />
+                          <span className="font-medium text-zinc-600">Whole family coverage</span>
+                        </div>
+                      ) : null}
+                      <div className="flex items-center gap-2.5">
+                        <CheckCircle2 size={20} className="text-green-500" />
+                        <span className="font-medium text-zinc-600">Lesson summary PDF{plan.sessions > 1 ? "s" : ""}</span>
+                      </div>
+                      {(plan.id === "skill" || plan.id === "family") && (
+                        <div className="flex items-center gap-2.5">
+                          <CheckCircle2 size={20} className="text-green-500" />
+                          <span className="font-medium text-zinc-600">Priority support</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className={`w-full py-3.5 rounded-xl font-bold text-base flex items-center justify-center gap-2 text-white bg-gradient-to-r ${plan.gradient} group-hover:shadow-lg transition-all min-h-[48px]`}>
+                      Choose {plan.name} <ArrowRight size={16} />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </section>
+
           {/* ════════ WHY WE PRICE THIS WAY ════════ */}
-          <section className="mt-28" aria-labelledby="why-heading">
-            <h2 id="why-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">Why Our Pricing Works for You</h2>
+          <section className="mt-28">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">Why Our Pricing Works for You</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {[
-                { icon: <CircleDollarSign size={32} className="text-blue-600" />, title: "Pay Once, Learn Forever", desc: "No monthly bills. Buy a session, keep your summary PDF forever. Simple and straightforward." },
-                { icon: <HeartHandshake size={32} className="text-violet-600" />, title: "Patient & Personal", desc: "Every session is 1-on-1 with a real educator. No group classes, no recorded videos. Just patient, live help." },
-                { icon: <Shield size={32} className="text-emerald-600" />, title: "Honest & Transparent", desc: "The price you see is the price you pay. No upsells, no hidden upgrades, no subscription tricks." },
+                { icon: <CircleDollarSign size={32} className="text-blue-600" />, title: "Pay Once, Learn Forever", desc: "No monthly bills. Buy a session, keep your summary PDF forever." },
+                { icon: <HeartHandshake size={32} className="text-violet-600" />, title: "Patient & Personal", desc: "Every session is 1-on-1 with a real educator. Just patient, live help." },
+                { icon: <Shield size={32} className="text-emerald-600" />, title: "Honest & Transparent", desc: "The price you see is the price you pay. No hidden tricks." },
               ].map((item, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                   className="text-center p-8 rounded-2xl bg-white border border-zinc-100 shadow-sm hover:shadow-lg transition-all group">
@@ -434,98 +575,19 @@ export default function PricingPage() {
             </div>
           </section>
 
-          {/* ════════ ANIMATED COMPARISON TABLE ════════ */}
-          <section className="mt-28" aria-labelledby="compare-heading">
-            <h2 id="compare-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-zinc-900">Compare All Plans at a Glance</h2>
-            <p className="text-center text-zinc-500 font-medium mb-10">Hover over any row to highlight it. Click a column header to choose that plan.</p>
-
-            <div className="overflow-x-auto bg-white rounded-3xl border border-zinc-200 shadow-xl">
-              <table className="w-full min-w-[700px]">
-                <thead>
-                  <tr className="border-b-2 border-zinc-100">
-                    <th className="py-6 px-6 text-left font-bold text-zinc-400 uppercase tracking-widest text-xs w-[28%]">Feature</th>
-                    <th className="py-6 px-4 text-center cursor-pointer group" onClick={() => router.push("/tools")}>
-                      <div className="text-emerald-600 font-bold group-hover:scale-105 transition-transform">Free Tools</div>
-                      <div className="text-zinc-400 text-xs font-medium mt-1">$0 forever</div>
-                    </th>
-                    <th className="py-6 px-4 text-center cursor-pointer group" onClick={() => navigateToContact("Single Lesson")}>
-                      <div className="text-blue-600 font-bold group-hover:scale-105 transition-transform">Single Lesson</div>
-                      <div className="text-zinc-400 text-xs font-medium mt-1">$49</div>
-                    </th>
-                    <th className="py-6 px-4 text-center cursor-pointer group relative" onClick={() => navigateToContact("Skill-Builder Course")}>
-                      <div className="absolute -top-0.5 left-2 right-2 h-1.5 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-t-lg" />
-                      <div className="text-violet-600 font-bold group-hover:scale-105 transition-transform">Skill-Builder</div>
-                      <div className="text-zinc-400 text-xs font-medium mt-1">$97 ⭐</div>
-                    </th>
-                    <th className="py-6 px-4 text-center cursor-pointer group" onClick={() => navigateToContact("Family Learning Plan")}>
-                      <div className="text-emerald-600 font-bold group-hover:scale-105 transition-transform">Family Plan</div>
-                      <div className="text-zinc-400 text-xs font-medium mt-1">$147</div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {comparison.map((row, i) => (
-                    <motion.tr key={i}
-                      onMouseEnter={() => setHoveredRow(i)}
-                      onMouseLeave={() => setHoveredRow(null)}
-                      initial={{ opacity: 0, x: -15 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.04 }}
-                      className={`border-b border-zinc-50 transition-colors duration-200 ${
-                        hoveredRow === i ? "bg-blue-50/60" : "hover:bg-zinc-50/50"
-                      }`}
-                    >
-                      <td className="py-5 px-6 font-bold text-zinc-700 text-base">{row.feature}</td>
-                      {(["free", "single", "skill", "family"] as const).map((col) => {
-                        const val = row[col];
-                        return (
-                          <td key={col} className="py-5 px-4 text-center">
-                            {typeof val === "boolean" ? (
-                              val ? (
-                                <motion.div animate={hoveredRow === i ? { scale: [1, 1.2, 1] } : {}} transition={{ duration: 0.3 }}>
-                                  <CheckCircle2 size={24} className="mx-auto text-green-500" />
-                                </motion.div>
-                              ) : (
-                                <XCircle size={24} className="mx-auto text-zinc-200" />
-                              )
-                            ) : (
-                              <span className={`font-bold text-sm ${hoveredRow === i ? "text-blue-600" : "text-zinc-600"} transition-colors`}>{val}</span>
-                            )}
-                          </td>
-                        );
-                      })}
-                    </motion.tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <div className="mt-8 text-center">
-              <button onClick={() => navigateToContact("Skill-Builder Course")}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-2xl font-bold text-lg hover:from-violet-500 hover:to-indigo-500 transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-violet-500/20 min-h-[56px]">
-                Get Started with Skill-Builder <ArrowRight size={20} />
-              </button>
-            </div>
-          </section>
-
           {/* ════════ TESTIMONIALS ════════ */}
-          <section className="mt-28" aria-labelledby="reviews-heading">
-            <h2 id="reviews-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">What Our Learners Say</h2>
+          <section className="mt-28">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">What Our Learners Say</h2>
             <div className="max-w-3xl mx-auto">
               <AnimatePresence mode="wait">
-                <motion.div key={activeTestimonial}
-                  initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }}
-                  transition={{ duration: 0.4 }}
+                <motion.div key={activeTestimonial} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.4 }}
                   className="bg-white rounded-3xl p-8 sm:p-12 border border-zinc-200 shadow-lg text-center">
                   <div className="flex items-center justify-center gap-1 mb-6">
                     {Array.from({ length: testimonials[activeTestimonial].rating }).map((_, j) => (
                       <Star key={j} size={24} className="text-amber-400 fill-amber-400" />
                     ))}
                   </div>
-                  <p className="text-xl sm:text-2xl text-zinc-700 font-medium leading-relaxed italic mb-8">
-                    &ldquo;{testimonials[activeTestimonial].text}&rdquo;
-                  </p>
+                  <p className="text-xl sm:text-2xl text-zinc-700 font-medium leading-relaxed italic mb-8">&ldquo;{testimonials[activeTestimonial].text}&rdquo;</p>
                   <div className="font-bold text-lg text-zinc-900">{testimonials[activeTestimonial].name}</div>
                   <div className="text-zinc-400 font-medium text-sm">{testimonials[activeTestimonial].location}</div>
                 </motion.div>
@@ -533,8 +595,7 @@ export default function PricingPage() {
               <div className="flex items-center justify-center gap-3 mt-6">
                 {testimonials.map((_, i) => (
                   <button key={i} onClick={() => setActiveTestimonial(i)}
-                    className={`w-3 h-3 rounded-full transition-all ${i === activeTestimonial ? "bg-blue-600 scale-125" : "bg-zinc-300 hover:bg-zinc-400"}`}
-                    aria-label={`View testimonial ${i + 1}`} />
+                    className={`w-3 h-3 rounded-full transition-all ${i === activeTestimonial ? "bg-blue-600 scale-125" : "bg-zinc-300 hover:bg-zinc-400"}`} aria-label={`Testimonial ${i + 1}`} />
                 ))}
               </div>
             </div>
@@ -542,17 +603,12 @@ export default function PricingPage() {
 
           {/* ════════ GUARANTEE ════════ */}
           <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="mt-28 bg-gradient-to-br from-blue-50 to-violet-50 rounded-3xl p-8 sm:p-12 lg:p-16 border border-blue-100 text-center relative overflow-hidden">
-            <div className="relative z-10 max-w-2xl mx-auto">
-              <div className="w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center mx-auto mb-8">
-                <ShieldCheck size={40} className="text-blue-600" />
-              </div>
+            className="mt-28 bg-gradient-to-br from-blue-50 to-violet-50 rounded-3xl p-8 sm:p-12 lg:p-16 border border-blue-100 text-center">
+            <div className="max-w-2xl mx-auto">
+              <div className="w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center mx-auto mb-8"><ShieldCheck size={40} className="text-blue-600" /></div>
               <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-5 text-zinc-900">100% Satisfaction Guarantee</h2>
-              <p className="text-lg text-zinc-600 font-medium leading-relaxed mb-8">
-                If your first lesson doesn&apos;t meet expectations, contact us within 24 hours for a full refund. No questions asked.
-              </p>
-              <button onClick={() => navigateToContact()}
-                className="inline-flex items-center gap-3 px-8 py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-blue-500/20 min-h-[60px]">
+              <p className="text-lg text-zinc-600 font-medium leading-relaxed mb-8">If your first lesson doesn&apos;t meet expectations, contact us within 24 hours for a full refund. No questions asked.</p>
+              <button onClick={() => openModal()} className="inline-flex items-center gap-3 px-8 py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-blue-500/20 min-h-[60px]">
                 <PhoneCall size={22} /> Book Your First Session
               </button>
             </div>
@@ -563,22 +619,17 @@ export default function PricingPage() {
             <h2 id="faq-heading" className="text-3xl sm:text-4xl font-extrabold text-center mb-14 text-zinc-900">Pricing Questions Answered</h2>
             <div className="space-y-4">
               {[
-                { q: "Are there any monthly fees or subscriptions?", a: "Absolutely not. Zero subscriptions, zero recurring fees, zero hidden charges. You pay once per plan, and that's it. Our 47 free tools are always free." },
-                { q: "What's the difference between the plans?", a: "Single Lesson ($49) covers one topic in one session. Skill-Builder ($97) gives 3 sessions with a custom roadmap. Family Plan ($147) gives 5 sessions for the whole household." },
-                { q: "Can I upgrade later?", a: "Yes! Start with a Single Lesson and if you want to continue, we'll credit the difference toward a Skill-Builder or Family Plan." },
-                { q: "What if I'm not satisfied?", a: "We offer a 100% satisfaction guarantee. If your first session doesn't meet expectations, contact us within 24 hours for a full refund." },
-                { q: "How do sessions work?", a: "Sessions are live 1-on-1 video calls with an educator. You pick the topic, we guide you step by step. Afterward, you get a PDF summary." },
-                { q: "Do you serve the US and Canada?", a: "Yes! We serve adults 45+ across both countries. All sessions are via video call." },
-                { q: "Are the 47 free tools really free?", a: "100% free. No account, no email, no credit card. Use them right now at setwisedigital.com/tools." },
+                { q: "Are there any monthly fees or subscriptions?", a: "Absolutely not. Zero subscriptions, zero recurring fees. You pay once per plan. Our 47 free tools are always free." },
+                { q: "What's the difference between the plans?", a: "Single Lesson ($49) covers one topic. Skill-Builder ($97) gives 3 sessions with a roadmap. Family Plan ($147) gives 5 sessions for the whole household." },
+                { q: "Can I upgrade later?", a: "Yes! Start with a Single Lesson and we'll credit the difference toward Skill-Builder or Family Plan." },
+                { q: "What if I'm not satisfied?", a: "100% satisfaction guarantee. Contact us within 24 hours of your first session for a full refund." },
+                { q: "How do sessions work?", a: "Live 1-on-1 video calls with an educator. You pick the topic, we guide you. Afterward, you get a PDF summary." },
+                { q: "Do you serve the US and Canada?", a: "Yes! Adults 45+ across both countries. All sessions are via video call." },
+                { q: "Are the 47 free tools really free?", a: "100% free. No account, no email, no credit card needed." },
               ].map((faq, i) => (
-                <motion.div key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
+                <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
                   className={`border rounded-2xl transition-all duration-300 ${activeFaq === i ? "border-blue-500 bg-blue-50/40 shadow-sm" : "border-zinc-200 hover:border-blue-200"}`}>
-                  <button onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-                    className="w-full px-7 py-6 text-left flex items-center justify-between gap-4 min-h-[72px]" aria-expanded={activeFaq === i}>
+                  <button onClick={() => setActiveFaq(activeFaq === i ? null : i)} className="w-full px-7 py-6 text-left flex items-center justify-between gap-4 min-h-[72px]" aria-expanded={activeFaq === i}>
                     <span className="text-lg font-bold text-zinc-800">{faq.q}</span>
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-all ${activeFaq === i ? "bg-blue-600 text-white rotate-180" : "bg-zinc-100 text-zinc-500"}`}>
                       <ChevronRight size={18} className="rotate-90" />
@@ -595,20 +646,18 @@ export default function PricingPage() {
           {/* ════════ FINAL CTA ════════ */}
           <section className="mt-28 text-center">
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-5 text-zinc-900">Ready to Get Started?</h2>
-            <p className="text-lg text-zinc-500 font-medium mb-10 max-w-xl mx-auto">Pick a plan or try our free tools first. No pressure, no rush.</p>
+            <p className="text-lg text-zinc-500 font-medium mb-10 max-w-xl mx-auto">Pick a plan or try our free tools first.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button onClick={() => navigateToContact()}
-                className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-blue-600/25 min-h-[60px]">
+              <button onClick={() => openModal()} className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-blue-600/25 min-h-[60px]">
                 <PhoneCall size={22} /> Book a Lesson
               </button>
-              <Link href="/tools"
-                className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] min-h-[60px]">
+              <Link href="/tools" className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 rounded-2xl font-bold text-lg transition-all hover:scale-[1.03] active:scale-[0.98] min-h-[60px]">
                 <Sparkles size={22} className="text-blue-600" /> Try Free Tools First
               </Link>
             </div>
           </section>
 
-          {/* ════════ LINKS ════════ */}
+          {/* Links */}
           <section className="mt-28" aria-label="Explore more">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
@@ -624,7 +673,6 @@ export default function PricingPage() {
             </div>
           </section>
 
-          {/* Disclaimer */}
           <div className="mt-24 text-center p-10 bg-blue-50 rounded-3xl border border-blue-100">
             <p className="text-base text-blue-900 font-medium italic leading-relaxed max-w-4xl mx-auto">
               Setwise Digital provides independent technology learning and educational guidance. We are not affiliated with, endorsed by, or a representative of any printer, GPS, camera, smart home, or technology manufacturer.
@@ -632,7 +680,6 @@ export default function PricingPage() {
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );
