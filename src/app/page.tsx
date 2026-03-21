@@ -123,16 +123,20 @@ export default function Home() {
 
       {/* ── HERO ────────────────────────────────────────────────────────── */}
       <header className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden text-white bg-zinc-950">
-        {/* Animated aurora background */}
+        {/* Animated aurora background — warm vibrant gradient */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <motion.div className="absolute w-[140%] h-[600px] -left-[20%] top-[5%] opacity-20"
-            style={{ background: "linear-gradient(135deg, rgba(59,130,246,0.35) 0%, rgba(139,92,246,0.25) 25%, rgba(236,72,153,0.15) 50%, rgba(34,211,238,0.25) 75%, rgba(59,130,246,0.35) 100%)", filter: "blur(80px)", borderRadius: "50%" }}
-            animate={{ x: [0, 80, -40, 60, 0], y: [0, -30, 20, -15, 0], scale: [1, 1.05, 0.98, 1.03, 1] }}
-            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }} />
-          <motion.div className="absolute w-[100%] h-[400px] left-[10%] top-[40%] opacity-15"
-            style={{ background: "linear-gradient(225deg, rgba(34,211,238,0.4) 0%, rgba(99,102,241,0.3) 40%, rgba(250,204,21,0.15) 100%)", filter: "blur(100px)", borderRadius: "40%" }}
-            animate={{ x: [0, -60, 30, -50, 0], y: [0, 25, -12, 18, 0] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 3 }} />
+          <motion.div className="absolute w-[150%] h-[700px] -left-[25%] top-[0%] opacity-30"
+            style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.4) 0%, rgba(236,72,153,0.3) 20%, rgba(251,146,60,0.25) 40%, rgba(34,211,238,0.3) 60%, rgba(139,92,246,0.35) 80%, rgba(59,130,246,0.3) 100%)", filter: "blur(80px)", borderRadius: "50%" }}
+            animate={{ x: [0, 100, -50, 70, 0], y: [0, -40, 25, -20, 0], scale: [1, 1.08, 0.96, 1.05, 1] }}
+            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }} />
+          <motion.div className="absolute w-[120%] h-[500px] left-[5%] top-[35%] opacity-20"
+            style={{ background: "linear-gradient(225deg, rgba(251,146,60,0.4) 0%, rgba(236,72,153,0.35) 30%, rgba(139,92,246,0.3) 60%, rgba(34,211,238,0.25) 100%)", filter: "blur(100px)", borderRadius: "40%" }}
+            animate={{ x: [0, -70, 40, -60, 0], y: [0, 30, -15, 20, 0] }}
+            transition={{ duration: 28, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
+          <motion.div className="absolute w-[80%] h-[300px] left-[40%] top-[60%] opacity-15"
+            style={{ background: "linear-gradient(45deg, rgba(52,211,153,0.35) 0%, rgba(59,130,246,0.3) 50%, rgba(168,85,247,0.25) 100%)", filter: "blur(90px)", borderRadius: "60%" }}
+            animate={{ x: [0, 50, -30, 40, 0], y: [0, -20, 15, -25, 0] }}
+            transition={{ duration: 26, repeat: Infinity, ease: "easeInOut", delay: 5 }} />
         </div>
 
         {/* Floating device symbols background */}
@@ -303,12 +307,12 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            {/* RIGHT — 3D Character with anticlockwise rotation */}
+            {/* RIGHT — 3D Character — LARGE & COLORFUL with anticlockwise rotation */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-              className="hidden lg:flex items-center justify-center w-[340px] xl:w-[400px] shrink-0"
+              className="hidden lg:flex items-center justify-center w-[420px] xl:w-[500px] shrink-0"
             >
               <div style={{ animation: "spinAntiClock 35s linear infinite", transformStyle: "preserve-3d", perspective: "900px" }}>
                 <svg viewBox="0 0 380 420" width="100%" height="auto" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -378,49 +382,49 @@ export default function Home() {
                   </path>
 
                   {/* CHAIR */}
-                  <path d="M255 315 L255 405 C255 410, 252 413, 248 413 L240 413" stroke="#52525b" strokeWidth="8" strokeLinecap="round" fill="none"/>
-                  <path d="M335 315 L335 405 C335 410, 338 413, 342 413 L350 413" stroke="#52525b" strokeWidth="8" strokeLinecap="round" fill="none"/>
-                  <rect x="245" y="278" width="100" height="42" rx="8" fill="#52525b"/>
-                  <rect x="249" y="282" width="92" height="34" rx="6" fill="#616168"/>
-                  <path d="M249 300 L341 300" stroke="#52525b" strokeWidth="1"/>
-                  <rect x="273" y="266" width="44" height="15" rx="5" fill="#616168" stroke="#52525b" strokeWidth=".8"/>
-                  <circle cx="233" cy="416" r="6" fill="#3f3f46"/>
-                  <circle cx="357" cy="416" r="6" fill="#3f3f46"/>
-                  <rect x="260" y="413" width="70" height="6" rx="3" fill="#3f3f46"/>
+                  <path d="M255 315 L255 405 C255 410, 252 413, 248 413 L240 413" stroke="#4f46e5" strokeWidth="8" strokeLinecap="round" fill="none"/>
+                  <path d="M335 315 L335 405 C335 410, 338 413, 342 413 L350 413" stroke="#4f46e5" strokeWidth="8" strokeLinecap="round" fill="none"/>
+                  <rect x="245" y="278" width="100" height="42" rx="8" fill="#4f46e5"/>
+                  <rect x="249" y="282" width="92" height="34" rx="6" fill="#6366f1"/>
+                  <path d="M249 300 L341 300" stroke="#4f46e5" strokeWidth="1"/>
+                  <rect x="273" y="266" width="44" height="15" rx="5" fill="#6366f1" stroke="#4f46e5" strokeWidth=".8"/>
+                  <circle cx="233" cy="416" r="6" fill="#4338ca"/>
+                  <circle cx="357" cy="416" r="6" fill="#4338ca"/>
+                  <rect x="260" y="413" width="70" height="6" rx="3" fill="#4338ca"/>
 
                   {/* CHARACTER BODY (breathing) */}
                   <g style={{ animation: "charBreathe 5s ease-in-out infinite", transformOrigin: "295px 275px" }}>
-                    <path d="M265 190 C265 168, 325 168, 325 190 L330 270 C330 288, 320 300, 308 303 L282 303 C270 300, 260 288, 260 270 Z" fill="#3a6494"/>
-                    <path d="M270 195 C270 178, 320 178, 320 195 L322 245 C322 250, 318 254, 312 254 L278 254 C272 254, 268 250, 268 245 Z" fill="#4878ae"/>
-                    <path d="M278 254 L274 282 C273 290, 276 298, 282 300 L308 300 C314 298, 317 290, 316 282 L312 254 Z" fill="#3a6494"/>
+                    <path d="M265 190 C265 168, 325 168, 325 190 L330 270 C330 288, 320 300, 308 303 L282 303 C270 300, 260 288, 260 270 Z" fill="#0d9488"/>
+                    <path d="M270 195 C270 178, 320 178, 320 195 L322 245 C322 250, 318 254, 312 254 L278 254 C272 254, 268 250, 268 245 Z" fill="#14b8a6"/>
+                    <path d="M278 254 L274 282 C273 290, 276 298, 282 300 L308 300 C314 298, 317 290, 316 282 L312 254 Z" fill="#0d9488"/>
                     <line x1="295" y1="195" x2="295" y2="300" stroke="#2f5680" strokeWidth="1" opacity=".2"/>
-                    <circle cx="285" cy="288" r="3" fill="#4878ae" opacity=".3"/>
-                    <circle cx="295" cy="288" r="3" fill="#4878ae" opacity=".3"/>
-                    <circle cx="305" cy="288" r="3" fill="#4878ae" opacity=".3"/>
+                    <circle cx="285" cy="288" r="3" fill="#14b8a6" opacity=".3"/>
+                    <circle cx="295" cy="288" r="3" fill="#14b8a6" opacity=".3"/>
+                    <circle cx="305" cy="288" r="3" fill="#14b8a6" opacity=".3"/>
                     {/* Sleeves */}
-                    <path d="M260 198 C254 198, 248 206, 248 214 L248 234 C248 242, 254 248, 262 248" fill="#3a6494"/>
-                    <path d="M330 198 C336 198, 342 206, 342 214 L342 234 C342 242, 336 248, 328 248" fill="#3a6494"/>
+                    <path d="M260 198 C254 198, 248 206, 248 214 L248 234 C248 242, 254 248, 262 248" fill="#0d9488"/>
+                    <path d="M330 198 C336 198, 342 206, 342 214 L342 234 C342 242, 336 248, 328 248" fill="#0d9488"/>
                   </g>
 
                   {/* LEFT ARM + typing hand */}
-                  <path d="M262 210 L238 250 C234 258, 222 264, 212 260 L190 248" stroke="#deb88c" strokeWidth="9" strokeLinecap="round" fill="none"/>
-                  <path d="M190 248 L172 278 C168 290, 166 302, 170 312" stroke="#deb88c" strokeWidth="7" strokeLinecap="round" fill="none"/>
+                  <path d="M262 210 L238 250 C234 258, 222 264, 212 260 L190 248" stroke="#e8c4a0" strokeWidth="9" strokeLinecap="round" fill="none"/>
+                  <path d="M190 248 L172 278 C168 290, 166 302, 170 312" stroke="#e8c4a0" strokeWidth="7" strokeLinecap="round" fill="none"/>
                   <g style={{ animation: "typeL .55s ease-in-out infinite" }}>
-                    <circle cx="158" cy="222" r="5" fill="#deb88c"/>
-                    <circle cx="152" cy="221" r="4" fill="#d4a87c"/>
-                    <circle cx="164" cy="223" r="3.5" fill="#d4a87c"/>
+                    <circle cx="158" cy="222" r="5" fill="#e8c4a0"/>
+                    <circle cx="152" cy="221" r="4" fill="#dcb48e"/>
+                    <circle cx="164" cy="223" r="3.5" fill="#dcb48e"/>
                   </g>
 
                   {/* RIGHT ARM + typing hand */}
-                  <path d="M328 210 L352 245 C356 252, 362 258, 368 256" stroke="#deb88c" strokeWidth="9" strokeLinecap="round" fill="none"/>
-                  <path d="M368 256 L378 286 C380 296, 376 304, 372 308" stroke="#deb88c" strokeWidth="7" strokeLinecap="round" fill="none"/>
+                  <path d="M328 210 L352 245 C356 252, 362 258, 368 256" stroke="#e8c4a0" strokeWidth="9" strokeLinecap="round" fill="none"/>
+                  <path d="M368 256 L378 286 C380 296, 376 304, 372 308" stroke="#e8c4a0" strokeWidth="7" strokeLinecap="round" fill="none"/>
                   <g style={{ animation: "typeR .65s ease-in-out infinite .12s" }}>
-                    <circle cx="165" cy="222" r="5" fill="#deb88c" transform="translate(200,0) scale(-1,1) translate(-200,0)"/>
-                    <circle cx="160" cy="221" r="4" fill="#d4a87c" transform="translate(200,0) scale(-1,1) translate(-200,0)"/>
+                    <circle cx="165" cy="222" r="5" fill="#e8c4a0" transform="translate(200,0) scale(-1,1) translate(-200,0)"/>
+                    <circle cx="160" cy="221" r="4" fill="#dcb48e" transform="translate(200,0) scale(-1,1) translate(-200,0)"/>
                   </g>
 
                   {/* LEGS */}
-                  <path d="M270 303 L268 340 C267 350, 270 358, 278 360 L308 360 C316 358, 319 350, 318 340 L316 303" fill="#2d5280"/>
+                  <path d="M270 303 L268 340 C267 350, 270 358, 278 360 L308 360 C316 358, 319 350, 318 340 L316 303" fill="#1e3a5f"/>
                   <path d="M270 354 L254 388 C252 394, 248 398, 242 400 L236 402" stroke="#2d5280" strokeWidth="10" strokeLinecap="round" fill="none"/>
                   <path d="M316 354 L332 388 C334 394, 338 398, 344 400 L350 402" stroke="#2d5280" strokeWidth="10" strokeLinecap="round" fill="none"/>
                   <rect x="226" y="398" width="20" height="10" rx="5" fill="#1e293b"/>
@@ -428,22 +432,22 @@ export default function Home() {
 
                   {/* HEAD */}
                   <g>
-                    <ellipse cx="295" cy="145" rx="38" ry="44" fill="#deb88c"/>
-                    <ellipse cx="295" cy="149" rx="34" ry="38" fill="#ebc89e"/>
+                    <ellipse cx="295" cy="145" rx="38" ry="44" fill="#e8c4a0"/>
+                    <ellipse cx="295" cy="149" rx="34" ry="38" fill="#f0d4b4"/>
                     {/* Hair */}
-                    <path d="M261 124 C259 106, 266 88, 282 80 C290 77, 300 77, 308 80 C324 88, 331 106, 329 124" fill="#c8ccd2"/>
-                    <path d="M261 124 L261 135 L329 135 L329 124" fill="#bec3ca"/>
-                    <path d="M257 124 C253 114, 257 98, 268 90" stroke="#b8bdc5" strokeWidth="4" fill="none" strokeLinecap="round"/>
-                    <path d="M333 124 C337 114, 333 98, 322 90" stroke="#b8bdc5" strokeWidth="4" fill="none" strokeLinecap="round"/>
+                    <path d="M261 124 C259 106, 266 88, 282 80 C290 77, 300 77, 308 80 C324 88, 331 106, 329 124" fill="#d4d4dc"/>
+                    <path d="M261 124 L261 135 L329 135 L329 124" fill="#c8c8d2"/>
+                    <path d="M257 124 C253 114, 257 98, 268 90" stroke="#c0c0cc" strokeWidth="4" fill="none" strokeLinecap="round"/>
+                    <path d="M333 124 C337 114, 333 98, 322 90" stroke="#c0c0cc" strokeWidth="4" fill="none" strokeLinecap="round"/>
                     {/* Ears */}
-                    <ellipse cx="268" cy="130" rx="5" ry="7" fill="#ebc89e"/>
-                    <ellipse cx="322" cy="130" rx="5" ry="7" fill="#ebc89e"/>
+                    <ellipse cx="268" cy="130" rx="5" ry="7" fill="#f0d4b4"/>
+                    <ellipse cx="322" cy="130" rx="5" ry="7" fill="#f0d4b4"/>
                     {/* Glasses */}
-                    <rect x="273" y="140" width="44" height="20" rx="10" fill="none" stroke="#52606e" strokeWidth="2.2"/>
-                    <circle cx="287" cy="150" r="10" fill="none" stroke="#52606e" strokeWidth="2.2"/>
-                    <circle cx="303" cy="150" r="10" fill="none" stroke="#52606e" strokeWidth="2.2"/>
-                    <line x1="313" y1="147" x2="330" y2="141" stroke="#52606e" strokeWidth="2.2" strokeLinecap="round"/>
-                    <line x1="273" y1="147" x2="258" y2="141" stroke="#52606e" strokeWidth="2.2" strokeLinecap="round"/>
+                    <rect x="273" y="140" width="44" height="20" rx="10" fill="none" stroke="#b8860b" strokeWidth="2.2"/>
+                    <circle cx="287" cy="150" r="10" fill="none" stroke="#b8860b" strokeWidth="2.2"/>
+                    <circle cx="303" cy="150" r="10" fill="none" stroke="#b8860b" strokeWidth="2.2"/>
+                    <line x1="313" y1="147" x2="330" y2="141" stroke="#b8860b" strokeWidth="2.2" strokeLinecap="round"/>
+                    <line x1="273" y1="147" x2="258" y2="141" stroke="#b8860b" strokeWidth="2.2" strokeLinecap="round"/>
                     {/* Pupils with reflections */}
                     <circle cx="287" cy="150" r="4" fill="#1a2030">
                       <animate attributeName="r" values="4;3.5;4" dur="4s" repeatCount="indefinite"/>
@@ -454,16 +458,16 @@ export default function Home() {
                     <circle cx="285" cy="148" r="1.5" fill="rgba(255,255,255,.35)"/>
                     <circle cx="301" cy="148" r="1.5" fill="rgba(255,255,255,.35)"/>
                     {/* Eyebrows */}
-                    <path d="M279 137 Q284 134, 291 136" stroke="#52606e" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-                    <path d="M311 137 Q306 134, 299 136" stroke="#52606e" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                    <path d="M279 137 Q284 134, 291 136" stroke="#b8860b" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                    <path d="M311 137 Q306 134, 299 136" stroke="#b8860b" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
                     {/* Nose */}
-                    <path d="M292 164 C292 162, 294 160, 295 160 C296 160, 298 162, 298 164 L297 167 C296 168, 294 168, 293 167 Z" fill="#d4a87c"/>
+                    <path d="M292 164 C292 162, 294 160, 295 160 C296 160, 298 162, 298 164 L297 167 C296 168, 294 168, 293 167 Z" fill="#dcb48e"/>
                     {/* Smile */}
-                    <path d="M287 174 Q295 183, 303 174" stroke="#be7e6a" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-                    <path d="M289 176 Q295 180, 301 176" fill="#b8706a" opacity=".2"/>
+                    <path d="M287 174 Q295 183, 303 174" stroke="#c06848" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                    <path d="M289 176 Q295 180, 301 176" fill="#b85a42" opacity=".2"/>
                     {/* Cheeks */}
-                    <ellipse cx="278" cy="165" rx="6" ry="4.5" fill="#d4956e" opacity=".25"/>
-                    <ellipse cx="312" cy="165" rx="6" ry="4.5" fill="#d4956e" opacity=".25"/>
+                    <ellipse cx="278" cy="165" rx="6" ry="4.5" fill="#e08870" opacity=".25"/>
+                    <ellipse cx="312" cy="165" rx="6" ry="4.5" fill="#e08870" opacity=".25"/>
                   </g>
                 </svg>
               </div>
