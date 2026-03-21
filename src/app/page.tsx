@@ -10,7 +10,6 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import HeaderBackgroundSlider from "@/components/HeaderBackgroundSlider";
 import ScrollToTop from "@/components/ScrollToTop";
 import { useState, useRef, useEffect } from "react";
 
@@ -75,22 +74,38 @@ function Ticker() {
   );
 }
 
-/* ─── Hero backgrounds ───────────────────────────────────────────────────── */
-const homeBackgrounds = [
-  { url: "https://assets.mixkit.co/videos/preview/mixkit-woman-working-on-her-laptop-at-home-39887-large.mp4", type: "video" as const, theme: "dark" as const },
-  { url: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1200", type: "image" as const, theme: "light" as const },
-  { url: "https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&q=80&w=1200", type: "image" as const, theme: "light" as const },
-  { url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1200", type: "image" as const, theme: "dark" as const },
-];
-
 /* ─── Page ───────────────────────────────────────────────────────────────── */
 export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [, setCurrentTheme] = useState<"dark" | "light">("dark");
+  const [showTopics, setShowTopics] = useState(false);
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+
+  /* Flip-card text cycling */
+  useEffect(() => {
+    const line1 = ["in plain English.", "at your own pace.", "no jargon.", "no pressure.", "just learning."];
+    const line2 = ["Printer Setup", "GPS Updates", "Smart Home Setup", "Security Installation", "Camera Basics"];
+    const colors = ["#60a5fa", "#a78bfa", "#34d399", "#fb923c"];
+    let idx = 0;
+    const interval = setInterval(() => {
+      idx = (idx + 1) % line1.length;
+      const col = colors[idx % colors.length];
+      const f1 = document.getElementById("flip1");
+      const f2 = document.getElementById("flip2");
+      if (f1) { f1.style.transform = "rotateX(90deg)"; f1.style.opacity = "0"; setTimeout(() => { f1.textContent = line1[idx]; f1.style.color = col; f1.style.transform = "rotateX(0)"; f1.style.opacity = "1"; }, 350); }
+      if (f2) { f2.style.transform = "rotateX(90deg)"; f2.style.opacity = "0"; setTimeout(() => { f2.textContent = line2[idx]; f2.style.color = col; f2.style.transform = "rotateX(0)"; f2.style.opacity = "1"; }, 350); }
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  /* Close topics popup on scroll */
+  useEffect(() => {
+    const handleScroll = () => { if (showTopics) setShowTopics(false); };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [showTopics]);
 
   const stagger: Variants = {
     hidden: { opacity: 0 },
@@ -107,27 +122,69 @@ export default function Home() {
       <ScrollToTop />
 
       {/* ── HERO ────────────────────────────────────────────────────────── */}
-      <header className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden text-white">
-        <HeaderBackgroundSlider items={homeBackgrounds} onThemeChange={setCurrentTheme} />
+      <header className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden text-white bg-zinc-950">
+        {/* Animated aurora background — no images */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <motion.div className="absolute w-[140%] h-[600px] -left-[20%] top-[5%] opacity-20"
+            style={{ background: "linear-gradient(135deg, rgba(59,130,246,0.35) 0%, rgba(139,92,246,0.25) 25%, rgba(236,72,153,0.15) 50%, rgba(34,211,238,0.25) 75%, rgba(59,130,246,0.35) 100%)", filter: "blur(80px)", borderRadius: "50%" }}
+            animate={{ x: [0, 80, -40, 60, 0], y: [0, -30, 20, -15, 0], scale: [1, 1.05, 0.98, 1.03, 1] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }} />
+          <motion.div className="absolute w-[100%] h-[400px] left-[10%] top-[40%] opacity-15"
+            style={{ background: "linear-gradient(225deg, rgba(34,211,238,0.4) 0%, rgba(99,102,241,0.3) 40%, rgba(250,204,21,0.15) 100%)", filter: "blur(100px)", borderRadius: "40%" }}
+            animate={{ x: [0, -60, 30, -50, 0], y: [0, 25, -12, 18, 0] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 3 }} />
+        </div>
 
-        {/* Ambient blobs */}
-        <motion.div style={{ y: y1 }}
-          className="absolute top-20 right-[-10%] w-[700px] h-[700px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none" />
-        <motion.div style={{ y: y2 }}
-          className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
+        {/* Scrolling search queries — parallax text background */}
+        <motion.div style={{ y: y1 }} className="absolute inset-0 overflow-hidden pointer-events-none z-[1]" aria-hidden="true">
+          <div className="absolute top-[18%] w-full overflow-hidden opacity-[0.04]">
+            <div className="flex whitespace-nowrap animate-marquee">
+              {["How to setup HP printer", "Garmin GPS map update", "Alexa smart home setup", "Ring camera installation", "Canon printer Wi-Fi", "How to setup HP printer", "Garmin GPS map update", "Alexa smart home setup", "Ring camera installation", "Canon printer Wi-Fi"].map((q, i) => (
+                <span key={i} className="text-white text-2xl font-black mx-8 tracking-tight">{q}</span>
+              ))}
+            </div>
+          </div>
+          <div className="absolute top-[45%] w-full overflow-hidden opacity-[0.03]">
+            <div className="flex whitespace-nowrap" style={{ animation: "marquee 45s linear infinite reverse" }}>
+              {["Smart home for beginners", "Print from iPhone", "GPS not working fix", "Google Home setup", "Epson ink reset", "Smart home for beginners", "Print from iPhone", "GPS not working fix", "Google Home setup", "Epson ink reset"].map((q, i) => (
+                <span key={i} className="text-white text-xl font-bold mx-8 tracking-tight">{q}</span>
+              ))}
+            </div>
+          </div>
+          <div className="absolute top-[68%] w-full overflow-hidden opacity-[0.025]">
+            <div className="flex whitespace-nowrap animate-marquee" style={{ animationDuration: "55s" }}>
+              {["Brother printer setup", "TomTom update help", "Security camera app", "Wi-Fi router fix", "Computer safety tips", "Brother printer setup", "TomTom update help", "Security camera app", "Wi-Fi router fix", "Computer safety tips"].map((q, i) => (
+                <span key={i} className="text-white text-lg font-bold mx-8 tracking-tight">{q}</span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          {Array.from({ length: 18 }).map((_, i) => (
+            <motion.div key={i} className="absolute rounded-full"
+              style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`, width: Math.random() * 3 + 1, height: Math.random() * 3 + 1, background: ["rgba(59,130,246,0.5)", "rgba(139,92,246,0.4)", "rgba(34,211,238,0.4)"][i % 3] }}
+              animate={{ y: [0, -25, 10, -15, 0], opacity: [0, 0.6, 0.3, 0.5, 0] }}
+              transition={{ duration: Math.random() * 12 + 10, delay: Math.random() * 5, repeat: Infinity, ease: "easeInOut" }} />
+          ))}
+        </div>
+
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#fafafa] to-transparent z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <motion.div variants={stagger} initial="hidden" animate="visible"
             className="text-center max-w-5xl mx-auto">
 
-            {/* Eyebrow pill */}
+            {/* Eyebrow pill — PRESERVED */}
             <motion.div variants={item}
-              className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-black uppercase tracking-[0.25em] mb-10 shadow-xl">
+              className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-black uppercase tracking-[0.25em] mb-10 shadow-xl">
               <Sparkles size={13} className="text-yellow-400 fill-yellow-400" />
               <span className="text-blue-200">Experience Technology Differently</span>
             </motion.div>
 
-            {/* Headline */}
+            {/* Headline — PRESERVED */}
             <motion.h1 variants={item}
               className="font-black tracking-tighter leading-[0.88] mb-8"
               style={{ fontSize: "clamp(3.8rem, 10vw, 9rem)" }}>
@@ -137,22 +194,78 @@ export default function Home() {
               </em>
             </motion.h1>
 
-            {/* Sub */}
-            <motion.p variants={item}
-              className="text-xl md:text-2xl mb-12 leading-relaxed font-medium text-white/80 max-w-3xl mx-auto">
-              We teach everyday technology in plain English — at your own pace. No jargon. No pressure.{" "}
-              <span className="text-white font-bold">Just learning.</span>
-            </motion.p>
+            {/* NEW — Flip-card cycling subtext */}
+            <motion.div variants={item} className="mb-5">
+              <p className="text-xl md:text-2xl leading-relaxed font-medium text-white/80 max-w-3xl mx-auto">
+                We teach everyday technology{" "}
+                <span className="inline-block" style={{ perspective: "300px" }}>
+                  <span id="flip1" className="inline-block font-black text-blue-400 transition-all duration-500" style={{ transformOrigin: "center bottom" }}>
+                    in plain English.
+                  </span>
+                </span>
+              </p>
+            </motion.div>
+            <motion.div variants={item} className="mb-12">
+              <p className="text-lg md:text-xl leading-relaxed font-medium text-white/60 max-w-3xl mx-auto">
+                What you can learn by yourself:{" "}
+                <span className="inline-block" style={{ perspective: "300px" }}>
+                  <span id="flip2" className="inline-block font-black text-blue-400 transition-all duration-500" style={{ transformOrigin: "center bottom" }}>
+                    Printer Setup
+                  </span>
+                </span>
+              </p>
+            </motion.div>
 
-            {/* CTAs */}
-            <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-16">
-              <Link href="/techbridge"
-                className="shine-effect group w-full sm:w-auto px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-xl
-                  hover:bg-blue-500 hover:shadow-[0_20px_60px_rgba(37,99,235,0.5)] hover:-translate-y-1
-                  transition-all duration-300 flex items-center justify-center gap-3 shadow-xl shadow-blue-600/30">
-                Start Learning Now
-                <ArrowRight size={22} className="group-hover:translate-x-1.5 transition-transform" />
-              </Link>
+            {/* CTAs — Start Learning opens popup, View Pricing stays */}
+            <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-10 relative">
+              <div className="relative">
+                <button
+                  onClick={() => setShowTopics(!showTopics)}
+                  className="shine-effect group w-full sm:w-auto px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-xl
+                    hover:bg-blue-500 hover:shadow-[0_20px_60px_rgba(37,99,235,0.5)] hover:-translate-y-1
+                    transition-all duration-300 flex items-center justify-center gap-3 shadow-xl shadow-blue-600/30">
+                  Start Learning Now
+                  <ArrowRight size={22} className={`transition-transform duration-300 ${showTopics ? "rotate-90" : "group-hover:translate-x-1.5"}`} />
+                </button>
+
+                {/* Animated 6 topic options popup */}
+                {showTopics && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[380px] max-w-[90vw] bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 shadow-2xl z-50"
+                  >
+                    <p className="text-center text-white/50 text-xs font-bold uppercase tracking-widest mb-3">Choose a topic</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { label: "Printer Setup", href: "/techbridge/printers", icon: <Printer size={20} />, color: "from-blue-500 to-blue-700" },
+                        { label: "GPS Updates", href: "/techbridge/gps", icon: <Navigation size={20} />, color: "from-emerald-500 to-emerald-700" },
+                        { label: "Smart Home", href: "/techbridge/smart-home", icon: <HomeIcon size={20} />, color: "from-violet-500 to-violet-700" },
+                        { label: "Camera Basics", href: "/techbridge/camera", icon: <Camera size={20} />, color: "from-amber-500 to-amber-700" },
+                        { label: "Alexa & Voice", href: "/techbridge/alexa", icon: <Smartphone size={20} />, color: "from-cyan-500 to-cyan-700" },
+                        { label: "Security Basics", href: "/techbridge/security", icon: <Shield size={20} />, color: "from-rose-500 to-rose-700" },
+                      ].map((topic, i) => (
+                        <motion.div key={i}
+                          initial={{ opacity: 0, y: 12 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.06, type: "spring", stiffness: 300 }}
+                        >
+                          <Link href={topic.href}
+                            className={`flex items-center gap-3 px-4 py-3.5 rounded-xl bg-gradient-to-r ${topic.color} text-white font-bold text-sm hover:scale-[1.04] active:scale-95 transition-all shadow-lg min-h-[48px]`}>
+                            {topic.icon}
+                            {topic.label}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+                    <button onClick={() => setShowTopics(false)}
+                      className="w-full mt-3 py-2 text-white/40 text-xs font-bold hover:text-white/60 transition-colors">
+                      Close
+                    </button>
+                  </motion.div>
+                )}
+              </div>
+
               <Link href="/pricing"
                 className="group flex items-center gap-3 text-white/80 hover:text-white font-black text-lg transition-all">
                 <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center
@@ -163,7 +276,7 @@ export default function Home() {
               </Link>
             </motion.div>
 
-            {/* Hero 3-pillars — now BELOW the headline, cleaner */}
+            {/* Hero 3-pillars */}
             <motion.div variants={item}
               className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
               {[
@@ -185,7 +298,7 @@ export default function Home() {
         {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20">
           <span className="text-white/40 text-xs font-bold uppercase tracking-widest">Scroll</span>
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}
             className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent" />
