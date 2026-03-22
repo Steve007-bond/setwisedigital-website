@@ -16,8 +16,51 @@ import EmailInput from "@/components/EmailInput";
 import PhoneInput from "@/components/PhoneInput";
 import { validateEmail, validatePhone } from "@/lib/validation";
 import Link from "next/link";
-import HeroCharacter from "@/components/HeroCharacter";
 import React, { useState, useRef, useEffect, useCallback } from "react";
+
+/* ── Typewriter rotating phrases for Pricing hero ── */
+const PRICING_PHRASES = [
+  "$49 Single Lesson",
+  "$97 Skill-Builder Course",
+  "$147 Family Learning Plan",
+  "Live 1-on-1 Video Sessions",
+  "Lifetime Access Included",
+  "Plain-English Courses",
+];
+
+function usePricingTypewriter(phrases: string[], typingSpeed = 60, deletingSpeed = 35, pauseDuration = 2200) {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const tick = useCallback(() => {
+    const currentPhrase = phrases[phraseIndex];
+    if (!isDeleting) {
+      const next = currentPhrase.slice(0, displayText.length + 1);
+      setDisplayText(next);
+      if (next === currentPhrase) {
+        setTimeout(() => setIsDeleting(true), pauseDuration);
+        return;
+      }
+    } else {
+      const next = currentPhrase.slice(0, displayText.length - 1);
+      setDisplayText(next);
+      if (next === "") {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        return;
+      }
+    }
+  }, [phrases, phraseIndex, displayText, isDeleting, pauseDuration]);
+
+  useEffect(() => {
+    const speed = isDeleting ? deletingSpeed : typingSpeed;
+    const timer = setTimeout(tick, speed);
+    return () => clearTimeout(timer);
+  }, [tick, isDeleting, typingSpeed, deletingSpeed]);
+
+  return displayText;
+}
 
 /* ═══════════════════════════════════════════════════════════════
    BACKGROUND
@@ -37,23 +80,6 @@ function AuroraBackground() {
   );
 }
 
-function ParticleField() {
-  const particles = Array.from({ length: 20 }, (_, i) => ({
-    id: i, left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`,
-    size: Math.random() * 3 + 1, duration: Math.random() * 15 + 10, delay: Math.random() * 8,
-    color: ["rgba(59,130,246,0.5)", "rgba(139,92,246,0.4)", "rgba(34,211,238,0.4)", "rgba(250,204,21,0.3)"][Math.floor(Math.random() * 4)],
-  }));
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      {particles.map((p) => (
-        <motion.div key={p.id} className="absolute rounded-full"
-          style={{ left: p.left, top: p.top, width: p.size, height: p.size, background: p.color }}
-          animate={{ y: [0, -30, 10, -20, 0], opacity: [0, 0.7, 0.3, 0.6, 0] }}
-          transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: "easeInOut" }} />
-      ))}
-    </div>
-  );
-}
 
 /* ═══════════════════════════════════════════════════════════════
    FREE TOOLS DATA
@@ -272,6 +298,7 @@ export default function PricingPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
   const heroRef = useRef<HTMLDivElement>(null);
+  const pricingTypedText = usePricingTypewriter(PRICING_PHRASES);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
@@ -296,68 +323,199 @@ export default function PricingPage() {
       <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} selectedPlan={selectedPlan} />
 
       {/* ════════ HERO ════════ */}
-      <header ref={heroRef} className="relative overflow-hidden bg-zinc-950 min-h-[75vh] lg:min-h-[82vh] flex items-center">
+      <header ref={heroRef} className="relative overflow-hidden bg-[#0c1220] min-h-[88vh] lg:min-h-[92vh] flex items-center">
         <AuroraBackground />
-        <ParticleField />
+        
+        {/* ── Constellation network background ── */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]" aria-hidden="true">
+          {Array.from({ length: 12 }).map((_, i) => {
+            const col = i % 4;
+            const row = Math.floor(i / 4);
+            const baseX = 10 + col * 25 + (row % 2 === 1 ? 12 : 0);
+            const baseY = 15 + row * 30;
+            return (
+              <motion.div
+                key={`node-${i}`}
+                className="absolute"
+                style={{ left: `${baseX}%`, top: `${baseY}%` }}
+                animate={{
+                  x: [0, 15 * Math.sin(i * 0.8), -10 * Math.cos(i * 0.5), 0],
+                  y: [0, -12 * Math.cos(i * 0.6), 8 * Math.sin(i * 0.7), 0],
+                  opacity: [0.15, 0.35, 0.2, 0.15],
+                }}
+                transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.7 }}
+              >
+                <div className="relative">
+                  <div className="w-3 h-3 rotate-45 rounded-sm"
+                    style={{
+                      background: ["rgba(139,92,246,0.5)", "rgba(59,130,246,0.4)", "rgba(34,211,238,0.4)", "rgba(99,102,241,0.45)"][i % 4],
+                      boxShadow: `0 0 ${12 + i * 2}px ${["rgba(139,92,246,0.3)", "rgba(59,130,246,0.25)", "rgba(34,211,238,0.25)", "rgba(99,102,241,0.3)"][i % 4]}`,
+                    }}
+                  />
+                  <motion.div className="absolute inset-[-8px] rounded-full border"
+                    style={{ borderColor: ["rgba(139,92,246,0.15)", "rgba(59,130,246,0.12)", "rgba(34,211,238,0.12)", "rgba(99,102,241,0.15)"][i % 4] }}
+                    animate={{ scale: [1, 2.5, 1], opacity: [0.4, 0, 0.4] }}
+                    transition={{ duration: 4 + i * 0.5, repeat: Infinity, delay: i * 0.3 }}
+                  />
+                </div>
+              </motion.div>
+            );
+          })}
+
+          {/* Sweeping light beams */}
+          <motion.div className="absolute w-[200px] h-[150vh] -top-[25vh]"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.04), rgba(99,102,241,0.03), transparent)", transform: "rotate(15deg)" }}
+            animate={{ x: ["-200px", "120vw"] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", repeatDelay: 3 }} />
+          <motion.div className="absolute w-[150px] h-[150vh] -top-[25vh]"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(59,130,246,0.03), rgba(34,211,238,0.02), transparent)", transform: "rotate(-12deg)" }}
+            animate={{ x: ["120vw", "-200px"] }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 6 }} />
+
+          {/* Subtle dot grid */}
+          <div className="absolute inset-0 opacity-[0.03]"
+            style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+        </div>
+
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FDFDFD] to-transparent z-10" />
 
         <motion.div style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
           className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-32 pb-24 lg:pt-40 lg:pb-28">
-          <div className="text-center max-w-4xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-              <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500/15 to-cyan-500/15 border border-emerald-400/25 text-emerald-300 text-sm font-bold tracking-wide">
-                <BadgeCheck size={16} className="text-emerald-400" />
-                No Subscriptions — No Hidden Fees — Pay Once
-              </span>
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-4">
+
+            {/* Left: Text Content */}
+            <div className="lg:w-[55%] text-center lg:text-left">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+                <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500/15 to-cyan-500/15 border border-emerald-400/25 text-emerald-300 text-sm font-bold tracking-wide">
+                  <BadgeCheck size={16} className="text-emerald-400" />
+                  No Subscriptions — No Hidden Fees — Pay Once
+                </span>
+              </motion.div>
+
+              <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
+                className="mt-8 text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.95] text-white">
+                Simple, Honest
+                <br />
+                <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
+                  Pricing.
+                </span>
+              </motion.h1>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}
+                className="mt-8 max-w-xl mx-auto lg:mx-0">
+                <p className="text-lg md:text-xl text-zinc-400 leading-relaxed font-medium mb-4">
+                  One-time payment, lifetime access — starting with
+                </p>
+                <div className="h-10 md:h-12 flex items-center justify-center lg:justify-start">
+                  <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
+                    {pricingTypedText}
+                  </span>
+                  <span className="w-[3px] h-7 md:h-8 bg-violet-400 ml-0.5 animate-pulse rounded-full" />
+                </div>
+              </motion.div>
+
+              {/* Price anchor buttons */}
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7 }}
+                className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
+                {plans.map((plan) => (
+                  <motion.button key={plan.id} onClick={() => openModal(plan.name)}
+                    whileHover={{ scale: 1.08, y: -4 }} whileTap={{ scale: 0.95 }}
+                    className="relative text-center px-6 py-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-colors cursor-pointer group min-w-[130px]">
+                    {plan.badge && (
+                      <span className={`absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] font-bold px-2.5 py-0.5 rounded-full text-white whitespace-nowrap ${plan.popular ? "bg-violet-500" : "bg-emerald-500"}`}>
+                        {plan.badge}
+                      </span>
+                    )}
+                    <div className={`text-3xl sm:text-4xl font-black ${plan.priceColor.replace("-600", "-400")}`}>${plan.price}</div>
+                    <div className="text-sm text-zinc-500 font-bold mt-1">{plan.name}</div>
+                  </motion.button>
+                ))}
+              </motion.div>
+
+              <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}
+                className="mt-8 text-zinc-500 font-bold text-sm italic tracking-wide text-center lg:text-left">
+                Live 1-on-1 video lessons. <span className="text-white">No contracts. No monthly fees.</span>
+              </motion.p>
+            </div>
+
+            {/* Right: 3D Character — seamless, oversized */}
+            <motion.div
+              initial={{ opacity: 0, x: 60, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+              className="lg:w-[45%] relative mt-8 lg:mt-0 lg:overflow-visible"
+            >
+              {/* Glow behind character */}
+              <div className="absolute inset-0 -z-10">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-violet-500/15 rounded-full blur-[120px]" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-blue-400/10 rounded-full blur-[80px]" />
+              </div>
+
+              {/* Character container — oversized */}
+              <div className="relative mx-auto lg:scale-[1.25] lg:origin-center lg:translate-x-[6%]">
+                {/* Outer rotating ring */}
+                <motion.div animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-[-8%] rounded-full border border-violet-500/15">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-violet-400 rounded-full shadow-[0_0_12px_rgba(139,92,246,0.6)]" />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+                </motion.div>
+
+                {/* Inner counter-rotating ring */}
+                <motion.div animate={{ rotate: -360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-[-3%] rounded-full border border-blue-500/10">
+                  <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-indigo-400 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
+                </motion.div>
+
+                {/* Character image — radial fade */}
+                <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative z-10">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src="/Images/hero-pricing.png"
+                      alt="Setwise Digital pricing — affordable tech learning"
+                      className="w-full h-auto"
+                      style={{
+                        maskImage: 'radial-gradient(ellipse 75% 70% at 50% 45%, black 40%, transparent 100%)',
+                        WebkitMaskImage: 'radial-gradient(ellipse 75% 70% at 50% 45%, black 40%, transparent 100%)',
+                      }}
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Floating badges */}
+                {[
+                  { emoji: "💰", label: "$49", pos: "top-[8%] left-[2%]", delay: 0 },
+                  { emoji: "✅", label: "No fees", pos: "top-[12%] right-[2%]", delay: 0.5 },
+                  { emoji: "📋", label: "Courses", pos: "bottom-[28%] left-[0%]", delay: 1 },
+                  { emoji: "🎯", label: "1-on-1", pos: "bottom-[25%] right-[0%]", delay: 1.5 },
+                ].map((badge, i) => (
+                  <motion.div key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.8 + badge.delay, duration: 0.5, type: "spring" }}
+                    className={`absolute ${badge.pos} z-20`}>
+                    <motion.div
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: badge.delay }}
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.08] backdrop-blur-md border border-white/[0.1] shadow-lg">
+                      <span className="text-lg">{badge.emoji}</span>
+                      <span className="text-xs font-bold text-white/80 hidden sm:inline">{badge.label}</span>
+                    </motion.div>
+                  </motion.div>
+                ))}
+
+                {/* Speech bubble */}
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.5, duration: 0.5 }}
+                  className="absolute top-[2%] left-1/2 -translate-x-1/2 z-30">
+                  <div className="px-4 py-2 bg-violet-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-violet-600/30 whitespace-nowrap">
+                    No hidden fees! 💜
+                    <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-violet-600 rotate-45" />
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
 
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
-              className="mt-8 text-[2.75rem] sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white">
-              Simple, Honest{" "}
-              <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-blue-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">Pricing.</span>
-                <motion.span className="absolute -bottom-2 left-0 h-1.5 rounded-full bg-gradient-to-r from-blue-500 via-violet-500 to-cyan-500"
-                  initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: 1.2, delay: 1.0, ease: "easeOut" }} />
-              </span>
-            </motion.h1>
-
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}
-              className="mt-8 text-xl sm:text-2xl text-zinc-400 leading-relaxed font-medium max-w-2xl mx-auto">
-              Live 1-on-1 video lessons with a real educator. <strong className="text-white">No monthly fees.</strong>{" "}
-              <strong className="text-white">No contracts.</strong> Pay only for what you need.
-            </motion.p>
-
-            {/* Price anchors */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7 }}
-              className="mt-12 flex flex-wrap justify-center gap-4 sm:gap-6">
-              {plans.map((plan) => (
-                <motion.button key={plan.id} onClick={() => openModal(plan.name)}
-                  whileHover={{ scale: 1.08, y: -4 }} whileTap={{ scale: 0.95 }}
-                  className="relative text-center px-6 py-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-colors cursor-pointer group min-w-[130px]">
-                  {plan.badge && (
-                    <span className={`absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] font-bold px-2.5 py-0.5 rounded-full text-white whitespace-nowrap ${plan.popular ? "bg-violet-500" : "bg-emerald-500"}`}>
-                      {plan.badge}
-                    </span>
-                  )}
-                  <div className={`text-3xl sm:text-4xl font-black ${plan.priceColor.replace("-600", "-400")}`}>${plan.price}</div>
-                  <div className="text-sm text-zinc-500 font-bold mt-1">{plan.name}</div>
-                </motion.button>
-              ))}
-            </motion.div>
-
-            {/* 3D Character */}
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.0 }}
-              className="mt-12 max-w-md mx-auto">
-              <HeroCharacter
-                src="/Images/hero-pricing.png"
-                alt="Setwise Digital pricing — affordable tech learning"
-                accentColor="#8b5cf6"
-                glowColor="#6366f1"
-                floatingIcons={["💰", "✅", "📋", "🎯"]}
-                speechBubble="No hidden fees!"
-                size="compact"
-              />
-            </motion.div>
           </div>
         </motion.div>
       </header>
