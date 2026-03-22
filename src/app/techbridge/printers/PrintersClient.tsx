@@ -182,15 +182,17 @@ export default function PageClient() {
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
-        {/* ── Constellation network background ── */}
+        {/* ── Dynamic background that changes colour with each frame ── */}
         <div className="absolute inset-0">
           <motion.div className="absolute inset-0 pointer-events-none"
-            animate={{background:[
-              `radial-gradient(ellipse at 20% 30%, ${ACCENT_HEX}20 0%, #080808 60%)`,
-              `radial-gradient(ellipse at 80% 70%, ${ACCENT_HEX}14 0%, #080808 60%)`,
-            ]}} transition={{duration:6,repeat:Infinity,repeatType:"reverse"}} />
+            key={`bg-${frameIdx}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2 }}
+            style={{ background: `radial-gradient(ellipse at 30% 40%, ${frame.color}18 0%, #080808 55%), radial-gradient(ellipse at 70% 60%, ${frame.color}10 0%, #080808 55%)` }}
+          />
 
-          {/* Constellation nodes */}
+          {/* Constellation nodes — colour follows frame */}
           {Array.from({ length: 10 }).map((_, i) => {
             const col = i % 4;
             const row = Math.floor(i / 4);
@@ -206,18 +208,44 @@ export default function PageClient() {
                 }}
                 transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}>
                 <div className="w-2.5 h-2.5 rotate-45 rounded-sm"
-                  style={{ background: `${ACCENT_HEX}60`, boxShadow: `0 0 ${10 + i * 2}px ${ACCENT_HEX}40` }} />
+                  style={{ background: `${frame.color}60`, boxShadow: `0 0 ${10 + i * 2}px ${frame.color}40`, transition: "background 1s, box-shadow 1s" }} />
                 <motion.div className="absolute inset-[-8px] rounded-full border"
-                  style={{ borderColor: `${ACCENT_HEX}18` }}
+                  style={{ borderColor: `${frame.color}18` }}
                   animate={{ scale: [1, 2.5, 1], opacity: [0.3, 0, 0.3] }}
                   transition={{ duration: 4 + i * 0.4, repeat: Infinity, delay: i * 0.3 }} />
               </motion.div>
             );
           })}
 
-          {/* Sweeping beam */}
+          {/* Floating emoji particles — change with each frame */}
+          {frame.particles.map((emoji: string, i: number) => (
+            <motion.div
+              key={`particle-${frameIdx}-${i}`}
+              className="absolute text-2xl pointer-events-none select-none"
+              style={{
+                left: `${10 + (i * 16) % 80}%`,
+                top: `${15 + (i * 23) % 60}%`,
+              }}
+              initial={{ opacity: 0, scale: 0, y: 20 }}
+              animate={{
+                opacity: [0, 0.6, 0.3, 0],
+                scale: [0.5, 1.2, 1, 0.5],
+                y: [20, -30 - i * 10, -60, -90],
+                x: [0, (i % 2 === 0 ? 15 : -15), (i % 2 === 0 ? -10 : 10), 0],
+              }}
+              transition={{
+                duration: 3.5,
+                delay: i * 0.3,
+                ease: "easeOut",
+              }}
+            >
+              {emoji}
+            </motion.div>
+          ))}
+
+          {/* Sweeping beam — colour shifts */}
           <motion.div className="absolute w-[180px] h-[150vh] -top-[25vh] pointer-events-none"
-            style={{ background: `linear-gradient(90deg, transparent, ${ACCENT_HEX}06, ${ACCENT_HEX}04, transparent)`, transform: "rotate(15deg)" }}
+            style={{ background: `linear-gradient(90deg, transparent, ${frame.color}06, ${frame.color}04, transparent)`, transform: "rotate(15deg)", transition: "background 1s" }}
             animate={{ x: ["-200px", "120vw"] }}
             transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", repeatDelay: 4 }} />
 
@@ -230,30 +258,67 @@ export default function PageClient() {
           <div>
             <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:0.05}}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-black uppercase tracking-[0.14em] mb-8"
-              style={{backgroundColor:ACCENT_HEX+"15",borderColor:ACCENT_HEX+"40",color:ACCENT_HEX}}>
+              style={{backgroundColor:frame.color+"15",borderColor:frame.color+"40",color:frame.color,transition:"all 1s"}}>
               PRINTER & SCANNER LEARNING GUIDE
             </motion.div>
 
-            {/* Dynamic H1 — changes with each frame */}
-            <h1 className="font-black leading-[0.92] tracking-tighter mb-8 min-h-[18rem] md:min-h-[14rem]">
-              {frame.headline.split("\n").map((line: string, i: number) => (
-                <motion.span key={`${frameIdx}-${i}`} className={`block text-6xl md:text-7xl ${
-                  i === frame.headline.split("\n").length - 1 && frame.headline.split("\n").length > 1
-                    ? "bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent italic"
-                    : "text-white"
-                }`}
-                  initial={{opacity:0,y:40}} animate={{opacity:1,y:0}}
-                  transition={{delay:i*0.12,type:"spring",stiffness:80}}>
-                  {line}
-                </motion.span>
-              ))}
+            {/* Dynamic H1 — animated headline cycling */}
+            <h1 className="font-black leading-[0.92] tracking-tighter mb-8 min-h-[10rem] md:min-h-[8rem]">
+              <motion.span
+                key={`h-${frameIdx}`}
+                className="block text-5xl sm:text-6xl md:text-7xl"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ type: "spring", stiffness: 80 }}
+              >
+                {frame.headline.split("\n").map((line: string, i: number) => (
+                  <span key={i} className={`block ${
+                    i > 0
+                      ? ""
+                      : "text-white"
+                  }`}
+                  style={i > 0 ? { background: `linear-gradient(to right, ${frame.color}, #06b6d4)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", transition: "all 1s" } : undefined}>
+                    {line}
+                  </span>
+                ))}
+              </motion.span>
             </h1>
 
-            <motion.p className="text-xl text-zinc-300 font-medium mb-3 leading-relaxed max-w-lg"
-              key={`sub-${frameIdx}`} initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.3}}>
-              {frame.visualSub}
-            </motion.p>
-            <motion.p className="text-base text-zinc-500 mb-10 max-w-lg"
+            {/* Animated subtitle with brand ticker */}
+            <motion.div
+              key={`sub-${frameIdx}`}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mb-3"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-3xl">{frame.emoji}</span>
+                <div>
+                  <p className="text-lg font-bold text-white">{frame.visualLabel}</p>
+                  <p className="text-base text-zinc-400">{frame.visualSub}</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Frame indicator dots */}
+            <div className="flex items-center gap-2 mb-10">
+              {FRAMES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setFrameIdx(i)}
+                  className="h-1.5 rounded-full transition-all duration-500"
+                  style={{
+                    width: i === frameIdx ? "28px" : "8px",
+                    backgroundColor: i === frameIdx ? frame.color : "rgba(255,255,255,0.15)",
+                    transition: "all 0.5s",
+                  }}
+                />
+              ))}
+            </div>
+
+            <motion.p className="text-sm text-zinc-500 mb-10 max-w-lg"
               initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.4}}>
               Plain English · No tech knowledge needed · Designed for adults 45+
             </motion.p>
@@ -261,14 +326,13 @@ export default function PageClient() {
             <motion.div className="flex flex-col sm:flex-row gap-4 mb-10"
               initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:0.5}}>
               <motion.a href="#learn" whileHover={{scale:1.03}} whileTap={{scale:0.97}}
-                className="px-9 py-5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-blue-900/50">
+                className="px-9 py-5 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 shadow-xl"
+                style={{ background: `linear-gradient(to right, ${frame.color}, #06b6d4)`, boxShadow: `0 20px 40px ${frame.color}30`, transition: "all 1s" }}>
                 Start Learning Free <ArrowRight size={20} />
               </motion.a>
               <Link href="/contact">
                 <motion.div whileHover={{scale:1.03}} whileTap={{scale:0.97}}
-                  className="px-9 py-5 border-2 border-zinc-700 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 transition-colors cursor-pointer"
-                  onMouseEnter={e=>(e.currentTarget.style.borderColor=ACCENT_HEX)}
-                onMouseLeave={e=>(e.currentTarget.style.borderColor="#3f3f46")}>
+                  className="px-9 py-5 border-2 border-zinc-700 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 transition-colors cursor-pointer hover:border-blue-500">
                   Book a Live Lesson
                 </motion.div>
               </Link>
@@ -281,7 +345,7 @@ export default function PageClient() {
                 <span className="text-zinc-400 text-sm font-medium ml-1">2,400+ learners</span>
               </div>
               <div className="flex items-center gap-2 text-green-400 text-sm font-bold"><Shield size={14}/>100% Free</div>
-              <div className="flex items-center gap-2 text-zinc-400 text-sm"><CheckCircle2 size={14} style={{color:ACCENT_HEX}}/>Plain English</div>
+              <div className="flex items-center gap-2 text-zinc-400 text-sm"><CheckCircle2 size={14} style={{color:frame.color,transition:"color 1s"}}/>Plain English</div>
             </motion.div>
           </div>
 
@@ -289,17 +353,17 @@ export default function PageClient() {
           <motion.div initial={{opacity:0,x:50,scale:0.95}} animate={{opacity:1,x:0,scale:1}}
             transition={{duration:1,delay:0.3,ease:"easeOut"}}
             className="hidden lg:block relative lg:overflow-visible">
-            {/* Glow */}
+            {/* Glow — colour shifts with frame */}
             <div className="absolute inset-0 -z-10">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full blur-[130px]" style={{backgroundColor:`${ACCENT_HEX}22`}} />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full blur-[130px]" style={{backgroundColor:`${frame.color}22`,transition:"background-color 1s"}} />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-cyan-400/12 rounded-full blur-[90px]" />
             </div>
 
             <div className="relative lg:scale-[1.4] lg:origin-center lg:translate-x-[10%] lg:-translate-y-[3%]">
-              {/* Rotating rings */}
+              {/* Rotating rings — colour shifts */}
               <motion.div animate={{rotate:360}} transition={{duration:30,repeat:Infinity,ease:"linear"}}
-                className="absolute inset-[-10%] rounded-full border" style={{borderColor:`${ACCENT_HEX}18`}}>
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full shadow-[0_0_14px_rgba(37,99,235,0.7)]" style={{backgroundColor:ACCENT_HEX}} />
+                className="absolute inset-[-10%] rounded-full border" style={{borderColor:`${frame.color}18`,transition:"border-color 1s"}}>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full" style={{backgroundColor:frame.color,boxShadow:`0 0 14px ${frame.color}90`,transition:"all 1s"}} />
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
               </motion.div>
               <motion.div animate={{rotate:-360}} transition={{duration:22,repeat:Infinity,ease:"linear"}}
@@ -307,7 +371,7 @@ export default function PageClient() {
                 <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-indigo-400 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
               </motion.div>
 
-              {/* Character image — radial fade, large */}
+              {/* Character image */}
               <motion.div animate={{y:[0,-14,0]}} transition={{duration:5,repeat:Infinity,ease:"easeInOut"}}
                 className="relative z-10">
                 <div className="relative overflow-hidden">
@@ -320,15 +384,15 @@ export default function PageClient() {
                 </div>
               </motion.div>
 
-              {/* Floating badges */}
+              {/* Floating badges — emoji changes with frame */}
               {[
-                {emoji:"🖨️",label:"Setup",pos:"top-[6%] left-[0%]",delay:0},
-                {emoji:"📶",label:"Wi-Fi",pos:"top-[10%] right-[0%]",delay:0.5},
-                {emoji:"💧",label:"Ink",pos:"bottom-[30%] left-[-2%]",delay:1},
-                {emoji:"📄",label:"Jams",pos:"bottom-[26%] right-[-2%]",delay:1.5},
+                {emoji: frame.particles[0], label:"Setup", pos:"top-[6%] left-[0%]", delay:0},
+                {emoji: frame.particles[1], label:"Fix", pos:"top-[10%] right-[0%]", delay:0.5},
+                {emoji: frame.particles[2], label:"Learn", pos:"bottom-[30%] left-[-2%]", delay:1},
+                {emoji: frame.particles[3], label:"Done", pos:"bottom-[26%] right-[-2%]", delay:1.5},
               ].map((b,i)=>(
-                <motion.div key={i} initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}}
-                  transition={{delay:0.8+b.delay,duration:0.5,type:"spring"}}
+                <motion.div key={`badge-${frameIdx}-${i}`} initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}}
+                  transition={{delay:0.3+b.delay,duration:0.5,type:"spring"}}
                   className={`absolute ${b.pos} z-20`}>
                   <motion.div animate={{y:[0,-8,0]}}
                     transition={{duration:3+i*0.5,repeat:Infinity,ease:"easeInOut",delay:b.delay}}
@@ -343,9 +407,9 @@ export default function PageClient() {
               <motion.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:1.5,duration:0.5}}
                 className="absolute top-[0%] left-1/2 -translate-x-1/2 z-30">
                 <div className="px-4 py-2 text-white text-sm font-bold rounded-xl shadow-lg whitespace-nowrap"
-                  style={{backgroundColor:ACCENT_HEX,boxShadow:`0 10px 25px ${ACCENT_HEX}40`}}>
+                  style={{backgroundColor:frame.color,boxShadow:`0 10px 25px ${frame.color}40`,transition:"all 1s"}}>
                   Let&apos;s fix your printer! 🖨️
-                  <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45" style={{backgroundColor:ACCENT_HEX}} />
+                  <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45" style={{backgroundColor:frame.color,transition:"all 1s"}} />
                 </div>
               </motion.div>
             </div>
