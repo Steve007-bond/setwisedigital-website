@@ -167,6 +167,237 @@ function ToolCard({ tool, i }: { tool: Tool; i: number }) {
   );
 }
 
+
+const CAMERASIMULATOR_SCENES = [
+  { id: "light", title: "Light enters the lens", emoji: "☀️", desc: "Light from the scene passes through the glass lens elements", duration: 4000, color: "#9333ea", elements: { light: true, sensor: false, process: false, screen: false, save: false, done: false } },
+  { id: "sensor", title: "Sensor captures the image", emoji: "📷", desc: "Millions of pixels convert light into electrical signals", duration: 4000, color: "#06b6d4", elements: { light: true, sensor: true, process: false, screen: false, save: false, done: false } },
+  { id: "process", title: "Processor creates the photo", emoji: "🧠", desc: "The processor applies colour, sharpness, and noise reduction", duration: 4000, color: "#8b5cf6", elements: { light: false, sensor: true, process: true, screen: false, save: false, done: false } },
+  { id: "screen", title: "Preview on screen", emoji: "🖥️", desc: "Your photo shows on the LCD — zoom in to check sharpness", duration: 5000, color: "#f59e0b", elements: { light: false, sensor: false, process: true, screen: true, save: false, done: false } },
+  { id: "save", title: "Saved to memory card", emoji: "💾", desc: "The image is written to your SD card as JPEG or RAW", duration: 4000, color: "#10b981", elements: { light: false, sensor: false, process: false, screen: true, save: true, done: false } },
+  { id: "done", title: "Photo captured! ✅", emoji: "🎉", desc: "Transfer to your phone anytime via Wi-Fi or cable.", duration: 4000, color: "#22c55e", elements: { light: false, sensor: false, process: false, screen: true, save: true, done: true } },
+];
+
+function CameraSimulator() {
+  const [sceneIdx, setSceneIdx] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const simRef = useRef<HTMLDivElement>(null);
+  const isVisible = useInView(simRef, { once: true, margin: "-100px" });
+
+  const scene = CAMERASIMULATOR_SCENES[sceneIdx];
+  const progress = ((sceneIdx + 1) / CAMERASIMULATOR_SCENES.length) * 100;
+
+  useEffect(() => {
+    if (!isPlaying) return;
+    const timer = setTimeout(() => {
+      if (sceneIdx < CAMERASIMULATOR_SCENES.length - 1) {
+        setSceneIdx(s => s + 1);
+      } else {
+        setIsPlaying(false);
+      }
+    }, scene.duration);
+    return () => clearTimeout(timer);
+  }, [sceneIdx, isPlaying, scene.duration]);
+
+  return (
+    <section ref={simRef} className="py-20 border-b border-zinc-800/50 bg-zinc-950/60 overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-3">See How Digital Photography Works</h2>
+          <p className="text-zinc-400 text-lg">30-second animated walkthrough — tap Play to begin</p>
+        </motion.div>
+
+        <motion.div initial={{opacity:0,scale:0.95}} animate={isVisible ? {opacity:1,scale:1} : {}}
+          transition={{duration:0.8}} className="relative max-w-4xl mx-auto">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] rounded-full blur-[100px]"
+            style={{ backgroundColor: `${scene.color}12`, transition: "background-color 1s" }} />
+          <div className="relative bg-zinc-900/80 border border-zinc-800 rounded-3xl p-6 md:p-10 backdrop-blur-sm">
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-3 h-3 rounded-full bg-red-500/80" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <div className="w-3 h-3 rounded-full bg-green-500/80" />
+              <span className="ml-3 text-xs text-zinc-500 font-bold">See How Digital Photography Works</span>
+            </div>
+            <div className="w-full h-1 bg-zinc-800 rounded-full mb-8 overflow-hidden">
+              <motion.div className="h-full rounded-full"
+                style={{ backgroundColor: scene.color, transition: "background-color 0.5s" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.5 }} />
+            </div>
+            <div className="relative h-[220px] md:h-[260px] mb-8">
+              
+              {"/* Light */"}
+              <motion.div
+                className="absolute left-[3%] top-[35%] flex flex-col items-center"
+                animate={{ opacity: scene.elements.light ? 1 : 0.15, scale: scene.elements.light ? 1 : 0.85 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl border-2 flex items-center justify-center"
+                  style={{ borderColor: scene.elements.light ? scene.color : "#374151", backgroundColor: scene.elements.light ? `${scene.color}15` : "#1e293b", transition: "all 0.6s" }}>
+                  <span className="text-2xl md:text-3xl">☀️</span>
+                </div>
+                <span className="text-[11px] text-zinc-500 font-bold mt-2">Light</span>
+                {scene.elements.light && (
+                  <motion.div className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
+                    style={{ backgroundColor: scene.color }}
+                    animate={{ scale: [1, 1.4, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }} />
+                )}
+              </motion.div>
+              {"/* Sensor */"}
+              <motion.div
+                className="absolute left-[22%] top-[35%] flex flex-col items-center"
+                animate={{ opacity: scene.elements.sensor ? 1 : 0.15, scale: scene.elements.sensor ? 1 : 0.85 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl border-2 flex items-center justify-center"
+                  style={{ borderColor: scene.elements.sensor ? scene.color : "#374151", backgroundColor: scene.elements.sensor ? `${scene.color}15` : "#1e293b", transition: "all 0.6s" }}>
+                  <span className="text-2xl md:text-3xl">📷</span>
+                </div>
+                <span className="text-[11px] text-zinc-500 font-bold mt-2">Sensor</span>
+                {scene.elements.sensor && (
+                  <motion.div className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
+                    style={{ backgroundColor: scene.color }}
+                    animate={{ scale: [1, 1.4, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }} />
+                )}
+              </motion.div>
+              {"/* Processor */"}
+              <motion.div
+                className="absolute left-[41%] top-[35%] flex flex-col items-center"
+                animate={{ opacity: scene.elements.process ? 1 : 0.15, scale: scene.elements.process ? 1 : 0.85 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl border-2 flex items-center justify-center"
+                  style={{ borderColor: scene.elements.process ? scene.color : "#374151", backgroundColor: scene.elements.process ? `${scene.color}15` : "#1e293b", transition: "all 0.6s" }}>
+                  <span className="text-2xl md:text-3xl">🧠</span>
+                </div>
+                <span className="text-[11px] text-zinc-500 font-bold mt-2">Processor</span>
+                {scene.elements.process && (
+                  <motion.div className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
+                    style={{ backgroundColor: scene.color }}
+                    animate={{ scale: [1, 1.4, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }} />
+                )}
+              </motion.div>
+              {"/* Screen */"}
+              <motion.div
+                className="absolute left-[60%] top-[35%] flex flex-col items-center"
+                animate={{ opacity: scene.elements.screen ? 1 : 0.15, scale: scene.elements.screen ? 1 : 0.85 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl border-2 flex items-center justify-center"
+                  style={{ borderColor: scene.elements.screen ? scene.color : "#374151", backgroundColor: scene.elements.screen ? `${scene.color}15` : "#1e293b", transition: "all 0.6s" }}>
+                  <span className="text-2xl md:text-3xl">🖥️</span>
+                </div>
+                <span className="text-[11px] text-zinc-500 font-bold mt-2">Screen</span>
+                {scene.elements.screen && (
+                  <motion.div className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
+                    style={{ backgroundColor: scene.color }}
+                    animate={{ scale: [1, 1.4, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }} />
+                )}
+              </motion.div>
+              {"/* Card */"}
+              <motion.div
+                className="absolute left-[79%] top-[35%] flex flex-col items-center"
+                animate={{ opacity: scene.elements.save ? 1 : 0.15, scale: scene.elements.save ? 1 : 0.85 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl border-2 flex items-center justify-center"
+                  style={{ borderColor: scene.elements.save ? scene.color : "#374151", backgroundColor: scene.elements.save ? `${scene.color}15` : "#1e293b", transition: "all 0.6s" }}>
+                  <span className="text-2xl md:text-3xl">💾</span>
+                </div>
+                <span className="text-[11px] text-zinc-500 font-bold mt-2">Card</span>
+                {scene.elements.save && (
+                  <motion.div className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
+                    style={{ backgroundColor: scene.color }}
+                    animate={{ scale: [1, 1.4, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }} />
+                )}
+              </motion.div>
+              
+              {scene.elements.light && scene.elements.sensor && (
+                <div className="absolute top-[42%]" style={{ left: "16%" }}>
+                  {[0,1,2].map(j => (
+                    <motion.div key={j} className="absolute w-2 h-2 rounded-full"
+                      style={{ backgroundColor: scene.color }}
+                      animate={{ x: [0, 27], opacity: [0, 1, 0] }}
+                      transition={{ duration: 1, repeat: Infinity, delay: j * 0.3 }} />
+                  ))}
+                </div>
+              )}
+              {scene.elements.sensor && scene.elements.process && (
+                <div className="absolute top-[42%]" style={{ left: "35%" }}>
+                  {[0,1,2].map(j => (
+                    <motion.div key={j} className="absolute w-2 h-2 rounded-full"
+                      style={{ backgroundColor: scene.color }}
+                      animate={{ x: [0, 27], opacity: [0, 1, 0] }}
+                      transition={{ duration: 1, repeat: Infinity, delay: j * 0.3 }} />
+                  ))}
+                </div>
+              )}
+              {scene.elements.process && scene.elements.screen && (
+                <div className="absolute top-[42%]" style={{ left: "54%" }}>
+                  {[0,1,2].map(j => (
+                    <motion.div key={j} className="absolute w-2 h-2 rounded-full"
+                      style={{ backgroundColor: scene.color }}
+                      animate={{ x: [0, 27], opacity: [0, 1, 0] }}
+                      transition={{ duration: 1, repeat: Infinity, delay: j * 0.3 }} />
+                  ))}
+                </div>
+              )}
+              {scene.elements.screen && scene.elements.save && (
+                <div className="absolute top-[42%]" style={{ left: "73%" }}>
+                  {[0,1,2].map(j => (
+                    <motion.div key={j} className="absolute w-2 h-2 rounded-full"
+                      style={{ backgroundColor: scene.color }}
+                      animate={{ x: [0, 27], opacity: [0, 1, 0] }}
+                      transition={{ duration: 1, repeat: Infinity, delay: j * 0.3 }} />
+                  ))}
+                </div>
+              )}
+            </div>
+            <motion.div key={`info-${sceneIdx}`} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="text-center mb-6">
+              <div className="inline-flex items-center gap-3 mb-3">
+                <span className="text-3xl">{scene.emoji}</span>
+                <h3 className="text-xl md:text-2xl font-black text-white">{scene.title}</h3>
+              </div>
+              <p className="text-zinc-400 text-base max-w-lg mx-auto">{scene.desc}</p>
+            </motion.div>
+            <div className="flex justify-center gap-1.5 mb-6">
+              {CAMERASIMULATOR_SCENES.map((_: typeof scene, i: number) => (
+                <button key={i} onClick={() => { setSceneIdx(i); setHasStarted(true); setIsPlaying(false); }}
+                  className="h-1.5 rounded-full transition-all duration-500 cursor-pointer"
+                  style={{ width: i === sceneIdx ? "24px" : "8px", backgroundColor: i === sceneIdx ? scene.color : i < sceneIdx ? `${scene.color}60` : "rgba(255,255,255,0.1)" }} />
+              ))}
+            </div>
+            <div className="flex justify-center gap-3">
+              {!hasStarted ? (
+                <button onClick={() => { setSceneIdx(0); setIsPlaying(true); setHasStarted(true); }}
+                  className="px-8 py-3 rounded-xl font-bold text-white flex items-center gap-2 transition-all hover:scale-105"
+                  style={{ backgroundColor: scene.color }}>▶ Play Simulation</button>
+              ) : (
+                <>
+                  <button onClick={() => setIsPlaying(!isPlaying)}
+                    className="px-6 py-3 rounded-xl font-bold text-white flex items-center gap-2 transition-all hover:scale-105"
+                    style={{ backgroundColor: scene.color }}>{isPlaying ? "⏸ Pause" : "▶ Resume"}</button>
+                  <button onClick={() => { setSceneIdx(0); setIsPlaying(true); }}
+                    className="px-6 py-3 rounded-xl font-bold text-white bg-white/10 border border-white/10 flex items-center gap-2 hover:scale-105 hover:bg-white/15">🔄 Replay</button>
+                  {sceneIdx < CAMERASIMULATOR_SCENES.length - 1 && (
+                    <button onClick={() => setSceneIdx(s => Math.min(s + 1, CAMERASIMULATOR_SCENES.length - 1))}
+                      className="px-6 py-3 rounded-xl font-bold text-white bg-white/10 border border-white/10 flex items-center gap-2 hover:scale-105 hover:bg-white/15">Skip →</button>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 export default function PageClient() {
   const [frameIdx, setFrameIdx] = useState(0);
   // Auto-cycle frames every 4 seconds
@@ -183,46 +414,143 @@ export default function PageClient() {
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
-        {/* Ambient */}
-        <motion.div className="absolute inset-0 pointer-events-none"
-          animate={{background:[
-            `radial-gradient(ellipse at 20% 30%, ${ACCENT_HEX}20 0%, #060410 60%)`,
-            `radial-gradient(ellipse at 80% 70%, ${ACCENT_HEX}14 0%, #060410 60%)`,
-          ]}} transition={{duration:6,repeat:Infinity,repeatType:"reverse"}} />
-        {[...Array(14)].map((_,i) => (
-          <motion.div key={i} className="absolute rounded-full pointer-events-none"
-            style={{width:`${5+(i%4)*2}px`,height:`${5+(i%4)*2}px`,left:`${(i*19+5)%100}%`,top:`${(i*27+8)%100}%`,backgroundColor:ACCENT_HEX+"28"}}
-            animate={{opacity:[0,0.7,0],y:[-6,6,-6]}} transition={{duration:4+(i%3),repeat:Infinity,delay:(i*0.35)%5}} />
-        ))}
+        {/* ── Dynamic background that changes colour with each frame ── */}
+        <div className="absolute inset-0">
+          <motion.div className="absolute inset-0 pointer-events-none"
+            key={`bg-${frameIdx}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2 }}
+            style={{ background: `radial-gradient(ellipse at 30% 40%, ${frame.color}18 0%, #060410 55%), radial-gradient(ellipse at 70% 60%, ${frame.color}10 0%, #060410 55%)` }}
+          />
+
+          {/* Constellation nodes — colour follows frame */}
+          {Array.from({ length: 10 }).map((_, i) => {
+            const col = i % 4;
+            const row = Math.floor(i / 4);
+            const bx = 8 + col * 26 + (row % 2 === 1 ? 13 : 0);
+            const by = 12 + row * 32;
+            return (
+              <motion.div key={`n-${i}`} className="absolute pointer-events-none"
+                style={{ left: `${bx}%`, top: `${by}%` }}
+                animate={{
+                  x: [0, 12 * Math.sin(i * 0.9), -8 * Math.cos(i * 0.6), 0],
+                  y: [0, -10 * Math.cos(i * 0.7), 6 * Math.sin(i * 0.8), 0],
+                  opacity: [0.12, 0.3, 0.15, 0.12],
+                }}
+                transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}>
+                <div className="w-2.5 h-2.5 rotate-45 rounded-sm"
+                  style={{ background: `${frame.color}60`, boxShadow: `0 0 ${10 + i * 2}px ${frame.color}40`, transition: "background 1s, box-shadow 1s" }} />
+                <motion.div className="absolute inset-[-8px] rounded-full border"
+                  style={{ borderColor: `${frame.color}18` }}
+                  animate={{ scale: [1, 2.5, 1], opacity: [0.3, 0, 0.3] }}
+                  transition={{ duration: 4 + i * 0.4, repeat: Infinity, delay: i * 0.3 }} />
+              </motion.div>
+            );
+          })}
+
+          {/* Floating emoji particles — change with each frame */}
+          {frame.particles.map((emoji: string, i: number) => (
+            <motion.div
+              key={`particle-${frameIdx}-${i}`}
+              className="absolute text-2xl pointer-events-none select-none"
+              style={{
+                left: `${10 + (i * 16) % 80}%`,
+                top: `${15 + (i * 23) % 60}%`,
+              }}
+              initial={{ opacity: 0, scale: 0, y: 20 }}
+              animate={{
+                opacity: [0, 0.6, 0.3, 0],
+                scale: [0.5, 1.2, 1, 0.5],
+                y: [20, -30 - i * 10, -60, -90],
+                x: [0, (i % 2 === 0 ? 15 : -15), (i % 2 === 0 ? -10 : 10), 0],
+              }}
+              transition={{
+                duration: 3.5,
+                delay: i * 0.3,
+                ease: "easeOut",
+              }}
+            >
+              {emoji}
+            </motion.div>
+          ))}
+
+          {/* Sweeping beam — colour shifts */}
+          <motion.div className="absolute w-[180px] h-[150vh] -top-[25vh] pointer-events-none"
+            style={{ background: `linear-gradient(90deg, transparent, ${frame.color}06, ${frame.color}04, transparent)`, transform: "rotate(15deg)", transition: "background 1s" }}
+            animate={{ x: ["-200px", "120vw"] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", repeatDelay: 4 }} />
+
+          {/* Dot grid */}
+          <div className="absolute inset-0 opacity-[0.025] pointer-events-none"
+            style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:0.05}}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-black uppercase tracking-[0.14em] mb-8"
-              style={{backgroundColor:ACCENT_HEX+"15",borderColor:ACCENT_HEX+"40",color:ACCENT_HEX}}>
-              CAMERA & PHOTOGRAPHY MASTERY
+              style={{backgroundColor:frame.color+"15",borderColor:frame.color+"40",color:frame.color,transition:"all 1s"}}>
+              CAMERA LEARNING GUIDE
             </motion.div>
 
-            {/* Dynamic H1 — changes with each frame */}
-            <h1 className="font-black leading-[0.92] tracking-tighter mb-8 min-h-[18rem] md:min-h-[14rem]">
-              {frame.headline.split("\n").map((line: string, i: number) => (
-                <motion.span key={`${frameIdx}-${i}`} className={`block text-6xl md:text-7xl ${
-                  i === frame.headline.split("\n").length - 1 && frame.headline.split("\n").length > 1
-                    ? "bg-gradient-to-r from-purple-600 to-violet-500 bg-clip-text text-transparent italic"
-                    : "text-white"
-                }`}
-                  initial={{opacity:0,y:40}} animate={{opacity:1,y:0}}
-                  transition={{delay:i*0.12,type:"spring",stiffness:80}}>
-                  {line}
-                </motion.span>
-              ))}
+            {/* Dynamic H1 — animated headline cycling */}
+            <h1 className="font-black leading-[0.92] tracking-tighter mb-8 min-h-[10rem] md:min-h-[8rem]">
+              <motion.span
+                key={`h-${frameIdx}`}
+                className="block text-5xl sm:text-6xl md:text-7xl"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ type: "spring", stiffness: 80 }}
+              >
+                {frame.headline.split("\n").map((line: string, i: number) => (
+                  <span key={i} className={`block ${
+                    i > 0
+                      ? ""
+                      : "text-white"
+                  }`}
+                  style={i > 0 ? { background: `linear-gradient(to right, ${frame.color}, #06b6d4)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", transition: "all 1s" } : undefined}>
+                    {line}
+                  </span>
+                ))}
+              </motion.span>
             </h1>
 
-            <motion.p className="text-xl text-zinc-300 font-medium mb-3 leading-relaxed max-w-lg"
-              key={`sub-${frameIdx}`} initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.3}}>
-              {frame.visualSub}
-            </motion.p>
-            <motion.p className="text-base text-zinc-500 mb-10 max-w-lg"
+            {/* Animated subtitle with brand ticker */}
+            <motion.div
+              key={`sub-${frameIdx}`}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mb-3"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-3xl">{frame.emoji}</span>
+                <div>
+                  <p className="text-lg font-bold text-white">{frame.visualLabel}</p>
+                  <p className="text-base text-zinc-400">{frame.visualSub}</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Frame indicator dots */}
+            <div className="flex items-center gap-2 mb-10">
+              {FRAMES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setFrameIdx(i)}
+                  className="h-1.5 rounded-full transition-all duration-500"
+                  style={{
+                    width: i === frameIdx ? "28px" : "8px",
+                    backgroundColor: i === frameIdx ? frame.color : "rgba(255,255,255,0.15)",
+                    transition: "all 0.5s",
+                  }}
+                />
+              ))}
+            </div>
+
+            <motion.p className="text-sm text-zinc-500 mb-10 max-w-lg"
               initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.4}}>
               Plain English · No tech knowledge needed · Designed for adults 45+
             </motion.p>
@@ -230,14 +558,13 @@ export default function PageClient() {
             <motion.div className="flex flex-col sm:flex-row gap-4 mb-10"
               initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:0.5}}>
               <motion.a href="#learn" whileHover={{scale:1.03}} whileTap={{scale:0.97}}
-                className="px-9 py-5 bg-gradient-to-r from-purple-600 to-violet-500 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-purple-900/50">
+                className="px-9 py-5 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 shadow-xl"
+                style={{ background: `linear-gradient(to right, ${frame.color}, #06b6d4)`, boxShadow: `0 20px 40px ${frame.color}30`, transition: "all 1s" }}>
                 Start Learning Free <ArrowRight size={20} />
               </motion.a>
               <Link href="/contact">
                 <motion.div whileHover={{scale:1.03}} whileTap={{scale:0.97}}
-                  className="px-9 py-5 border-2 border-zinc-700 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 transition-colors cursor-pointer"
-                  onMouseEnter={e=>(e.currentTarget.style.borderColor=ACCENT_HEX)}
-                onMouseLeave={e=>(e.currentTarget.style.borderColor="#3f3f46")}>
+                  className="px-9 py-5 border-2 border-zinc-700 text-white font-black text-xl rounded-2xl flex items-center justify-center gap-3 transition-colors cursor-pointer hover:border-blue-500">
                   Book a Live Lesson
                 </motion.div>
               </Link>
@@ -250,14 +577,74 @@ export default function PageClient() {
                 <span className="text-zinc-400 text-sm font-medium ml-1">2,400+ learners</span>
               </div>
               <div className="flex items-center gap-2 text-green-400 text-sm font-bold"><Shield size={14}/>100% Free</div>
-              <div className="flex items-center gap-2 text-zinc-400 text-sm"><CheckCircle2 size={14} style={{color:ACCENT_HEX}}/>Plain English</div>
+              <div className="flex items-center gap-2 text-zinc-400 text-sm"><CheckCircle2 size={14} style={{color:frame.color,transition:"color 1s"}}/>Plain English</div>
             </motion.div>
           </div>
 
-          {/* Animated visual — NO real image */}
-          <motion.div initial={{opacity:0,x:30}} animate={{opacity:1,x:0}} transition={{delay:0.3,duration:0.8}}
-            className="hidden lg:block">
-            <HeroCharacter src="/Images/hero-camera.jpeg" alt="Camera guide" accentColor="#9333ea" glowColor="#7c3aed" floatingIcons={["📷","✨","🔄","🌅"]} speechBubble="Smile! 📸" />
+          {/* Right: 3D Character — seamless, oversized */}
+          <motion.div initial={{opacity:0,x:50,scale:0.95}} animate={{opacity:1,x:0,scale:1}}
+            transition={{duration:1,delay:0.3,ease:"easeOut"}}
+            className="hidden lg:block relative lg:overflow-visible">
+            {/* Glow — colour shifts with frame */}
+            <div className="absolute inset-0 -z-10">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full blur-[130px]" style={{backgroundColor:`${frame.color}22`,transition:"background-color 1s"}} />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-cyan-400/12 rounded-full blur-[90px]" />
+            </div>
+
+            <div className="relative lg:scale-[1.4] lg:origin-center lg:translate-x-[10%] lg:-translate-y-[3%]">
+              {/* Rotating rings — colour shifts */}
+              <motion.div animate={{rotate:360}} transition={{duration:30,repeat:Infinity,ease:"linear"}}
+                className="absolute inset-[-10%] rounded-full border" style={{borderColor:`${frame.color}18`,transition:"border-color 1s"}}>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full" style={{backgroundColor:frame.color,boxShadow:`0 0 14px ${frame.color}90`,transition:"all 1s"}} />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+              </motion.div>
+              <motion.div animate={{rotate:-360}} transition={{duration:22,repeat:Infinity,ease:"linear"}}
+                className="absolute inset-[-4%] rounded-full border border-cyan-500/10">
+                <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-indigo-400 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
+              </motion.div>
+
+              {/* Character image */}
+              <motion.div animate={{y:[0,-14,0]}} transition={{duration:5,repeat:Infinity,ease:"easeInOut"}}
+                className="relative z-10">
+                <div className="relative overflow-hidden">
+                  <img src="/Images/hero-camera.jpeg" alt="Camera guide"
+                    className="w-full h-auto"
+                    style={{
+                      maskImage:'radial-gradient(ellipse 80% 75% at 50% 42%, black 35%, transparent 100%)',
+                      WebkitMaskImage:'radial-gradient(ellipse 80% 75% at 50% 42%, black 35%, transparent 100%)',
+                    }} />
+                </div>
+              </motion.div>
+
+              {/* Floating badges — emoji changes with frame */}
+              {[
+                {emoji: frame.particles[0], label:"Shoot", pos:"top-[6%] left-[0%]", delay:0},
+                {emoji: frame.particles[1], label:"Quality", pos:"top-[10%] right-[0%]", delay:0.5},
+                {emoji: frame.particles[2], label:"Update", pos:"bottom-[30%] left-[-2%]", delay:1},
+                {emoji: frame.particles[3], label:"Scenes", pos:"bottom-[26%] right-[-2%]", delay:1.5},
+              ].map((b,i)=>(
+                <motion.div key={`badge-${frameIdx}-${i}`} initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}}
+                  transition={{delay:0.3+b.delay,duration:0.5,type:"spring"}}
+                  className={`absolute ${b.pos} z-20`}>
+                  <motion.div animate={{y:[0,-8,0]}}
+                    transition={{duration:3+i*0.5,repeat:Infinity,ease:"easeInOut",delay:b.delay}}
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.08] backdrop-blur-md border border-white/[0.1] shadow-lg">
+                    <span className="text-lg">{b.emoji}</span>
+                    <span className="text-xs font-bold text-white/80 hidden sm:inline">{b.label}</span>
+                  </motion.div>
+                </motion.div>
+              ))}
+
+              {/* Speech bubble */}
+              <motion.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:1.5,duration:0.5}}
+                className="absolute top-[0%] left-1/2 -translate-x-1/2 z-30">
+                <div className="px-4 py-2 text-white text-sm font-bold rounded-xl shadow-lg whitespace-nowrap"
+                  style={{backgroundColor:frame.color,boxShadow:`0 10px 25px ${frame.color}40`,transition:"all 1s"}}>
+                  Smile! 📸
+                  <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45" style={{backgroundColor:frame.color,transition:"all 1s"}} />
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -274,6 +661,10 @@ export default function PageClient() {
           ))}
         </div>
       </section>
+
+      
+      {/* INTERACTIVE SIMULATOR */}
+      <CameraSimulator />
 
       {/* TOPICS */}
       <section className="py-24 bg-zinc-950/50 border-y border-zinc-800/50">
