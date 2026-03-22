@@ -13,8 +13,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
-import HeroCharacter from "@/components/HeroCharacter";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
    CYCLING TEXT — simulates real search queries typing
@@ -57,6 +56,51 @@ function CyclingText() {
 /* ═══════════════════════════════════════════════════════════════
    BACKGROUND
    ═══════════════════════════════════════════════════════════════ */
+
+/* ── Typewriter rotating phrases for About hero ── */
+const ABOUT_PHRASES = [
+  "Printer & Scanner Setup",
+  "GPS Map Updates",
+  "Alexa & Smart Home",
+  "Online Security Basics",
+  "Camera Troubleshooting",
+  "Step-by-Step Courses",
+];
+
+function useAboutTypewriter(phrases: string[], typingSpeed = 60, deletingSpeed = 35, pauseDuration = 2200) {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const tick = useCallback(() => {
+    const currentPhrase = phrases[phraseIndex];
+
+    if (!isDeleting) {
+      const next = currentPhrase.slice(0, displayText.length + 1);
+      setDisplayText(next);
+      if (next === currentPhrase) {
+        setTimeout(() => setIsDeleting(true), pauseDuration);
+        return;
+      }
+    } else {
+      const next = currentPhrase.slice(0, displayText.length - 1);
+      setDisplayText(next);
+      if (next === "") {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        return;
+      }
+    }
+  }, [phrases, phraseIndex, displayText, isDeleting, pauseDuration]);
+
+  useEffect(() => {
+    const speed = isDeleting ? deletingSpeed : typingSpeed;
+    const timer = setTimeout(tick, speed);
+    return () => clearTimeout(timer);
+  }, [tick, isDeleting, typingSpeed, deletingSpeed]);
+
+  return displayText;
+}
 function AuroraBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
@@ -99,6 +143,7 @@ export default function About() {
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const aboutTypedText = useAboutTypewriter(ABOUT_PHRASES);
 
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-zinc-900 font-sans selection:bg-blue-100 selection:text-blue-900">
@@ -163,28 +208,25 @@ export default function About() {
 
               <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
                 className="mt-8 text-[2.5rem] sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-white">
-                People Search for{" "}
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
-                    Tech Help.
-                  </span>
-                </span>
+                We Make Tech
                 <br />
-                <span className="text-zinc-400">We Teach Them</span>{" "}
-                <span className="relative inline-block">
-                  <span className="text-white">How.</span>
-                  <motion.span className="absolute -bottom-1.5 left-0 h-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500"
-                    initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ duration: 1, delay: 1.0 }} />
+                <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
+                  Simple to Learn.
                 </span>
               </motion.h1>
 
-              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}
-                className="mt-8 text-lg sm:text-xl text-zinc-400 leading-relaxed font-medium max-w-xl">
-                Every day, thousands of adults 45+ search for help with their <strong className="text-white">printers</strong>,{" "}
-                <strong className="text-white">GPS devices</strong>, <strong className="text-white">Alexa</strong>, and{" "}
-                <strong className="text-white">smart home</strong>. We don&apos;t just give answers — we{" "}
-                <em className="text-blue-300 not-italic font-bold">teach</em> them, step by step, in plain English.
-              </motion.p>
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }}
+                className="mt-8 max-w-xl">
+                <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed font-medium mb-4">
+                  Helping everyday users master their devices — like
+                </p>
+                <div className="h-10 md:h-12 flex items-center">
+                  <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    {aboutTypedText}
+                  </span>
+                  <span className="w-[3px] h-7 md:h-8 bg-blue-400 ml-0.5 animate-pulse rounded-full" />
+                </div>
+              </motion.div>
 
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7 }}
                 className="mt-10 flex flex-col sm:flex-row gap-4">
@@ -197,24 +239,107 @@ export default function About() {
               </motion.div>
             </div>
 
-            {/* Right — 3D Character with animations */}
+            {/* Right — 3D Character, seamless edge-blended, oversized */}
             <div className="hidden lg:block">
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }}>
-                <HeroCharacter
-                  src="/Images/hero-about.png"
-                  alt="Setwise Digital team — technology educators"
-                  accentColor="#3b82f6"
-                  floatingIcons={["💡", "📚", "🤝", "⭐"]}
-                  speechBubble="Technology for everyone!"
-                />
+              <motion.div 
+                initial={{ opacity: 0, x: 50, scale: 0.95 }} 
+                animate={{ opacity: 1, x: 0, scale: 1 }} 
+                transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                className="relative lg:overflow-visible"
+              >
+                {/* Glow behind character */}
+                <div className="absolute inset-0 -z-10">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-blue-500/20 rounded-full blur-[120px]" />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-cyan-400/12 rounded-full blur-[80px]" />
+                </div>
+
+                {/* Character container — oversized */}
+                <div className="relative lg:scale-[1.25] lg:origin-center lg:translate-x-[6%]">
+                  {/* Outer rotating ring */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-[-8%] rounded-full border border-blue-500/15"
+                  >
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-400 rounded-full shadow-[0_0_12px_rgba(59,130,246,0.6)]" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+                  </motion.div>
+
+                  {/* Inner counter-rotating ring */}
+                  <motion.div
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-[-3%] rounded-full border border-cyan-500/10"
+                  >
+                    <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-indigo-400 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
+                  </motion.div>
+
+                  {/* Character image — radial fade, no hard edges */}
+                  <motion.div
+                    animate={{ y: [0, -12, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                    className="relative z-10"
+                  >
+                    <div className="relative overflow-hidden">
+                      <img
+                        src="/Images/hero-about.png"
+                        alt="Setwise Digital team — technology educators"
+                        className="w-full h-auto"
+                        style={{
+                          maskImage: 'radial-gradient(ellipse 75% 70% at 50% 45%, black 40%, transparent 100%)',
+                          WebkitMaskImage: 'radial-gradient(ellipse 75% 70% at 50% 45%, black 40%, transparent 100%)',
+                        }}
+                      />
+                    </div>
+                  </motion.div>
+
+                  {/* Floating badges */}
+                  {[
+                    { emoji: "💡", label: "Learn", pos: "top-[8%] left-[2%]", delay: 0 },
+                    { emoji: "📚", label: "Courses", pos: "top-[12%] right-[2%]", delay: 0.5 },
+                    { emoji: "🤝", label: "Support", pos: "bottom-[28%] left-[0%]", delay: 1 },
+                    { emoji: "⭐", label: "Trusted", pos: "bottom-[25%] right-[0%]", delay: 1.5 },
+                  ].map((badge, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.8 + badge.delay, duration: 0.5, type: "spring" }}
+                      className={`absolute ${badge.pos} z-20`}
+                    >
+                      <motion.div
+                        animate={{ y: [0, -8, 0] }}
+                        transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: badge.delay }}
+                        className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.08] backdrop-blur-md border border-white/[0.1] shadow-lg"
+                      >
+                        <span className="text-lg">{badge.emoji}</span>
+                        <span className="text-xs font-bold text-white/80">{badge.label}</span>
+                      </motion.div>
+                    </motion.div>
+                  ))}
+
+                  {/* Speech bubble */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.5, duration: 0.5 }}
+                    className="absolute top-[2%] left-1/2 -translate-x-1/2 z-30"
+                  >
+                    <div className="px-4 py-2 bg-blue-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-600/30 whitespace-nowrap">
+                      Technology for everyone! 🌟
+                      <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-blue-600 rotate-45" />
+                    </div>
+                  </motion.div>
+                </div>
+
                 {/* Stats grid below character */}
-                <div className="grid grid-cols-3 gap-3 mt-6">
+                <div className="grid grid-cols-3 gap-3 mt-4 relative z-20">
                   {[
                     { value: 2016, suffix: "", label: "Founded" },
                     { value: 47, suffix: "+", label: "Free Tools" },
                     { value: 2, suffix: "", label: "Countries" },
                   ].map((s, i) => (
-                    <div key={i} className="text-center p-4 bg-white/5 rounded-xl border border-white/5">
+                    <div key={i} className="text-center p-4 bg-white/5 rounded-xl border border-white/5 backdrop-blur-sm">
                       <div className="text-2xl font-black text-white"><AnimatedCounter target={s.value} suffix={s.suffix} /></div>
                       <div className="text-xs text-zinc-500 font-bold mt-1">{s.label}</div>
                     </div>
