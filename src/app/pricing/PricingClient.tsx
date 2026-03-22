@@ -17,6 +17,7 @@ import PhoneInput from "@/components/PhoneInput";
 import { validateEmail, validatePhone } from "@/lib/validation";
 import Link from "next/link";
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import StorySimulator, { type SimScene } from "@/components/StorySimulator";
 
 /* ── Typewriter rotating phrases for Pricing hero ── */
 const PRICING_PHRASES = [
@@ -291,6 +292,22 @@ function ContactModal({ isOpen, onClose, selectedPlan }: { isOpen: boolean; onCl
 /* ═══════════════════════════════════════════════════════════════
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════════════ */
+
+const PRICING_STORY_SCENES: SimScene[] = [
+  { id: "stuck", title: "You have been stuck for hours", emoji: "⏰", desc: "Googling. Watching YouTube videos. Reading forums. Nothing is working. Your device is still broken.", duration: 5000, color: "#ef4444", mood: "sad", subEmojis: ["⏰", "😤", "💻", "❌"] },
+  { id: "cost", title: "Geek Squad wants $150+", emoji: "💸", desc: "And they will fix it once. Next time it breaks? Another $150. You never learn why it happened.", duration: 5000, color: "#f97316", mood: "sad", subEmojis: ["💸", "😰", "🔄", "❌"] },
+  { id: "different", title: "Setwise is different", emoji: "💡", desc: "We do not just fix your problem. We TEACH you. So next time, you fix it yourself. In minutes.", duration: 5000, color: "#3b82f6", mood: "thinking", subEmojis: ["💡", "📚", "🧠", "✅"] },
+  { id: "choose", title: "Pick your plan — pay once", emoji: "📋", desc: "$49 single lesson. $97 skill-builder course. $147 family plan. No subscriptions. Ever.", duration: 5000, color: "#8b5cf6", mood: "neutral", subEmojis: ["💰", "📋", "✅", "🎯"] },
+  { id: "matched", title: "Matched with YOUR expert", emoji: "👨‍🏫", desc: "Not a random agent. A real educator who specializes in YOUR exact device and problem.", duration: 5000, color: "#06b6d4", mood: "happy", subEmojis: ["👨‍🏫", "🎯", "✨", "🤝"] },
+  { id: "session", title: "Your live session begins", emoji: "🎥", desc: "Video call. Screen sharing. Your educator can see exactly what you see. No confusion.", duration: 5000, color: "#3b82f6", mood: "happy", subEmojis: ["🎥", "💻", "🤝", "📱"] },
+  { id: "patience", title: "At YOUR pace. No rushing.", emoji: "🐢", desc: "Repeat any step. Ask any question. There is no clock ticking. Your educator has all the patience.", duration: 5000, color: "#f59e0b", mood: "happy", subEmojis: ["🐢", "❤️", "🤝", "😊"] },
+  { id: "you-do-it", title: "Now YOU do it", emoji: "🤲", desc: "Your educator watches while you perform each step yourself. Building muscle memory. Real confidence.", duration: 5000, color: "#10b981", mood: "excited", subEmojis: ["💪", "🤲", "✅", "👏"] },
+  { id: "solved", title: "Problem solved — and understood", emoji: "🎉", desc: "Your device works. But unlike Geek Squad, you know WHY. You can do it again tomorrow.", duration: 5000, color: "#22c55e", mood: "excited", subEmojis: ["🎉", "🧠", "✅", "⭐"] },
+  { id: "lifetime", title: "Lifetime access to your guide", emoji: "♾️", desc: "Your personalized notes, steps, and recordings are yours forever. Come back anytime.", duration: 5000, color: "#8b5cf6", mood: "proud", subEmojis: ["♾️", "📚", "💾", "✅"] },
+  { id: "compare", title: "$49 vs $150+ at Geek Squad", emoji: "⚖️", desc: "Cheaper. And you get education, not just a fix. The skills stay with you for life.", duration: 5000, color: "#f59e0b", mood: "proud", subEmojis: ["⚖️", "💰", "🏆", "✅"] },
+  { id: "act-now", title: "Do not wait until it gets worse", emoji: "⚡", desc: "Every day without fixing it is a day of frustration. One lesson. One hour. Problem solved forever.", duration: 5000, color: "#ef4444", mood: "excited", subEmojis: ["⚡", "🚀", "🔥", "💪"] },
+];
+
 export default function PricingPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -519,6 +536,10 @@ export default function PricingPage() {
           </div>
         </motion.div>
       </header>
+
+      {/* ════════ ANIMATED STORY SIMULATOR ════════ */}
+      <StorySimulator title="Why This Matters — Right Now" subtitle="See what happens when you choose Setwise over another frustrating Google search" scenes={PRICING_STORY_SCENES} windowTitle="Your Learning Journey — $49 to Confidence" />
+
 
       {/* ════════ MAIN ════════ */}
       <main className="pb-32">

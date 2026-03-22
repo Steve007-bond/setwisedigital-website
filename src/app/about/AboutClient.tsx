@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
 import { useRef, useState, useEffect, useCallback } from "react";
+import StorySimulator, { type SimScene } from "@/components/StorySimulator";
 
 /* ═══════════════════════════════════════════════════════════════
    BACKGROUND
@@ -97,6 +98,22 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
 }
 
 /* ═══════════════════════════════════════════════════════════════ */
+
+const ABOUT_STORY_SCENES: SimScene[] = [
+  { id: "beginning", title: "It started in a living room", emoji: "🏠", desc: "2016. A family watching their parents struggle with a new printer. Confused. Frustrated. Alone.", duration: 5000, color: "#3b82f6", mood: "sad", subEmojis: ["🏠", "👴", "👵", "🖨️"] },
+  { id: "parent", title: "Mom could not print her photos", emoji: "📸", desc: "She just wanted to print pictures of her grandchildren. The printer kept saying offline.", duration: 5000, color: "#ef4444", mood: "sad", subEmojis: ["📸", "😢", "🖨️", "❌"] },
+  { id: "dad", title: "Dad could not update his GPS", emoji: "🗺️", desc: "He drove 40 minutes in the wrong direction because his maps were 3 years out of date.", duration: 5000, color: "#f97316", mood: "sad", subEmojis: ["🗺️", "🚗", "😤", "❓"] },
+  { id: "realization", title: "The problem was not the technology", emoji: "💡", desc: "The problem was that nobody was teaching them. Not in a way they could understand.", duration: 5000, color: "#f59e0b", mood: "thinking", subEmojis: ["💡", "🤔", "💭", "✨"] },
+  { id: "idea", title: "What if we could teach anyone?", emoji: "🌟", desc: "Not with manuals. Not with jargon. With patience. With plain English. With real human kindness.", duration: 5000, color: "#8b5cf6", mood: "excited", subEmojis: ["🌟", "❤️", "📚", "🤝"] },
+  { id: "born", title: "Setwise Digital was born", emoji: "🎂", desc: "A tiny company with a big mission: make technology accessible to everyone, regardless of age.", duration: 5000, color: "#3b82f6", mood: "happy", subEmojis: ["🎂", "🚀", "✨", "🌍"] },
+  { id: "first-guide", title: "Our first guide helped 12 people", emoji: "📖", desc: "A simple printer setup guide. Written like a letter to our own parents. It worked.", duration: 5000, color: "#06b6d4", mood: "happy", subEmojis: ["📖", "1️⃣", "2️⃣", "✅"] },
+  { id: "grew", title: "Then 100. Then 1,000. Then 2,400+", emoji: "📈", desc: "Word spread. Real people, telling other real people: these guides actually make sense.", duration: 5000, color: "#22c55e", mood: "excited", subEmojis: ["📈", "👥", "🌍", "⭐"] },
+  { id: "tools", title: "We built 47 free tools", emoji: "🔧", desc: "Interactive wizards that diagnose your problem and walk you through the fix. All free. No account.", duration: 5000, color: "#f59e0b", mood: "proud", subEmojis: ["🔧", "🆓", "✅", "🎯"] },
+  { id: "live", title: "We added live human lessons", emoji: "👨‍🏫", desc: "Because some people need a patient voice. A real face. Someone who says: you are doing great.", duration: 5000, color: "#8b5cf6", mood: "happy", subEmojis: ["👨‍🏫", "🎥", "❤️", "🤝"] },
+  { id: "today", title: "Today, we serve 2 countries", emoji: "🌍", desc: "USA and beyond. Every guide, every tool, every lesson built with one question: would our parents understand this?", duration: 5000, color: "#3b82f6", mood: "proud", subEmojis: ["🌍", "🇺🇸", "❤️", "👴"] },
+  { id: "mission", title: "Our mission will never change", emoji: "❤️", desc: "Technology should empower, not intimidate. Everyone deserves to feel confident with their devices.", duration: 5000, color: "#ef4444", mood: "proud", subEmojis: ["❤️", "💪", "🌟", "🏆"] },
+];
+
 export default function About() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -366,6 +383,10 @@ export default function About() {
           </div>
         </motion.div>
       </header>
+
+      {/* ════════ ANIMATED STORY SIMULATOR ════════ */}
+      <StorySimulator title="The Setwise Digital Story" subtitle="How a living room frustration became a mission to teach technology — watch our story" scenes={ABOUT_STORY_SCENES} windowTitle="Our Story — From 2016 to Today" />
+
 
       {/* ════════ MAIN ════════ */}
       <main className="pb-32">
