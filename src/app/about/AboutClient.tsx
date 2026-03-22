@@ -13,7 +13,7 @@ import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
 import { useRef, useState, useEffect, useCallback } from "react";
-import CinematicVideoPlayer from "@/components/CinematicVideoPlayer";
+import ImmersiveVideoSection from "@/components/ImmersiveVideoSection";
 
 /* ═══════════════════════════════════════════════════════════════
    BACKGROUND
@@ -372,17 +372,27 @@ export default function About() {
       </header>
 
       {/* ════════ CINEMATIC VIDEO ════════ */}
-      <CinematicVideoPlayer
-        title="The Setwise Digital Story"
-        subtitle="How a living room frustration became a mission to teach technology"
+      <ImmersiveVideoSection
         videoSrc="/videos/about-story.mp4"
-        accentColor="#3b82f6"
+        sectionTitle="The Setwise Digital Story"
+        bgColor="#0a0a0a"
+        scenes={[
+          { time: 0, headline: "Every day, thousands struggle with technology.", color: "#ef4444" },
+          { time: 4, headline: "She just wanted to print photos.", sub: "The printer kept saying offline.", color: "#ef4444" },
+          { time: 8, headline: "He drove 40 minutes the wrong way.", color: "#f97316" },
+          { time: 10, headline: "We do not just fix it. We teach you.", color: "#fbbf24" },
+          { time: 14, headline: "So we built something different.", sub: "Plain English guides for everyone.", color: "#8b5cf6" },
+          { time: 19, headline: "2,400+ learners. 47 free tools.", sub: "Across 2 countries.", color: "#22c55e" },
+          { time: 23, headline: "Live 1-on-1 human lessons.", sub: "Because patience matters.", color: "#06b6d4" },
+          { time: 26, headline: "And it worked.", color: "#22c55e" },
+          { time: 28, headline: "Setwise Digital. Technology Simplified.", color: "#3b82f6" },
+        ]}
         ctaButtons={[
-            { label: "Browse Learning Plans", href: "/pricing", color: "#3b82f6" },
-            { label: "47 Free Tools", href: "/tools", color: "#22c55e" },
-            { label: "Start Live Session", href: "/contact", color: "#8b5cf6" },
-            { label: "Browse TechBridge", href: "/techbridge", color: "#06b6d4" },
-          ]}
+          { label: "Browse Learning Plans", href: "/pricing", color: "#3b82f6" },
+          { label: "47 Free Tools", href: "/tools", color: "#22c55e" },
+          { label: "Start Live Session", href: "/contact", color: "#8b5cf6" },
+          { label: "Browse TechBridge", href: "/techbridge", color: "#06b6d4" },
+        ]}
       />
 
 

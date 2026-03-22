@@ -20,7 +20,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import CinematicVideoPlayer from "@/components/CinematicVideoPlayer";
+import ImmersiveVideoSection from "@/components/ImmersiveVideoSection";
 
 /* ── Typewriter rotating phrases ── */
 const ROTATING_PHRASES = [
@@ -289,19 +289,29 @@ export default function TechBridgePage() {
       </header>
 
       {/* ════════ CINEMATIC VIDEO ════════ */}
-      <CinematicVideoPlayer
-        title="The TechBridge Platform"
-        subtitle="Six topics, one platform — see everything TechBridge covers"
+      <ImmersiveVideoSection
         videoSrc="/videos/techbridge-overview.mp4"
-        accentColor="#3b82f6"
+        sectionTitle="The TechBridge Platform"
+        bgColor="#18181b"
+        scenes={[
+          { time: 0, headline: "TechBridge", sub: "6 topics. One platform. Plain English.", color: "#3b82f6" },
+          { time: 2, headline: "Printers & Scanners", sub: "Wi-Fi setup, paper jams, ink replacement", color: "#2563eb" },
+          { time: 5, headline: "GPS & Navigation", sub: "Map updates, route planning, device setup", color: "#16a34a" },
+          { time: 8, headline: "Smart Home", sub: "Voice control, smart plugs, cameras, routines", color: "#f59e0b" },
+          { time: 11.5, headline: "Alexa & Echo", sub: "50+ commands, skills, routines, music", color: "#06b6d4" },
+          { time: 15, headline: "Cameras", sub: "Firmware, settings, transfers, troubleshooting", color: "#9333ea" },
+          { time: 18, headline: "Online Security", sub: "Passwords, scams, antivirus, 2FA", color: "#ef4444" },
+          { time: 21, headline: "47 free tools. AI answers. Live lessons.", color: "#f59e0b" },
+          { time: 24, headline: "Choose your learning path.", color: "#3b82f6" },
+        ]}
         ctaButtons={[
-            { label: "Printers", href: "/techbridge/printers", color: "#2563eb" },
-            { label: "GPS", href: "/techbridge/gps", color: "#16a34a" },
-            { label: "Smart Home", href: "/techbridge/smart-home", color: "#f59e0b" },
-            { label: "Alexa", href: "/techbridge/alexa", color: "#06b6d4" },
-            { label: "Cameras", href: "/techbridge/camera", color: "#9333ea" },
-            { label: "Security", href: "/techbridge/security", color: "#ef4444" },
-          ]}
+          { label: "Printers", href: "/techbridge/printers", color: "#2563eb" },
+          { label: "GPS", href: "/techbridge/gps", color: "#16a34a" },
+          { label: "Smart Home", href: "/techbridge/smart-home", color: "#f59e0b" },
+          { label: "Alexa", href: "/techbridge/alexa", color: "#06b6d4" },
+          { label: "Cameras", href: "/techbridge/camera", color: "#9333ea" },
+          { label: "Security", href: "/techbridge/security", color: "#ef4444" },
+        ]}
       />
 
 

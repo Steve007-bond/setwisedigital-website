@@ -13,7 +13,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ScrollToTop from "@/components/ScrollToTop";
 import { useState, useRef, useEffect } from "react";
-import CinematicVideoPlayer from "@/components/CinematicVideoPlayer";
+import ImmersiveVideoSection from "@/components/ImmersiveVideoSection";
 
 /* ─── Animated counter hook ─────────────────────────────────────────────── */
 function useCounter(end: number, duration = 2000, start = false) {
@@ -449,17 +449,27 @@ export default function Home() {
       </header>
 
       {/* ════════ CINEMATIC VIDEO ════════ */}
-      <CinematicVideoPlayer
-        title="How Setwise Digital Works"
-        subtitle="Watch our story — from a living room frustration to helping 2,400+ people learn technology"
+      <ImmersiveVideoSection
         videoSrc="/videos/homepage-story.mp4"
-        accentColor="#3b82f6"
+        sectionTitle="How Setwise Digital Works"
+        bgColor="#080808"
+        scenes={[
+          { time: 0, headline: "2016.", sub: "A living room. A family. A printer that would not work.", color: "#3b82f6" },
+          { time: 7.5, headline: "She just wanted to print photos of her grandchildren.", color: "#ef4444" },
+          { time: 15, headline: "He drove 40 minutes the wrong way.", sub: "His GPS maps were three years old.", color: "#f97316" },
+          { time: 22.5, headline: "The problem was never the technology.", sub: "Nobody was teaching them. Not in plain English.", color: "#f59e0b" },
+          { time: 30, headline: "So we built something different.", sub: "Simple guides. Written like a letter to our own parents.", color: "#8b5cf6" },
+          { time: 37.5, headline: "12 people. Then 100. Then 2,400+.", sub: "Word spread. Across 2 countries.", color: "#22c55e" },
+          { time: 45, headline: "47 free tools. Live 1-on-1 lessons.", sub: "Because some people need a patient voice.", color: "#06b6d4" },
+          { time: 52.5, headline: "And it worked.", color: "#22c55e" },
+          { time: 57, headline: "Technology should empower. Never intimidate.", sub: "Setwise Digital", color: "#ef4444" },
+        ]}
         ctaButtons={[
-            { label: "Start Learning Free", href: "/techbridge", color: "#3b82f6" },
-            { label: "47 Free Tools", href: "/tools", color: "#22c55e" },
-            { label: "View Pricing", href: "/pricing", color: "#8b5cf6" },
-            { label: "Contact Us", href: "/contact", color: "#06b6d4" },
-          ]}
+          { label: "Start Learning Free", href: "/techbridge", color: "#3b82f6" },
+          { label: "47 Free Tools", href: "/tools", color: "#22c55e" },
+          { label: "View Pricing", href: "/pricing", color: "#8b5cf6" },
+          { label: "Contact Us", href: "/contact", color: "#06b6d4" },
+        ]}
       />
 
 

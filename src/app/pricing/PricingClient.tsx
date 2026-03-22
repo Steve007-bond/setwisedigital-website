@@ -17,7 +17,7 @@ import PhoneInput from "@/components/PhoneInput";
 import { validateEmail, validatePhone } from "@/lib/validation";
 import Link from "next/link";
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import CinematicVideoPlayer from "@/components/CinematicVideoPlayer";
+import ImmersiveVideoSection from "@/components/ImmersiveVideoSection";
 
 /* ── Typewriter rotating phrases for Pricing hero ── */
 const PRICING_PHRASES = [
@@ -525,17 +525,26 @@ export default function PricingPage() {
       </header>
 
       {/* ════════ CINEMATIC VIDEO ════════ */}
-      <CinematicVideoPlayer
-        title="Why This Matters — Right Now"
-        subtitle="See what makes Setwise different from expensive tech support"
+      <ImmersiveVideoSection
         videoSrc="/videos/pricing-overview.mp4"
-        accentColor="#8b5cf6"
+        sectionTitle="Why This Matters Right Now"
+        bgColor="#080808"
+        scenes={[
+          { time: 0, headline: "Stuck for hours?", sub: "Google is not helping.", color: "#ef4444" },
+          { time: 2, headline: "She just wanted it to work.", color: "#ef4444" },
+          { time: 6, headline: "Geek Squad: $150+", sub: "They fix it once. You learn nothing.", color: "#ef4444" },
+          { time: 8.5, headline: "Setwise: $49.", sub: "We teach you. You fix it forever.", color: "#22c55e" },
+          { time: 11, headline: "Live 1-on-1 video lesson.", sub: "Real educator. Your pace. Lifetime access.", color: "#06b6d4" },
+          { time: 15.5, headline: "Every day you wait is another day of frustration.", color: "#ef4444" },
+          { time: 18, headline: "And it worked.", color: "#22c55e" },
+          { time: 20, headline: "$49. $97. $147.", sub: "Pay once. No subscriptions. No hidden fees.", color: "#8b5cf6" },
+        ]}
         ctaButtons={[
-            { label: "$49 Single Lesson", href: "/contact", color: "#3b82f6" },
-            { label: "$97 Skill-Builder", href: "/contact", color: "#8b5cf6" },
-            { label: "$147 Family Plan", href: "/contact", color: "#22c55e" },
-            { label: "47 Free Tools", href: "/tools", color: "#f59e0b" },
-          ]}
+          { label: "$49 Single Lesson", href: "/contact", color: "#3b82f6" },
+          { label: "$97 Skill-Builder", href: "/contact", color: "#8b5cf6" },
+          { label: "$147 Family Plan", href: "/contact", color: "#22c55e" },
+          { label: "47 Free Tools", href: "/tools", color: "#f59e0b" },
+        ]}
       />
 
 
