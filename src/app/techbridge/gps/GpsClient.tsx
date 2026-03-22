@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
-import TechBridgeHeroVisual, { HeroFrame } from "@/components/TechBridgeHeroVisual";
+import HeroCharacter from "@/components/HeroCharacter";
 import { ArrowRight, CheckCircle2, Phone, Mail, User, Loader2, Star, Shield, Zap, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
@@ -257,7 +257,7 @@ export default function PageClient() {
           {/* Animated visual — NO real image */}
           <motion.div initial={{opacity:0,x:30}} animate={{opacity:1,x:0}} transition={{delay:0.3,duration:0.8}}
             className="hidden lg:block">
-            <TechBridgeHeroVisual frames={FRAMES} currentFrame={frameIdx} onFrameChange={setFrameIdx} />
+            <HeroCharacter src="/images/hero-gps.png" alt="GPS navigation guide" accentColor="#16a34a" glowColor="#059669" floatingIcons={["🗺️","📍","🚗","🔄"]} speechBubble="Maps updated!" />
           </motion.div>
         </div>
       </section>

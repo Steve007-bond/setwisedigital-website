@@ -16,6 +16,7 @@ import EmailInput from "@/components/EmailInput";
 import PhoneInput from "@/components/PhoneInput";
 import { validateEmail, validatePhone } from "@/lib/validation";
 import Link from "next/link";
+import HeroCharacter from "@/components/HeroCharacter";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -342,6 +343,20 @@ export default function PricingPage() {
                   <div className="text-sm text-zinc-500 font-bold mt-1">{plan.name}</div>
                 </motion.button>
               ))}
+            </motion.div>
+
+            {/* 3D Character */}
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.0 }}
+              className="mt-12 max-w-md mx-auto">
+              <HeroCharacter
+                src="/images/hero-pricing.png"
+                alt="Setwise Digital pricing — affordable tech learning"
+                accentColor="#8b5cf6"
+                glowColor="#6366f1"
+                floatingIcons={["💰", "✅", "📋", "🎯"]}
+                speechBubble="No hidden fees!"
+                size="compact"
+              />
             </motion.div>
           </div>
         </motion.div>

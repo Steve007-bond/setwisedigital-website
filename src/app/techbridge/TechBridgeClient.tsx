@@ -19,6 +19,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import HeroCharacter from "@/components/HeroCharacter";
 
 export default function TechBridgePage() {
   const containerVariants: Variants = {
@@ -127,6 +128,19 @@ export default function TechBridgePage() {
             <motion.p variants={itemVariants} className="mt-14 text-zinc-500 font-bold text-xl italic tracking-wide">
               Don't just fix it. <span className="text-white border-b-2 border-blue-500">Learn it. Own it.</span>
             </motion.p>
+
+            {/* 3D Character */}
+            <motion.div variants={itemVariants} className="mt-12 max-w-lg mx-auto">
+              <HeroCharacter
+                src="/images/hero-techbridge.jpeg"
+                alt="TechBridge learning hub — master everyday technology"
+                accentColor="#3b82f6"
+                glowColor="#06b6d4"
+                floatingIcons={["🖨️", "🗺️", "🏠", "📷"]}
+                speechBubble="Pick a topic!"
+                size="large"
+              />
+            </motion.div>
           </motion.div>
         </div>
       </header>

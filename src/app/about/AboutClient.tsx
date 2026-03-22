@@ -13,6 +13,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
+import HeroCharacter from "@/components/HeroCharacter";
 import { useRef, useState, useEffect } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -196,26 +197,18 @@ export default function About() {
               </motion.div>
             </div>
 
-            {/* Right — Animated cycling "search queries" + stats */}
+            {/* Right — 3D Character with animations */}
             <div className="hidden lg:block">
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 space-y-5">
-                {/* Simulated search bar */}
-                <div className="flex items-center gap-3 px-5 py-4 bg-white/10 rounded-xl border border-white/10">
-                  <Search size={20} className="text-zinc-500" />
-                  <CyclingText />
-                </div>
-
-                {/* What we actually do */}
-                <div className="p-6 bg-gradient-to-br from-blue-600/20 to-violet-600/20 rounded-2xl border border-blue-500/20">
-                  <p className="text-sm font-bold text-blue-300 mb-2 uppercase tracking-wider">What Setwise Digital Does</p>
-                  <p className="text-white font-bold text-lg leading-relaxed">
-                    We don&apos;t just fix — we <span className="text-cyan-300">educate</span>. Patient, 1-on-1 guidance that builds lasting confidence with everyday technology.
-                  </p>
-                </div>
-
-                {/* Stats grid */}
-                <div className="grid grid-cols-3 gap-3">
+              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }}>
+                <HeroCharacter
+                  src="/images/hero-about.png"
+                  alt="Setwise Digital team — technology educators"
+                  accentColor="#3b82f6"
+                  floatingIcons={["💡", "📚", "🤝", "⭐"]}
+                  speechBubble="Technology for everyone!"
+                />
+                {/* Stats grid below character */}
+                <div className="grid grid-cols-3 gap-3 mt-6">
                   {[
                     { value: 2016, suffix: "", label: "Founded" },
                     { value: 47, suffix: "+", label: "Free Tools" },
