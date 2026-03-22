@@ -175,7 +175,7 @@ const GPSSIMULATOR_SCENES = [
   { id: "map", title: "Map data loads on screen", emoji: "🗺️", desc: "Pre-loaded maps show roads, landmarks, and points of interest", duration: 4000, color: "#16a34a", elements: { satellite: false, signal: false, device: true, map: true, route: false, arrive: false } },
   { id: "route", title: "Route is calculated", emoji: "🛣️", desc: "The GPS finds the best path considering distance and traffic", duration: 5000, color: "#f59e0b", elements: { satellite: false, signal: false, device: true, map: true, route: true, arrive: false } },
   { id: "navigate", title: "Turn-by-turn directions begin", emoji: "🔊", desc: "Voice and screen guide you at every turn", duration: 5000, color: "#06b6d4", elements: { satellite: false, signal: false, device: true, map: true, route: true, arrive: false } },
-  { id: "arrive", title: "You've arrived! ✅", emoji: "🎉", desc: "The GPS confirms your destination — door to door guidance complete.", duration: 4000, color: "#22c55e", elements: { satellite: false, signal: false, device: true, map: true, route: true, arrive: true } },
+  { id: "arrive", title: "You have arrived! ✅", emoji: "🎉", desc: 'The GPS confirms your destination. Door to door guidance complete.', duration: 4000, color: "#22c55e", elements: { satellite: false, signal: false, device: true, map: true, route: true, arrive: true } },
 ];
 
 function GpsSimulator() {

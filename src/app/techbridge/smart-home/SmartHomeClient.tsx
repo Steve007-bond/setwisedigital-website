@@ -169,12 +169,12 @@ function ToolCard({ tool, i }: { tool: Tool; i: number }) {
 
 
 const SMARTHOMESIMULATOR_SCENES = [
-  { id: "voice", title: "You say a voice command", emoji: "🗣️", desc: ""Alexa, turn on the living room lights"", duration: 4000, color: "#f59e0b", elements: { voice: true, speaker: false, router: false, plug: false, device: false, done: false } },
+  { id: "voice", title: "You say a voice command", emoji: "🗣️", desc: 'Alexa, turn on the living room lights', duration: 4000, color: "#f59e0b", elements: { voice: true, speaker: false, router: false, plug: false, device: false, done: false } },
   { id: "speaker", title: "Smart speaker processes it", emoji: "🎙️", desc: "Alexa interprets your words using cloud AI — in under 1 second", duration: 4000, color: "#8b5cf6", elements: { voice: true, speaker: true, router: false, plug: false, device: false, done: false } },
   { id: "router", title: "Command sent via Wi-Fi", emoji: "📶", desc: "Your router sends the instruction to the right smart device", duration: 4000, color: "#06b6d4", elements: { voice: false, speaker: true, router: true, plug: false, device: false, done: false } },
   { id: "plug", title: "Smart plug receives signal", emoji: "🔌", desc: "The plug or bulb gets the command and prepares to act", duration: 4000, color: "#10b981", elements: { voice: false, speaker: false, router: true, plug: true, device: false, done: false } },
   { id: "device", title: "Device turns on!", emoji: "💡", desc: "The light turns on, the fan starts, or the appliance powers up", duration: 5000, color: "#f59e0b", elements: { voice: false, speaker: false, router: false, plug: true, device: true, done: false } },
-  { id: "done", title: "Speaker confirms it's done ✅", emoji: "🎉", desc: ""OK, living room lights are on" — action confirmed", duration: 4000, color: "#22c55e", elements: { voice: false, speaker: true, router: false, plug: false, device: true, done: true } },
+  { id: "done", title: "Speaker confirms — done! ✅", emoji: "🎉", desc: 'OK, living room lights are on — action confirmed', duration: 4000, color: "#22c55e", elements: { voice: false, speaker: true, router: false, plug: false, device: true, done: true } },
 ];
 
 function SmartHomeSimulator() {

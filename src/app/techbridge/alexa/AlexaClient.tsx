@@ -169,10 +169,10 @@ function ToolCard({ tool, i }: { tool: Tool; i: number }) {
 
 
 const ALEXASIMULATOR_SCENES = [
-  { id: "wake", title: "You say the wake word", emoji: "🗣️", desc: ""Alexa..." — the light ring turns blue, she's listening", duration: 4000, color: "#06b6d4", elements: { voice: true, echo: false, cloud: false, skill: false, response: false, done: false } },
-  { id: "listen", title: "Echo records your command", emoji: "🎙️", desc: ""...play relaxing music" — captured after the wake word", duration: 4000, color: "#06b6d4", elements: { voice: true, echo: true, cloud: false, skill: false, response: false, done: false } },
-  { id: "cloud", title: "Sent to Amazon's cloud", emoji: "☁️", desc: "Your voice clip is sent via Wi-Fi for AI processing", duration: 4000, color: "#8b5cf6", elements: { voice: false, echo: true, cloud: true, skill: false, response: false, done: false } },
-  { id: "skill", title: "AI finds the right skill", emoji: "🧠", desc: "Amazon's AI matches your request to music, timer, smart home, etc.", duration: 5000, color: "#f59e0b", elements: { voice: false, echo: false, cloud: true, skill: true, response: false, done: false } },
+  { id: "wake", title: "You say the wake word", emoji: "🗣️", desc: "Alexa — the light ring turns blue, she is listening", duration: 4000, color: "#06b6d4", elements: { voice: true, echo: false, cloud: false, skill: false, response: false, done: false } },
+  { id: "listen", title: "Echo records your command", emoji: "🎙️", desc: '...play relaxing music — captured after the wake word', duration: 4000, color: "#06b6d4", elements: { voice: true, echo: true, cloud: false, skill: false, response: false, done: false } },
+  { id: "cloud", title: "Sent to Amazon cloud", emoji: "☁️", desc: "Your voice clip is sent via Wi-Fi for AI processing", duration: 4000, color: "#8b5cf6", elements: { voice: false, echo: true, cloud: true, skill: false, response: false, done: false } },
+  { id: "skill", title: "AI finds the right skill", emoji: "🧠", desc: 'Amazon AI matches your request to music, timer, smart home, etc.', duration: 5000, color: "#f59e0b", elements: { voice: false, echo: false, cloud: true, skill: true, response: false, done: false } },
   { id: "response", title: "Response sent back", emoji: "📡", desc: "The answer is sent back to your Echo in under 1 second", duration: 4000, color: "#06b6d4", elements: { voice: false, echo: true, cloud: true, skill: true, response: true, done: false } },
   { id: "done", title: "Alexa responds! ✅", emoji: "🎵", desc: "Music plays, lights change, timer starts — confirmed", duration: 4000, color: "#22c55e", elements: { voice: false, echo: true, cloud: false, skill: false, response: false, done: true } },
 ];

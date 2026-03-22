@@ -169,12 +169,12 @@ function ToolCard({ tool, i }: { tool: Tool; i: number }) {
 
 
 const SECURITYSIMULATOR_SCENES = [
-  { id: "threat", title: "A suspicious email arrives", emoji: "📧", desc: "You receive an email that looks like your bank — but is it?", duration: 4000, color: "#ef4444", elements: { email: true, scan: false, check: false, block: false, safe: false, done: false } },
+  { id: "threat", title: "A suspicious email arrives", emoji: "📧", desc: 'You receive an email that looks like your bank but is it real?', duration: 4000, color: "#ef4444", elements: { email: true, scan: false, check: false, block: false, safe: false, done: false } },
   { id: "scan", title: "Check for red flags", emoji: "🔍", desc: "Check sender address, hover links, look for spelling errors", duration: 4000, color: "#f97316", elements: { email: true, scan: true, check: false, block: false, safe: false, done: false } },
   { id: "check", title: "Antivirus scans attachments", emoji: "🛡️", desc: "Security software scans for viruses, trojans, or malware", duration: 4000, color: "#8b5cf6", elements: { email: true, scan: true, check: true, block: false, safe: false, done: false } },
   { id: "block", title: "Threat blocked!", emoji: "🚫", desc: "The scam is flagged — mark as spam and delete permanently", duration: 5000, color: "#ef4444", elements: { email: false, scan: false, check: true, block: true, safe: false, done: false } },
-  { id: "2fa", title: "Two-factor auth protects you", emoji: "🔑", desc: "Even with your password, hackers can't get in with 2FA", duration: 5000, color: "#8b5cf6", elements: { email: false, scan: false, check: false, block: false, safe: true, done: false } },
-  { id: "done", title: "You're protected! ✅", emoji: "🎉", desc: "Strong passwords + 2FA + awareness = best defence.", duration: 4000, color: "#22c55e", elements: { email: false, scan: false, check: false, block: false, safe: true, done: true } },
+  { id: "2fa", title: "Two-factor auth protects you", emoji: "🔑", desc: 'Even with your password, hackers cannot get in with 2FA', duration: 5000, color: "#8b5cf6", elements: { email: false, scan: false, check: false, block: false, safe: true, done: false } },
+  { id: "done", title: "You are protected! ✅", emoji: "🎉", desc: "Strong passwords + 2FA + awareness = best defence.", duration: 4000, color: "#22c55e", elements: { email: false, scan: false, check: false, block: false, safe: true, done: true } },
 ];
 
 function SecuritySimulator() {
