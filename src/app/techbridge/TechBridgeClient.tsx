@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import { motion, Variants } from "framer-motion";
 import { 
   Zap, 
@@ -19,9 +20,57 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import HeroCharacter from "@/components/HeroCharacter";
+
+/* ── Typewriter rotating phrases ── */
+const ROTATING_PHRASES = [
+  "AI-Powered Guidance",
+  "Human Expert Access",
+  "Step-by-Step Courses",
+  "Daily Tech Confidence",
+  "Plain-English Learning",
+  "Hands-On Practice",
+];
+
+function useTypewriter(phrases: string[], typingSpeed = 60, deletingSpeed = 35, pauseDuration = 2200) {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const tick = useCallback(() => {
+    const currentPhrase = phrases[phraseIndex];
+
+    if (!isDeleting) {
+      // Typing
+      const next = currentPhrase.slice(0, displayText.length + 1);
+      setDisplayText(next);
+      if (next === currentPhrase) {
+        // Pause at end of phrase
+        setTimeout(() => setIsDeleting(true), pauseDuration);
+        return;
+      }
+    } else {
+      // Deleting
+      const next = currentPhrase.slice(0, displayText.length - 1);
+      setDisplayText(next);
+      if (next === "") {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        return;
+      }
+    }
+  }, [phrases, phraseIndex, displayText, isDeleting, pauseDuration]);
+
+  useEffect(() => {
+    const speed = isDeleting ? deletingSpeed : typingSpeed;
+    const timer = setTimeout(tick, speed);
+    return () => clearTimeout(timer);
+  }, [tick, isDeleting, typingSpeed, deletingSpeed]);
+
+  return displayText;
+}
 
 export default function TechBridgePage() {
+  const typedText = useTypewriter(ROTATING_PHRASES);
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -43,105 +92,195 @@ export default function TechBridgePage() {
     <div className="min-h-screen bg-[#FDFDFD] text-zinc-900 font-sans selection:bg-blue-100 selection:text-blue-900">
       <Navbar />
 
-      {/* Hero Section */}
-      <header className="relative pt-44 pb-32 overflow-hidden bg-zinc-900 text-white">
-        {/* Advanced Animated Background (Video-like) */}
-        <div className="absolute inset-0 overflow-hidden">
+{/* Hero Section */}
+      <header className="relative pt-36 pb-24 md:pt-44 md:pb-32 overflow-hidden bg-[#0c1220] text-white min-h-[90vh] flex items-center">
+        {/* ── Cinematic background layers ── */}
+        <div className="absolute inset-0">
+          {/* Deep gradient base */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#0c1428] to-[#0f1a2e]" />
+          
+          {/* Animated aurora blobs */}
           <motion.div 
             animate={{ 
-              scale: [1, 1.2, 1],
-              rotate: [0, 90, 0],
-              x: [-50, 50, -50],
-              y: [-50, 50, -50]
+              scale: [1, 1.3, 1],
+              rotate: [0, 60, 0],
+              x: [-30, 40, -30],
             }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[-20%] left-[-20%] w-[140%] h-[140%] bg-gradient-to-br from-blue-600/30 via-transparent to-indigo-600/30 blur-[120px] opacity-50" 
+            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[-30%] left-[-10%] w-[80%] h-[80%] bg-gradient-to-br from-blue-600/25 via-cyan-500/10 to-transparent rounded-full blur-[100px]" 
           />
           <motion.div 
             animate={{ 
               scale: [1.2, 1, 1.2],
-              rotate: [0, -90, 0],
-              x: [50, -50, 50],
-              y: [50, -50, 50]
+              rotate: [0, -45, 0],
+              y: [0, -40, 0],
             }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[-20%] right-[-20%] w-[140%] h-[140%] bg-gradient-to-tr from-indigo-600/20 via-transparent to-blue-600/20 blur-[100px] opacity-40" 
+            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-[-20%] right-[-10%] w-[70%] h-[70%] bg-gradient-to-tl from-indigo-600/20 via-blue-500/10 to-transparent rounded-full blur-[100px]" 
           />
           
-          {/* Animated Grid Lines */}
-          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]" />
+          {/* Subtle grid overlay */}
+          <div 
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+              backgroundSize: '60px 60px',
+            }}
+          />
           
-          {/* Floating Particles/Shapes */}
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={{ 
-                opacity: [0.1, 0.3, 0.1],
-                y: [0, -100, 0],
-                x: [0, Math.random() * 50 - 25, 0]
-              }}
-              transition={{ 
-                duration: 5 + Math.random() * 5, 
-                repeat: Infinity, 
-                delay: i * 0.5 
-              }}
-              className="absolute w-1 h-20 bg-gradient-to-b from-blue-500 to-transparent blur-sm"
-              style={{ 
-                left: `${15 + i * 15}%`, 
-                top: `${20 + Math.random() * 60}%` 
-              }}
-            />
-          ))}
+          {/* Radial spotlight on character area */}
+          <div className="absolute top-0 right-0 w-[70%] h-full bg-gradient-to-l from-blue-500/[0.06] to-transparent" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="max-w-4xl mx-auto"
-          >
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full dark-glass border-white/10 text-blue-400 text-sm font-bold uppercase tracking-wider mb-8 shadow-2xl animate-pulse-slow">
-              <Zap size={16} className="text-yellow-400 fill-yellow-400" />
-              <span>The TechBridge™ Platform</span>
-            </motion.div>
-            <motion.h1 
-              variants={itemVariants}
-              className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.9] text-white"
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-4">
+            
+            {/* Left: Text Content */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="lg:w-[55%] text-center lg:text-left"
             >
-              Technology <br />
-              <span className="bg-gradient-to-r from-blue-400 via-white to-indigo-400 bg-[length:200%_auto] animate-gradient bg-clip-text text-transparent">Finally Makes Sense.</span>
-            </motion.h1>
-            <motion.p 
-              variants={itemVariants}
-              className="text-xl md:text-3xl text-zinc-400 max-w-3xl mx-auto mb-14 leading-relaxed font-medium"
-            >
-              Plain-English technology courses for everyday device users. Learn at your own pace, on any device.
-            </motion.p>
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Link href="/contact" className="shine-effect w-full sm:w-auto px-12 py-6 bg-blue-600 text-white rounded-[2rem] font-black text-2xl hover:shadow-[0_20px_50px_rgba(37,99,235,0.4)] hover:-translate-y-1 transition-all flex items-center justify-center gap-3 group">
-                Start Your Journey
-                <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
-              </Link>
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.06] border border-white/[0.08] text-blue-400 text-sm font-bold uppercase tracking-wider mb-8">
+                <Zap size={16} className="text-yellow-400 fill-yellow-400" />
+                <span>The TechBridge™ Platform</span>
+              </motion.div>
+              
+              <motion.h1 
+                variants={itemVariants}
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 leading-[0.9] text-white"
+              >
+                Where Technology
+                <br />
+                <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">Finally Makes </span>
+                <span className="bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">Sense.</span>
+              </motion.h1>
+              
+              <motion.div 
+                variants={itemVariants}
+                className="max-w-xl mx-auto lg:mx-0 mb-10"
+              >
+                <p className="text-lg md:text-xl text-zinc-400 leading-relaxed font-medium mb-4">
+                  Learn everyday technology your way — through
+                </p>
+                <div className="h-10 md:h-12 flex items-center">
+                  <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    {typedText}
+                  </span>
+                  <span className="w-[3px] h-7 md:h-8 bg-blue-400 ml-0.5 animate-pulse rounded-full" />
+                </div>
+              </motion.div>
+              
+              <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                <Link href="/contact" className="shine-effect w-full sm:w-auto px-10 py-5 bg-blue-600 text-white rounded-2xl font-bold text-lg hover:shadow-[0_20px_50px_rgba(37,99,235,0.4)] hover:-translate-y-1 transition-all flex items-center justify-center gap-3 group">
+                  Start Your Journey
+                  <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform" />
+                </Link>
+                <Link href="#topics" className="w-full sm:w-auto px-10 py-5 bg-white/[0.06] border border-white/10 text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-3">
+                  Browse Topics
+                </Link>
+              </motion.div>
+              
+              <motion.p variants={itemVariants} className="mt-10 text-zinc-500 font-bold text-base italic tracking-wide">
+                Don&apos;t just fix it. <span className="text-white border-b-2 border-blue-500">Learn it. Own it.</span>
+              </motion.p>
             </motion.div>
-            <motion.p variants={itemVariants} className="mt-14 text-zinc-500 font-bold text-xl italic tracking-wide">
-              Don't just fix it. <span className="text-white border-b-2 border-blue-500">Learn it. Own it.</span>
-            </motion.p>
 
-            {/* 3D Character */}
-            <motion.div variants={itemVariants} className="mt-12 max-w-lg mx-auto">
-              <HeroCharacter
-                src="/Images/hero-techbridge.jpeg"
-                alt="TechBridge learning hub — master everyday technology"
-                accentColor="#3b82f6"
-                glowColor="#06b6d4"
-                floatingIcons={["🖨️", "🗺️", "🏠", "📷"]}
-                speechBubble="Pick a topic!"
-                size="large"
-              />
+            {/* Right: 3D Character — large, immersive */}
+            <motion.div 
+              initial={{ opacity: 0, x: 60, scale: 0.9 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+              className="lg:w-[45%] relative mt-8 lg:mt-0"
+            >
+              {/* Glow behind character */}
+              <div className="absolute inset-0 -z-10">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-blue-500/15 rounded-full blur-[80px]" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-cyan-400/10 rounded-full blur-[60px]" />
+              </div>
+              
+              {/* Character container with 3D ring effects */}
+              <div className="relative max-w-[520px] mx-auto">
+                {/* Outer rotating ring */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-[-8%] rounded-full border border-blue-500/15"
+                >
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-400 rounded-full shadow-[0_0_12px_rgba(59,130,246,0.6)]" />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+                </motion.div>
+                
+                {/* Inner counter-rotating ring */}
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-[-3%] rounded-full border border-cyan-500/10"
+                >
+                  <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-indigo-400 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
+                </motion.div>
+                
+                {/* Character image */}
+                <motion.div
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative z-10"
+                >
+                  <div className="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-blue-900/40">
+                    <img
+                      src="/Images/hero-techbridge.jpeg"
+                      alt="TechBridge learning hub — master everyday technology"
+                      className="w-full h-auto"
+                    />
+                    {/* Bottom fade to match bg */}
+                    <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0c1220] to-transparent" />
+                    {/* Subtle overlay for depth */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-transparent" />
+                  </div>
+                </motion.div>
+                
+                {/* Floating topic badges around character */}
+                {[
+                  { emoji: "🖨️", label: "Printers", pos: "top-[5%] -left-[10%]", delay: 0 },
+                  { emoji: "🗺️", label: "GPS", pos: "top-[15%] -right-[8%]", delay: 0.5 },
+                  { emoji: "🏠", label: "Smart Home", pos: "bottom-[25%] -left-[12%]", delay: 1 },
+                  { emoji: "📷", label: "Cameras", pos: "bottom-[20%] -right-[10%]", delay: 1.5 },
+                ].map((badge, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.8 + badge.delay, duration: 0.5, type: "spring" }}
+                    className={`absolute ${badge.pos} z-20`}
+                  >
+                    <motion.div
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: badge.delay }}
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.08] backdrop-blur-md border border-white/[0.1] shadow-lg"
+                    >
+                      <span className="text-lg">{badge.emoji}</span>
+                      <span className="text-xs font-bold text-white/80 hidden sm:inline">{badge.label}</span>
+                    </motion.div>
+                  </motion.div>
+                ))}
+                
+                {/* Speech bubble */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.5, duration: 0.5 }}
+                  className="absolute -top-[5%] left-1/2 -translate-x-1/2 z-30"
+                >
+                  <div className="px-4 py-2 bg-blue-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-600/30 whitespace-nowrap">
+                    Pick a topic! 👋
+                    <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-blue-600 rotate-45" />
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
-          </motion.div>
+
+          </div>
         </div>
       </header>
 
