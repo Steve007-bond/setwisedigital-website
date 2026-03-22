@@ -3,13 +3,13 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 604800, // 7 days — was 1 day
+    minimumCacheTTL: 604800, // 7 days
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "assets.mixkit.co" },
       { protocol: "https", hostname: "*.unsplash.com" },
     ],
-    deviceSizes: [390, 640, 750, 828, 1080, 1200],  // mobile-first: 390 added
+    deviceSizes: [390, 640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
 
@@ -36,9 +36,17 @@ const nextConfig: NextConfig = {
           { key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=86400" },
         ],
       },
+      // Video files — 30 day cache
+      {
+        source: "/videos/(.*)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=86400" },
+          { key: "Content-Type", value: "video/mp4" },
+        ],
+      },
       // HTML pages — always revalidate (CDN can serve stale)
       {
-        source: "/((?!_next).*)",
+        source: "/((?!_next|videos).*)",
         headers: [
           { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
           { key: "X-Content-Type-Options", value: "nosniff" },
