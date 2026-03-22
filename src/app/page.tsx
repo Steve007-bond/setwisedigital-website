@@ -13,7 +13,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ScrollToTop from "@/components/ScrollToTop";
 import { useState, useRef, useEffect } from "react";
-import StorySimulator, { type SimScene } from "@/components/StorySimulator";
+import CinematicVideoPlayer from "@/components/CinematicVideoPlayer";
 
 /* ─── Animated counter hook ─────────────────────────────────────────────── */
 function useCounter(end: number, duration = 2000, start = false) {
@@ -78,20 +78,7 @@ function Ticker() {
 
 /* ─── Page ───────────────────────────────────────────────────────────────── */
 
-const HOME_STORY_SCENES: SimScene[] = [
-  { id: "frustration", title: "Your device stops working", emoji: "😤", desc: "The printer shows offline. The GPS has outdated maps. Alexa is not responding. Sound familiar?", duration: 5000, color: "#ef4444", mood: "sad", subEmojis: ["🖨️", "❌", "😰", "📵"] },
-  { id: "search", title: "You search for help online", emoji: "🔍", desc: "Google shows a hundred results. Confusing forums. Technical jargon. Nothing makes sense.", duration: 5000, color: "#f97316", mood: "thinking", subEmojis: ["🔍", "😕", "📱", "🤔"] },
-  { id: "find-us", title: "You find Setwise Digital", emoji: "💡", desc: "A website that speaks your language. No jargon. No rush. Just plain-English help.", duration: 5000, color: "#3b82f6", mood: "neutral", subEmojis: ["💡", "✨", "🌟", "😊"] },
-  { id: "choose-path", title: "Choose how you want to learn", emoji: "🛤️", desc: "Free guides you can read yourself. Interactive tools that walk you through it. Or a live human educator.", duration: 5000, color: "#8b5cf6", mood: "thinking", subEmojis: ["📖", "🔧", "👨‍🏫", "📱"] },
-  { id: "ai-help", title: "AI gives you instant answers", emoji: "🤖", desc: "Ask any question about your device. Get a clear, simple answer in seconds. 24/7, always free.", duration: 5000, color: "#06b6d4", mood: "happy", subEmojis: ["🤖", "💬", "⚡", "✅"] },
-  { id: "guided", title: "Step-by-step guidance begins", emoji: "📖", desc: "Screenshots. Arrows. Numbered steps. Every click explained like a patient friend sitting beside you.", duration: 5000, color: "#3b82f6", mood: "neutral", subEmojis: ["1️⃣", "2️⃣", "3️⃣", "✅"] },
-  { id: "live-lesson", title: "Or book a live 1-on-1 lesson", emoji: "🎥", desc: "A real educator joins you on video. Shares their screen. Walks you through it at YOUR pace.", duration: 5000, color: "#8b5cf6", mood: "happy", subEmojis: ["🎥", "👨‍🏫", "🤝", "💻"] },
-  { id: "practice", title: "You practice it yourself", emoji: "🤲", desc: "With your educator watching, you do it yourself. Building real confidence, not just a quick fix.", duration: 5000, color: "#f59e0b", mood: "excited", subEmojis: ["💪", "👏", "✅", "🎯"] },
-  { id: "fixed", title: "Problem solved!", emoji: "🎉", desc: "Your device works again. But more importantly — you understand WHY it works now.", duration: 5000, color: "#22c55e", mood: "excited", subEmojis: ["🎉", "🖨️", "✅", "🌟"] },
-  { id: "next-time", title: "Next time? You fix it yourself", emoji: "💪", desc: "Because we did not just fix your problem. We taught you. That is the Setwise Digital difference.", duration: 5000, color: "#3b82f6", mood: "proud", subEmojis: ["💪", "🧠", "⭐", "🏆"] },
-  { id: "community", title: "Join 2,400+ confident learners", emoji: "👥", desc: "Adults 45+ across 2 countries who stopped fearing technology and started mastering it.", duration: 5000, color: "#8b5cf6", mood: "proud", subEmojis: ["👥", "🌍", "⭐", "❤️"] },
-  { id: "free-start", title: "Start for free. Right now.", emoji: "🚀", desc: "47 free tools. Hundreds of guides. No account needed. No credit card. Just learning.", duration: 5000, color: "#22c55e", mood: "excited", subEmojis: ["🚀", "🆓", "✨", "🎯"] },
-];
+
 
 export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -461,8 +448,19 @@ export default function Home() {
         `}</style>
       </header>
 
-      {/* ════════ ANIMATED STORY SIMULATOR ════════ */}
-      <StorySimulator title="How Setwise Digital Works" subtitle="Watch our 1-minute animated story — see the complete journey" scenes={HOME_STORY_SCENES} windowTitle="The Setwise Digital Story" />
+      {/* ════════ CINEMATIC VIDEO ════════ */}
+      <CinematicVideoPlayer
+        title="How Setwise Digital Works"
+        subtitle="Watch our story — from a living room frustration to helping 2,400+ people learn technology"
+        videoSrc="/videos/homepage-story.mp4"
+        accentColor="#3b82f6"
+        ctaButtons={[
+            { label: "Start Learning Free", href: "/techbridge", color: "#3b82f6" },
+            { label: "47 Free Tools", href: "/tools", color: "#22c55e" },
+            { label: "View Pricing", href: "/pricing", color: "#8b5cf6" },
+            { label: "Contact Us", href: "/contact", color: "#06b6d4" },
+          ]}
+      />
 
 
       {/* ── TICKER ─────────────────────────────────────────────────────── */}

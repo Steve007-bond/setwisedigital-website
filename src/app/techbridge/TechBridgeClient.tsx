@@ -20,7 +20,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import StorySimulator, { type SimScene } from "@/components/StorySimulator";
+import CinematicVideoPlayer from "@/components/CinematicVideoPlayer";
 
 /* ── Typewriter rotating phrases ── */
 const ROTATING_PHRASES = [
@@ -71,20 +71,7 @@ function useTypewriter(phrases: string[], typingSpeed = 60, deletingSpeed = 35, 
 }
 
 
-const TECHBRIDGE_STORY_SCENES: SimScene[] = [
-  { id: "welcome", title: "Welcome to TechBridge", emoji: "🌉", desc: "The bridge between confusion and confidence. Six technology topics, one learning platform.", duration: 5000, color: "#3b82f6", mood: "happy", subEmojis: ["🌉", "✨", "📚", "🎯"] },
-  { id: "printers", title: "Printers and Scanners", emoji: "🖨️", desc: "Wi-Fi setup, paper jams, ink replacement, scan to email. HP, Canon, Epson, Brother — all covered.", duration: 5000, color: "#2563eb", mood: "neutral", subEmojis: ["🖨️", "📄", "📶", "💧"] },
-  { id: "gps", title: "GPS and Navigation", emoji: "🗺️", desc: "Map updates, route planning, frozen screens, wrong directions. Garmin, TomTom, in-car GPS.", duration: 5000, color: "#16a34a", mood: "neutral", subEmojis: ["🗺️", "🚗", "📍", "🔄"] },
-  { id: "smarthome", title: "Smart Home Technology", emoji: "🏠", desc: "Smart bulbs, plugs, cameras, routines. Alexa, Google, Apple HomeKit — voice control your home.", duration: 5000, color: "#f59e0b", mood: "neutral", subEmojis: ["🏠", "💡", "🔌", "📷"] },
-  { id: "alexa", title: "Alexa and Voice Assistants", emoji: "🎙️", desc: "50+ commands, routines, smart home control, music, timers. Make Alexa actually useful.", duration: 5000, color: "#06b6d4", mood: "neutral", subEmojis: ["🎙️", "🎵", "⏰", "💡"] },
-  { id: "camera", title: "Cameras and Photography", emoji: "📷", desc: "Firmware updates, sharper photos, phone transfers. Canon, Sony, Nikon, Fujifilm.", duration: 5000, color: "#9333ea", mood: "neutral", subEmojis: ["📷", "✨", "💾", "🌅"] },
-  { id: "security", title: "Online Security", emoji: "🛡️", desc: "Virus removal, scam emails, strong passwords, two-factor auth. Protect yourself online.", duration: 5000, color: "#ef4444", mood: "neutral", subEmojis: ["🛡️", "🔒", "🔑", "📧"] },
-  { id: "free-tools", title: "47 free interactive tools", emoji: "🔧", desc: "Printer fixer, GPS updater, smart home matcher, security audit, and more. No login needed.", duration: 5000, color: "#f59e0b", mood: "happy", subEmojis: ["🔧", "🆓", "✅", "🎯"] },
-  { id: "ai", title: "AI-powered instant answers", emoji: "🤖", desc: "Ask any question. Get a plain-English answer in seconds. Available 24/7, completely free.", duration: 5000, color: "#06b6d4", mood: "happy", subEmojis: ["🤖", "💬", "⚡", "✅"] },
-  { id: "guides", title: "Step-by-step visual guides", emoji: "📖", desc: "Screenshots. Numbered steps. Written like a letter to someone you care about.", duration: 5000, color: "#8b5cf6", mood: "happy", subEmojis: ["📖", "1️⃣", "2️⃣", "3️⃣"] },
-  { id: "live", title: "Live 1-on-1 lessons available", emoji: "🎥", desc: "When you want a real human. Patient. Kind. Expert in your exact device.", duration: 5000, color: "#3b82f6", mood: "proud", subEmojis: ["🎥", "👨‍🏫", "❤️", "🤝"] },
-  { id: "master", title: "Technology, finally mastered", emoji: "🏆", desc: "You are not just fixing devices. You are understanding them. That is the TechBridge promise.", duration: 5000, color: "#22c55e", mood: "proud", subEmojis: ["🏆", "💪", "🌟", "🎉"] },
-];
+
 
 export default function TechBridgePage() {
   const typedText = useTypewriter(ROTATING_PHRASES);
@@ -301,8 +288,21 @@ export default function TechBridgePage() {
         </div>
       </header>
 
-      {/* ════════ ANIMATED STORY SIMULATOR ════════ */}
-      <StorySimulator title="The TechBridge Platform" subtitle="Six topics, one platform — see everything TechBridge covers in 1 minute" scenes={TECHBRIDGE_STORY_SCENES} windowTitle="TechBridge — Learn Any Device" />
+      {/* ════════ CINEMATIC VIDEO ════════ */}
+      <CinematicVideoPlayer
+        title="The TechBridge Platform"
+        subtitle="Six topics, one platform — see everything TechBridge covers"
+        videoSrc="/videos/techbridge-overview.mp4"
+        accentColor="#3b82f6"
+        ctaButtons={[
+            { label: "Printers", href: "/techbridge/printers", color: "#2563eb" },
+            { label: "GPS", href: "/techbridge/gps", color: "#16a34a" },
+            { label: "Smart Home", href: "/techbridge/smart-home", color: "#f59e0b" },
+            { label: "Alexa", href: "/techbridge/alexa", color: "#06b6d4" },
+            { label: "Cameras", href: "/techbridge/camera", color: "#9333ea" },
+            { label: "Security", href: "/techbridge/security", color: "#ef4444" },
+          ]}
+      />
 
 
       {/* Section 1: The Origin Story */}
