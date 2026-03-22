@@ -14,7 +14,7 @@ const ACCENT_HEX = "#2563eb";
 const GLOW = "#2563eb38";
 
 // ── Headline frames — each maps to a different user query intent ────────────
-const FRAMES: HeroFrame[] = [
+const FRAMES = [
   { svgType:"printer", headline: "Print Without Pressure.\n", visualLabel: "HP, Canon, Epson & Brother", visualSub: "Wi-Fi setup, ink, paper jams, scanning", emoji: "🖨️", color: "#2563eb", particles: ["🖨️","📄","📶","🔧","💧","📱"] },
   { svgType:"printer", headline: "Printer Showing Offline?", visualLabel: "HP, Canon, Epson & Brother", visualSub: "Plain-English fix for any offline error", emoji: "❌", color: "#2563eb", particles: ["❌","🔧","📶","💡","🖨️","✅"] },
   { svgType:"printer", headline: "Wi-Fi Printing Setup", visualLabel: "Wireless for any device", visualSub: "iPhone, Android, Windows, Mac", emoji: "📶", color: "#06b6d4", particles: ["📱","💻","📶","🖨️","📲","✅"] },

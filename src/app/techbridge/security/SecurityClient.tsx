@@ -14,7 +14,7 @@ const ACCENT_HEX = "#ef4444";
 const GLOW = "#ef444438";
 
 // ── Headline frames — each maps to a different user query intent ────────────
-const FRAMES: HeroFrame[] = [
+const FRAMES = [
   { svgType:"shield", headline: "Stay Safe Online, Always.\n", visualLabel: "Windows, Mac, iPhone, Android", visualSub: "Protect against viruses, scams, hackers", emoji: "🛡️", color: "#ef4444", particles: ["🛡️","🔒","⚠️","✅","🔑","📧"] },
   { svgType:"shield", headline: "Think You Have a Virus?", visualLabel: "Windows & Mac computers", visualSub: "Free step-by-step removal guide", emoji: "🦠", color: "#ef4444", particles: ["🦠","😰","🔧","✅","😌","🛡️"] },
   { svgType:"shield", headline: "Scam Email — Spot It", visualLabel: "Gmail, Outlook, Yahoo Mail", visualSub: "Warning signs to look for every time", emoji: "📧", color: "#f97316", particles: ["📧","⚠️","🔍","✅","🛡️","🔒"] },

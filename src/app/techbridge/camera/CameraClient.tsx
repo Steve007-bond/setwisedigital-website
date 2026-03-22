@@ -14,7 +14,7 @@ const ACCENT_HEX = "#9333ea";
 const GLOW = "#9333ea38";
 
 // ── Headline frames — each maps to a different user query intent ────────────
-const FRAMES: HeroFrame[] = [
+const FRAMES = [
   { svgType:"camera", headline: "Capture Every Moment.\n", visualLabel: "Canon, Sony, Nikon, Fujifilm", visualSub: "Firmware updates, sharp photos, settings", emoji: "📷", color: "#9333ea", particles: ["📷","✨","🌅","👨‍👩‍👧","🎞️","⭐"] },
   { svgType:"camera", headline: "Photos Look Blurry?", visualLabel: "Any camera brand", visualSub: "Simple settings for dramatically sharper shots", emoji: "🔍", color: "#9333ea", particles: ["🔍","😤","📷","✅","🌅","⭐"] },
   { svgType:"camera", headline: "Update Camera Firmware", visualLabel: "Canon, Sony, Nikon, Fujifilm", visualSub: "Fixes bugs, adds features — takes 10 minutes", emoji: "🔄", color: "#06b6d4", particles: ["🔄","⚡","✅","📷","💡","🎉"] },

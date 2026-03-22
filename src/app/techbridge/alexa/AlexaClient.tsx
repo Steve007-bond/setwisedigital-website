@@ -14,7 +14,7 @@ const ACCENT_HEX = "#06b6d4";
 const GLOW = "#06b6d438";
 
 // ── Headline frames — each maps to a different user query intent ────────────
-const FRAMES: HeroFrame[] = [
+const FRAMES = [
   { svgType:"mic", headline: "Your Voice, Your Home.\n", visualLabel: "Amazon Echo Dot, Echo Show, Echo", visualSub: "50+ Alexa commands explained simply", emoji: "🎙️", color: "#06b6d4", particles: ["🎙️","💡","🏠","⏰","🎵","📱"] },
   { svgType:"mic", headline: "Alexa Not Responding?", visualLabel: "Echo Dot, Echo, Echo Show", visualSub: "Common fixes in under 5 minutes", emoji: "❓", color: "#06b6d4", particles: ["❓","🔧","✅","🎙️","💡","😌"] },
   { svgType:"mic", headline: "Set Up Alexa Routines", visualLabel: "Daily reminders & automations", visualSub: "Morning, bedtime, medication alerts", emoji: "⏰", color: "#8b5cf6", particles: ["⏰","🌅","💊","🌙","✅","🎙️"] },

@@ -14,7 +14,7 @@ const ACCENT_HEX = "#16a34a";
 const GLOW = "#16a34a38";
 
 // ── Headline frames — each maps to a different user query intent ────────────
-const FRAMES: HeroFrame[] = [
+const FRAMES = [
   { svgType:"gps", headline: "Navigate With Confidence.\n", visualLabel: "Garmin, TomTom, in-car GPS", visualSub: "Keep maps current, plan every journey", emoji: "🗺️", color: "#16a34a", particles: ["🗺️","🚗","📍","✅","🔄","⭐"] },
   { svgType:"gps", headline: "GPS Maps Outdated?", visualLabel: "Garmin, TomTom, in-car navigation", visualSub: "Free map updates — step by step", emoji: "🔄", color: "#16a34a", particles: ["🔄","🗺️","📡","✅","🚗","💡"] },
   { svgType:"gps", headline: "GPS Giving Wrong Directions?", visualLabel: "Garmin, TomTom, phone GPS", visualSub: "Why it happens and how to fix it", emoji: "🔀", color: "#f59e0b", particles: ["🔀","🤔","🔧","✅","🗺️","🚗"] },

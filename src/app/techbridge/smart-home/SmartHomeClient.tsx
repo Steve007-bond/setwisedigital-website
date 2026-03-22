@@ -14,7 +14,7 @@ const ACCENT_HEX = "#f59e0b";
 const GLOW = "#f59e0b38";
 
 // ── Headline frames — each maps to a different user query intent ────────────
-const FRAMES: HeroFrame[] = [
+const FRAMES = [
   { svgType:"home", headline: "Your Home, Smarter.\n", visualLabel: "Alexa, Google Nest, Apple HomeKit", visualSub: "Connect lights, plugs, cameras by voice", emoji: "🏠", color: "#f59e0b", particles: ["🏠","💡","🔌","📷","🗣️","✅"] },
   { svgType:"home", headline: "Set Up Smart Bulbs", visualLabel: "Any smart bulb brand", visualSub: "Done in under 5 minutes — really", emoji: "💡", color: "#f59e0b", particles: ["💡","⚡","📱","🗣️","✅","🌙"] },
   { svgType:"home", headline: "Smart Plug Installation", visualLabel: "TP-Link, Amazon, Govee", visualSub: "Control any appliance by voice or app", emoji: "🔌", color: "#10b981", particles: ["🔌","🔧","📱","🗣️","✅","💡"] },
