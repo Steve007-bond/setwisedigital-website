@@ -1,57 +1,18 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   CheckCircle2, Heart, ShieldCheck, Users, Target, MapPin,
   ArrowRight, Printer, Navigation, Camera, Home as HomeIcon,
   BookOpen, MessageSquare, UserCheck, Calendar, Zap, Globe,
   Sparkles, Award, HeartHandshake, Clock, Star, ArrowUpRight,
   ChevronRight, Shield, Phone, BadgeCheck, GraduationCap,
-  Search,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import Link from "next/link";
 import { useRef, useState, useEffect, useCallback } from "react";
-
-/* ═══════════════════════════════════════════════════════════════
-   CYCLING TEXT — simulates real search queries typing
-   ═══════════════════════════════════════════════════════════════ */
-const searchQueries = [
-  "How to setup HP printer Wi-Fi...",
-  "Garmin GPS map update not working...",
-  "How to connect Alexa to smart home...",
-  "Canon printer not printing from phone...",
-  "Ring doorbell camera setup help...",
-  "How to print from my iPhone...",
-  "Google Home setup for beginners...",
-  "Epson printer ink cartridge help...",
-  "TomTom GPS update download...",
-  "Smart home security for seniors...",
-];
-
-function CyclingText() {
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    const timer = setInterval(() => setIndex((p) => (p + 1) % searchQueries.length), 3000);
-    return () => clearInterval(timer);
-  }, []);
-  return (
-    <AnimatePresence mode="wait">
-      <motion.span
-        key={index}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.35 }}
-        className="text-zinc-300 font-medium text-base"
-      >
-        {searchQueries[index]}
-      </motion.span>
-    </AnimatePresence>
-  );
-}
 
 /* ═══════════════════════════════════════════════════════════════
    BACKGROUND
@@ -153,44 +114,84 @@ export default function About() {
       {/* ════════ HERO — Parallax with rotating search queries ════════ */}
       <header ref={heroRef} className="relative overflow-hidden bg-zinc-950 min-h-[88vh] lg:min-h-[95vh] flex items-center">
         <AuroraBackground />
-        {/* Particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <motion.div key={i} className="absolute rounded-full"
-              style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`, width: Math.random() * 3 + 1, height: Math.random() * 3 + 1, background: ["rgba(59,130,246,0.5)", "rgba(139,92,246,0.4)", "rgba(34,211,238,0.4)"][i % 3] }}
-              animate={{ y: [0, -25, 10, -15, 0], opacity: [0, 0.6, 0.3, 0.5, 0] }}
-              transition={{ duration: Math.random() * 12 + 10, delay: Math.random() * 6, repeat: Infinity, ease: "easeInOut" }} />
-          ))}
-        </div>
+        
+        {/* ── Animated constellation network — unique geometric background ── */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]" aria-hidden="true">
+          {/* Floating hexagonal nodes with connecting pulse lines */}
+          {Array.from({ length: 12 }).map((_, i) => {
+            const col = i % 4;
+            const row = Math.floor(i / 4);
+            const baseX = 10 + col * 25 + (row % 2 === 1 ? 12 : 0);
+            const baseY = 15 + row * 30;
+            return (
+              <motion.div
+                key={`node-${i}`}
+                className="absolute"
+                style={{ left: `${baseX}%`, top: `${baseY}%` }}
+                animate={{
+                  x: [0, 15 * Math.sin(i * 0.8), -10 * Math.cos(i * 0.5), 0],
+                  y: [0, -12 * Math.cos(i * 0.6), 8 * Math.sin(i * 0.7), 0],
+                  opacity: [0.15, 0.4, 0.2, 0.15],
+                }}
+                transition={{
+                  duration: 10 + i * 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.7,
+                }}
+              >
+                {/* Hexagon node */}
+                <div className="relative">
+                  <div
+                    className="w-3 h-3 rotate-45 rounded-sm"
+                    style={{
+                      background: ["rgba(59,130,246,0.5)", "rgba(34,211,238,0.4)", "rgba(139,92,246,0.4)", "rgba(99,102,241,0.45)"][i % 4],
+                      boxShadow: `0 0 ${12 + i * 2}px ${["rgba(59,130,246,0.3)", "rgba(34,211,238,0.25)", "rgba(139,92,246,0.25)", "rgba(99,102,241,0.3)"][i % 4]}`,
+                    }}
+                  />
+                  {/* Pulse ring */}
+                  <motion.div
+                    className="absolute inset-[-8px] rounded-full border"
+                    style={{ borderColor: ["rgba(59,130,246,0.15)", "rgba(34,211,238,0.12)", "rgba(139,92,246,0.12)", "rgba(99,102,241,0.15)"][i % 4] }}
+                    animate={{ scale: [1, 2.5, 1], opacity: [0.4, 0, 0.4] }}
+                    transition={{ duration: 4 + i * 0.5, repeat: Infinity, delay: i * 0.3 }}
+                  />
+                </div>
+              </motion.div>
+            );
+          })}
 
-        {/* Scrolling search queries background — parallax layer */}
-        <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [0, 150]) }}
-          className="absolute inset-0 overflow-hidden pointer-events-none z-[1]" aria-hidden="true">
-          {/* Row 1 */}
-          <div className="absolute top-[15%] w-full overflow-hidden opacity-[0.06]">
-            <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }} className="flex whitespace-nowrap">
-              {["How to setup HP printer", "Garmin GPS map update", "How to connect Alexa to Wi-Fi", "Printer not printing fix", "How to update Garmin GPS", "Ring camera setup help", "How to setup HP printer", "Garmin GPS map update", "How to connect Alexa to Wi-Fi", "Printer not printing fix", "How to update Garmin GPS", "Ring camera setup help"].map((q, i) => (
-                <span key={i} className="text-white text-2xl sm:text-3xl font-black mx-8 tracking-tight">{q}</span>
-              ))}
-            </motion.div>
-          </div>
-          {/* Row 2 — opposite direction */}
-          <div className="absolute top-[35%] w-full overflow-hidden opacity-[0.04]">
-            <motion.div animate={{ x: ["-50%", "0%"] }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }} className="flex whitespace-nowrap">
-              {["Smart home for beginners", "How to print from iPhone", "Canon printer Wi-Fi setup", "GPS not working fix", "Alexa routines setup", "Download security camera app", "Smart home for beginners", "How to print from iPhone", "Canon printer Wi-Fi setup", "GPS not working fix", "Alexa routines setup", "Download security camera app"].map((q, i) => (
-                <span key={i} className="text-white text-xl sm:text-2xl font-bold mx-8 tracking-tight">{q}</span>
-              ))}
-            </motion.div>
-          </div>
-          {/* Row 3 */}
-          <div className="absolute top-[55%] w-full overflow-hidden opacity-[0.03]">
-            <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 50, repeat: Infinity, ease: "linear" }} className="flex whitespace-nowrap">
-              {["Brother printer setup guide", "TomTom update help", "Google Home setup for seniors", "Epson ink troubleshooting", "Computer security for beginners", "Wi-Fi router setup help", "Brother printer setup guide", "TomTom update help", "Google Home setup for seniors", "Epson ink troubleshooting", "Computer security for beginners", "Wi-Fi router setup help"].map((q, i) => (
-                <span key={i} className="text-white text-lg sm:text-xl font-bold mx-8 tracking-tight">{q}</span>
-              ))}
-            </motion.div>
-          </div>
-        </motion.div>
+          {/* Sweeping light beam — diagonal scan effect */}
+          <motion.div
+            className="absolute w-[200px] h-[150vh] -top-[25vh]"
+            style={{
+              background: "linear-gradient(90deg, transparent, rgba(59,130,246,0.04), rgba(34,211,238,0.03), transparent)",
+              transform: "rotate(15deg)",
+            }}
+            animate={{ x: ["-200px", "120vw"] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", repeatDelay: 3 }}
+          />
+
+          {/* Second beam — opposite angle, delayed */}
+          <motion.div
+            className="absolute w-[150px] h-[150vh] -top-[25vh]"
+            style={{
+              background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.03), rgba(59,130,246,0.02), transparent)",
+              transform: "rotate(-12deg)",
+            }}
+            animate={{ x: ["120vw", "-200px"] }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 6 }}
+          />
+          
+          {/* Subtle grid dots */}
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
+        </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-[#FDFDFD] to-transparent z-10" />
 
