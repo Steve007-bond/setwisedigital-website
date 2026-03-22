@@ -6,7 +6,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import TechBridgeLearningHub from "@/components/TechBridgeLearningHub";
-import HeroCharacter from "@/components/HeroCharacter";
 import { ArrowRight, CheckCircle2, Phone, Mail, User, Loader2, Star, Shield, Zap, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
@@ -183,17 +182,49 @@ export default function PageClient() {
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
-        {/* Ambient */}
-        <motion.div className="absolute inset-0 pointer-events-none"
-          animate={{background:[
-            `radial-gradient(ellipse at 20% 30%, ${ACCENT_HEX}20 0%, #080808 60%)`,
-            `radial-gradient(ellipse at 80% 70%, ${ACCENT_HEX}14 0%, #080808 60%)`,
-          ]}} transition={{duration:6,repeat:Infinity,repeatType:"reverse"}} />
-        {[...Array(14)].map((_,i) => (
-          <motion.div key={i} className="absolute rounded-full pointer-events-none"
-            style={{width:`${5+(i%4)*2}px`,height:`${5+(i%4)*2}px`,left:`${(i*19+5)%100}%`,top:`${(i*27+8)%100}%`,backgroundColor:ACCENT_HEX+"28"}}
-            animate={{opacity:[0,0.7,0],y:[-6,6,-6]}} transition={{duration:4+(i%3),repeat:Infinity,delay:(i*0.35)%5}} />
-        ))}
+        {/* ── Constellation network background ── */}
+        <div className="absolute inset-0">
+          <motion.div className="absolute inset-0 pointer-events-none"
+            animate={{background:[
+              `radial-gradient(ellipse at 20% 30%, ${ACCENT_HEX}20 0%, #080808 60%)`,
+              `radial-gradient(ellipse at 80% 70%, ${ACCENT_HEX}14 0%, #080808 60%)`,
+            ]}} transition={{duration:6,repeat:Infinity,repeatType:"reverse"}} />
+
+          {/* Constellation nodes */}
+          {Array.from({ length: 10 }).map((_, i) => {
+            const col = i % 4;
+            const row = Math.floor(i / 4);
+            const bx = 8 + col * 26 + (row % 2 === 1 ? 13 : 0);
+            const by = 12 + row * 32;
+            return (
+              <motion.div key={`n-${i}`} className="absolute pointer-events-none"
+                style={{ left: `${bx}%`, top: `${by}%` }}
+                animate={{
+                  x: [0, 12 * Math.sin(i * 0.9), -8 * Math.cos(i * 0.6), 0],
+                  y: [0, -10 * Math.cos(i * 0.7), 6 * Math.sin(i * 0.8), 0],
+                  opacity: [0.12, 0.3, 0.15, 0.12],
+                }}
+                transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}>
+                <div className="w-2.5 h-2.5 rotate-45 rounded-sm"
+                  style={{ background: `${ACCENT_HEX}60`, boxShadow: `0 0 ${10 + i * 2}px ${ACCENT_HEX}40` }} />
+                <motion.div className="absolute inset-[-8px] rounded-full border"
+                  style={{ borderColor: `${ACCENT_HEX}18` }}
+                  animate={{ scale: [1, 2.5, 1], opacity: [0.3, 0, 0.3] }}
+                  transition={{ duration: 4 + i * 0.4, repeat: Infinity, delay: i * 0.3 }} />
+              </motion.div>
+            );
+          })}
+
+          {/* Sweeping beam */}
+          <motion.div className="absolute w-[180px] h-[150vh] -top-[25vh] pointer-events-none"
+            style={{ background: `linear-gradient(90deg, transparent, ${ACCENT_HEX}06, ${ACCENT_HEX}04, transparent)`, transform: "rotate(15deg)" }}
+            animate={{ x: ["-200px", "120vw"] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", repeatDelay: 4 }} />
+
+          {/* Dot grid */}
+          <div className="absolute inset-0 opacity-[0.025] pointer-events-none"
+            style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.7) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
@@ -254,10 +285,70 @@ export default function PageClient() {
             </motion.div>
           </div>
 
-          {/* Animated visual — NO real image */}
-          <motion.div initial={{opacity:0,x:30}} animate={{opacity:1,x:0}} transition={{delay:0.3,duration:0.8}}
-            className="hidden lg:block">
-            <HeroCharacter src="/Images/hero-printers.jpeg" alt="Printer setup guide" accentColor="#2563eb" floatingIcons={["🖨️","📄","📶","💧"]} speechBubble="Let's fix your printer!" />
+          {/* Right: 3D Character — seamless, oversized */}
+          <motion.div initial={{opacity:0,x:50,scale:0.95}} animate={{opacity:1,x:0,scale:1}}
+            transition={{duration:1,delay:0.3,ease:"easeOut"}}
+            className="hidden lg:block relative lg:overflow-visible">
+            {/* Glow */}
+            <div className="absolute inset-0 -z-10">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full blur-[130px]" style={{backgroundColor:`${ACCENT_HEX}22`}} />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-cyan-400/12 rounded-full blur-[90px]" />
+            </div>
+
+            <div className="relative lg:scale-[1.4] lg:origin-center lg:translate-x-[10%] lg:-translate-y-[3%]">
+              {/* Rotating rings */}
+              <motion.div animate={{rotate:360}} transition={{duration:30,repeat:Infinity,ease:"linear"}}
+                className="absolute inset-[-10%] rounded-full border" style={{borderColor:`${ACCENT_HEX}18`}}>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full shadow-[0_0_14px_rgba(37,99,235,0.7)]" style={{backgroundColor:ACCENT_HEX}} />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+              </motion.div>
+              <motion.div animate={{rotate:-360}} transition={{duration:22,repeat:Infinity,ease:"linear"}}
+                className="absolute inset-[-4%] rounded-full border border-cyan-500/10">
+                <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-indigo-400 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
+              </motion.div>
+
+              {/* Character image — radial fade, large */}
+              <motion.div animate={{y:[0,-14,0]}} transition={{duration:5,repeat:Infinity,ease:"easeInOut"}}
+                className="relative z-10">
+                <div className="relative overflow-hidden">
+                  <img src="/Images/hero-printers.jpeg" alt="Printer setup guide"
+                    className="w-full h-auto"
+                    style={{
+                      maskImage:'radial-gradient(ellipse 80% 75% at 50% 42%, black 35%, transparent 100%)',
+                      WebkitMaskImage:'radial-gradient(ellipse 80% 75% at 50% 42%, black 35%, transparent 100%)',
+                    }} />
+                </div>
+              </motion.div>
+
+              {/* Floating badges */}
+              {[
+                {emoji:"🖨️",label:"Setup",pos:"top-[6%] left-[0%]",delay:0},
+                {emoji:"📶",label:"Wi-Fi",pos:"top-[10%] right-[0%]",delay:0.5},
+                {emoji:"💧",label:"Ink",pos:"bottom-[30%] left-[-2%]",delay:1},
+                {emoji:"📄",label:"Jams",pos:"bottom-[26%] right-[-2%]",delay:1.5},
+              ].map((b,i)=>(
+                <motion.div key={i} initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}}
+                  transition={{delay:0.8+b.delay,duration:0.5,type:"spring"}}
+                  className={`absolute ${b.pos} z-20`}>
+                  <motion.div animate={{y:[0,-8,0]}}
+                    transition={{duration:3+i*0.5,repeat:Infinity,ease:"easeInOut",delay:b.delay}}
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.08] backdrop-blur-md border border-white/[0.1] shadow-lg">
+                    <span className="text-lg">{b.emoji}</span>
+                    <span className="text-xs font-bold text-white/80 hidden sm:inline">{b.label}</span>
+                  </motion.div>
+                </motion.div>
+              ))}
+
+              {/* Speech bubble */}
+              <motion.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:1.5,duration:0.5}}
+                className="absolute top-[0%] left-1/2 -translate-x-1/2 z-30">
+                <div className="px-4 py-2 text-white text-sm font-bold rounded-xl shadow-lg whitespace-nowrap"
+                  style={{backgroundColor:ACCENT_HEX,boxShadow:`0 10px 25px ${ACCENT_HEX}40`}}>
+                  Let&apos;s fix your printer! 🖨️
+                  <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45" style={{backgroundColor:ACCENT_HEX}} />
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -272,6 +363,85 @@ export default function PageClient() {
               <span className="text-zinc-400 text-base leading-relaxed">{s[1]}</span>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* INTERACTIVE PRINTER ANIMATION SHOWCASE */}
+      <section className="py-20 border-b border-zinc-800/50 bg-zinc-950/60 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-3">See How Your Printer Works</h2>
+            <p className="text-zinc-400 text-lg">Interactive animation — understand the basics at a glance</p>
+          </motion.div>
+          <motion.div initial={{opacity:0,scale:0.95}} whileInView={{opacity:1,scale:1}} viewport={{once:true}}
+            transition={{duration:0.8}}
+            className="relative max-w-2xl mx-auto">
+            {/* Glow behind */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full blur-[80px]" style={{backgroundColor:`${ACCENT_HEX}15`}} />
+            
+            <div className="relative bg-zinc-900/80 border border-zinc-800 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
+              {/* Window dots */}
+              <div className="flex gap-2 mb-8">
+                <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                <span className="ml-3 text-xs text-zinc-500 font-bold">Printer Simulator</span>
+              </div>
+              
+              {/* Animated SVG Printer */}
+              <div className="w-full max-w-sm mx-auto">
+                <svg viewBox="0 0 200 180" className="w-full h-full">
+                  {/* Paper tray */}
+                  <motion.rect x="50" y="105" width="100" height="55" rx="6" fill="#1e293b" stroke="#334155" strokeWidth="1.5"
+                    animate={{ y: [105, 100, 105] }} transition={{ duration: 3, repeat: Infinity }} />
+                  {/* Printer body */}
+                  <rect x="30" y="60" width="140" height="60" rx="8" fill="#0f172a" stroke={ACCENT_HEX} strokeWidth="1.5" />
+                  {/* Paper slot */}
+                  <rect x="45" y="95" width="110" height="8" rx="3" fill="#1e3a5f" />
+                  {/* Paper coming out */}
+                  <motion.rect x="65" y="80" width="70" height="3" rx="1.5" fill="white" opacity="0.9"
+                    initial={{ y: 85, opacity: 0 }} animate={{ y: [85, 65, 50], opacity: [0, 1, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }} />
+                  {/* Status light */}
+                  <motion.circle cx="155" cy="80" r="5" fill={ACCENT_HEX}
+                    animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity }} />
+                  {/* Wi-Fi rings */}
+                  {[10, 18, 26].map((r, i) => (
+                    <motion.circle key={i} cx="100" cy="45" r={r} fill="none" stroke={ACCENT_HEX} strokeWidth="1.2"
+                      animate={{ opacity: [0, 0.7, 0], scale: [0.7, 1.3, 1.8] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
+                      style={{ transformOrigin: "100px 45px" }} />
+                  ))}
+                  {/* Ink dots */}
+                  {[{ c: "#06b6d4", x: 70 }, { c: "#ec4899", x: 85 }, { c: "#eab308", x: 100 }, { c: "#374151", x: 115 }].map((d, i) => (
+                    <motion.circle key={i} cx={d.x} cy={20} r="4" fill={d.c}
+                      animate={{ cy: [20, 48, 20], opacity: [0, 1, 0] }}
+                      transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.25, type: "spring", stiffness: 300 }} />
+                  ))}
+                  {/* Connecting arc */}
+                  <motion.path d="M 75 45 Q 100 25 125 45" fill="none" stroke={ACCENT_HEX} strokeWidth="1.5" strokeDasharray="40"
+                    animate={{ strokeDashoffset: [40, 0, -40] }} transition={{ duration: 2, repeat: Infinity }} />
+                </svg>
+              </div>
+              
+              {/* Labels */}
+              <div className="flex flex-wrap justify-center gap-4 mt-8">
+                {[
+                  { icon: "📶", label: "Wi-Fi Signal" },
+                  { icon: "💧", label: "Ink Flow" },
+                  { icon: "📄", label: "Paper Feed" },
+                  { icon: "💡", label: "Status Light" },
+                ].map((item, i) => (
+                  <motion.div key={i} initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}}
+                    viewport={{once:true}} transition={{delay:0.2+i*0.1}}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/5 text-sm">
+                    <span>{item.icon}</span>
+                    <span className="text-zinc-400 font-medium">{item.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
