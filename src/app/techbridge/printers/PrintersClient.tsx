@@ -166,6 +166,341 @@ function ToolCard({ tool, i }: { tool: Tool; i: number }) {
   );
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   PRINTER SIMULATOR — 30-second animated story
+   ═══════════════════════════════════════════════════════════════ */
+const SIM_SCENES = [
+  {
+    id: "start",
+    title: "You tap Print on your phone",
+    emoji: "📱",
+    desc: "You open a document and hit the print button",
+    duration: 4000,
+    color: "#3b82f6",
+    elements: { phone: true, wifi: false, router: false, printer: false, paper: false, ink: false },
+  },
+  {
+    id: "wifi-send",
+    title: "Phone sends data over Wi-Fi",
+    emoji: "📶",
+    desc: "Your phone converts the document into print data and sends it wirelessly",
+    duration: 4000,
+    color: "#06b6d4",
+    elements: { phone: true, wifi: true, router: false, printer: false, paper: false, ink: false },
+  },
+  {
+    id: "router",
+    title: "Your router delivers it",
+    emoji: "🌐",
+    desc: "The Wi-Fi router passes the data to any printer on the same network",
+    duration: 4000,
+    color: "#8b5cf6",
+    elements: { phone: true, wifi: true, router: true, printer: false, paper: false, ink: false },
+  },
+  {
+    id: "printer-receive",
+    title: "Printer receives the job",
+    emoji: "🖨️",
+    desc: "The printer's Wi-Fi chip picks up the signal — the status light turns on",
+    duration: 4000,
+    color: "#2563eb",
+    elements: { phone: true, wifi: true, router: true, printer: true, paper: false, ink: false },
+  },
+  {
+    id: "ink",
+    title: "Ink cartridges activate",
+    emoji: "💧",
+    desc: "Tiny nozzles spray microscopic ink drops — Cyan, Magenta, Yellow, Black",
+    duration: 5000,
+    color: "#ec4899",
+    elements: { phone: false, wifi: false, router: false, printer: true, paper: false, ink: true },
+  },
+  {
+    id: "paper",
+    title: "Paper feeds through",
+    emoji: "📄",
+    desc: "Rollers pull paper from the tray — the print head moves left to right, line by line",
+    duration: 5000,
+    color: "#f59e0b",
+    elements: { phone: false, wifi: false, router: false, printer: true, paper: true, ink: true },
+  },
+  {
+    id: "done",
+    title: "Your page is printed! ✅",
+    emoji: "🎉",
+    desc: "The finished page slides out. Total time: about 15 seconds for one page.",
+    duration: 4000,
+    color: "#22c55e",
+    elements: { phone: false, wifi: false, router: false, printer: true, paper: true, ink: false },
+  },
+];
+
+function PrinterSimulator() {
+  const [sceneIdx, setSceneIdx] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isVisible = useInView(containerRef, { once: true, margin: "-100px" });
+
+  const scene = SIM_SCENES[sceneIdx];
+  const progress = ((sceneIdx + 1) / SIM_SCENES.length) * 100;
+
+  useEffect(() => {
+    if (!isPlaying) return;
+    const timer = setTimeout(() => {
+      if (sceneIdx < SIM_SCENES.length - 1) {
+        setSceneIdx(s => s + 1);
+      } else {
+        setIsPlaying(false);
+      }
+    }, scene.duration);
+    return () => clearTimeout(timer);
+  }, [sceneIdx, isPlaying, scene.duration]);
+
+  const handlePlay = () => {
+    setSceneIdx(0);
+    setIsPlaying(true);
+    setHasStarted(true);
+  };
+
+  const handleReplay = () => {
+    setSceneIdx(0);
+    setIsPlaying(true);
+  };
+
+  return (
+    <section ref={containerRef} className="py-20 border-b border-zinc-800/50 bg-zinc-950/60 overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-3">See How Wireless Printing Works</h2>
+          <p className="text-zinc-400 text-lg">30-second animated walkthrough — tap Play to begin</p>
+        </motion.div>
+
+        <motion.div initial={{opacity:0,scale:0.95}} animate={isVisible ? {opacity:1,scale:1} : {}}
+          transition={{duration:0.8}}
+          className="relative max-w-4xl mx-auto">
+          
+          {/* Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] rounded-full blur-[100px]"
+            style={{ backgroundColor: `${scene.color}12`, transition: "background-color 1s" }} />
+
+          <div className="relative bg-zinc-900/80 border border-zinc-800 rounded-3xl p-6 md:p-10 backdrop-blur-sm">
+            {/* Window bar */}
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-3 h-3 rounded-full bg-red-500/80" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <div className="w-3 h-3 rounded-full bg-green-500/80" />
+              <span className="ml-3 text-xs text-zinc-500 font-bold">Printer Simulator — How Wi-Fi Printing Works</span>
+            </div>
+
+            {/* Progress bar */}
+            <div className="w-full h-1 bg-zinc-800 rounded-full mb-8 overflow-hidden">
+              <motion.div className="h-full rounded-full" 
+                style={{ backgroundColor: scene.color, transition: "background-color 0.5s" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.5 }} />
+            </div>
+
+            {/* ── Animation stage ── */}
+            <div className="relative h-[280px] md:h-[320px] mb-8">
+              
+              {/* Phone */}
+              <motion.div
+                className="absolute left-[5%] top-[30%] flex flex-col items-center"
+                animate={{ opacity: scene.elements.phone ? 1 : 0.15, scale: scene.elements.phone ? 1 : 0.85 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="w-14 h-24 md:w-16 md:h-28 rounded-xl border-2 flex items-center justify-center relative overflow-hidden"
+                  style={{ borderColor: scene.elements.phone ? scene.color : "#374151", backgroundColor: scene.elements.phone ? `${scene.color}15` : "#1e293b", transition: "all 0.6s" }}>
+                  <span className="text-2xl">📱</span>
+                  {scene.id === "start" && (
+                    <motion.div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-8 h-1.5 rounded-full"
+                      style={{ backgroundColor: scene.color }}
+                      animate={{ opacity: [0.4, 1, 0.4] }}
+                      transition={{ duration: 1, repeat: Infinity }} />
+                  )}
+                </div>
+                <span className="text-[11px] text-zinc-500 font-bold mt-2">Phone</span>
+              </motion.div>
+
+              {/* Wi-Fi signal waves — phone to router */}
+              {scene.elements.wifi && (
+                <div className="absolute left-[18%] top-[38%]">
+                  {[0, 1, 2].map(i => (
+                    <motion.div key={`wave-${i}`}
+                      className="absolute w-6 h-6 rounded-full border"
+                      style={{ borderColor: `${scene.color}50` }}
+                      initial={{ scale: 0.5, opacity: 0.8 }}
+                      animate={{ scale: [0.5, 2, 3], opacity: [0.8, 0.3, 0], x: [0, 40, 80] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.4 }}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* Router */}
+              <motion.div
+                className="absolute left-[35%] top-[25%] flex flex-col items-center"
+                animate={{ opacity: scene.elements.router ? 1 : 0.15, scale: scene.elements.router ? 1 : 0.85 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="w-16 h-14 md:w-20 md:h-16 rounded-xl border-2 flex items-center justify-center"
+                  style={{ borderColor: scene.elements.router ? scene.color : "#374151", backgroundColor: scene.elements.router ? `${scene.color}15` : "#1e293b", transition: "all 0.6s" }}>
+                  <span className="text-2xl">🌐</span>
+                </div>
+                <span className="text-[11px] text-zinc-500 font-bold mt-2">Router</span>
+                {scene.elements.router && (
+                  <motion.div className="absolute -top-3 -right-3"
+                    animate={{ scale: [1, 1.3, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }}>
+                    <span className="text-sm">📶</span>
+                  </motion.div>
+                )}
+              </motion.div>
+
+              {/* Data stream — router to printer */}
+              {scene.elements.router && scene.elements.printer && (
+                <div className="absolute left-[52%] top-[32%]">
+                  {[0, 1, 2, 3].map(i => (
+                    <motion.div key={`data-${i}`}
+                      className="absolute w-2 h-2 rounded-full"
+                      style={{ backgroundColor: scene.color }}
+                      initial={{ x: 0, opacity: 0 }}
+                      animate={{ x: [0, 30, 60, 90], opacity: [0, 1, 1, 0] }}
+                      transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.3 }}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* Printer */}
+              <motion.div
+                className="absolute right-[5%] md:right-[10%] top-[20%] flex flex-col items-center"
+                animate={{ opacity: scene.elements.printer ? 1 : 0.15, scale: scene.elements.printer ? 1 : 0.85 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="relative">
+                  <div className="w-28 h-20 md:w-36 md:h-24 rounded-xl border-2 flex items-center justify-center relative"
+                    style={{ borderColor: scene.elements.printer ? scene.color : "#374151", backgroundColor: scene.elements.printer ? `${scene.color}10` : "#1e293b", transition: "all 0.6s" }}>
+                    <span className="text-4xl">🖨️</span>
+                    {/* Status light */}
+                    {scene.elements.printer && (
+                      <motion.div className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full"
+                        style={{ backgroundColor: scene.color }}
+                        animate={{ opacity: [0.4, 1, 0.4] }}
+                        transition={{ duration: 1, repeat: Infinity }} />
+                    )}
+                  </div>
+
+                  {/* Ink drops */}
+                  {scene.elements.ink && (
+                    <div className="absolute -top-6 left-1/2 -translate-x-1/2 flex gap-1.5">
+                      {[
+                        { color: "#06b6d4", label: "C" },
+                        { color: "#ec4899", label: "M" },
+                        { color: "#eab308", label: "Y" },
+                        { color: "#374151", label: "K" },
+                      ].map((ink, i) => (
+                        <motion.div key={i} className="flex flex-col items-center"
+                          animate={{ y: [0, 8, 0], opacity: [0.5, 1, 0.5] }}
+                          transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}>
+                          <div className="w-3 h-5 rounded-b-full" style={{ backgroundColor: ink.color }} />
+                          <span className="text-[8px] font-bold mt-0.5" style={{ color: ink.color }}>{ink.label}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Paper coming out */}
+                  {scene.elements.paper && (
+                    <motion.div
+                      className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-sm flex items-center justify-center"
+                      initial={{ height: 0, width: 60, opacity: 0 }}
+                      animate={{ height: [0, 40, 60], width: 60, opacity: [0, 1, 1] }}
+                      transition={{ duration: 2, repeat: scene.id !== "done" ? Infinity : 0, repeatDelay: 1 }}
+                    >
+                      {scene.id === "done" && (
+                        <motion.span className="text-green-600 text-lg"
+                          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}>
+                          ✅
+                        </motion.span>
+                      )}
+                    </motion.div>
+                  )}
+                </div>
+                <span className="text-[11px] text-zinc-500 font-bold mt-3">Printer</span>
+              </motion.div>
+
+              {/* Connection line background */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.08 }}>
+                <line x1="15%" y1="55%" x2="42%" y2="45%" stroke="white" strokeWidth="1" strokeDasharray="4 4" />
+                <line x1="52%" y1="45%" x2="78%" y2="45%" stroke="white" strokeWidth="1" strokeDasharray="4 4" />
+              </svg>
+            </div>
+
+            {/* Scene info panel */}
+            <motion.div
+              key={`info-${sceneIdx}`}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-center mb-6"
+            >
+              <div className="inline-flex items-center gap-3 mb-3">
+                <span className="text-3xl">{scene.emoji}</span>
+                <h3 className="text-xl md:text-2xl font-black text-white">{scene.title}</h3>
+              </div>
+              <p className="text-zinc-400 text-base max-w-lg mx-auto">{scene.desc}</p>
+            </motion.div>
+
+            {/* Step indicators */}
+            <div className="flex justify-center gap-1.5 mb-6">
+              {SIM_SCENES.map((s, i) => (
+                <button key={i} onClick={() => { setSceneIdx(i); setHasStarted(true); setIsPlaying(false); }}
+                  className="h-1.5 rounded-full transition-all duration-500 cursor-pointer"
+                  style={{
+                    width: i === sceneIdx ? "24px" : "8px",
+                    backgroundColor: i === sceneIdx ? scene.color : i < sceneIdx ? `${scene.color}60` : "rgba(255,255,255,0.1)",
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Controls */}
+            <div className="flex justify-center gap-3">
+              {!hasStarted ? (
+                <button onClick={handlePlay}
+                  className="px-8 py-3 rounded-xl font-bold text-white flex items-center gap-2 transition-all hover:scale-105"
+                  style={{ backgroundColor: scene.color }}>
+                  ▶ Play Simulation
+                </button>
+              ) : (
+                <>
+                  <button onClick={() => setIsPlaying(!isPlaying)}
+                    className="px-6 py-3 rounded-xl font-bold text-white flex items-center gap-2 transition-all hover:scale-105"
+                    style={{ backgroundColor: scene.color }}>
+                    {isPlaying ? "⏸ Pause" : "▶ Resume"}
+                  </button>
+                  <button onClick={handleReplay}
+                    className="px-6 py-3 rounded-xl font-bold text-white bg-white/10 border border-white/10 flex items-center gap-2 transition-all hover:scale-105 hover:bg-white/15">
+                    🔄 Replay
+                  </button>
+                  {sceneIdx < SIM_SCENES.length - 1 && (
+                    <button onClick={() => setSceneIdx(s => Math.min(s + 1, SIM_SCENES.length - 1))}
+                      className="px-6 py-3 rounded-xl font-bold text-white bg-white/10 border border-white/10 flex items-center gap-2 transition-all hover:scale-105 hover:bg-white/15">
+                      Skip →
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 export default function PageClient() {
   const [frameIdx, setFrameIdx] = useState(0);
   // Auto-cycle frames every 4 seconds
@@ -430,84 +765,8 @@ export default function PageClient() {
         </div>
       </section>
 
-      {/* INTERACTIVE PRINTER ANIMATION SHOWCASE */}
-      <section className="py-20 border-b border-zinc-800/50 bg-zinc-950/60 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-3">See How Your Printer Works</h2>
-            <p className="text-zinc-400 text-lg">Interactive animation — understand the basics at a glance</p>
-          </motion.div>
-          <motion.div initial={{opacity:0,scale:0.95}} whileInView={{opacity:1,scale:1}} viewport={{once:true}}
-            transition={{duration:0.8}}
-            className="relative max-w-2xl mx-auto">
-            {/* Glow behind */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full blur-[80px]" style={{backgroundColor:`${ACCENT_HEX}15`}} />
-            
-            <div className="relative bg-zinc-900/80 border border-zinc-800 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
-              {/* Window dots */}
-              <div className="flex gap-2 mb-8">
-                <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                <span className="ml-3 text-xs text-zinc-500 font-bold">Printer Simulator</span>
-              </div>
-              
-              {/* Animated SVG Printer */}
-              <div className="w-full max-w-sm mx-auto">
-                <svg viewBox="0 0 200 180" className="w-full h-full">
-                  {/* Paper tray */}
-                  <motion.rect x="50" y="105" width="100" height="55" rx="6" fill="#1e293b" stroke="#334155" strokeWidth="1.5"
-                    animate={{ y: [105, 100, 105] }} transition={{ duration: 3, repeat: Infinity }} />
-                  {/* Printer body */}
-                  <rect x="30" y="60" width="140" height="60" rx="8" fill="#0f172a" stroke={ACCENT_HEX} strokeWidth="1.5" />
-                  {/* Paper slot */}
-                  <rect x="45" y="95" width="110" height="8" rx="3" fill="#1e3a5f" />
-                  {/* Paper coming out */}
-                  <motion.rect x="65" y="80" width="70" height="3" rx="1.5" fill="white" opacity="0.9"
-                    initial={{ y: 85, opacity: 0 }} animate={{ y: [85, 65, 50], opacity: [0, 1, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }} />
-                  {/* Status light */}
-                  <motion.circle cx="155" cy="80" r="5" fill={ACCENT_HEX}
-                    animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity }} />
-                  {/* Wi-Fi rings */}
-                  {[10, 18, 26].map((r, i) => (
-                    <motion.circle key={i} cx="100" cy="45" r={r} fill="none" stroke={ACCENT_HEX} strokeWidth="1.2"
-                      animate={{ opacity: [0, 0.7, 0], scale: [0.7, 1.3, 1.8] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
-                      style={{ transformOrigin: "100px 45px" }} />
-                  ))}
-                  {/* Ink dots */}
-                  {[{ c: "#06b6d4", x: 70 }, { c: "#ec4899", x: 85 }, { c: "#eab308", x: 100 }, { c: "#374151", x: 115 }].map((d, i) => (
-                    <motion.circle key={i} cx={d.x} cy={20} r="4" fill={d.c}
-                      animate={{ cy: [20, 48, 20], opacity: [0, 1, 0] }}
-                      transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.25, type: "spring", stiffness: 300 }} />
-                  ))}
-                  {/* Connecting arc */}
-                  <motion.path d="M 75 45 Q 100 25 125 45" fill="none" stroke={ACCENT_HEX} strokeWidth="1.5" strokeDasharray="40"
-                    animate={{ strokeDashoffset: [40, 0, -40] }} transition={{ duration: 2, repeat: Infinity }} />
-                </svg>
-              </div>
-              
-              {/* Labels */}
-              <div className="flex flex-wrap justify-center gap-4 mt-8">
-                {[
-                  { icon: "📶", label: "Wi-Fi Signal" },
-                  { icon: "💧", label: "Ink Flow" },
-                  { icon: "📄", label: "Paper Feed" },
-                  { icon: "💡", label: "Status Light" },
-                ].map((item, i) => (
-                  <motion.div key={i} initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}}
-                    viewport={{once:true}} transition={{delay:0.2+i*0.1}}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/5 text-sm">
-                    <span>{item.icon}</span>
-                    <span className="text-zinc-400 font-medium">{item.label}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* INTERACTIVE PRINTER SIMULATOR — 30s animated story */}
+      <PrinterSimulator />
 
       {/* TOPICS */}
       <section className="py-24 bg-zinc-950/50 border-y border-zinc-800/50">
