@@ -2,91 +2,39 @@ import type { Metadata } from "next";
 import ContactClient from "./ContactClient";
 
 export const metadata: Metadata = {
-  title: "Contact Setwise Digital — Free Tech Help for Adults 45+ in US & Canada",
+  title: "Contact Us — Get Tech Help | Setwise Digital",
   description:
-    "Get in touch with Setwise Digital for personalized technology learning sessions. We help adults 45+ across the United States and Canada master printers, GPS, smart home devices, and more. Free consultation — reply within 24 hours.",
+    "Reach Setwise Digital for tech help. Send a message, schedule a call, or get instant support. We reply within 24 hours. Plain-English tech education.",
   keywords: [
     "contact Setwise Digital",
-    "tech help for seniors",
-    "technology help adults over 45",
-    "book tech lesson United States",
-    "book tech lesson Canada",
-    "printer help for seniors",
-    "GPS help for older adults",
-    "smart home setup help",
-    "technology tutor for seniors",
-    "Setwise Digital support",
-    "patient tech education",
-    "tech learning for adults over 40",
-    "technology lessons near me",
-    "digital literacy for seniors US Canada",
+    "tech help contact",
+    "book tech lesson",
+    "printer help contact",
+    "GPS help support",
+    "smart home support",
+    "technology education contact",
   ],
-  alternates: { canonical: "https://www.setwisedigital.com/contact" },
   openGraph: {
-    title: "Contact Setwise Digital — Free Tech Help for Adults 45+",
+    title: "Contact Us — Get Tech Help | Setwise Digital",
     description:
-      "Personalized, patient technology education for adults 45+ across the US & Canada. Printers, GPS, smart home, and more. Free consultation — we reply within 24 hours.",
-    url: "https://www.setwisedigital.com/contact",
-    type: "website",
-    locale: "en_US",
-    siteName: "Setwise Digital",
-    images: [
-      {
-        url: "https://www.setwisedigital.com/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Contact Setwise Digital — Technology Made Easy for Adults 45+",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Contact Setwise Digital — Free Tech Help for Adults 45+",
-    description:
-      "Patient, personalized technology education for adults 45+ across the US & Canada. Reply within 24 hours.",
-    images: ["https://www.setwisedigital.com/og-image.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+      "Reach Setwise Digital for tech help. Send a message, schedule a call, or get instant support. We reply within 24 hours.",
+    url: "https://setwisedigital.com/contact",
   },
 };
 
 export default function ContactPage() {
-  const contactPageSchema = {
+  const contactSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     name: "Contact Setwise Digital",
-    url: "https://www.setwisedigital.com/contact",
+    url: "https://setwisedigital.com/contact",
     description:
-      "Contact Setwise Digital for personalized technology learning guidance and live lesson session bookings. Serving adults 45+ across the United States and Canada.",
+      "Contact Setwise Digital for tech help, learning sessions, or general enquiries. We reply within 24 hours.",
     mainEntity: {
       "@type": "Organization",
       name: "Setwise Digital",
       email: "support@setwisedigital.com",
-      url: "https://www.setwisedigital.com",
-      foundingDate: "2016",
-      areaServed: [
-        { "@type": "Country", name: "United States" },
-        { "@type": "Country", name: "Canada" },
-      ],
-      contactPoint: {
-        "@type": "ContactPoint",
-        email: "support@setwisedigital.com",
-        contactType: "customer service",
-        availableLanguage: ["English"],
-        areaServed: [
-          { "@type": "Country", name: "United States" },
-          { "@type": "Country", name: "Canada" },
-        ],
-      },
+      url: "https://setwisedigital.com",
       address: {
         "@type": "PostalAddress",
         streetAddress: "137 Mazzeo Drive",
@@ -95,62 +43,14 @@ export default function ContactPage() {
         postalCode: "08028",
         addressCountry: "US",
       },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: "support@setwisedigital.com",
+        availableLanguage: "English",
+        areaServed: ["US", "CA"],
+      },
     },
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "How do I contact Setwise Digital?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Contact Setwise Digital via the contact form at setwisedigital.com/contact or by emailing support@setwisedigital.com. We respond to all enquiries within 24 hours.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Does Setwise Digital serve customers in both the United States and Canada?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes. Setwise Digital provides technology education services to adults aged 45 and older across both the United States and Canada through online sessions.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Does Setwise Digital provide remote technical support?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "No. Setwise Digital provides educational learning guidance, not remote technical support or device repairs. Our live lesson sessions are structured educational video sessions — our educators do not access your device remotely.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Is it free to contact Setwise Digital?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes. Contacting Setwise Digital and using our 47 free interactive tools is completely free. Live lesson sessions are available at paid pricing starting from $49.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "How quickly does Setwise Digital respond?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Setwise Digital responds to all contact form submissions and emails within 24 hours on business days.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What technology topics does Setwise Digital teach?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Setwise Digital offers educational guidance on printers, GPS navigation, smart home devices like Alexa, security cameras, and general technology literacy for adults over 45.",
-        },
-      },
-    ],
   };
 
   const breadcrumbSchema = {
@@ -161,13 +61,13 @@ export default function ContactPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.setwisedigital.com",
+        item: "https://setwisedigital.com",
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Contact Us",
-        item: "https://www.setwisedigital.com/contact",
+        name: "Contact",
+        item: "https://setwisedigital.com/contact",
       },
     ],
   };
@@ -176,11 +76,7 @@ export default function ContactPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
       />
       <script
         type="application/ld+json"

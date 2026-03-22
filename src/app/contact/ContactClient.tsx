@@ -1,408 +1,243 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
-  motion,
-  useScroll,
-  useTransform,
-  useInView,
-  AnimatePresence,
-} from "framer-motion";
-import {
-  ArrowRight,
+  Send,
+  Calendar,
   Zap,
-  Shield,
-  Globe,
-  Printer,
-  Navigation,
-  Home as HomeIcon,
-  Camera,
-  CheckCircle2,
-  BookOpen,
-  Smartphone,
-  ChevronRight,
-  ChevronDown,
-  UserCheck,
-  Award,
-  Sparkles,
-  Star,
-  TrendingUp,
+  Mail,
+  Phone,
+  User,
+  MapPin,
   Clock,
-  Users,
-  Play,
-  MousePointer2,
-  Lightbulb,
-  ArrowUpRight,
+  CheckCircle2,
+  Loader2,
+  ArrowRight,
+  MessageSquare,
+  Globe,
+  Shield,
+  Star,
+  ChevronRight,
+  Headphones,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 import ScrollToTop from "@/components/ScrollToTop";
+import Link from "next/link";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   CONSTANTS & DATA
+   TYPES & DATA
    ═══════════════════════════════════════════════════════════════════════════ */
 
-const HERO_PHRASES = [
-  "Printer Setup",
-  "GPS Updates",
-  "Smart Home",
-  "Alexa Commands",
-  "Camera Tips",
-  "Online Safety",
-  "Wi-Fi Printing",
-  "Voice Control",
+type TabId = "message" | "schedule" | "call";
+
+const TABS: { id: TabId; label: string; icon: React.ReactNode; desc: string }[] = [
+  { id: "message", label: "Message", icon: <Send size={16} />, desc: "Send us a message — we reply within 24 hours" },
+  { id: "schedule", label: "Schedule", icon: <Calendar size={16} />, desc: "Book a live lesson at a time that suits you" },
+  { id: "call", label: "Instant Call", icon: <Zap size={16} />, desc: "Request a callback — we'll call you back today" },
 ];
 
-const TOPICS = [
-  {
-    Icon: Printer,
-    title: "Printer Setup",
-    desc: "Wi-Fi printing, paper jams, ink saving — all brands covered.",
-    points: ["Wi-Fi Setup", "Paper Jams", "Save Ink"],
-    href: "/techbridge/printers",
-    gradient: "from-blue-600 to-cyan-500",
-    shadow: "shadow-blue-600/20",
-    emoji: "🖨️",
-  },
-  {
-    Icon: Navigation,
-    title: "GPS Updates",
-    desc: "Keep Garmin & TomTom maps current for stress-free travel.",
-    points: ["Map Updates", "Route Tips", "Syncing"],
-    href: "/techbridge/gps",
-    gradient: "from-emerald-500 to-teal-500",
-    shadow: "shadow-emerald-600/20",
-    emoji: "🗺️",
-  },
-  {
-    Icon: HomeIcon,
-    title: "Smart Home",
-    desc: "Set up Alexa, Google Nest, smart bulbs & routines easily.",
-    points: ["Alexa Tips", "Google Nest", "Routines"],
-    href: "/techbridge/smart-home",
-    gradient: "from-amber-500 to-orange-500",
-    shadow: "shadow-amber-600/20",
-    emoji: "🏠",
-  },
-  {
-    Icon: Camera,
-    title: "Camera Basics",
-    desc: "Firmware updates, settings explained, sharper photos.",
-    points: ["Firmware", "Settings", "Better Photos"],
-    href: "/techbridge/camera",
-    gradient: "from-rose-500 to-pink-500",
-    shadow: "shadow-rose-600/20",
-    emoji: "📷",
-  },
-  {
-    Icon: Smartphone,
-    title: "Alexa Refresh",
-    desc: "50+ commands, daily routines, music & news setup.",
-    points: ["Updates", "Commands", "Daily Tasks"],
-    href: "/techbridge/alexa",
-    gradient: "from-cyan-500 to-blue-500",
-    shadow: "shadow-cyan-600/20",
-    emoji: "🔊",
-  },
-  {
-    Icon: Shield,
-    title: "Security & Basics",
-    desc: "Antivirus, password safety, scam detection — free tools.",
-    points: ["Antivirus", "Passwords", "Scams"],
-    href: "/techbridge/security",
-    gradient: "from-red-500 to-rose-500",
-    shadow: "shadow-red-600/20",
-    emoji: "🔒",
-  },
-];
-
-const TOOLS = [
-  {
-    emoji: "🔧",
-    title: "Printer Stopped Working?",
-    desc: "Step-by-step fix for offline, blank pages, paper jams.",
-    href: "/tools/my-printer-stopped-working",
-    gradient: "from-orange-500 to-amber-400",
-  },
-  {
-    emoji: "📱",
-    title: "Print from Your Phone",
-    desc: "iPhone, Android, Windows or Mac — exact steps.",
-    href: "/tools/how-to-print-from-phone-or-laptop",
-    gradient: "from-sky-500 to-cyan-400",
-  },
-  {
-    emoji: "⚖️",
-    title: "HP vs Canon vs Epson",
-    desc: "3-question quiz picks the best brand for you.",
-    href: "/tools/hp-vs-canon-vs-epson-vs-brother",
-    gradient: "from-violet-500 to-fuchsia-400",
-  },
-  {
-    emoji: "🗺️",
-    title: "Road Trip GPS Check",
-    desc: "5-step GPS readiness checklist before your trip.",
-    href: "/tools/road-trip-checker",
-    gradient: "from-green-500 to-emerald-400",
-  },
-];
-
-const PACKAGES = [
-  {
-    title: "Printer Learning",
-    sub: "10 min a day",
-    bonus: "Tips to save time & money on printing",
-    features: ["Wi-Fi printing explained", "Maintenance basics"],
-    gradient: "from-blue-600 to-blue-800",
-    Icon: Printer,
-    href: "/techbridge/printers",
-  },
-  {
-    title: "GPS Travel",
-    sub: "Smooth travels ahead",
-    bonus: "Hidden map features most people miss",
-    features: ["Garmin & car GPS systems", "How navigation works"],
-    gradient: "from-emerald-600 to-teal-700",
-    Icon: Navigation,
-    href: "/techbridge/gps",
-  },
-  {
-    title: "Smart Home Starter",
-    sub: "Voice-controlled life",
-    bonus: "Create routines that suit your lifestyle",
-    features: ["Alexa & Google Nest setup", "Voice commands explained"],
-    gradient: "from-violet-600 to-purple-700",
-    Icon: HomeIcon,
-    href: "/techbridge/smart-home",
-  },
-  {
-    title: "Camera Essentials",
-    sub: "Clearer, sharper photos",
-    bonus: "Simple tips for sharper photos every time",
-    features: ["Camera firmware updates", "Settings explained"],
-    gradient: "from-zinc-800 to-zinc-900",
-    Icon: Camera,
-    href: "/techbridge/camera",
-  },
-];
-
-const FAQS = [
-  {
-    q: "Do I need prior technical knowledge?",
-    a: "Not at all. Our guides are written in plain English and designed for all levels — especially those who prefer clear, non-technical explanations.",
-  },
-  {
-    q: "Can I use these guides at my own pace?",
-    a: "Yes. Every guide is step-by-step, allowing you to pause, repeat, and return whenever you have a few minutes to spare.",
-  },
-  {
-    q: "Do you cover different brands?",
-    a: "Yes. We include instructions for popular devices like HP, Canon, Epson, Garmin, Sony, and many others.",
-  },
-  {
-    q: "What if I just need a quick answer?",
-    a: "That's what our 47 free interactive tools are for — pick your device, answer 2–3 questions, and get exact steps for your situation.",
-  },
-  {
-    q: "Is Setwise Digital affiliated with HP, Canon, or Garmin?",
-    a: "No. We are an independent tech literacy platform, not affiliated with any device manufacturer.",
-  },
+const QUICK_TOPICS = [
+  "Printer setup help",
+  "GPS map updates",
+  "Smart home setup",
+  "Alexa not working",
+  "Camera firmware",
+  "Online security",
+  "Book a live lesson",
+  "General question",
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   UTILITY COMPONENTS
+   UTILITY
    ═══════════════════════════════════════════════════════════════════════════ */
 
-function FadeUp({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
+function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 32 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-    >
+    <motion.div ref={ref} initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className={className}>
       {children}
     </motion.div>
   );
 }
 
-/* Animated counter */
-function useCounter(end: number, duration = 2000, start = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    let startTime: number | null = null;
-    const step = (ts: number) => {
-      if (!startTime) startTime = ts;
-      const p = Math.min((ts - startTime) / duration, 1);
-      setCount(Math.floor((1 - Math.pow(1 - p, 3)) * end));
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [end, duration, start]);
-  return count;
-}
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONTACT FORM
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-function StatCard({
-  value,
-  suffix,
-  label,
-}: {
-  value: number;
-  suffix: string;
-  label: string;
-}) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const count = useCounter(value, 1600, inView);
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="text-center p-6"
-    >
-      <div className="text-4xl md:text-5xl font-black tracking-tighter text-white tabular-nums mb-1">
-        {count}
-        {suffix}
-      </div>
-      <div className="text-zinc-500 font-semibold text-sm">{label}</div>
-    </motion.div>
-  );
-}
+function ContactForm({ activeTab }: { activeTab: TabId }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [preferredDate, setPreferredDate] = useState("");
+  const [preferredTime, setPreferredTime] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [status, setStatus] = useState<"idle" | "loading" | "done">("idle");
 
-/* Rotating typewriter for hero */
-function RotatingText({ items }: { items: string[] }) {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % items.length), 2800);
-    return () => clearInterval(t);
-  }, [items.length]);
-  return (
-    <span className="relative inline-block h-[1.15em] overflow-hidden align-bottom min-w-[280px]">
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={idx}
-          initial={{ y: 40, opacity: 0, rotateX: -45 }}
-          animate={{ y: 0, opacity: 1, rotateX: 0 }}
-          exit={{ y: -40, opacity: 0, rotateX: 45 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute left-0 bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent whitespace-nowrap"
-        >
-          {items[idx]}
-        </motion.span>
-      </AnimatePresence>
-    </span>
-  );
-}
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!name.trim()) e.name = "Please enter your name";
+    if (!email.trim() || !email.includes("@")) e.email = "Please enter a valid email";
+    if (activeTab === "call" && !phone.trim()) e.phone = "Phone is required for callbacks";
+    if (activeTab === "message" && !message.trim()) e.message = "Please describe how we can help";
+    if (activeTab === "schedule" && !preferredDate) e.date = "Please select a preferred date";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
 
-/* SVG floating icons in the hero */
-function FloatingIcons() {
-  const icons = [
-    { Icon: Printer, x: "8%", y: "18%", delay: 0, size: 22 },
-    { Icon: Navigation, x: "85%", y: "14%", delay: 0.4, size: 20 },
-    { Icon: HomeIcon, x: "5%", y: "72%", delay: 0.8, size: 18 },
-    { Icon: Camera, x: "90%", y: "68%", delay: 1.2, size: 20 },
-    { Icon: Shield, x: "78%", y: "42%", delay: 0.6, size: 16 },
-    { Icon: Smartphone, x: "14%", y: "48%", delay: 1.0, size: 16 },
-  ];
-  return (
-    <>
-      {icons.map((item, i) => (
-        <motion.div
-          key={i}
-          className="absolute pointer-events-none"
-          style={{ left: item.x, top: item.y }}
-          animate={{ y: [0, -14, 0], rotate: [0, 5, -5, 0] }}
-          transition={{
-            duration: 5 + i * 0.6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: item.delay,
-          }}
-        >
-          <div className="w-12 h-12 rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/10 flex items-center justify-center text-blue-300/60 shadow-lg">
-            <item.Icon size={item.size} />
-          </div>
+  const submit = async () => {
+    if (!validate()) return;
+    setStatus("loading");
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          issue: activeTab === "schedule"
+            ? `Schedule request: ${preferredDate} ${preferredTime} — ${message}`
+            : activeTab === "call"
+            ? `Callback request — ${message}`
+            : message,
+          source: `contact-page-${activeTab}`,
+        }),
+      });
+    } catch (e) {
+      console.error("[contact] error:", e);
+    }
+    setStatus("done");
+  };
+
+  if (status === "done") {
+    return (
+      <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-14">
+        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
+          className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-green-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-emerald-500/30">
+          <CheckCircle2 size={36} className="text-white" />
         </motion.div>
-      ))}
-    </>
-  );
-}
-
-/* Orbital rings SVG for hero visual */
-function OrbitalVisual() {
-  return (
-    <div className="relative w-full aspect-square max-w-[500px] mx-auto">
-      {/* Rings */}
-      {[180, 250, 320].map((r, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full border border-blue-500/15"
-          style={{
-            width: r,
-            height: r,
-            top: `calc(50% - ${r / 2}px)`,
-            left: `calc(50% - ${r / 2}px)`,
-          }}
-          animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-          transition={{
-            duration: 25 + i * 10,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      ))}
-
-      {/* Center logo */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-        animate={{ scale: [1, 1.06, 1] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="w-28 h-28 rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center shadow-2xl shadow-blue-600/40 border border-blue-400/20">
-          <span className="text-white font-black text-5xl italic">S</span>
-        </div>
+        <h3 className="text-2xl font-black text-white mb-2">Message Sent!</h3>
+        <p className="text-zinc-400 font-medium mb-1">Thanks, {name}. We&apos;ll get back to you within 24 hours.</p>
+        <p className="text-zinc-600 text-sm">Check your email at {email} for our reply.</p>
       </motion.div>
+    );
+  }
 
-      {/* Orbiting dots */}
-      {[0, 1, 2, 3, 4, 5].map((i) => (
-        <motion.div
-          key={`dot-${i}`}
-          className="absolute w-3 h-3 rounded-full bg-blue-400/50"
-          style={{
-            top: `calc(50% - 6px)`,
-            left: `calc(50% - 6px)`,
-          }}
-          animate={{
-            x: Math.cos((i * Math.PI) / 3) * 160,
-            y: Math.sin((i * Math.PI) / 3) * 160,
-            opacity: [0.3, 0.8, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "linear",
-            delay: i * 1.3,
-          }}
-        />
-      ))}
+  const inputClass = "w-full px-4 py-4 bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-blue-500/50 rounded-xl text-white text-base placeholder:text-zinc-600 font-medium outline-none transition-all focus:ring-2 focus:ring-blue-500/20";
+  const labelClass = "text-xs font-black text-zinc-400 uppercase tracking-widest block mb-2 ml-1";
+  const errorClass = "text-red-400 text-xs mt-1.5 font-semibold ml-1";
 
-      {/* Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-600/20 rounded-full blur-[80px]" />
+  return (
+    <div className="space-y-5">
+      {/* Name */}
+      <div>
+        <label className={labelClass}>Full Name *</label>
+        <div className="relative">
+          <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600" />
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="John Doe"
+            className={`${inputClass} pl-11`} style={{ borderColor: errors.name ? "#ef4444" : undefined }} />
+        </div>
+        {errors.name && <p className={errorClass}>{errors.name}</p>}
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className={labelClass}>Email *</label>
+        <div className="relative">
+          <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600" />
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="john@example.com"
+            className={`${inputClass} pl-11`} style={{ borderColor: errors.email ? "#ef4444" : undefined }} />
+        </div>
+        {errors.email && <p className={errorClass}>{errors.email}</p>}
+      </div>
+
+      {/* Phone */}
+      <div>
+        <label className={labelClass}>Phone {activeTab === "call" ? "*" : <span className="text-zinc-600 normal-case font-normal">(optional)</span>}</label>
+        <div className="relative">
+          <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600" />
+          <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(555) 000-0000"
+            className={`${inputClass} pl-11`} style={{ borderColor: errors.phone ? "#ef4444" : undefined }} />
+        </div>
+        {errors.phone && <p className={errorClass}>{errors.phone}</p>}
+      </div>
+
+      {/* Schedule-specific fields */}
+      <AnimatePresence>
+        {activeTab === "schedule" && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden space-y-5">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className={labelClass}>Preferred Date *</label>
+                <input type="date" value={preferredDate} onChange={(e) => setPreferredDate(e.target.value)}
+                  className={inputClass} style={{ borderColor: errors.date ? "#ef4444" : undefined }} />
+                {errors.date && <p className={errorClass}>{errors.date}</p>}
+              </div>
+              <div>
+                <label className={labelClass}>Preferred Time</label>
+                <select value={preferredTime} onChange={(e) => setPreferredTime(e.target.value)} className={inputClass}>
+                  <option value="">Any time</option>
+                  <option value="morning">Morning (9–12)</option>
+                  <option value="afternoon">Afternoon (12–3)</option>
+                  <option value="evening">Evening (3–6)</option>
+                </select>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Message */}
+      <div>
+        <label className={labelClass}>
+          {activeTab === "message" ? "How Can We Help? *" : activeTab === "schedule" ? "What would you like to learn?" : "What do you need help with?"}
+        </label>
+        <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={4}
+          placeholder={
+            activeTab === "message" ? "I need help with my printer setup..." :
+            activeTab === "schedule" ? "I'd like to learn how to set up wireless printing..." :
+            "Briefly describe what you need help with..."
+          }
+          className={`${inputClass} resize-none`} style={{ borderColor: errors.message ? "#ef4444" : undefined }} />
+        {errors.message && <p className={errorClass}>{errors.message}</p>}
+      </div>
+
+      {/* Quick topic chips */}
+      {activeTab === "message" && !message && (
+        <div>
+          <p className="text-xs text-zinc-600 font-bold mb-2 ml-1">Quick select:</p>
+          <div className="flex flex-wrap gap-2">
+            {QUICK_TOPICS.map((topic) => (
+              <button key={topic} onClick={() => setMessage(topic)}
+                className="px-3 py-1.5 bg-white/[0.04] border border-white/10 rounded-lg text-xs font-bold text-zinc-400 hover:border-blue-500/30 hover:text-blue-400 hover:bg-blue-500/5 transition-all">
+                {topic}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Submit */}
+      <motion.button onClick={submit} disabled={status === "loading"} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
+        className="w-full py-5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black text-lg rounded-xl flex items-center justify-center gap-3 shadow-xl shadow-blue-600/25 hover:shadow-blue-500/40 transition-all mt-2 disabled:opacity-70">
+        {status === "loading" ? (
+          <Loader2 size={22} className="animate-spin" />
+        ) : (
+          <>
+            {activeTab === "message" && <><Send size={18} /> Send Message</>}
+            {activeTab === "schedule" && <><Calendar size={18} /> Request Booking</>}
+            {activeTab === "call" && <><Phone size={18} /> Request Callback</>}
+          </>
+        )}
+      </motion.button>
+
+      <p className="text-center text-zinc-600 text-xs font-medium">
+        We reply within 24 hours · No spam · Your data is secure
+      </p>
     </div>
   );
 }
@@ -411,521 +246,204 @@ function OrbitalVisual() {
    MAIN PAGE
    ═══════════════════════════════════════════════════════════════════════════ */
 
-export default function Home() {
-  const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+export default function ContactClient() {
+  const [activeTab, setActiveTab] = useState<TabId>("message");
 
   return (
-    <div className="min-h-screen bg-[#060a12] text-white font-sans selection:bg-blue-500/30 overflow-x-hidden">
+    <div className="min-h-screen bg-[#060a12] text-white font-sans">
       <Navbar />
       <ScrollToTop />
 
-      {/* ═══════════════════════════════════════════════════════════════
-         HERO
-         ═══════════════════════════════════════════════════════════════ */}
-      <header
-        ref={heroRef}
-        className="relative min-h-screen flex items-center overflow-hidden"
-      >
-        {/* Deep background */}
-        <div className="absolute inset-0 bg-[#060a12]" />
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(100,180,255,0.4) 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
-        />
+      {/* ─── BREADCRUMB ─── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2 text-sm font-medium">
+          <Link href="/" className="text-zinc-500 hover:text-blue-400 transition-colors">Home</Link>
+          <ChevronRight size={14} className="text-zinc-700" />
+          <span className="text-white font-bold">Contact Us</span>
+        </motion.div>
+      </div>
 
-        {/* Gradient orbs */}
-        <motion.div
-          style={{ y: heroY }}
-          className="absolute top-[-10%] right-[-10%] w-[700px] h-[700px] bg-blue-600/12 rounded-full blur-[140px] pointer-events-none"
-        />
-        <motion.div
-          className="absolute bottom-[-15%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/8 rounded-full blur-[120px] pointer-events-none"
-        />
-        <div className="absolute top-[30%] left-[50%] w-[300px] h-[300px] bg-cyan-500/6 rounded-full blur-[100px] pointer-events-none" />
+      {/* ─── HERO + FORM ─── */}
+      <section className="relative pb-24 overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute top-0 right-[-10%] w-[600px] h-[600px] bg-blue-600/8 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-cyan-600/6 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.025]" style={{
+          backgroundImage: "radial-gradient(circle at 1px 1px, rgba(100,180,255,0.4) 1px, transparent 0)",
+          backgroundSize: "48px 48px",
+        }} />
 
-        {/* Floating device icons */}
-        <div className="absolute inset-0 hidden lg:block">
-          <FloatingIcons />
-        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
 
-        {/* Content */}
-        <motion.div
-          style={{ opacity: heroOpacity }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-24 pb-16"
-        >
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left — copy */}
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-black uppercase tracking-[0.25em] mb-8"
-              >
-                <Sparkles
-                  size={13}
-                  className="text-yellow-400 fill-yellow-400"
-                />
-                <span className="text-blue-300">
-                  Experience Technology Differently
-                </span>
+            {/* ─── LEFT: Info Side ─── */}
+            <div className="pt-8">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-[0.2em] mb-8">
+                  <Headphones size={12} /> Get Help Anytime
+                </div>
               </motion.div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.18, duration: 0.8 }}
-                className="font-black tracking-[-0.04em] leading-[0.88] mb-8"
-                style={{ fontSize: "clamp(3.2rem, 7vw, 5.5rem)" }}
-              >
-                Learn{" "}
-                <RotatingText items={HERO_PHRASES} />
+              <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
+                className="font-black tracking-[-0.03em] leading-[1.05] mb-6"
+                style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
+                We&apos;re Here
                 <br />
-                <span className="text-white/90">In Plain English.</span>
+                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">to Help You.</span>
               </motion.h1>
 
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-lg md:text-xl text-zinc-400 font-medium leading-relaxed mb-10 max-w-lg"
-              >
-                We teach everyday technology at your own pace — no jargon, no
-                pressure.{" "}
-                <span className="text-white font-bold">Just learning.</span>
+              <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                className="text-lg text-zinc-400 font-medium leading-relaxed mb-10 max-w-md">
+                Whether you have a question about our free tools, want to book a live learning session, or just need a friendly nudge in the right direction — reach out anytime.
               </motion.p>
 
-              {/* CTAs */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="flex flex-col sm:flex-row gap-4 mb-10"
-              >
-                <Link
-                  href="/techbridge"
-                  className="group px-8 py-5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 shadow-xl shadow-blue-600/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 transition-all"
-                >
-                  Start Learning Now
-                  <ArrowRight
-                    size={20}
-                    className="group-hover:translate-x-1.5 transition-transform"
-                  />
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="group flex items-center gap-3 px-6 py-5 bg-white/[0.06] border border-white/10 rounded-2xl font-black text-lg hover:bg-white/10 transition-all"
-                >
-                  <Zap size={18} className="text-blue-400" />
-                  View Pricing
-                </Link>
-                <Link
-                  href="/common-tech-problems"
-                  className="group flex items-center gap-3 px-6 py-5 bg-white/[0.06] border border-white/10 rounded-2xl font-black text-lg hover:bg-white/10 transition-all"
-                >
-                  <CheckCircle2 size={18} className="text-emerald-400" />
-                  Fix Issues
-                </Link>
+              {/* Status badge */}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+                className="inline-flex items-center gap-3 px-5 py-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl mb-10">
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-emerald-400 font-bold text-sm">Online now — we reply within 24 hours</span>
               </motion.div>
 
-              {/* Trust row */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.55 }}
-                className="flex flex-wrap items-center gap-6"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="flex">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star
-                        key={s}
-                        size={14}
-                        className="text-amber-400 fill-amber-400"
-                      />
-                    ))}
+              {/* Contact info cards */}
+              <div className="space-y-4 mb-10">
+                {[
+                  {
+                    icon: <Mail size={20} className="text-blue-400" />,
+                    title: "Email Us",
+                    desc: "We respond within 24 hours.",
+                    value: "support@setwisedigital.com",
+                    href: "mailto:support@setwisedigital.com",
+                  },
+                  {
+                    icon: <MapPin size={20} className="text-emerald-400" />,
+                    title: "US & Canada",
+                    desc: "Online tech education coast to coast.",
+                    value: "Glassboro, NJ 08028",
+                    href: null,
+                  },
+                  {
+                    icon: <Clock size={20} className="text-amber-400" />,
+                    title: "Office Hours",
+                    desc: "Monday – Friday",
+                    value: "9:00 AM – 6:00 PM EST",
+                    href: null,
+                  },
+                ].map((info, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.35 + i * 0.08 }}
+                    className="flex items-start gap-4 p-5 bg-white/[0.03] border border-white/8 rounded-2xl hover:border-white/15 transition-all group">
+                    <div className="w-11 h-11 rounded-xl bg-white/[0.06] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      {info.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-black text-white text-sm">{info.title}</h4>
+                      <p className="text-zinc-500 text-xs font-medium">{info.desc}</p>
+                      {info.href ? (
+                        <a href={info.href} className="text-blue-400 text-sm font-bold hover:text-blue-300 transition-colors mt-1 inline-flex items-center gap-1">
+                          {info.value} <ArrowRight size={12} />
+                        </a>
+                      ) : (
+                        <p className="text-zinc-300 text-sm font-bold mt-1">{info.value}</p>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Trust signals */}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
+                className="flex flex-wrap gap-4">
+                {[
+                  { icon: <Shield size={13} />, text: "Secure & private" },
+                  { icon: <Globe size={13} />, text: "US & Canada" },
+                  { icon: <Star size={13} className="fill-amber-400 text-amber-400" />, text: "2,400+ learners" },
+                ].map((t, i) => (
+                  <div key={i} className="flex items-center gap-1.5 text-zinc-500 text-xs font-bold">
+                    {t.icon} {t.text}
                   </div>
-                  <span className="text-zinc-500 text-sm font-bold">
-                    2,400+ learners
-                  </span>
-                </div>
-                <span className="text-zinc-700">|</span>
-                <div className="flex items-center gap-1.5 text-emerald-400 text-sm font-bold">
-                  <Shield size={13} />
-                  100% Free Tools
-                </div>
-                <span className="text-zinc-700">|</span>
-                <div className="flex items-center gap-1.5 text-zinc-400 text-sm font-bold">
-                  <BookOpen size={13} className="text-blue-400" />
-                  Plain English
-                </div>
+                ))}
               </motion.div>
             </div>
 
-            {/* Right — orbital visual */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 1 }}
-              className="hidden lg:block"
-            >
-              <OrbitalVisual />
+            {/* ─── RIGHT: Form Card ─── */}
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8 }}>
+              <div className="relative">
+                {/* Glow behind card */}
+                <div className="absolute -inset-4 bg-gradient-to-br from-blue-600/10 to-cyan-500/10 rounded-[3rem] blur-2xl pointer-events-none" />
+
+                <div className="relative bg-zinc-900/80 backdrop-blur-md border border-white/10 rounded-[2.5rem] overflow-hidden">
+                  {/* Gradient top bar */}
+                  <div className="h-1.5 w-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600" />
+
+                  <div className="p-8 md:p-10">
+                    {/* Tabs */}
+                    <div className="flex gap-1 p-1 bg-white/[0.04] border border-white/8 rounded-xl mb-8">
+                      {TABS.map((tab) => (
+                        <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                          className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg text-sm font-black transition-all ${
+                            activeTab === tab.id
+                              ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-600/25"
+                              : "text-zinc-500 hover:text-white hover:bg-white/[0.04]"
+                          }`}>
+                          {tab.icon}
+                          <span className="hidden sm:inline">{tab.label}</span>
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Tab description */}
+                    <AnimatePresence mode="wait">
+                      <motion.div key={activeTab}
+                        initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                        className="mb-8">
+                        <h2 className="text-2xl font-black text-white mb-1">
+                          {activeTab === "message" && "Get In Touch."}
+                          {activeTab === "schedule" && "Book a Lesson."}
+                          {activeTab === "call" && "Request a Callback."}
+                        </h2>
+                        <p className="text-zinc-500 text-sm font-medium">
+                          {TABS.find((t) => t.id === activeTab)?.desc}
+                        </p>
+                      </motion.div>
+                    </AnimatePresence>
+
+                    {/* Form */}
+                    <ContactForm activeTab={activeTab} />
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <span className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.3em]">
-            Scroll
-          </span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.6 }}
-            className="w-px h-8 bg-gradient-to-b from-blue-400/40 to-transparent"
-          />
-        </motion.div>
-      </header>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         STATS BAR
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-16 bg-zinc-950/80 border-y border-white/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-transparent to-cyan-600/5" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <StatCard value={47} suffix="" label="Free interactive tools" />
-            <StatCard value={90} suffix="%" label="Printer issues fixed at home" />
-            <StatCard value={72} suffix="%" label="GPS users never update maps" />
-            <StatCard value={89} suffix="%" label="Prefer plain-English guides" />
-          </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-         WHY CHOOSE US
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-28 bg-[#060a12] relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(100,180,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(100,180,255,1) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
+      {/* ─── WHAT WE HELP WITH ─── */}
+      <section className="py-20 bg-zinc-950 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <FadeUp>
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-black text-xs uppercase tracking-[0.2em] mb-8">
-                  Our Mission
-                </div>
-              </FadeUp>
-              <FadeUp delay={0.05}>
-                <h2
-                  className="font-black tracking-[-0.03em] leading-[1.05] mb-8"
-                  style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)" }}
-                >
-                  Why Choose
-                  <br />
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                    Setwise Digital
-                  </span>
-                </h2>
-              </FadeUp>
-              <FadeUp delay={0.1}>
-                <p className="text-lg text-zinc-400 mb-10 leading-relaxed font-medium">
-                  People search daily for{" "}
-                  <em className="text-white font-bold not-italic">
-                    &quot;how do I set up my printer&quot;
-                  </em>{" "}
-                  or{" "}
-                  <em className="text-white font-bold not-italic">
-                    &quot;how do I use Alexa.&quot;
-                  </em>{" "}
-                  The answers are buried in jargon.{" "}
-                  <strong className="text-white">We make it simple.</strong>
-                </p>
-              </FadeUp>
-
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  {
-                    icon: <Lightbulb size={18} />,
-                    title: "Clarity",
-                    text: "Plain English step-by-step guides",
-                  },
-                  {
-                    icon: <TrendingUp size={18} />,
-                    title: "Confidence",
-                    text: "We teach the 'why', not just 'how'",
-                  },
-                  {
-                    icon: <Users size={18} />,
-                    title: "Community",
-                    text: "Built for real users, by real people",
-                  },
-                  {
-                    icon: <Play size={18} />,
-                    title: "Coaching",
-                    text: "Live video lessons with real educators",
-                  },
-                ].map((p, i) => (
-                  <FadeUp key={i} delay={0.12 + i * 0.06}>
-                    <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/8 hover:border-blue-500/30 hover:bg-white/[0.06] transition-all group cursor-default">
-                      <div className="w-9 h-9 rounded-xl bg-blue-600/15 flex items-center justify-center text-blue-400 mb-3 group-hover:bg-blue-600/25 transition-colors">
-                        {p.icon}
-                      </div>
-                      <h4 className="font-black text-white text-sm mb-1">
-                        {p.title}
-                      </h4>
-                      <p className="text-zinc-500 text-xs font-medium leading-snug">
-                        {p.text}
-                      </p>
-                    </div>
-                  </FadeUp>
-                ))}
-              </div>
-            </div>
-
-            {/* Right — visual */}
-            <FadeUp delay={0.15}>
-              <div className="relative">
-                <div className="relative rounded-[3rem] overflow-hidden bg-zinc-900/80 border border-white/8 h-[520px] flex items-center justify-center">
-                  {/* Orbital bg */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    {[200, 300, 400].map((size, i) => (
-                      <motion.div
-                        key={i}
-                        animate={{
-                          rotate: i % 2 === 0 ? 360 : -360,
-                        }}
-                        transition={{
-                          duration: 20 + i * 10,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        style={{ width: size, height: size }}
-                        className="absolute rounded-full border border-blue-500/10"
-                      />
-                    ))}
-                  </div>
-
-                  {/* Floating device emojis */}
-                  {[
-                    { emoji: "🖨️", pos: "top-12 left-12", d: 0 },
-                    { emoji: "🗺️", pos: "top-12 right-12", d: 0.5 },
-                    { emoji: "🏠", pos: "bottom-20 left-12", d: 1.0 },
-                    { emoji: "📷", pos: "bottom-20 right-12", d: 1.5 },
-                  ].map((f, i) => (
-                    <motion.div
-                      key={i}
-                      animate={{ y: [0, -12, 0] }}
-                      transition={{
-                        duration: 3.5 + i * 0.5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: f.d,
-                      }}
-                      className={`absolute ${f.pos} text-3xl`}
-                    >
-                      <div className="w-14 h-14 rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg">
-                        {f.emoji}
-                      </div>
-                    </motion.div>
-                  ))}
-
-                  {/* Center */}
-                  <motion.div
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="relative z-10 flex flex-col items-center gap-4"
-                  >
-                    <div className="w-24 h-24 rounded-[1.8rem] bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center shadow-2xl shadow-blue-600/50 border border-blue-400/20">
-                      <span className="text-white font-black text-4xl italic">
-                        S
-                      </span>
-                    </div>
-                    <span className="text-zinc-500 font-bold text-xs tracking-[0.2em] uppercase">
-                      Technology Bridged
-                    </span>
-                  </motion.div>
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-transparent to-transparent" />
-                  <div className="absolute bottom-8 left-8 right-8">
-                    <p className="text-xl font-black text-white tracking-tight mb-1">
-                      Designed for lifelong learners
-                    </p>
-                    <p className="text-zinc-500 font-medium text-sm">
-                      Clarity over complexity — always.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Badge */}
-                <motion.div
-                  initial={{ x: 50, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                  className="absolute -bottom-6 -left-6 bg-zinc-900 p-5 rounded-2xl shadow-2xl border border-white/10 flex items-center gap-4 hover:-translate-y-1 transition-transform"
-                >
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-lg">
-                    <Award size={28} />
-                  </div>
-                  <div>
-                    <div className="font-black text-2xl tracking-tighter text-white">
-                      100%
-                    </div>
-                    <div className="text-zinc-500 font-black text-[10px] uppercase tracking-widest">
-                      Satisfaction
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         TOPICS GRID
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-28 bg-zinc-950 relative">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeUp className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-black text-xs uppercase tracking-[0.2em] mb-6">
-              <TrendingUp size={12} /> Expertise
-            </div>
-            <h2
-              className="font-black tracking-[-0.03em] mb-5"
-              style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)" }}
-            >
-              Everyday Tech Made Simple
+          <FadeUp className="text-center mb-14">
+            <h2 className="font-black tracking-tight text-2xl md:text-3xl mb-3">
+              What People Contact Us About
             </h2>
-            <p className="text-zinc-500 font-medium text-lg max-w-xl mx-auto">
-              Tap a topic to see how we help you master the devices your family
-              uses every day.
+            <p className="text-zinc-500 font-medium">
+              Our most common support topics — all answered in plain English.
             </p>
           </FadeUp>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {TOPICS.map((topic, i) => {
-              const Icon = topic.Icon;
-              return (
-                <FadeUp key={i} delay={i * 0.06}>
-                  <motion.div
-                    whileHover={{ y: -8 }}
-                    className="h-full"
-                  >
-                    <div
-                      className={`h-full bg-white/[0.03] border border-white/8 hover:border-white/20 rounded-3xl p-8 flex flex-col transition-all duration-500 group ${topic.shadow} hover:shadow-xl`}
-                    >
-                      <div
-                        className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${topic.gradient} flex items-center justify-center text-white mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}
-                      >
-                        <Icon size={26} />
-                      </div>
-                      <h3 className="text-xl font-black text-white mb-3 tracking-tight group-hover:text-blue-300 transition-colors">
-                        {topic.title}
-                      </h3>
-                      <p className="text-zinc-500 font-medium text-sm leading-relaxed mb-6 flex-grow">
-                        {topic.desc}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {topic.points.map((p, j) => (
-                          <span
-                            key={j}
-                            className="px-3 py-1 bg-white/[0.04] border border-white/8 rounded-full text-[10px] font-black text-zinc-500 uppercase tracking-widest group-hover:border-blue-500/20 group-hover:text-blue-400 transition-all"
-                          >
-                            {p}
-                          </span>
-                        ))}
-                      </div>
-                      <Link
-                        href={topic.href}
-                        className={`inline-flex items-center justify-center gap-2 bg-gradient-to-r ${topic.gradient} text-white px-6 py-3.5 rounded-xl font-black text-sm hover:shadow-lg hover:-translate-y-0.5 transition-all`}
-                      >
-                        Learn More{" "}
-                        <ArrowRight size={14} />
-                      </Link>
-                    </div>
-                  </motion.div>
-                </FadeUp>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         FREE TOOLS SPOTLIGHT
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#060a12] border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeUp className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-14">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 font-black text-xs uppercase tracking-[0.2em] mb-4">
-                <Zap size={12} /> 47 Free Tools
-              </div>
-              <h2 className="font-black tracking-tight text-2xl md:text-3xl">
-                Free Interactive Tools
-              </h2>
-              <p className="text-zinc-500 font-medium mt-2 max-w-lg">
-                Pick your device, get exact steps. No jargon, no guessing.
-              </p>
-            </div>
-            <Link
-              href="/tools"
-              className="shrink-0 px-7 py-3.5 bg-white/[0.06] border border-white/10 rounded-xl font-bold text-sm hover:bg-white/10 transition-all whitespace-nowrap"
-            >
-              View All 47 Tools →
-            </Link>
-          </FadeUp>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {TOOLS.map((tool, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { emoji: "🖨️", title: "Printer Setup", desc: "Wi-Fi, offline, ink problems", href: "/techbridge/printers" },
+              { emoji: "🗺️", title: "GPS Updates", desc: "Garmin, TomTom, car GPS", href: "/techbridge/gps" },
+              { emoji: "🏠", title: "Smart Home", desc: "Alexa, Google Nest, bulbs", href: "/techbridge/smart-home" },
+              { emoji: "🔒", title: "Security Help", desc: "Virus, passwords, scams", href: "/techbridge/security" },
+            ].map((topic, i) => (
               <FadeUp key={i} delay={i * 0.06}>
-                <Link href={tool.href} className="block h-full">
-                  <motion.div
-                    whileHover={{ y: -6 }}
-                    className="h-full bg-white/[0.03] border border-white/8 hover:border-white/20 rounded-2xl p-7 flex flex-col transition-all group"
-                  >
-                    <div
-                      className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${tool.gradient} flex items-center justify-center text-2xl mb-5 shadow-lg group-hover:scale-110 transition-transform`}
-                    >
-                      {tool.emoji}
-                    </div>
-                    <h4 className="font-black text-white text-base mb-2 group-hover:text-blue-300 transition-colors">
-                      {tool.title}
-                    </h4>
-                    <p className="text-zinc-500 text-sm font-medium leading-relaxed flex-grow">
-                      {tool.desc}
-                    </p>
-                    <div className="flex items-center gap-1 text-blue-400 font-black text-sm mt-5">
-                      Try Free <ArrowRight size={14} />
+                <Link href={topic.href}>
+                  <motion.div whileHover={{ y: -4 }}
+                    className="p-6 bg-white/[0.03] border border-white/8 hover:border-blue-500/20 rounded-2xl transition-all group cursor-pointer">
+                    <div className="text-3xl mb-4">{topic.emoji}</div>
+                    <h4 className="font-black text-white text-sm mb-1 group-hover:text-blue-300 transition-colors">{topic.title}</h4>
+                    <p className="text-zinc-500 text-xs font-medium">{topic.desc}</p>
+                    <div className="flex items-center gap-1 text-blue-400 font-bold text-xs mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Learn free <ArrowRight size={11} />
                     </div>
                   </motion.div>
                 </Link>
@@ -935,434 +453,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-         PACKAGES
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-28 bg-zinc-950 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeUp className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-black text-xs uppercase tracking-[0.2em] mb-6">
-              <Star size={12} className="fill-indigo-400" /> Featured Packages
-            </div>
-            <h2
-              className="font-black tracking-[-0.03em] mb-5"
-              style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)" }}
-            >
-              Choose Your Learning Path
-            </h2>
-            <p className="text-zinc-500 font-medium text-lg max-w-xl mx-auto">
-              Simple pricing. No monthly fees. Just the learning you need.
-            </p>
-          </FadeUp>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {PACKAGES.map((pkg, i) => {
-              const Icon = pkg.Icon;
-              return (
-                <FadeUp key={i} delay={i * 0.08}>
-                  <motion.div
-                    whileHover={{ y: -10, scale: 1.02 }}
-                    className="h-full"
-                  >
-                    <div
-                      className={`h-full bg-gradient-to-br ${pkg.gradient} p-7 rounded-[2.5rem] text-white flex flex-col relative overflow-hidden group`}
-                    >
-                      {/* Decorative circle */}
-                      <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
-                      <div className="absolute -bottom-8 -left-8 w-28 h-28 bg-black/10 rounded-full" />
-
-                      <div className="w-13 h-13 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-7 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all relative z-10">
-                        <Icon size={24} />
-                      </div>
-                      <h3 className="text-xl font-black mb-1 tracking-tight relative z-10">
-                        {pkg.title}
-                      </h3>
-                      <p className="text-white/60 font-bold text-xs uppercase tracking-widest mb-5 relative z-10">
-                        {pkg.sub}
-                      </p>
-                      <div className="space-y-2.5 mb-7 flex-grow relative z-10">
-                        {pkg.features.map((f, j) => (
-                          <div
-                            key={j}
-                            className="flex items-start gap-2.5"
-                          >
-                            <CheckCircle2
-                              size={14}
-                              className="text-white/50 mt-0.5 shrink-0"
-                            />
-                            <span className="font-medium text-sm text-white/85">
-                              {f}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="pt-5 border-t border-white/15 mb-7 relative z-10">
-                        <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">
-                          Bonus:
-                        </p>
-                        <p className="text-sm font-bold italic text-white/70">
-                          {pkg.bonus}
-                        </p>
-                      </div>
-                      <Link
-                        href={pkg.href}
-                        className="w-full py-4 bg-white text-zinc-900 rounded-2xl font-black text-sm flex items-center justify-center gap-2 hover:bg-zinc-100 transition-all relative z-10"
-                      >
-                        Explore Package{" "}
-                        <ChevronRight size={16} />
-                      </Link>
-                    </div>
-                  </motion.div>
-                </FadeUp>
-              );
-            })}
-          </div>
-
-          <FadeUp className="mt-14 text-center">
-            <Link
-              href="/pricing"
-              className="group inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-2xl font-black text-lg hover:shadow-[0_20px_60px_rgba(37,99,235,0.4)] hover:-translate-y-1 transition-all shadow-xl shadow-blue-600/25"
-            >
-              Browse All Learning Packages
-              <ArrowRight
-                size={20}
-                className="group-hover:translate-x-1 transition-transform"
-              />
-            </Link>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         TECHBRIDGE PREVIEW
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-28 bg-[#060a12] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-600/5 via-transparent to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <FadeUp>
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-black text-xs uppercase tracking-[0.2em] mb-8">
-                  Innovation Meets Experience
-                </div>
-                <h2
-                  className="font-black tracking-tight leading-[1.05] mb-8"
-                  style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
-                >
-                  TechBridge: Mastering Tech
-                  <br />
-                  With{" "}
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                    Confidence
-                  </span>
-                </h2>
-                <p className="text-lg text-zinc-400 mb-10 leading-relaxed font-medium">
-                  We blend on-demand AI learning with human-designed lessons. One
-                  side is fast and interactive — the other is thoughtful and
-                  personal. Together they make mastering technology feel natural.
-                </p>
-              </FadeUp>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  {
-                    icon: <Zap size={18} className="text-blue-400" />,
-                    title: "On-Demand Learning",
-                    desc: "AI-guided lessons whenever you need.",
-                  },
-                  {
-                    icon: <UserCheck size={18} className="text-blue-400" />,
-                    title: "Thoughtful & Human",
-                    desc: "Lessons designed by real educators.",
-                  },
-                  {
-                    icon: <Clock size={18} className="text-blue-400" />,
-                    title: "Learn at Your Pace",
-                    desc: "Pause, rewind, repeat — it's yours.",
-                  },
-                  {
-                    icon: <Users size={18} className="text-blue-400" />,
-                    title: "Real Support",
-                    desc: "Book a live educator any time.",
-                  },
-                ].map((c, i) => (
-                  <FadeUp key={i} delay={i * 0.06}>
-                    <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/8 hover:bg-white/[0.06] hover:border-blue-500/20 transition-all group">
-                      <div className="mb-3 group-hover:scale-110 transition-transform w-fit">
-                        {c.icon}
-                      </div>
-                      <h4 className="font-black text-white text-sm mb-1">
-                        {c.title}
-                      </h4>
-                      <p className="text-zinc-500 text-xs font-medium">
-                        {c.desc}
-                      </p>
-                    </div>
-                  </FadeUp>
-                ))}
-              </div>
-            </div>
-
-            {/* Chat mockup */}
-            <FadeUp delay={0.1}>
-              <div className="relative">
-                <div className="p-px rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-blue-500 to-cyan-500">
-                  <div className="bg-zinc-900 p-8 rounded-[2.4rem] space-y-6">
-                    <div className="flex items-center gap-3 border-b border-white/10 pb-5">
-                      <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center font-black text-lg italic text-white shadow-lg">
-                        S
-                      </div>
-                      <div>
-                        <div className="font-black text-white text-sm">
-                          Setwise CoPilot
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                          <span className="text-[11px] text-zinc-500 font-medium">
-                            Online — ready to help
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="space-y-4">
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 }}
-                        className="bg-white/[0.06] p-4 rounded-2xl rounded-tl-sm mr-12 text-sm text-zinc-300 font-medium border border-white/5"
-                      >
-                        &quot;Teach me how to set up wireless printing.&quot;
-                      </motion.div>
-                      <motion.div
-                        initial={{ opacity: 0, x: 10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.6 }}
-                        className="bg-gradient-to-r from-blue-600 to-cyan-500 p-4 rounded-2xl rounded-tr-sm ml-12 text-sm font-medium shadow-lg"
-                      >
-                        &quot;Great choice! Let&apos;s start with Lesson 1: how
-                        Wi-Fi printing actually works — in plain English...&quot;
-                      </motion.div>
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.9 }}
-                        className="flex items-center justify-center gap-2 pt-2"
-                      >
-                        {[0, 150, 300].map((d) => (
-                          <div
-                            key={d}
-                            className="w-2 h-2 rounded-full bg-zinc-600 animate-bounce"
-                            style={{ animationDelay: `${d}ms` }}
-                          />
-                        ))}
-                      </motion.div>
-                    </div>
-                    <Link
-                      href="/techbridge"
-                      className="flex items-center justify-center gap-2 w-full py-4 bg-blue-600/15 border border-blue-500/25 rounded-2xl text-blue-400 font-black text-sm hover:bg-blue-600/25 transition-colors"
-                    >
-                      Start a Lesson <ArrowRight size={14} />
-                    </Link>
-                  </div>
-                </div>
-                <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-600/10 blur-[80px]" />
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         FAQ
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-28 bg-zinc-950">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeUp className="text-center mb-14">
-            <h2
-              className="font-black tracking-tight mb-4"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
-            >
-              Questions You Might Have
-            </h2>
-            <p className="text-zinc-500 font-medium">
-              Everything about learning with Setwise Digital.
-            </p>
-          </FadeUp>
-
-          <div className="space-y-3">
-            {FAQS.map((faq, i) => (
-              <FadeUp key={i} delay={i * 0.04}>
-                <div
-                  className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
-                    activeFaq === i
-                      ? "border-blue-500/40 bg-blue-500/5"
-                      : "border-white/8 bg-white/[0.02] hover:border-white/15"
-                  }`}
-                >
-                  <button
-                    onClick={() =>
-                      setActiveFaq(activeFaq === i ? null : i)
-                    }
-                    className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
-                  >
-                    <span className="font-black text-white text-sm leading-snug">
-                      {faq.q}
-                    </span>
-                    <ChevronDown
-                      size={16}
-                      className={`text-zinc-500 shrink-0 transition-transform duration-300 ${
-                        activeFaq === i
-                          ? "rotate-180 text-blue-400"
-                          : ""
-                      }`}
-                    />
-                  </button>
-                  <AnimatePresence>
-                    {activeFaq === i && (
-                      <motion.div
-                        initial={{ height: 0 }}
-                        animate={{ height: "auto" }}
-                        exit={{ height: 0 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 pb-5 text-zinc-400 font-medium text-sm leading-relaxed border-t border-white/5 pt-4">
-                          {faq.a}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         WHO WE BUILD FOR
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-blue-950/50 to-zinc-950" />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      {/* ─── BOTTOM CTA ─── */}
+      <section className="py-16 bg-[#060a12] border-t border-white/5">
+        <div className="max-w-3xl mx-auto px-4 text-center">
           <FadeUp>
-            <p className="text-blue-400 font-black text-xs uppercase tracking-[0.3em] mb-4">
-              Built with care for
+            <p className="text-zinc-500 font-medium text-lg mb-6">
+              Not sure what you need? Start with our free tools — no account required.
             </p>
-            <h2
-              className="font-black tracking-tight text-white mb-14"
-              style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
-            >
-              Who We Build For
-            </h2>
-          </FadeUp>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              {
-                icon: "✦",
-                label: "Clarity Seekers",
-                text: "People who want clear instructions without tech jargon",
-              },
-              {
-                icon: "◆",
-                label: "Lifelong Learners",
-                text: "Adults 40+ who value step-by-step learning",
-              },
-              {
-                icon: "●",
-                label: "Everyday Users",
-                text: "Anyone who wants to enjoy gadgets without stress",
-              },
-            ].map((item, i) => (
-              <FadeUp key={i} delay={i * 0.1}>
-                <div className="p-8 rounded-3xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.07] hover:border-blue-500/25 transition-all hover:-translate-y-1 duration-300">
-                  <div className="text-blue-400 text-3xl font-black mb-4">
-                    {item.icon}
-                  </div>
-                  <div className="text-[10px] font-black uppercase tracking-widest text-blue-400/60 mb-3">
-                    {item.label}
-                  </div>
-                  <p className="text-white/80 font-bold text-base leading-snug">
-                    {item.text}
-                  </p>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         CLOSING CTA
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-32 bg-[#060a12] relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/8 rounded-full blur-[120px] pointer-events-none" />
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <FadeUp>
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 font-black text-xs uppercase tracking-[0.2em] mb-10">
-              <Sparkles
-                size={12}
-                className="text-yellow-400 fill-yellow-400"
-              />{" "}
-              Start Today — It&apos;s Free
-            </div>
-            <h2
-              className="font-black tracking-[-0.04em] mb-8"
-              style={{
-                fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
-                lineHeight: 0.95,
-              }}
-            >
-              Explore.
-              <br />
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">
-                Learn.
-              </span>
-              <br />
-              Simplify.
-            </h2>
-            <p className="text-xl text-zinc-400 font-medium mb-12 max-w-xl mx-auto leading-relaxed">
-              Technology doesn&apos;t have to be confusing. Let&apos;s make it
-              work for you, every day.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-14">
-              <Link
-                href="/pricing"
-                className="group inline-flex items-center gap-3 px-10 py-6 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-2xl font-black text-xl hover:shadow-[0_20px_60px_rgba(37,99,235,0.45)] hover:-translate-y-1 transition-all shadow-2xl shadow-blue-600/25"
-              >
-                Browse Learning Packages
-                <ArrowRight
-                  size={22}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/tools"
+                className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-black hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-lg shadow-blue-600/20">
+                Browse 47 Free Tools <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link
-                href="/tools"
-                className="inline-flex items-center gap-2 text-zinc-400 font-black hover:text-blue-400 transition-colors text-lg"
-              >
-                Try 47 Free Tools <ChevronRight size={18} />
+              <Link href="/techbridge"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/[0.06] border border-white/10 text-white rounded-xl font-black hover:bg-white/10 transition-all">
+                Explore TechBridge
               </Link>
-            </div>
-
-            {/* Trust signals */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-zinc-600 font-bold">
-              {[
-                "✓ No monthly fees",
-                "✓ Plain English always",
-                "✓ Works on all devices",
-                "✓ 100% satisfaction promise",
-              ].map((t, i) => (
-                <span
-                  key={i}
-                  className="hover:text-blue-400 transition-colors"
-                >
-                  {t}
-                </span>
-              ))}
             </div>
           </FadeUp>
         </div>
