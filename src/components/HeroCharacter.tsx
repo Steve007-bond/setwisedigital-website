@@ -94,22 +94,20 @@ export default function HeroCharacter({
 
       {/* ── Floating emoji icons ── */}
       {floatingIcons.slice(0, 4).map((emoji, i) => {
-        const positions = [
-          { top: "5%", left: "0%", delay: 0 },
-          { top: "8%", right: "2%", delay: 0.6 },
-          { bottom: "15%", left: "2%", delay: 1.2 },
-          { bottom: "10%", right: "0%", delay: 0.9 },
-        ];
-        const pos = positions[i];
+        const tops = ["5%", "8%", undefined, undefined];
+        const bottoms = [undefined, undefined, "15%", "10%"];
+        const lefts = ["0%", undefined, "2%", undefined];
+        const rights = [undefined, "2%", undefined, "0%"];
+        const delays = [0, 0.6, 1.2, 0.9];
         return (
           <motion.div
             key={i}
             className="absolute z-20 pointer-events-none"
             style={{
-              top: pos.top,
-              bottom: (pos as Record<string, string>).bottom,
-              left: pos.left,
-              right: (pos as Record<string, string>).right,
+              top: tops[i],
+              bottom: bottoms[i],
+              left: lefts[i],
+              right: rights[i],
             }}
             animate={{
               y: [0, -14, 0],
@@ -119,7 +117,7 @@ export default function HeroCharacter({
               duration: 3.5 + i * 0.5,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: pos.delay,
+              delay: delays[i],
             }}
           >
             <div
