@@ -257,7 +257,7 @@ export default function PageClient() {
           {/* Animated visual — NO real image */}
           <motion.div initial={{opacity:0,x:30}} animate={{opacity:1,x:0}} transition={{delay:0.3,duration:0.8}}
             className="hidden lg:block">
-            <HeroCharacter src="/images/hero-gps.png" alt="GPS navigation guide" accentColor="#16a34a" glowColor="#059669" floatingIcons={["🗺️","📍","🚗","🔄"]} speechBubble="Maps updated!" />
+            <HeroCharacter src="/Images/hero-gps.png" alt="GPS navigation guide" accentColor="#16a34a" glowColor="#059669" floatingIcons={["🗺️","📍","🚗","🔄"]} speechBubble="Maps updated!" />
           </motion.div>
         </div>
       </section>

@@ -257,7 +257,7 @@ export default function PageClient() {
           {/* Animated visual — NO real image */}
           <motion.div initial={{opacity:0,x:30}} animate={{opacity:1,x:0}} transition={{delay:0.3,duration:0.8}}
             className="hidden lg:block">
-            <HeroCharacter src="/images/hero-camera.jpeg" alt="Camera guide" accentColor="#9333ea" glowColor="#7c3aed" floatingIcons={["📷","✨","🔄","🌅"]} speechBubble="Smile! 📸" />
+            <HeroCharacter src="/Images/hero-camera.jpeg" alt="Camera guide" accentColor="#9333ea" glowColor="#7c3aed" floatingIcons={["📷","✨","🔄","🌅"]} speechBubble="Smile! 📸" />
           </motion.div>
         </div>
       </section>

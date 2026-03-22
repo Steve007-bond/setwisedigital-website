@@ -257,7 +257,7 @@ export default function PageClient() {
           {/* Animated visual — NO real image */}
           <motion.div initial={{opacity:0,x:30}} animate={{opacity:1,x:0}} transition={{delay:0.3,duration:0.8}}
             className="hidden lg:block">
-            <HeroCharacter src="/images/hero-printers.jpeg" alt="Printer setup guide" accentColor="#2563eb" floatingIcons={["🖨️","📄","📶","💧"]} speechBubble="Let's fix your printer!" />
+            <HeroCharacter src="/Images/hero-printers.jpeg" alt="Printer setup guide" accentColor="#2563eb" floatingIcons={["🖨️","📄","📶","💧"]} speechBubble="Let's fix your printer!" />
           </motion.div>
         </div>
       </section>

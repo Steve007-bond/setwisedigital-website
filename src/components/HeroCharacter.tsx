@@ -8,7 +8,7 @@ import Image from "next/image";
    
    Usage:
    <HeroCharacter
-     src="/images/hero-printers.jpeg"
+     src="/Images/hero-printers.jpeg"
      alt="Printer setup character"
      accentColor="#2563eb"
      glowColor="#2563eb"

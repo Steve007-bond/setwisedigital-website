@@ -257,7 +257,7 @@ export default function PageClient() {
           {/* Animated visual — NO real image */}
           <motion.div initial={{opacity:0,x:30}} animate={{opacity:1,x:0}} transition={{delay:0.3,duration:0.8}}
             className="hidden lg:block">
-            <HeroCharacter src="/images/hero-smarthome.jpeg" alt="Smart home setup guide" accentColor="#f59e0b" glowColor="#d97706" floatingIcons={["💡","🔌","🗣️","📱"]} speechBubble="Turn on the lights!" />
+            <HeroCharacter src="/Images/hero-smarthome.jpeg" alt="Smart home setup guide" accentColor="#f59e0b" glowColor="#d97706" floatingIcons={["💡","🔌","🗣️","📱"]} speechBubble="Turn on the lights!" />
           </motion.div>
         </div>
       </section>

@@ -132,7 +132,7 @@ export default function TechBridgePage() {
             {/* 3D Character */}
             <motion.div variants={itemVariants} className="mt-12 max-w-lg mx-auto">
               <HeroCharacter
-                src="/images/hero-techbridge.jpeg"
+                src="/Images/hero-techbridge.jpeg"
                 alt="TechBridge learning hub — master everyday technology"
                 accentColor="#3b82f6"
                 glowColor="#06b6d4"

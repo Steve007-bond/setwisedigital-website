@@ -257,7 +257,7 @@ export default function PageClient() {
           {/* Animated visual — NO real image */}
           <motion.div initial={{opacity:0,x:30}} animate={{opacity:1,x:0}} transition={{delay:0.3,duration:0.8}}
             className="hidden lg:block">
-            <HeroCharacter src="/images/hero-alexa.jpeg" alt="Alexa and Echo guide" accentColor="#06b6d4" glowColor="#0891b2" floatingIcons={["🎙️","🎵","⏰","💡"]} speechBubble="50+ commands!" />
+            <HeroCharacter src="/Images/hero-alexa.jpeg" alt="Alexa and Echo guide" accentColor="#06b6d4" glowColor="#0891b2" floatingIcons={["🎙️","🎵","⏰","💡"]} speechBubble="50+ commands!" />
           </motion.div>
         </div>
       </section>

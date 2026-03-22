@@ -349,7 +349,7 @@ export default function PricingPage() {
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.0 }}
               className="mt-12 max-w-md mx-auto">
               <HeroCharacter
-                src="/images/hero-pricing.png"
+                src="/Images/hero-pricing.png"
                 alt="Setwise Digital pricing — affordable tech learning"
                 accentColor="#8b5cf6"
                 glowColor="#6366f1"

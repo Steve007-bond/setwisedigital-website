@@ -201,7 +201,7 @@ export default function About() {
             <div className="hidden lg:block">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }}>
                 <HeroCharacter
-                  src="/images/hero-about.png"
+                  src="/Images/hero-about.png"
                   alt="Setwise Digital team — technology educators"
                   accentColor="#3b82f6"
                   floatingIcons={["💡", "📚", "🤝", "⭐"]}
