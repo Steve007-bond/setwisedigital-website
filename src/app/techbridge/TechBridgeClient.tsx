@@ -187,21 +187,21 @@ export default function TechBridgePage() {
               </motion.p>
             </motion.div>
 
-            {/* Right: 3D Character — large, immersive */}
+            {/* Right: 3D Character — seamless, edge-blended, oversized */}
             <motion.div 
-              initial={{ opacity: 0, x: 60, scale: 0.9 }}
+              initial={{ opacity: 0, x: 60, scale: 0.95 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-              className="lg:w-[45%] relative mt-8 lg:mt-0"
+              className="lg:w-[45%] relative mt-8 lg:mt-0 lg:overflow-visible"
             >
               {/* Glow behind character */}
               <div className="absolute inset-0 -z-10">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-blue-500/15 rounded-full blur-[80px]" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-cyan-400/10 rounded-full blur-[60px]" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-blue-500/20 rounded-full blur-[120px]" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-cyan-400/15 rounded-full blur-[80px]" />
               </div>
               
-              {/* Character container with 3D ring effects */}
-              <div className="relative max-w-[520px] mx-auto">
+              {/* Character container — oversized, breaks out of column */}
+              <div className="relative mx-auto lg:scale-[1.3] lg:origin-center lg:translate-x-[8%] lg:-translate-y-[2%]">
                 {/* Outer rotating ring */}
                 <motion.div
                   animate={{ rotate: 360 }}
@@ -221,31 +221,31 @@ export default function TechBridgePage() {
                   <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-indigo-400 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
                 </motion.div>
                 
-                {/* Character image */}
+                {/* Character image — no rounded corners, full edge fade */}
                 <motion.div
                   animate={{ y: [0, -12, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                   className="relative z-10"
                 >
-                  <div className="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-blue-900/40">
+                  <div className="relative overflow-hidden">
                     <img
                       src="/Images/hero-techbridge.jpeg"
                       alt="TechBridge learning hub — master everyday technology"
                       className="w-full h-auto"
+                      style={{
+                        maskImage: 'radial-gradient(ellipse 75% 70% at 50% 45%, black 40%, transparent 100%)',
+                        WebkitMaskImage: 'radial-gradient(ellipse 75% 70% at 50% 45%, black 40%, transparent 100%)',
+                      }}
                     />
-                    {/* Bottom fade to match bg */}
-                    <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0c1220] to-transparent" />
-                    {/* Subtle overlay for depth */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-transparent" />
                   </div>
                 </motion.div>
                 
                 {/* Floating topic badges around character */}
                 {[
-                  { emoji: "🖨️", label: "Printers", pos: "top-[5%] -left-[10%]", delay: 0 },
-                  { emoji: "🗺️", label: "GPS", pos: "top-[15%] -right-[8%]", delay: 0.5 },
-                  { emoji: "🏠", label: "Smart Home", pos: "bottom-[25%] -left-[12%]", delay: 1 },
-                  { emoji: "📷", label: "Cameras", pos: "bottom-[20%] -right-[10%]", delay: 1.5 },
+                  { emoji: "🖨️", label: "Printers", pos: "top-[8%] left-[2%]", delay: 0 },
+                  { emoji: "🗺️", label: "GPS", pos: "top-[12%] right-[2%]", delay: 0.5 },
+                  { emoji: "🏠", label: "Smart Home", pos: "bottom-[28%] left-[0%]", delay: 1 },
+                  { emoji: "📷", label: "Cameras", pos: "bottom-[25%] right-[0%]", delay: 1.5 },
                 ].map((badge, i) => (
                   <motion.div
                     key={i}
@@ -270,7 +270,7 @@ export default function TechBridgePage() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.5, duration: 0.5 }}
-                  className="absolute -top-[5%] left-1/2 -translate-x-1/2 z-30"
+                  className="absolute top-[2%] left-1/2 -translate-x-1/2 z-30"
                 >
                   <div className="px-4 py-2 bg-blue-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-600/30 whitespace-nowrap">
                     Pick a topic! 👋
