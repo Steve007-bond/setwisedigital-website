@@ -1,5 +1,7 @@
 "use client";
 
+import { autoRedirect } from "@/lib/postFormRedirect";
+
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import Navbar from "@/components/Navbar";

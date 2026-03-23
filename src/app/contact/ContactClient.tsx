@@ -1,5 +1,7 @@
 "use client";
 
+import { autoRedirect } from "@/lib/postFormRedirect";
+
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
@@ -265,6 +267,7 @@ function ContactForm({ activeTab }: { activeTab: TabId }) {
       });
     } catch (e) { console.error("[contact]", e); }
     setStatus("done");
+    autoRedirect(name, email, phone);
   };
 
   if (status === "done") {

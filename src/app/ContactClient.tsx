@@ -1,5 +1,7 @@
 "use client";
 
+import { autoRedirect } from "@/lib/postFormRedirect";
+
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import {
   Mail, MapPin, CheckCircle2, BookOpen, ShieldCheck, UserCheck,
@@ -317,6 +319,7 @@ export default function ContactPage() {
       });
       if (!res.ok) throw new Error("Network error");
       setFormStatus("success");
+      autoRedirect(msgName, msgEmail, msgPhone);
     } catch {
       setFormError("Something went wrong. Please email us directly at support@setwisedigital.com");
       setFormStatus("error");
@@ -352,6 +355,7 @@ export default function ContactPage() {
       });
       if (!res.ok) throw new Error("Network error");
       setScheduleStatus("success");
+      autoRedirect(schName, schEmail, schPhone);
     } catch {
       setScheduleError("Something went wrong. Please email us at support@setwisedigital.com");
       setScheduleStatus("error");
@@ -383,6 +387,7 @@ export default function ContactPage() {
       });
       if (!res.ok) throw new Error("Network error");
       setCallbackStatus("success");
+      autoRedirect(cbName, cbEmail, cbPhone);
     } catch {
       setCallbackError("Something went wrong. Please email support@setwisedigital.com");
       setCallbackStatus("error");
